@@ -4,19 +4,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <!-- >>> Replace this with the parent pom's artifactId -->
         <artifactId>security-and-compliance-center</artifactId>
         <groupId>com.ibm.cloud</groupId>
         <version>99-SNAPSHOT</version>
         <relativePath>../..</relativePath>
     </parent>
 
-    <!-- >>> Replace this with the common module's artifactId (e.g. platform-services-common) -->
-    <artifactId>security-and-compliance-center-common</artifactId>
-
-    <!-- >>> Replace this with the common module's description (e.g. Platform Services Common Library) -->
-    <name>IBM Cloud Security &amp; Compliance Center Common Library</name>
+    <artifactId>findings-api</artifactId>
     <packaging>jar</packaging>
+    <name>IBM Cloud Security &amp; Compliance Center Findings API</name>
 
     <dependencies>
         <dependency>
@@ -24,8 +20,26 @@
             <artifactId>sdk-core</artifactId>
         </dependency>
         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>security-and-compliance-center-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>security-and-compliance-center-common</artifactId>
+            <type>test-jar</type>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>mockwebserver</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -39,31 +53,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>${project.parent.artifactId}.properties</include>
-                </includes>
-            </resource>
-        </resources>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>test-jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
+    
     <developers>
         <developer>
             <name>IBM Cloud DevX SDK Development</name>
@@ -71,5 +61,4 @@
             <url>https://www.ibm.com/</url>
         </developer>
     </developers>
-
 </project>

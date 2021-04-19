@@ -59,7 +59,7 @@
 
         <!-- >>> List each service's module here -->
         <module>modules/configuration-governance</module>
-        <!-- <module>modules/findings-api</module> -->
+        <module>modules/findings-api</module>
         <module>modules/notifications-api</module>
 
         <!-- This module should be listed after all the service-related modules above -->

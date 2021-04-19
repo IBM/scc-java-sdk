@@ -14,7 +14,7 @@
     <artifactId>security-and-compliance-center-coverage-reports</artifactId>
 
     <!-- >>> Replace this with the coverage-report module's description -->
-    <name>IBM Security &amp; Compliance Center Coverage Reports</name>
+    <name>IBM Cloud Security &amp; Compliance Center Coverage Reports</name>
 
     <properties>
 	<!-- There is no need to publish this module's artifacts on maven central -->

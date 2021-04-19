@@ -11,7 +11,7 @@
 
     <artifactId>security-and-compliance-center-examples</artifactId>
     <packaging>jar</packaging>
-    <name>Code Examples</name>
+    <name>IBM Cloud Security &amp; Compliance Center Code Examples</name>
 
     <properties>
         <maven.javadoc.skip>true</maven.javadoc.skip>
