@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- >>> Replace this with the coverage-report module's artifactId (e.g. platform-services-coverage-reports) -->
-    <artifactId>security-and-compliance-center-coverage-reports</artifactId>
+    <artifactId>coverage-reports</artifactId>
 
     <!-- >>> Replace this with the coverage-report module's description -->
     <name>IBM Cloud Security &amp; Compliance Center Coverage Reports</name>
@@ -32,7 +32,7 @@
         -->
         <dependency>
             <!-- >>> Replace this with the common module's artifactId -->
-            <artifactId>security-and-compliance-center-common</artifactId>
+            <artifactId>common</artifactId>
             <groupId>${project.groupId}</groupId>
             <version>${project.version}</version>
         </dependency>
@@ -40,25 +40,19 @@
         <!-- Copy and update this section for each service added to the project. -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>security-and-compliance-center-common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <!-- <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>findings-api</artifactId>
-            <version>${project.version}</version>
-        </dependency> -->
-
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>notifications-api</artifactId>
+            <artifactId>notifications_api</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>configuration-governance</artifactId>
+            <artifactId>findings_api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>configuration_governance</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

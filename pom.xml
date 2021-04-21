@@ -67,7 +67,7 @@
 
         <!-- This module should always be listed last -->
         <!-- >>> Uncomment the following line if you want to build the examples -->
-        <!-- <module>modules/examples</module> -->
+        <module>modules/examples</module>
     </modules>
 
     <licenses>
@@ -125,13 +125,13 @@
             <!-- Each module (except "common") should depend on this artifact -->
             <dependency>
                 <!-- >>> Replace this with the common module's artifactId -->
-                <artifactId>security-and-compliance-center-common</artifactId>
+                <artifactId>common</artifactId>
                 <groupId>${project.groupId}</groupId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <!-- >>> Replace this with the common module's artifactId -->
-                <artifactId>security-and-compliance-center-common</artifactId>
+                <artifactId>common</artifactId>
                 <groupId>${project.groupId}</groupId>
                 <version>${project.version}</version>
                 <type>test-jar</type>

@@ -9,7 +9,7 @@
         <relativePath>../..</relativePath>
     </parent>
 
-    <artifactId>security-and-compliance-center-examples</artifactId>
+    <artifactId>examples</artifactId>
     <packaging>jar</packaging>
     <name>IBM Cloud Security &amp; Compliance Center Code Examples</name>
 
@@ -23,7 +23,17 @@
             below should reflect the "artifactId" value specified in each module's pom.xml file (i.e. not the module's directory name). -->
         <dependency>
             <groupId>com.ibm.cloud</groupId>
-            <artifactId>example-service</artifactId>
+            <artifactId>findings_api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ibm.cloud</groupId>
+            <artifactId>notifications_api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ibm.cloud</groupId>
+            <artifactId>configuration_governance</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -37,18 +47,18 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <!-- Build an executable JAR -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.ibm.cloud.my_services.example_service.v1.ExampleServiceExamples</mainClass>
-                        </manifest>
-                    </archive>
+                    <minimizeJar>true</minimizeJar>
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
                 </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

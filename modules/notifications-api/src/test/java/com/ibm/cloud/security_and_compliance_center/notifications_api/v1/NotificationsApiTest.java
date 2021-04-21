@@ -12,33 +12,35 @@
  */
 package com.ibm.cloud.security_and_compliance_center.notifications_api.v1;
 
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.NotificationsApi;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.BulkDeleteChannelsResponse;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ChannelResponseDefinition;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ChannelResponseDefinitionAlertSourceItem;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ChannelResponseDefinitionSeverity;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.CreateChannelsResponse;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.CreateNotificationChannelOptions;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.DeleteChannelResponse;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.DeleteNotificationChannelOptions;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.DeleteNotificationChannelsOptions;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.GetChannelResponse;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.GetNotificationChannelOptions;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.GetPublicKeyOptions;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ListAllChannelsOptions;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ListChannelsResponse;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.NotificationChannelAlertSourceItem;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.PublicKeyResponse;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.TestChannelResponse;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.TestNotificationChannelOptions;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.UpdateChannelResponse;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.UpdateNotificationChannelOptions;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.http.Response;
 import com.ibm.cloud.sdk.core.security.Authenticator;
 import com.ibm.cloud.sdk.core.security.NoAuthAuthenticator;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.sdk.core.util.EnvironmentUtils;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.NotificationsApi;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.Channel;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ChannelAlertSourceItem;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ChannelDelete;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ChannelGet;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ChannelGetChannel;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ChannelGetChannelAlertSourceItem;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ChannelGetChannelSeverity;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ChannelInfo;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ChannelSeverity;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ChannelsDelete;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ChannelsList;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.CreateNotificationChannelOptions;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.DeleteNotificationChannelOptions;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.DeleteNotificationChannelsOptions;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.GetNotificationChannelOptions;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.GetPublicKeyOptions;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ListAllChannelsOptions;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.NotificationChannelAlertSourceItem;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.PublicKeyGet;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.TestChannel;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.TestNotificationChannelOptions;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.UpdateNotificationChannelOptions;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.utils.TestUtilities;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -101,7 +103,7 @@ public class NotificationsApiTest extends PowerMockTestCase {
   @Test
   public void testListAllChannelsWOptions() throws Throwable {
     // Schedule some responses.
-    String mockResponseBody = "{\"channels\": [{\"channel_id\": \"channelId\", \"name\": \"name\", \"description\": \"description\", \"type\": \"Webhook\", \"severity\": {\"critical\": true, \"high\": true, \"medium\": true, \"low\": false}, \"endpoint\": \"endpoint\", \"enabled\": false, \"alert_source\": [{\"provider_name\": \"providerName\", \"finding_types\": [\"findingTypes\"]}], \"frequency\": \"frequency\"}]}";
+    String mockResponseBody = "{\"channels\": [{\"channel_id\": \"channelId\", \"name\": \"name\", \"description\": \"description\", \"type\": \"Webhook\", \"severity\": {\"critical\": true, \"high\": true, \"medium\": true, \"low\": false}, \"endpoint\": \"endpoint\", \"enabled\": false, \"alert_source\": [{\"provider_name\": \"VA\", \"finding_types\": [\"anyValue\"]}], \"frequency\": \"frequency\"}]}";
     String listAllChannelsPath = "/v1/testString/notifications/channels";
 
     server.enqueue(new MockResponse()
@@ -120,9 +122,9 @@ public class NotificationsApiTest extends PowerMockTestCase {
     .build();
 
     // Invoke operation with valid options model (positive test)
-    Response<ListChannelsResponse> response = notificationsApiService.listAllChannels(listAllChannelsOptionsModel).execute();
+    Response<ChannelsList> response = notificationsApiService.listAllChannels(listAllChannelsOptionsModel).execute();
     assertNotNull(response);
-    ListChannelsResponse responseObj = response.getResult();
+    ChannelsList responseObj = response.getResult();
     assertNotNull(responseObj);
 
     // Verify the contents of the request
@@ -186,9 +188,9 @@ public class NotificationsApiTest extends PowerMockTestCase {
     .build();
 
     // Invoke operation with valid options model (positive test)
-    Response<CreateChannelsResponse> response = notificationsApiService.createNotificationChannel(createNotificationChannelOptionsModel).execute();
+    Response<ChannelInfo> response = notificationsApiService.createNotificationChannel(createNotificationChannelOptionsModel).execute();
     assertNotNull(response);
-    CreateChannelsResponse responseObj = response.getResult();
+    ChannelInfo responseObj = response.getResult();
     assertNotNull(responseObj);
 
     // Verify the contents of the request
@@ -238,9 +240,9 @@ public class NotificationsApiTest extends PowerMockTestCase {
     .build();
 
     // Invoke operation with valid options model (positive test)
-    Response<BulkDeleteChannelsResponse> response = notificationsApiService.deleteNotificationChannels(deleteNotificationChannelsOptionsModel).execute();
+    Response<ChannelsDelete> response = notificationsApiService.deleteNotificationChannels(deleteNotificationChannelsOptionsModel).execute();
     assertNotNull(response);
-    BulkDeleteChannelsResponse responseObj = response.getResult();
+    ChannelsDelete responseObj = response.getResult();
     assertNotNull(responseObj);
 
     // Verify the contents of the request
@@ -290,9 +292,9 @@ public class NotificationsApiTest extends PowerMockTestCase {
     .build();
 
     // Invoke operation with valid options model (positive test)
-    Response<DeleteChannelResponse> response = notificationsApiService.deleteNotificationChannel(deleteNotificationChannelOptionsModel).execute();
+    Response<ChannelDelete> response = notificationsApiService.deleteNotificationChannel(deleteNotificationChannelOptionsModel).execute();
     assertNotNull(response);
-    DeleteChannelResponse responseObj = response.getResult();
+    ChannelDelete responseObj = response.getResult();
     assertNotNull(responseObj);
 
     // Verify the contents of the request
@@ -324,7 +326,7 @@ public class NotificationsApiTest extends PowerMockTestCase {
   @Test
   public void testGetNotificationChannelWOptions() throws Throwable {
     // Schedule some responses.
-    String mockResponseBody = "{\"channel\": {\"channel_id\": \"channelId\", \"name\": \"name\", \"description\": \"description\", \"type\": \"Webhook\", \"severity\": {\"critical\": true, \"high\": true, \"medium\": true, \"low\": false}, \"endpoint\": \"endpoint\", \"enabled\": false, \"alert_source\": [{\"provider_name\": \"providerName\", \"finding_types\": [\"findingTypes\"]}], \"frequency\": \"frequency\"}}";
+    String mockResponseBody = "{\"channel\": {\"channel_id\": \"channelId\", \"name\": \"name\", \"description\": \"description\", \"type\": \"Webhook\", \"severity\": {\"critical\": true, \"high\": true, \"medium\": true, \"low\": false}, \"endpoint\": \"endpoint\", \"enabled\": false, \"alert_source\": [{\"provider_name\": \"VA\", \"finding_types\": [\"anyValue\"]}], \"frequency\": \"frequency\"}}";
     String getNotificationChannelPath = "/v1/testString/notifications/channels/testString";
 
     server.enqueue(new MockResponse()
@@ -342,9 +344,9 @@ public class NotificationsApiTest extends PowerMockTestCase {
     .build();
 
     // Invoke operation with valid options model (positive test)
-    Response<GetChannelResponse> response = notificationsApiService.getNotificationChannel(getNotificationChannelOptionsModel).execute();
+    Response<ChannelGet> response = notificationsApiService.getNotificationChannel(getNotificationChannelOptionsModel).execute();
     assertNotNull(response);
-    GetChannelResponse responseObj = response.getResult();
+    ChannelGet responseObj = response.getResult();
     assertNotNull(responseObj);
 
     // Verify the contents of the request
@@ -407,9 +409,9 @@ public class NotificationsApiTest extends PowerMockTestCase {
     .build();
 
     // Invoke operation with valid options model (positive test)
-    Response<UpdateChannelResponse> response = notificationsApiService.updateNotificationChannel(updateNotificationChannelOptionsModel).execute();
+    Response<ChannelInfo> response = notificationsApiService.updateNotificationChannel(updateNotificationChannelOptionsModel).execute();
     assertNotNull(response);
-    UpdateChannelResponse responseObj = response.getResult();
+    ChannelInfo responseObj = response.getResult();
     assertNotNull(responseObj);
 
     // Verify the contents of the request
@@ -459,9 +461,9 @@ public class NotificationsApiTest extends PowerMockTestCase {
     .build();
 
     // Invoke operation with valid options model (positive test)
-    Response<TestChannelResponse> response = notificationsApiService.testNotificationChannel(testNotificationChannelOptionsModel).execute();
+    Response<TestChannel> response = notificationsApiService.testNotificationChannel(testNotificationChannelOptionsModel).execute();
     assertNotNull(response);
-    TestChannelResponse responseObj = response.getResult();
+    TestChannel responseObj = response.getResult();
     assertNotNull(responseObj);
 
     // Verify the contents of the request
@@ -510,9 +512,9 @@ public class NotificationsApiTest extends PowerMockTestCase {
     .build();
 
     // Invoke operation with valid options model (positive test)
-    Response<PublicKeyResponse> response = notificationsApiService.getPublicKey(getPublicKeyOptionsModel).execute();
+    Response<PublicKeyGet> response = notificationsApiService.getPublicKey(getPublicKeyOptionsModel).execute();
     assertNotNull(response);
-    PublicKeyResponse responseObj = response.getResult();
+    PublicKeyGet responseObj = response.getResult();
     assertNotNull(responseObj);
 
     // Verify the contents of the request

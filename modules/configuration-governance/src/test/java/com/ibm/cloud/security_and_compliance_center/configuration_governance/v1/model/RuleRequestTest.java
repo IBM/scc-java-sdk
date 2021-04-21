@@ -13,13 +13,13 @@
 
 package com.ibm.cloud.security_and_compliance_center.configuration_governance.v1.model;
 
+import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.security_and_compliance_center.configuration_governance.v1.model.EnforcementAction;
 import com.ibm.cloud.security_and_compliance_center.configuration_governance.v1.model.RuleRequest;
 import com.ibm.cloud.security_and_compliance_center.configuration_governance.v1.model.RuleRequiredConfigSingleProperty;
 import com.ibm.cloud.security_and_compliance_center.configuration_governance.v1.model.TargetResource;
 import com.ibm.cloud.security_and_compliance_center.configuration_governance.v1.model.TargetResourceAdditionalTargetAttributesItem;
 import com.ibm.cloud.security_and_compliance_center.configuration_governance.v1.utils.TestUtilities;
-import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;

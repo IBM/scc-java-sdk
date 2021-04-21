@@ -18,23 +18,6 @@
 package com.ibm.cloud.security_and_compliance_center.notifications_api.v1;
 
 import com.google.gson.JsonObject;
-import com.ibm.cloud.security_and_compliance_center.common.SdkCommon;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.BulkDeleteChannelsResponse;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.CreateChannelsResponse;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.CreateNotificationChannelOptions;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.DeleteChannelResponse;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.DeleteNotificationChannelOptions;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.DeleteNotificationChannelsOptions;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.GetChannelResponse;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.GetNotificationChannelOptions;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.GetPublicKeyOptions;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ListAllChannelsOptions;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ListChannelsResponse;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.PublicKeyResponse;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.TestChannelResponse;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.TestNotificationChannelOptions;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.UpdateChannelResponse;
-import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.UpdateNotificationChannelOptions;
 import com.ibm.cloud.sdk.core.http.RequestBuilder;
 import com.ibm.cloud.sdk.core.http.ResponseConverter;
 import com.ibm.cloud.sdk.core.http.ServiceCall;
@@ -42,6 +25,22 @@ import com.ibm.cloud.sdk.core.security.Authenticator;
 import com.ibm.cloud.sdk.core.security.ConfigBasedAuthenticatorFactory;
 import com.ibm.cloud.sdk.core.service.BaseService;
 import com.ibm.cloud.sdk.core.util.ResponseConverterUtils;
+import com.ibm.cloud.security_and_compliance_center.common.SdkCommon;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ChannelDelete;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ChannelGet;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ChannelInfo;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ChannelsDelete;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ChannelsList;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.CreateNotificationChannelOptions;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.DeleteNotificationChannelOptions;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.DeleteNotificationChannelsOptions;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.GetNotificationChannelOptions;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.GetPublicKeyOptions;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.ListAllChannelsOptions;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.PublicKeyGet;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.TestChannel;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.TestNotificationChannelOptions;
+import com.ibm.cloud.security_and_compliance_center.notifications_api.v1.model.UpdateNotificationChannelOptions;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -99,9 +98,9 @@ public class NotificationsApi extends BaseService {
    * list all channels under this account.
    *
    * @param listAllChannelsOptions the {@link ListAllChannelsOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link ListChannelsResponse}
+   * @return a {@link ServiceCall} with a result of type {@link ChannelsList}
    */
-  public ServiceCall<ListChannelsResponse> listAllChannels(ListAllChannelsOptions listAllChannelsOptions) {
+  public ServiceCall<ChannelsList> listAllChannels(ListAllChannelsOptions listAllChannelsOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(listAllChannelsOptions,
       "listAllChannelsOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
@@ -121,8 +120,8 @@ public class NotificationsApi extends BaseService {
     if (listAllChannelsOptions.skip() != null) {
       builder.query("skip", String.valueOf(listAllChannelsOptions.skip()));
     }
-    ResponseConverter<ListChannelsResponse> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ListChannelsResponse>() { }.getType());
+    ResponseConverter<ChannelsList> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ChannelsList>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -132,9 +131,9 @@ public class NotificationsApi extends BaseService {
    * create notification channel.
    *
    * @param createNotificationChannelOptions the {@link CreateNotificationChannelOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link CreateChannelsResponse}
+   * @return a {@link ServiceCall} with a result of type {@link ChannelInfo}
    */
-  public ServiceCall<CreateChannelsResponse> createNotificationChannel(CreateNotificationChannelOptions createNotificationChannelOptions) {
+  public ServiceCall<ChannelInfo> createNotificationChannel(CreateNotificationChannelOptions createNotificationChannelOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(createNotificationChannelOptions,
       "createNotificationChannelOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
@@ -165,8 +164,8 @@ public class NotificationsApi extends BaseService {
       contentJson.add("alert_source", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createNotificationChannelOptions.alertSource()));
     }
     builder.bodyJson(contentJson);
-    ResponseConverter<CreateChannelsResponse> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<CreateChannelsResponse>() { }.getType());
+    ResponseConverter<ChannelInfo> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ChannelInfo>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -176,9 +175,9 @@ public class NotificationsApi extends BaseService {
    * bulk delete of channels.
    *
    * @param deleteNotificationChannelsOptions the {@link DeleteNotificationChannelsOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link BulkDeleteChannelsResponse}
+   * @return a {@link ServiceCall} with a result of type {@link ChannelsDelete}
    */
-  public ServiceCall<BulkDeleteChannelsResponse> deleteNotificationChannels(DeleteNotificationChannelsOptions deleteNotificationChannelsOptions) {
+  public ServiceCall<ChannelsDelete> deleteNotificationChannels(DeleteNotificationChannelsOptions deleteNotificationChannelsOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(deleteNotificationChannelsOptions,
       "deleteNotificationChannelsOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
@@ -193,8 +192,8 @@ public class NotificationsApi extends BaseService {
       builder.header("Transaction-Id", deleteNotificationChannelsOptions.transactionId());
     }
     builder.bodyContent(com.ibm.cloud.sdk.core.util.GsonSingleton.getGsonWithoutPrettyPrinting().toJson(deleteNotificationChannelsOptions.body()), "application/json");
-    ResponseConverter<BulkDeleteChannelsResponse> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<BulkDeleteChannelsResponse>() { }.getType());
+    ResponseConverter<ChannelsDelete> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ChannelsDelete>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -204,9 +203,9 @@ public class NotificationsApi extends BaseService {
    * delete the details of a specific channel.
    *
    * @param deleteNotificationChannelOptions the {@link DeleteNotificationChannelOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link DeleteChannelResponse}
+   * @return a {@link ServiceCall} with a result of type {@link ChannelDelete}
    */
-  public ServiceCall<DeleteChannelResponse> deleteNotificationChannel(DeleteNotificationChannelOptions deleteNotificationChannelOptions) {
+  public ServiceCall<ChannelDelete> deleteNotificationChannel(DeleteNotificationChannelOptions deleteNotificationChannelOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(deleteNotificationChannelOptions,
       "deleteNotificationChannelOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
@@ -221,8 +220,8 @@ public class NotificationsApi extends BaseService {
     if (deleteNotificationChannelOptions.transactionId() != null) {
       builder.header("Transaction-Id", deleteNotificationChannelOptions.transactionId());
     }
-    ResponseConverter<DeleteChannelResponse> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DeleteChannelResponse>() { }.getType());
+    ResponseConverter<ChannelDelete> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ChannelDelete>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -232,9 +231,9 @@ public class NotificationsApi extends BaseService {
    * get the details of a specific channel.
    *
    * @param getNotificationChannelOptions the {@link GetNotificationChannelOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link GetChannelResponse}
+   * @return a {@link ServiceCall} with a result of type {@link ChannelGet}
    */
-  public ServiceCall<GetChannelResponse> getNotificationChannel(GetNotificationChannelOptions getNotificationChannelOptions) {
+  public ServiceCall<ChannelGet> getNotificationChannel(GetNotificationChannelOptions getNotificationChannelOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(getNotificationChannelOptions,
       "getNotificationChannelOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
@@ -249,8 +248,8 @@ public class NotificationsApi extends BaseService {
     if (getNotificationChannelOptions.transactionId() != null) {
       builder.header("Transaction-Id", getNotificationChannelOptions.transactionId());
     }
-    ResponseConverter<GetChannelResponse> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<GetChannelResponse>() { }.getType());
+    ResponseConverter<ChannelGet> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ChannelGet>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -260,9 +259,9 @@ public class NotificationsApi extends BaseService {
    * update notification channel.
    *
    * @param updateNotificationChannelOptions the {@link UpdateNotificationChannelOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link UpdateChannelResponse}
+   * @return a {@link ServiceCall} with a result of type {@link ChannelInfo}
    */
-  public ServiceCall<UpdateChannelResponse> updateNotificationChannel(UpdateNotificationChannelOptions updateNotificationChannelOptions) {
+  public ServiceCall<ChannelInfo> updateNotificationChannel(UpdateNotificationChannelOptions updateNotificationChannelOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(updateNotificationChannelOptions,
       "updateNotificationChannelOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
@@ -294,8 +293,8 @@ public class NotificationsApi extends BaseService {
       contentJson.add("alert_source", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateNotificationChannelOptions.alertSource()));
     }
     builder.bodyJson(contentJson);
-    ResponseConverter<UpdateChannelResponse> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<UpdateChannelResponse>() { }.getType());
+    ResponseConverter<ChannelInfo> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ChannelInfo>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -305,9 +304,9 @@ public class NotificationsApi extends BaseService {
    * test a nofication channel under this account.
    *
    * @param testNotificationChannelOptions the {@link TestNotificationChannelOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link TestChannelResponse}
+   * @return a {@link ServiceCall} with a result of type {@link TestChannel}
    */
-  public ServiceCall<TestChannelResponse> testNotificationChannel(TestNotificationChannelOptions testNotificationChannelOptions) {
+  public ServiceCall<TestChannel> testNotificationChannel(TestNotificationChannelOptions testNotificationChannelOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(testNotificationChannelOptions,
       "testNotificationChannelOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
@@ -322,8 +321,8 @@ public class NotificationsApi extends BaseService {
     if (testNotificationChannelOptions.transactionId() != null) {
       builder.header("Transaction-Id", testNotificationChannelOptions.transactionId());
     }
-    ResponseConverter<TestChannelResponse> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<TestChannelResponse>() { }.getType());
+    ResponseConverter<TestChannel> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<TestChannel>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -333,9 +332,9 @@ public class NotificationsApi extends BaseService {
    * fetch public key to decrypt messages in notification payload.
    *
    * @param getPublicKeyOptions the {@link GetPublicKeyOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link PublicKeyResponse}
+   * @return a {@link ServiceCall} with a result of type {@link PublicKeyGet}
    */
-  public ServiceCall<PublicKeyResponse> getPublicKey(GetPublicKeyOptions getPublicKeyOptions) {
+  public ServiceCall<PublicKeyGet> getPublicKey(GetPublicKeyOptions getPublicKeyOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(getPublicKeyOptions,
       "getPublicKeyOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
@@ -349,8 +348,8 @@ public class NotificationsApi extends BaseService {
     if (getPublicKeyOptions.transactionId() != null) {
       builder.header("Transaction-Id", getPublicKeyOptions.transactionId());
     }
-    ResponseConverter<PublicKeyResponse> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<PublicKeyResponse>() { }.getType());
+    ResponseConverter<PublicKeyGet> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<PublicKeyGet>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 

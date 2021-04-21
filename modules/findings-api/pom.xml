@@ -10,7 +10,7 @@
         <relativePath>../..</relativePath>
     </parent>
 
-    <artifactId>findings-api</artifactId>
+    <artifactId>findings_api</artifactId>
     <packaging>jar</packaging>
     <name>IBM Cloud Security &amp; Compliance Center Findings API</name>
 
@@ -21,12 +21,12 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>security-and-compliance-center-common</artifactId>
+            <artifactId>common</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>security-and-compliance-center-common</artifactId>
+            <artifactId>common</artifactId>
             <type>test-jar</type>
             <classifier>tests</classifier>
             <scope>test</scope>

@@ -13,4 +13,4 @@
 /**
  * Notifications API v1.
  */
-package com.ibm.cloud.notifications_api.v1;
+package com.ibm.cloud.security_and_compliance_center.notifications_api.v1;

@@ -12,7 +12,7 @@
     </parent>
 
     <!-- >>> Replace this with the common module's artifactId (e.g. platform-services-common) -->
-    <artifactId>security-and-compliance-center-common</artifactId>
+    <artifactId>common</artifactId>
 
     <!-- >>> Replace this with the common module's description (e.g. Platform Services Common Library) -->
     <name>IBM Cloud Security &amp; Compliance Center Common Library</name>

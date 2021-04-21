@@ -18,6 +18,13 @@
 package com.ibm.cloud.security_and_compliance_center.configuration_governance.v1;
 
 import com.google.gson.JsonObject;
+import com.ibm.cloud.sdk.core.http.RequestBuilder;
+import com.ibm.cloud.sdk.core.http.ResponseConverter;
+import com.ibm.cloud.sdk.core.http.ServiceCall;
+import com.ibm.cloud.sdk.core.security.Authenticator;
+import com.ibm.cloud.sdk.core.security.ConfigBasedAuthenticatorFactory;
+import com.ibm.cloud.sdk.core.service.BaseService;
+import com.ibm.cloud.sdk.core.util.ResponseConverterUtils;
 import com.ibm.cloud.security_and_compliance_center.common.SdkCommon;
 import com.ibm.cloud.security_and_compliance_center.configuration_governance.v1.model.CreateRuleAttachmentsOptions;
 import com.ibm.cloud.security_and_compliance_center.configuration_governance.v1.model.CreateRuleAttachmentsResponse;
@@ -36,13 +43,6 @@ import com.ibm.cloud.security_and_compliance_center.configuration_governance.v1.
 import com.ibm.cloud.security_and_compliance_center.configuration_governance.v1.model.TemplateAttachment;
 import com.ibm.cloud.security_and_compliance_center.configuration_governance.v1.model.UpdateRuleAttachmentOptions;
 import com.ibm.cloud.security_and_compliance_center.configuration_governance.v1.model.UpdateRuleOptions;
-import com.ibm.cloud.sdk.core.http.RequestBuilder;
-import com.ibm.cloud.sdk.core.http.ResponseConverter;
-import com.ibm.cloud.sdk.core.http.ServiceCall;
-import com.ibm.cloud.sdk.core.security.Authenticator;
-import com.ibm.cloud.sdk.core.security.ConfigBasedAuthenticatorFactory;
-import com.ibm.cloud.sdk.core.service.BaseService;
-import com.ibm.cloud.sdk.core.util.ResponseConverterUtils;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
