@@ -15,7 +15,7 @@
     <url>https://github.ibm.com/CloudEngineering/java-sdk-template</url>
 
     <groupId>com.ibm.cloud</groupId>
-    <version>99-SNAPSHOT</version>
+    <version>0.0.1</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -97,16 +97,8 @@
     <!-- >>> Update these values to reflect your project -->
     <ciManagement>
         <system>Travis-CI</system>
-        <url>https://travis.ibm.com/ibm-cloud-security/scc-java-sdk/</url>
+        <url>https://travis.com/ibm-cloud-security/scc-java-sdk/</url>
     </ciManagement>
-
-    <repositories>
-        <!-- these definitions are useful only for internal SDK projects -->
-        <repository>
-            <id>na-artifactory-ibmcloud-sdks</id>
-            <url>https://na.artifactory.swg-devops.com:443/artifactory/wcp-ibmcloud-sdks-team-maven-local/</url>
-        </repository>
-    </repositories>
 
     <!-- This section is commented out because we use an alternate deploy plugin.
     <distributionManagement>
@@ -513,8 +505,7 @@
                 </plugins>
             </build>
             <properties>
-                <!-- Configure the gpg plugin to use the env vars defined in the Travis build settings -->
-                <gpg.keyname>${env.GPG_KEYNAME}</gpg.keyname>
+                <gpg.executable>${env.GPG_EXECUTABLE}</gpg.executable>
                 <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
             </properties>
         </profile>

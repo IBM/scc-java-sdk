@@ -18,6 +18,17 @@
         "message": "chore(release): ${nextRelease.version} release notes\n\n${nextRelease.notes}"
       }
     ],
-    "@semantic-release/github"
+    "@semantic-release/github",
+    [
+      {
+        "path": "modules/findings-api/target/findings_api-*[0-9].*[0-9].*[0-9].jar", "label": "findings_api-${nextRelease.version}.jar", "name": "findings_api-${nextRelease.version}.jar"
+      },
+      {
+        "path": "modules/notifications-api/target/notifications_api-*[0-9].*[0-9].*[0-9].jar", "label": "notifications_api-${nextRelease.version}.jar", "name": "notifications_api-${nextRelease.version}.jar"
+      },
+      {
+        "path": "modules/configuration-governance/target/configuration_governance-*[0-9].*[0-9].*[0-9].jar", "label": "configuration_governance-${nextRelease.version}.jar", "name": "configuration_governance-${nextRelease.version}.jar"
+      },
+    ],
   ]
 }
