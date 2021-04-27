@@ -1,5 +1,6 @@
-[![Build Status](https://travis.ibm.com/CloudEngineering/java-sdk-template.svg?token=eW5FVD71iyte6tTby8gr&branch=main)](https://travis.ibm.com/CloudEngineering/java-sdk-template)
+[![Build Status](https://travis-ci.com/ibm-cloud-security/scc-java-sdk.svg?branch=main)](https://travis-ci.com/github/ibm-cloud-security/scc-java-sdk)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.ibm.cloud/scc/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.ibm.cloud/scc)
 
 # IBM Cloud Security & Compliance Center Java SDK Version 0.0.1
 Java client library to interact with various [IBM Cloud Security & Compliance Center](https://cloud.ibm.com/apidocs/security-and-compliance-center).
