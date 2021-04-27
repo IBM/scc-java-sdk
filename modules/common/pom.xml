@@ -5,7 +5,7 @@
 
     <parent>
         <!-- >>> Replace this with the parent pom's artifactId -->
-        <artifactId>security-and-compliance-center</artifactId>
+        <artifactId>scc</artifactId>
         <groupId>com.ibm.cloud</groupId>
         <version>0.0.1</version>
         <relativePath>../..</relativePath>

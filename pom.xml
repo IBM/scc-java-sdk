@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- >>> Replace this with your service category (e.g. "platform-services") -->
-    <artifactId>security-and-compliance-center</artifactId>
+    <artifactId>scc</artifactId>
 
     <!-- >>> Update this field to reflect your project -->
     <name>IBM Cloud Security &amp; Compliance Center Java SDK</name>
