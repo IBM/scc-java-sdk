@@ -34,11 +34,6 @@ jobs:
   include:
     - stage: Build
       script: mvn clean package $MVN_ARGS
-      deploy:
-        provider: pages
-        skip_cleanup: true
-        token: $GH_TOKEN
-        local_dir: target/site/apidocs
 
     - stage: Release & Deployment
       name: Release & Deployment
@@ -57,3 +52,8 @@ jobs:
         - mvn clean package -DskipTests
         - npx semantic-release
         - mvn deploy $MVN_ARGS -DskipTests -P central
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        token: $GH_TOKEN
+        local_dir: target/site/apidocs
