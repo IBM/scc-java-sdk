@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.com/ibm-cloud-security/scc-java-sdk.svg?branch=main)](https://travis-ci.com/github/ibm-cloud-security/scc-java-sdk)
+[![Release](https://img.shields.io/github/v/release/ibm-cloud-security/scc-java-sdk)](https://img.shields.io/github/v/release/ibm-cloud-security/scc-java-sdk)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.ibm.cloud/scc/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.ibm.cloud/scc)
 
 # IBM Cloud Security & Compliance Center Java SDK Version 0.0.1
