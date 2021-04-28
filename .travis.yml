@@ -1,0 +1,59 @@
+---
+language: java
+
+dist: xenial
+
+os: linux
+
+jdk:
+- openjdk8
+branches:
+  except:
+  - gh-pages
+
+cache:
+  directories:
+  - "$HOME/.m2"
+
+env:
+  global:
+    - MVN_ARGS="--settings build/.travis.settings.xml"
+
+stages:
+  - name: Build
+  - name: Release & Deployment
+    if: branch = master AND type = push AND fork = false
+
+before_install:
+  - sudo apt-get update
+  - env | grep TRAVIS
+  - echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import
+  - echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust
+
+jobs:
+  include:
+    - stage: Build
+      script: mvn clean package $MVN_ARGS
+
+    - stage: Release & Deployment
+      name: Release & Deployment
+      jdk: openjdk8
+      install:
+        - sudo apt-get update
+        - sudo apt-get install python
+        - nvm install 12
+        - npm install -g npm@6.x
+        - pip install --user bump2version
+        - npm install @semantic-release/changelog
+        - npm install @semantic-release/exec
+        - npm install @semantic-release/git
+        - npm install @semantic-release/github
+      script:
+        - mvn clean package -DskipTests
+        - npx semantic-release
+        - mvn deploy $MVN_ARGS -DskipTests -P central
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        token: $GH_TOKEN
+        local_dir: target/site/apidocs

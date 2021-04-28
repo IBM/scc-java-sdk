@@ -1,0 +1,34 @@
+{
+  "debug": true,
+  "branches": [ "main" ],
+  "tagFormat": "${version}",
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    [
+      "@semantic-release/exec", 
+      {
+        "prepareCmd": "bump2version --allow-dirty --current-version ${lastRelease.version} --new-version ${nextRelease.version} patch"
+      }
+    ],
+    [
+      "@semantic-release/git", 
+      {
+        "message": "chore(release): ${nextRelease.version} release notes\n\n${nextRelease.notes}"
+      }
+    ],
+    "@semantic-release/github",
+    [
+      {
+        "path": "modules/findings-api/target/findings_api-*[0-9].*[0-9].*[0-9].jar", "label": "findings_api-${nextRelease.version}.jar", "name": "findings_api-${nextRelease.version}.jar"
+      },
+      {
+        "path": "modules/notifications-api/target/notifications_api-*[0-9].*[0-9].*[0-9].jar", "label": "notifications_api-${nextRelease.version}.jar", "name": "notifications_api-${nextRelease.version}.jar"
+      },
+      {
+        "path": "modules/configuration-governance/target/configuration_governance-*[0-9].*[0-9].*[0-9].jar", "label": "configuration_governance-${nextRelease.version}.jar", "name": "configuration_governance-${nextRelease.version}.jar"
+      },
+    ],
+  ]
+}
