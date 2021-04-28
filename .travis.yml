@@ -22,7 +22,7 @@ env:
 stages:
   - name: Build
   - name: Release & Deployment
-    if: branch = master AND type = push AND fork = false
+    if: branch = main AND type = push AND fork = false
 
 before_install:
   - sudo apt-get update
