@@ -1,3 +1,11 @@
+## [0.0.3](https://github.com/ibm-cloud-security/scc-java-sdk/compare/0.0.2...0.0.3) (2021-04-29)
+
+
+### Bug Fixes
+
+* **IBM Cloud SCC:** first release to MVN central ([60aa40b](https://github.com/ibm-cloud-security/scc-java-sdk/commit/60aa40b1357a8827acacbd28fc08edc5ee410fc1))
+* **IBM Cloud SCC:** first release to MVN central ([1f2b8d1](https://github.com/ibm-cloud-security/scc-java-sdk/commit/1f2b8d1bae1ff5a60a2b93a43d91c2745d42853e))
+
 ## [0.0.2](https://github.com/ibm-cloud-security/scc-java-sdk/compare/v0.0.1...0.0.2) (2021-04-28)
 
 
