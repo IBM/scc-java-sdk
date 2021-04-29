@@ -1,3 +1,11 @@
+## [0.0.5](https://github.com/ibm-cloud-security/scc-java-sdk/compare/0.0.4...0.0.5) (2021-04-29)
+
+
+### Bug Fixes
+
+* **IBM Cloud SCC:** javadoc publish issue ([9a26193](https://github.com/ibm-cloud-security/scc-java-sdk/commit/9a26193775d722d1a9ffcc0cd82b1fa100b0fa6d))
+* **IBM Cloud SCC:** javadoc publish issue ([c8e97aa](https://github.com/ibm-cloud-security/scc-java-sdk/commit/c8e97aa7ba64dd7fdff1769a1d8917b1b7f6f28d))
+
 ## [0.0.4](https://github.com/ibm-cloud-security/scc-java-sdk/compare/0.0.3...0.0.4) (2021-04-29)
 
 
