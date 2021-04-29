@@ -54,6 +54,8 @@ jobs:
         - mvn deploy $MVN_ARGS -DskipTests -P central
       deploy:
         provider: pages
+        on:
+          branch: main
         skip_cleanup: true
         token: $GH_TOKEN
         local_dir: target/site/apidocs
