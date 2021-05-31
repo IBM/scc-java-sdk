@@ -48,7 +48,7 @@ import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.sdk.core.util.CredentialUtils;
 
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterGroups;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -64,7 +64,7 @@ public class NotificationsIT extends SdkIntegrationTestBase {
    * This method provides our config filename to the base class.
    */
 
-  final String accountID = "a7e15e43dba44fb58db381d68addbebe";//System.getenv("ACCOUNT_ID");
+  final String accountID = System.getenv("ACCOUNT_ID");
   String channelID = "";
   final String testString = "testString";
 
@@ -114,7 +114,7 @@ public class NotificationsIT extends SdkIntegrationTestBase {
     }
   }
 
-  @Test
+  @Test(groups={"channel"})
   public void testCreateNotificationChannel() throws Exception {
     try {
       NotificationChannelAlertSourceItem notificationChannelAlertSourceItemModel = new NotificationChannelAlertSourceItem.Builder()
@@ -149,7 +149,7 @@ public class NotificationsIT extends SdkIntegrationTestBase {
     }
   }
 
-  @Test
+  @Test(groups={"channel"})
   public void testGetNotificationChannel() throws Exception {
     try {
       GetNotificationChannelOptions getNotificationChannelOptions = new GetNotificationChannelOptions.Builder()
@@ -172,7 +172,7 @@ public class NotificationsIT extends SdkIntegrationTestBase {
     }
   }
 
-  @Test
+  @Test(groups={"channel"})
   public void testUpdateNotificationChannel() throws Exception {
     try {
       NotificationChannelAlertSourceItem notificationChannelAlertSourceItemModel = new NotificationChannelAlertSourceItem.Builder()
@@ -207,7 +207,7 @@ public class NotificationsIT extends SdkIntegrationTestBase {
     }
   }
 
-  @Test
+  @Test(groups={"channel"})
   public void testTestNotificationChannel() throws Exception {
     try {
       TestNotificationChannelOptions testNotificationChannelOptions = new TestNotificationChannelOptions.Builder()
@@ -252,7 +252,7 @@ public class NotificationsIT extends SdkIntegrationTestBase {
     }
   }
 
-  @AfterTest
+  @AfterGroups(groups={"channel"})
   public void testDeleteNotificationChannel() throws Exception {
     try {
       DeleteNotificationChannelOptions deleteNotificationChannelOptions = new DeleteNotificationChannelOptions.Builder()
@@ -275,7 +275,7 @@ public class NotificationsIT extends SdkIntegrationTestBase {
     }
   }
 
-  @AfterTest
+  @AfterGroups(groups={"channel"})
   public void testDeleteNotificationChannels() throws Exception {
     try {
       NotificationChannelAlertSourceItem notificationChannelAlertSourceItemModel = new NotificationChannelAlertSourceItem.Builder()
