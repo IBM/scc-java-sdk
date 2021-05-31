@@ -1,3 +1,10 @@
+## [0.0.7](https://github.com/ibm-cloud-security/scc-java-sdk/compare/0.0.6...0.0.7) (2021-05-31)
+
+
+### Bug Fixes
+
+* **Travis:** travis stages sequence fixed ([7186658](https://github.com/ibm-cloud-security/scc-java-sdk/commit/7186658bad398aff88c15577b1152d612043795e))
+
 ## [0.0.6](https://github.com/ibm-cloud-security/scc-java-sdk/compare/0.0.5...0.0.6) (2021-05-31)
 
 
