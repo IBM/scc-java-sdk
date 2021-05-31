@@ -126,7 +126,7 @@ public class Findings extends BaseService {
     if (postGraphOptions.transactionId() != null) {
       builder.header("Transaction-Id", postGraphOptions.transactionId());
     }
-    builder.bodyContent(postGraphOptions.contentType(), postGraphOptions.body(),
+    builder.bodyContent(postGraphOptions.contentType(), null,
       null, postGraphOptions.body());
     ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
     return createServiceCall(builder.build(), responseConverter);
