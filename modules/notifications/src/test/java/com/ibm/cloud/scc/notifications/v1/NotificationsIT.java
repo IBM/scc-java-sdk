@@ -13,12 +13,20 @@
 
 package com.ibm.cloud.scc.notifications.v1;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.fail;
+
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.ibm.cloud.scc.notifications.v1.model.Channel;
-import com.ibm.cloud.scc.notifications.v1.model.ChannelAlertSourceItem;
 import com.ibm.cloud.scc.notifications.v1.model.ChannelDelete;
 import com.ibm.cloud.scc.notifications.v1.model.ChannelGet;
 import com.ibm.cloud.scc.notifications.v1.model.ChannelInfo;
-import com.ibm.cloud.scc.notifications.v1.model.ChannelSeverity;
 import com.ibm.cloud.scc.notifications.v1.model.ChannelsDelete;
 import com.ibm.cloud.scc.notifications.v1.model.ChannelsList;
 import com.ibm.cloud.scc.notifications.v1.model.CreateNotificationChannelOptions;
@@ -38,16 +46,11 @@ import com.ibm.cloud.sdk.core.http.Response;
 import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.sdk.core.util.CredentialUtils;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import static org.testng.Assert.*;
 
 /**
  * Integration test class for the Notifications service.
@@ -60,6 +63,10 @@ public class NotificationsIT extends SdkIntegrationTestBase {
   /**
    * This method provides our config filename to the base class.
    */
+
+  final String accountID = "a7e15e43dba44fb58db381d68addbebe";//System.getenv("ACCOUNT_ID");
+  String channelID = "";
+  final String testString = "testString";
 
   public String getConfigFilename() {
     return "../../notifications_v1.env";
@@ -89,10 +96,7 @@ public class NotificationsIT extends SdkIntegrationTestBase {
   public void testListAllChannels() throws Exception {
     try {
       ListAllChannelsOptions listAllChannelsOptions = new ListAllChannelsOptions.Builder()
-      .accountId("testString")
-      .transactionId("testString")
-      .limit(Long.valueOf("26"))
-      .skip(Long.valueOf("26"))
+      .accountId(accountID)
       .build();
 
       // Invoke operation
@@ -114,24 +118,24 @@ public class NotificationsIT extends SdkIntegrationTestBase {
   public void testCreateNotificationChannel() throws Exception {
     try {
       NotificationChannelAlertSourceItem notificationChannelAlertSourceItemModel = new NotificationChannelAlertSourceItem.Builder()
-      .providerName("testString")
-      .findingTypes(new java.util.ArrayList<String>(java.util.Arrays.asList("testString")))
+      .providerName("VA")
+      .findingTypes(new java.util.ArrayList<String>(java.util.Arrays.asList("image_with_vulnerabilities")))
       .build();
 
       CreateNotificationChannelOptions createNotificationChannelOptions = new CreateNotificationChannelOptions.Builder()
-      .accountId("testString")
-      .name("testString")
+      .accountId(accountID)
+      .name(testString)
       .type("Webhook")
-      .endpoint("testString")
-      .description("testString")
+      .endpoint("https://webhook.site/136fe1e2-3c3f-4bff-925f-391fbb202546")
+      .description(testString)
       .severity(new java.util.ArrayList<String>(java.util.Arrays.asList("low")))
       .enabled(true)
       .alertSource(new java.util.ArrayList<NotificationChannelAlertSourceItem>(java.util.Arrays.asList(notificationChannelAlertSourceItemModel)))
-      .transactionId("testString")
       .build();
 
       // Invoke operation
       Response<ChannelInfo> response = service.createNotificationChannel(createNotificationChannelOptions).execute();
+      channelID = response.getResult().getChannelId();
       // Validate response
       assertNotNull(response);
       assertEquals(response.getStatusCode(), 200);
@@ -149,9 +153,8 @@ public class NotificationsIT extends SdkIntegrationTestBase {
   public void testGetNotificationChannel() throws Exception {
     try {
       GetNotificationChannelOptions getNotificationChannelOptions = new GetNotificationChannelOptions.Builder()
-      .accountId("testString")
-      .channelId("testString")
-      .transactionId("testString")
+      .accountId(accountID)
+      .channelId(channelID)
       .build();
 
       // Invoke operation
@@ -173,21 +176,20 @@ public class NotificationsIT extends SdkIntegrationTestBase {
   public void testUpdateNotificationChannel() throws Exception {
     try {
       NotificationChannelAlertSourceItem notificationChannelAlertSourceItemModel = new NotificationChannelAlertSourceItem.Builder()
-      .providerName("testString")
-      .findingTypes(new java.util.ArrayList<String>(java.util.Arrays.asList("testString")))
+      .providerName("VA")
+      .findingTypes(new java.util.ArrayList<String>(java.util.Arrays.asList("image_with_vulnerabilities")))
       .build();
 
       UpdateNotificationChannelOptions updateNotificationChannelOptions = new UpdateNotificationChannelOptions.Builder()
-      .accountId("testString")
-      .channelId("testString")
-      .name("testString")
+      .accountId(accountID)
+      .channelId(channelID)
+      .name(testString)
       .type("Webhook")
-      .endpoint("testString")
-      .description("testString")
+      .endpoint("https://webhook.site/136fe1e2-3c3f-4bff-925f-391fbb202546")
+      .description(testString)
       .severity(new java.util.ArrayList<String>(java.util.Arrays.asList("low")))
       .enabled(true)
       .alertSource(new java.util.ArrayList<NotificationChannelAlertSourceItem>(java.util.Arrays.asList(notificationChannelAlertSourceItemModel)))
-      .transactionId("testString")
       .build();
 
       // Invoke operation
@@ -209,9 +211,8 @@ public class NotificationsIT extends SdkIntegrationTestBase {
   public void testTestNotificationChannel() throws Exception {
     try {
       TestNotificationChannelOptions testNotificationChannelOptions = new TestNotificationChannelOptions.Builder()
-      .accountId("testString")
-      .channelId("testString")
-      .transactionId("testString")
+      .accountId(accountID)
+      .channelId(channelID)
       .build();
 
       // Invoke operation
@@ -233,8 +234,7 @@ public class NotificationsIT extends SdkIntegrationTestBase {
   public void testGetPublicKey() throws Exception {
     try {
       GetPublicKeyOptions getPublicKeyOptions = new GetPublicKeyOptions.Builder()
-      .accountId("testString")
-      .transactionId("testString")
+      .accountId(accountID)
       .build();
 
       // Invoke operation
@@ -252,37 +252,12 @@ public class NotificationsIT extends SdkIntegrationTestBase {
     }
   }
 
-  @Test
-  public void testDeleteNotificationChannels() throws Exception {
-    try {
-      DeleteNotificationChannelsOptions deleteNotificationChannelsOptions = new DeleteNotificationChannelsOptions.Builder()
-      .accountId("testString")
-      .body(new java.util.ArrayList<String>(java.util.Arrays.asList("testString")))
-      .transactionId("testString")
-      .build();
-
-      // Invoke operation
-      Response<ChannelsDelete> response = service.deleteNotificationChannels(deleteNotificationChannelsOptions).execute();
-      // Validate response
-      assertNotNull(response);
-      assertEquals(response.getStatusCode(), 200);
-
-      ChannelsDelete channelsDeleteResult = response.getResult();
-
-      assertNotNull(channelsDeleteResult);
-    } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
-    }
-  }
-
-  @Test
+  @AfterTest
   public void testDeleteNotificationChannel() throws Exception {
     try {
       DeleteNotificationChannelOptions deleteNotificationChannelOptions = new DeleteNotificationChannelOptions.Builder()
-      .accountId("testString")
-      .channelId("testString")
-      .transactionId("testString")
+      .accountId(accountID)
+      .channelId(channelID)
       .build();
 
       // Invoke operation
@@ -300,9 +275,71 @@ public class NotificationsIT extends SdkIntegrationTestBase {
     }
   }
 
+  @AfterTest
+  public void testDeleteNotificationChannels() throws Exception {
+    try {
+      NotificationChannelAlertSourceItem notificationChannelAlertSourceItemModel = new NotificationChannelAlertSourceItem.Builder()
+      .providerName("VA")
+      .findingTypes(new java.util.ArrayList<String>(java.util.Arrays.asList("image_with_vulnerabilities")))
+      .build();
+
+      CreateNotificationChannelOptions createNotificationChannelOptions = new CreateNotificationChannelOptions.Builder()
+      .accountId(accountID)
+      .name(testString)
+      .type("Webhook")
+      .endpoint("https://webhook.site/136fe1e2-3c3f-4bff-925f-391fbb202546")
+      .description(testString)
+      .severity(new java.util.ArrayList<String>(java.util.Arrays.asList("low")))
+      .enabled(true)
+      .alertSource(new java.util.ArrayList<NotificationChannelAlertSourceItem>(java.util.Arrays.asList(notificationChannelAlertSourceItemModel)))
+      .build();
+
+      // Invoke operation
+      Response<ChannelInfo> createChannelResp = service.createNotificationChannel(createNotificationChannelOptions).execute();
+
+      DeleteNotificationChannelsOptions deleteNotificationChannelsOptions = new DeleteNotificationChannelsOptions.Builder()
+      .accountId(accountID)
+      .body(new java.util.ArrayList<String>(java.util.Arrays.asList(createChannelResp.getResult().getChannelId())))
+      .build();
+
+      // Invoke operation
+      Response<ChannelsDelete> deleteChannelResp = service.deleteNotificationChannels(deleteNotificationChannelsOptions).execute();
+      // Validate response
+      assertNotNull(deleteChannelResp);
+      assertEquals(deleteChannelResp.getStatusCode(), 200);
+
+      ChannelsDelete channelsDeleteResult = deleteChannelResp.getResult();
+
+      assertNotNull(channelsDeleteResult);
+    } catch (ServiceResponseException e) {
+        fail(String.format("Service returned status code %d: %s\nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+    }
+  }
+
   @AfterClass
   public void tearDown() {
-    // Add any clean up logic here
+    service = Notifications.newInstance();
+    config = CredentialUtils.getServiceProperties(Notifications.DEFAULT_SERVICE_NAME);
     System.out.println("Clean up complete.");
+
+    System.out.println(String.format("cleaning up account: %s", accountID));
+
+    ListAllChannelsOptions listAllChannelsOptions = new ListAllChannelsOptions.Builder()
+    .accountId(accountID)
+    .build();
+
+    Response<ChannelsList> channels = service.listAllChannels(listAllChannelsOptions).execute();
+    for(Channel channel: channels.getResult().getChannels()) {
+      if (channel.getChannelId() == channelID) {
+        DeleteNotificationChannelOptions deleteNotificationChannelOptions = new DeleteNotificationChannelOptions.Builder()
+        .accountId(accountID)
+        .channelId(channelID)
+        .build();
+
+        service.deleteNotificationChannel(deleteNotificationChannelOptions);
+      }
+    }
+    System.out.println("cleanup was successful");
   }
  }
