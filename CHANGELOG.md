@@ -1,3 +1,11 @@
+## [0.0.6](https://github.com/ibm-cloud-security/scc-java-sdk/compare/0.0.5...0.0.6) (2021-05-31)
+
+
+### Bug Fixes
+
+* **TRI:** region based service URL feature added ([75d6eeb](https://github.com/ibm-cloud-security/scc-java-sdk/commit/75d6eeb245ec212e5e7769f9568b5a5672427572))
+* **TRI:** region based service URL feature added ([80df08d](https://github.com/ibm-cloud-security/scc-java-sdk/commit/80df08d6dd9acaaf90b616d55a083dbff61351b9))
+
 ## [0.0.5](https://github.com/ibm-cloud-security/scc-java-sdk/compare/0.0.4...0.0.5) (2021-04-29)
 
 
