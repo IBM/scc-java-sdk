@@ -13,10 +13,10 @@
 
 package com.ibm.cloud.scc.configuration_governance.v1.model;
 
-import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.scc.configuration_governance.v1.model.TemplateAttachment;
 import com.ibm.cloud.scc.configuration_governance.v1.model.TemplateScope;
 import com.ibm.cloud.scc.configuration_governance.v1.utils.TestUtilities;
+import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;

@@ -32,8 +32,12 @@ before_install:
 
 jobs:
   include:
-    - stage: Build
-      script: mvn clean package $MVN_ARGS
+    - stage: Build & Test
+      install:
+        - curl -s https://codecov.io/bash > $HOME/codecov-bash.sh && chmod +x $HOME/codecov-bash.sh
+      script: mvn verify -fae -DskipITs $MVN_ARGS
+      after_success:
+        - build/publishCodeCoverage.sh
 
     - stage: Release & Deployment
       name: Release & Deployment
@@ -49,9 +53,9 @@ jobs:
         - npm install @semantic-release/git
         - npm install @semantic-release/github
       script:
-        - mvn clean package -DskipTests
+        - mvn clean package -DskipITs
         - npx semantic-release
-        - mvn deploy $MVN_ARGS -DskipTests -P central
+        - mvn deploy $MVN_ARGS -DskipITs -P central
       deploy:
         provider: pages
         on:

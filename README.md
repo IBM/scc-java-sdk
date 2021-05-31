@@ -75,14 +75,14 @@ Here are examples for maven and gradle:
 ```xml
 <dependency>
     <groupId>com.ibm.cloud</groupId>
-    <artifactId>findings_api</artifactId>
+    <artifactId>findings</artifactId>
     <version>0.0.5</version>
 </dependency>
 ```
 
 ### Gradle
 ```gradle
-compile 'com.ibm.cloud:findings_api:0.0.5'
+compile 'com.ibm.cloud:findings:0.0.5'
 ```
 
 ## Using the SDK

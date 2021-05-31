@@ -59,8 +59,8 @@
 
         <!-- >>> List each service's module here -->
         <module>modules/configuration-governance</module>
-        <module>modules/findings-api</module>
-        <module>modules/notifications-api</module>
+        <module>modules/findings</module>
+        <module>modules/notifications</module>
 
         <!-- This module should be listed after all the service-related modules above -->
         <module>modules/coverage-reports</module>
@@ -383,6 +383,27 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-plugin-version}</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <systemPropertyVariables>
+                        <jacoco-agent.destfile>${project.build.directory}</jacoco-agent.destfile>
+                    </systemPropertyVariables>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

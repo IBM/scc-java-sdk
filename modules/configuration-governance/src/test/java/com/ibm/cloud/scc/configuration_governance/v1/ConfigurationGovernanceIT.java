@@ -13,11 +13,6 @@
 
 package com.ibm.cloud.scc.configuration_governance.v1;
 
-import com.ibm.cloud.sdk.core.http.Response;
-import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
-import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
-import com.ibm.cloud.sdk.core.util.CredentialUtils;
-import com.ibm.cloud.sdk.core.util.DateUtils;
 import com.ibm.cloud.scc.configuration_governance.v1.model.CreateRuleAttachmentsOptions;
 import com.ibm.cloud.scc.configuration_governance.v1.model.CreateRuleAttachmentsResponse;
 import com.ibm.cloud.scc.configuration_governance.v1.model.CreateRuleRequest;
@@ -58,6 +53,11 @@ import com.ibm.cloud.scc.configuration_governance.v1.model.UpdateRuleAttachmentO
 import com.ibm.cloud.scc.configuration_governance.v1.model.UpdateRuleOptions;
 import com.ibm.cloud.scc.configuration_governance.v1.utils.TestUtilities;
 import com.ibm.cloud.scc.test.SdkIntegrationTestBase;
+import com.ibm.cloud.sdk.core.http.Response;
+import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
+import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
+import com.ibm.cloud.sdk.core.util.CredentialUtils;
+import com.ibm.cloud.sdk.core.util.DateUtils;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;

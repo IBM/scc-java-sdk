@@ -13,10 +13,10 @@
 
 package com.ibm.cloud.scc.configuration_governance.v1.model;
 
-import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.scc.configuration_governance.v1.model.RuleConditionOrLvl2;
 import com.ibm.cloud.scc.configuration_governance.v1.model.RuleSingleProperty;
 import com.ibm.cloud.scc.configuration_governance.v1.utils.TestUtilities;
+import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
