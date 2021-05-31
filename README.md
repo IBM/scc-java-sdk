@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.ibm.cloud/scc/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.ibm.cloud/scc)
 
-# IBM Cloud Security & Compliance Center Java SDK Version 0.0.6
+# IBM Cloud Security & Compliance Center Java SDK Version 0.0.7
 Java client library to interact with various [IBM Cloud Security & Compliance Center](https://cloud.ibm.com/apidocs/security-and-compliance-center).
 
 Disclaimer: this SDK is being released initially as a **pre-release** version.
@@ -44,9 +44,9 @@ The IBM Cloud Security & Compliance Center Java SDK allows developers to program
 
 Service Name | Imported Class Name
 --- | ---
-[FindingsApi](https://cloud.ibm.com/apidocs/security-and-compliance-center/findings) | FindingsApi:0.0.6
-[NotificationsApi](https://cloud.ibm.com/apidocs/security-and-compliance-center/notifications) | NotificationsApi:0.0.6
-[ConfigurationGovernanceApi](https://cloud.ibm.com/apidocs/security-and-compliance-center/configuration-governance) | ConfigurationGovernanceApi:0.0.6
+[FindingsApi](https://cloud.ibm.com/apidocs/security-and-compliance-center/findings) | FindingsApi:0.0.7
+[NotificationsApi](https://cloud.ibm.com/apidocs/security-and-compliance-center/notifications) | NotificationsApi:0.0.7
+[ConfigurationGovernanceApi](https://cloud.ibm.com/apidocs/security-and-compliance-center/configuration-governance) | ConfigurationGovernanceApi:0.0.7
 
 ## Prerequisites
 
@@ -57,7 +57,7 @@ Service Name | Imported Class Name
 * Java 8 or above.
 
 ## Installation
-The current version of this SDK is: 0.0.6
+The current version of this SDK is: 0.0.7
 
 Each service's artifact coordinates are listed in the table above.
 
@@ -76,13 +76,13 @@ Here are examples for maven and gradle:
 <dependency>
     <groupId>com.ibm.cloud</groupId>
     <artifactId>findings</artifactId>
-    <version>0.0.6</version>
+    <version>0.0.7</version>
 </dependency>
 ```
 
 ### Gradle
 ```gradle
-compile 'com.ibm.cloud:findings:0.0.6'
+compile 'com.ibm.cloud:findings:0.0.7'
 ```
 
 ## Using the SDK
