@@ -40,13 +40,13 @@
         <!-- Copy and update this section for each service added to the project. -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>notifications_api</artifactId>
+            <artifactId>notifications</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>findings_api</artifactId>
+            <artifactId>findings</artifactId>
             <version>${project.version}</version>
         </dependency>
 

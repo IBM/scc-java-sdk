@@ -12,19 +12,12 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.30.0-bd714324-20210406-200538
+ * IBM OpenAPI SDK Code Generator Version: 3.32.0-4c6a3129-20210514-210323
  */
 
 package com.ibm.cloud.scc.configuration_governance.v1;
 
 import com.google.gson.JsonObject;
-import com.ibm.cloud.sdk.core.http.RequestBuilder;
-import com.ibm.cloud.sdk.core.http.ResponseConverter;
-import com.ibm.cloud.sdk.core.http.ServiceCall;
-import com.ibm.cloud.sdk.core.security.Authenticator;
-import com.ibm.cloud.sdk.core.security.ConfigBasedAuthenticatorFactory;
-import com.ibm.cloud.sdk.core.service.BaseService;
-import com.ibm.cloud.sdk.core.util.ResponseConverterUtils;
 import com.ibm.cloud.scc.common.SdkCommon;
 import com.ibm.cloud.scc.configuration_governance.v1.model.CreateRuleAttachmentsOptions;
 import com.ibm.cloud.scc.configuration_governance.v1.model.CreateRuleAttachmentsResponse;
@@ -43,6 +36,13 @@ import com.ibm.cloud.scc.configuration_governance.v1.model.RuleList;
 import com.ibm.cloud.scc.configuration_governance.v1.model.TemplateAttachment;
 import com.ibm.cloud.scc.configuration_governance.v1.model.UpdateRuleAttachmentOptions;
 import com.ibm.cloud.scc.configuration_governance.v1.model.UpdateRuleOptions;
+import com.ibm.cloud.sdk.core.http.RequestBuilder;
+import com.ibm.cloud.sdk.core.http.ResponseConverter;
+import com.ibm.cloud.sdk.core.http.ServiceCall;
+import com.ibm.cloud.sdk.core.security.Authenticator;
+import com.ibm.cloud.sdk.core.security.ConfigBasedAuthenticatorFactory;
+import com.ibm.cloud.sdk.core.service.BaseService;
+import com.ibm.cloud.sdk.core.util.ResponseConverterUtils;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -56,7 +56,7 @@ public class ConfigurationGovernance extends BaseService {
 
   public static final String DEFAULT_SERVICE_NAME = "configuration_governance";
 
-  public static final String DEFAULT_SERVICE_URL = "https://compliance.cloud.ibm.com";
+  public static final String DEFAULT_SERVICE_URL = "https://us.compliance.cloud.ibm.com";
 
  /**
    * Class method which constructs an instance of the `ConfigurationGovernance` client.

@@ -13,7 +13,6 @@
 
 package com.ibm.cloud.scc.configuration_governance.v1.model;
 
-import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.scc.configuration_governance.v1.model.CreateRuleRequest;
 import com.ibm.cloud.scc.configuration_governance.v1.model.EnforcementAction;
 import com.ibm.cloud.scc.configuration_governance.v1.model.RuleRequest;
@@ -21,6 +20,7 @@ import com.ibm.cloud.scc.configuration_governance.v1.model.RuleRequiredConfigSin
 import com.ibm.cloud.scc.configuration_governance.v1.model.TargetResource;
 import com.ibm.cloud.scc.configuration_governance.v1.model.TargetResourceAdditionalTargetAttributesItem;
 import com.ibm.cloud.scc.configuration_governance.v1.utils.TestUtilities;
+import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;

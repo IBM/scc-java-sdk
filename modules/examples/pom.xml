@@ -19,12 +19,12 @@
             below should reflect the "artifactId" value specified in each module's pom.xml file (i.e. not the module's directory name). -->
         <dependency>
             <groupId>com.ibm.cloud</groupId>
-            <artifactId>findings_api</artifactId>
+            <artifactId>findings</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.ibm.cloud</groupId>
-            <artifactId>notifications_api</artifactId>
+            <artifactId>notifications</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
