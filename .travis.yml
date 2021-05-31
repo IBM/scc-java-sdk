@@ -20,7 +20,7 @@ env:
     - MVN_ARGS="--settings build/.travis.settings.xml"
 
 stages:
-  - name: Build
+  - name: Build & Test
   - name: Release & Deployment
     if: branch = main AND type = push AND fork = false
 
