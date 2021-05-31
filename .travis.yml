@@ -58,7 +58,7 @@ jobs:
         - npm install @semantic-release/git
         - npm install @semantic-release/github
       script:
-        - mvn clean verify package
+        - mvn clean verify
         - npx semantic-release
         - mvn deploy $MVN_ARGS -DskipITs -P central
       deploy:
