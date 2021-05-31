@@ -49,7 +49,6 @@ import com.ibm.cloud.sdk.core.util.CredentialUtils;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterGroups;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
