@@ -64,7 +64,7 @@ public class NotificationsIT extends SdkIntegrationTestBase {
    * This method provides our config filename to the base class.
    */
 
-  final String accountID = "a7e15e43dba44fb58db381d68addbebe";//System.getenv("ACCOUNT_ID");
+  final String accountID = System.getenv("ACCOUNT_ID");
   String channelID = "";
   final String testString = "testString";
 
