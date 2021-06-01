@@ -1,3 +1,10 @@
+## [0.0.12](https://github.com/ibm-cloud-security/scc-java-sdk/compare/0.0.11...0.0.12) (2021-06-01)
+
+
+### Bug Fixes
+
+* **IBM Cloud SCC Java SDK Travis:** Release stage should not run for semantic-release-bot commits ([a5fdaa2](https://github.com/ibm-cloud-security/scc-java-sdk/commit/a5fdaa202730686fe61106b26cb3fd23d878b627))
+
 ## [0.0.11](https://github.com/ibm-cloud-security/scc-java-sdk/compare/0.0.10...0.0.11) (2021-06-01)
 
 
