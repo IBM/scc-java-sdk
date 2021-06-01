@@ -1,3 +1,11 @@
+## [0.0.13](https://github.com/ibm-cloud-security/scc-java-sdk/compare/0.0.12...0.0.13) (2021-06-01)
+
+
+### Bug Fixes
+
+* **IT:** commit to retrigger build process ([3b09c5e](https://github.com/ibm-cloud-security/scc-java-sdk/commit/3b09c5ebb76f3f06257852dedc054b71928ab373))
+* **Travis:** tag IS present ([e912457](https://github.com/ibm-cloud-security/scc-java-sdk/commit/e9124575745fc454313faf553615415b065804f3))
+
 ## [0.0.12](https://github.com/ibm-cloud-security/scc-java-sdk/compare/0.0.11...0.0.12) (2021-06-01)
 
 
