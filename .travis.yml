@@ -21,9 +21,9 @@ stages:
   - name: Build
     if: branch = main AND type = push AND fork = false
   - name: Release
-    if: branch = main AND type = push AND fork = false
+    if: branch = main AND type = push AND fork = false AND sender != "semantic-release-bot"
   - name: Deploy
-    if: branch = main AND type = push AND fork = false AND tag = true
+    if: tag = true
   
 before_install:
   - sudo apt-get update
