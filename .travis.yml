@@ -18,9 +18,13 @@ env:
 
 stages:
   - name: Verify
+  - name: Build
+    if: branch = main AND type = push AND fork = false
   - name: Release
     if: branch = main AND type = push AND fork = false
-
+  - name: Deploy
+    if: branch = main AND type = push AND fork = false AND tag = true
+  
 before_install:
   - sudo apt-get update
   - env | grep TRAVIS
@@ -30,6 +34,7 @@ before_install:
 jobs:
   include:
     - stage: Verify
+      jdk: openjdk8
       install:
         - curl -s https://codecov.io/bash > $HOME/codecov-bash.sh && chmod +x $HOME/codecov-bash.sh
       script: 
@@ -37,9 +42,12 @@ jobs:
       after_success:
         - build/publishCodeCoverage.sh
 
+    - stage: Build
+      jdk: openjdk8
+      script: build/testScript.sh
+
     - stage: Release
       name: Release
-      jdk: openjdk8
       install:
         - sudo apt-get update
         - sudo apt-get install python
@@ -51,8 +59,11 @@ jobs:
         - npm install @semantic-release/git
         - npm install @semantic-release/github
       script:
-        - build/testScript.sh
         - npx semantic-release
+
+    - stage: Deploy
+      jdk: openjdk8
+      script:
         - mvn deploy $MVN_ARGS -DskipITs -P central
       deploy:
         provider: pages
