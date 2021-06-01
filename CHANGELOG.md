@@ -1,3 +1,10 @@
+## [0.0.10](https://github.com/ibm-cloud-security/scc-java-sdk/compare/0.0.9...0.0.10) (2021-06-01)
+
+
+### Bug Fixes
+
+* **SDK:** IBM Cloud SCC Java SDK ([a79cf02](https://github.com/ibm-cloud-security/scc-java-sdk/commit/a79cf02b7a8b08ee96f61015af4efeb2cc004e92))
+
 ## [0.0.9](https://github.com/ibm-cloud-security/scc-java-sdk/compare/0.0.8...0.0.9) (2021-06-01)
 
 
