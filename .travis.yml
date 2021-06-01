@@ -19,11 +19,11 @@ env:
 stages:
   - name: Verify
   - name: Build
-    if: branch = main AND type = push AND fork = false
+    if: NOT commit_message =~ /chore\(release\)\:/ AND branch = main AND type = push AND fork = false
   - name: Release
-    if: branch = main AND type = push AND fork = false AND sender != "semantic-release-bot"
+    if: NOT commit_message =~ /chore\(release\)\:/ AND branch = main AND type = push AND fork = false
   - name: Deploy
-    if: tag = true
+    if: tag IS present
   
 before_install:
   - sudo apt-get update
