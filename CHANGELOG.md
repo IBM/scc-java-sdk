@@ -1,3 +1,10 @@
+## [0.0.11](https://github.com/ibm-cloud-security/scc-java-sdk/compare/0.0.10...0.0.11) (2021-06-01)
+
+
+### Bug Fixes
+
+* **Travis:** IBM Cloud SCC Java SDK Travis configuration fixed ([ea3b563](https://github.com/ibm-cloud-security/scc-java-sdk/commit/ea3b5631d7920b7243ca275f300ac6d24551b8b4))
+
 ## [0.0.10](https://github.com/ibm-cloud-security/scc-java-sdk/compare/0.0.9...0.0.10) (2021-06-01)
 
 
