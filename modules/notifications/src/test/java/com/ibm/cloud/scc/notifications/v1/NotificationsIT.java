@@ -22,6 +22,8 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import com.ibm.cloud.scc.notifications.v1.model.Channel;
 import com.ibm.cloud.scc.notifications.v1.model.ChannelDelete;
@@ -67,6 +69,7 @@ public class NotificationsIT extends SdkIntegrationTestBase {
   final String accountID = System.getenv("ACCOUNT_ID");
   String channelID = "";
   final String testString = "testString";
+  String identifier = System.getenv("TRAVIS_BUILD_NUMBER");
 
   public String getConfigFilename() {
     return "../../notifications_v1.env";
@@ -74,6 +77,11 @@ public class NotificationsIT extends SdkIntegrationTestBase {
 
   @BeforeClass
   public void constructService() {
+
+    if(identifier == null){
+      identifier = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+    }
+
     // Ask super if we should skip the tests.
     if (skipTests()) {
       return;
@@ -124,7 +132,7 @@ public class NotificationsIT extends SdkIntegrationTestBase {
 
       CreateNotificationChannelOptions createNotificationChannelOptions = new CreateNotificationChannelOptions.Builder()
       .accountId(accountID)
-      .name(testString)
+      .name(String.format("%s-%s", testString, identifier))
       .type("Webhook")
       .endpoint("https://webhook.site/136fe1e2-3c3f-4bff-925f-391fbb202546")
       .description(testString)
@@ -183,7 +191,7 @@ public class NotificationsIT extends SdkIntegrationTestBase {
       UpdateNotificationChannelOptions updateNotificationChannelOptions = new UpdateNotificationChannelOptions.Builder()
       .accountId(accountID)
       .channelId(channelID)
-      .name(testString)
+      .name(String.format("%s-%s", testString, identifier))
       .type("Webhook")
       .endpoint("https://webhook.site/136fe1e2-3c3f-4bff-925f-391fbb202546")
       .description(testString)
@@ -285,7 +293,7 @@ public class NotificationsIT extends SdkIntegrationTestBase {
 
       CreateNotificationChannelOptions createNotificationChannelOptions = new CreateNotificationChannelOptions.Builder()
       .accountId(accountID)
-      .name(testString)
+      .name(String.format("%s-%s", testString, identifier))
       .type("Webhook")
       .endpoint("https://webhook.site/136fe1e2-3c3f-4bff-925f-391fbb202546")
       .description(testString)

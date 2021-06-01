@@ -20,8 +20,8 @@ env:
     - MVN_ARGS="--settings build/.travis.settings.xml"
 
 stages:
-  - name: Build & Test
-  - name: Release & Deployment
+  - name: Verify
+  - name: Release
     if: branch = main AND type = push AND fork = false
 
 before_install:
@@ -32,20 +32,16 @@ before_install:
 
 jobs:
   include:
-    - stage: Build & Test
+    - stage: Verify
       install:
         - curl -s https://codecov.io/bash > $HOME/codecov-bash.sh && chmod +x $HOME/codecov-bash.sh
       script: 
-      - curl https://us-south.functions.appdomain.cloud/api/v1/web/e6b54af6-ab44-4149-a8e4-e906dcc58136/default/secadvstg-location-shift.json
-      - echo "${FINDINGS_ENV}" | base64 -d >> findings_v1.env
-      - echo "${NOTIFICATIONS_ENV}" | base64 -d >> notifications_v1.env
-      # - echo "${CONFIGURATION_GOVERNANCE_ENV}" | base64 -d >> configuration_governance_v1.env
-      - mvn verify -fae -DskipITs $MVN_ARGS
+        - mvn verify -fae -DskipITs $MVN_ARGS
       after_success:
         - build/publishCodeCoverage.sh
 
-    - stage: Release & Deployment
-      name: Release & Deployment
+    - stage: Release
+      name: Release
       jdk: openjdk8
       install:
         - sudo apt-get update
@@ -58,7 +54,7 @@ jobs:
         - npm install @semantic-release/git
         - npm install @semantic-release/github
       script:
-        - mvn clean verify
+        - build/testScript.sh
         - npx semantic-release
         - mvn deploy $MVN_ARGS -DskipITs -P central
       deploy:
