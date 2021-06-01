@@ -2,6 +2,7 @@
 
 # based on https://odoepner.wordpress.com/2012/02/17/shell-script-to-generate-simple-index-html/
 
+mvn javadoc:aggregate
 mkdir javadocs
 mv target/site/apidocs javadocs/docs
 

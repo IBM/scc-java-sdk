@@ -7,9 +7,6 @@ os: linux
 
 jdk:
 - openjdk8
-branches:
-  except:
-  - gh-pages
 
 cache:
   directories:
@@ -60,8 +57,6 @@ jobs:
       deploy:
         provider: pages
         script: build/prepareJavadoc.sh
-        on:
-          branch: main
         skip_cleanup: true
         token: $GH_TOKEN
         local_dir: javadocs
