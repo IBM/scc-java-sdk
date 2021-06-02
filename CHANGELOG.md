@@ -1,3 +1,11 @@
+## [0.0.17](https://github.com/ibm-cloud-security/scc-java-sdk/compare/0.0.16...0.0.17) (2021-06-02)
+
+
+### Bug Fixes
+
+* **SemanticRelease:** skip CI ops on SR commits ([e1406f2](https://github.com/ibm-cloud-security/scc-java-sdk/commit/e1406f2b2bb6d2f15d726072a7f1eeb042d610d4))
+* **Travis:** after_success has to be used with explicit failure mechanism ([6538976](https://github.com/ibm-cloud-security/scc-java-sdk/commit/65389763ed7e2a4b0de75fe957b90bce26c9ecba))
+
 ## [0.0.16](https://github.com/ibm-cloud-security/scc-java-sdk/compare/0.0.15...0.0.16) (2021-06-02)
 
 
