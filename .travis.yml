@@ -60,14 +60,14 @@ jobs:
         - npm install @semantic-release/github
       script:
         - npx semantic-release
-
-    - stage: Deploy
-      jdk: openjdk8
-      script:
-        - mvn deploy $MVN_ARGS -DskipITs -P central
       deploy:
         provider: pages
         script: build/prepareJavadoc.sh
         skip_cleanup: true
         token: $GH_TOKEN
         local_dir: javadocs
+
+    - stage: Deploy
+      jdk: openjdk8
+      script:
+        - mvn deploy $MVN_ARGS -DskipITs -P central
