@@ -60,11 +60,11 @@ jobs:
         - npm install @semantic-release/github
       script:
         - npx semantic-release
+      before_deploy: build/prepareJavadoc.sh
       deploy:
         provider: pages
         on:
           branch: main
-        script: build/prepareJavadoc.sh
         skip_cleanup: true
         token: $GH_TOKEN
         local_dir: javadocs
