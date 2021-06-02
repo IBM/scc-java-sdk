@@ -7,7 +7,7 @@
         <!-- >>> Replace this with the parent pom's artifactId -->
         <artifactId>scc</artifactId>
         <groupId>com.ibm.cloud</groupId>
-        <version>0.0.17</version>
+        <version>0.0.18</version>
         <relativePath>../..</relativePath>
     </parent>
 
