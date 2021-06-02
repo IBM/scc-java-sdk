@@ -1,3 +1,10 @@
+## [0.0.14](https://github.com/ibm-cloud-security/scc-java-sdk/compare/0.0.13...0.0.14) (2021-06-02)
+
+
+### Bug Fixes
+
+* **Javadoc:** Javadoc create and publish within  stage ([452160c](https://github.com/ibm-cloud-security/scc-java-sdk/commit/452160c19df8c6b6c836904a562bd4c9a155e4c4))
+
 ## [0.0.13](https://github.com/ibm-cloud-security/scc-java-sdk/compare/0.0.12...0.0.13) (2021-06-01)
 
 
