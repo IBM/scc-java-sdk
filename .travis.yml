@@ -19,9 +19,9 @@ env:
 stages:
   - name: Verify
   - name: Build
-    if: NOT commit_message =~ /chore\(release\)\:/ AND branch = main AND type = push AND fork = false
+    if: branch = main AND type = push AND fork = false
   - name: Release
-    if: NOT commit_message =~ /chore\(release\)\:/ AND branch = main AND type = push AND fork = false
+    if: branch = main AND type = push AND fork = false
   - name: Deploy
     if: tag IS present
   
