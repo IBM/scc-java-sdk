@@ -62,6 +62,8 @@ jobs:
         - npx semantic-release
       deploy:
         provider: pages
+        on:
+          branch: main
         script: build/prepareJavadoc.sh
         skip_cleanup: true
         token: $GH_TOKEN
