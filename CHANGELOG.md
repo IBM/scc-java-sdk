@@ -1,3 +1,10 @@
+## [0.0.19](https://github.com/IBM/scc-java-sdk/compare/0.0.18...0.0.19) (2021-06-07)
+
+
+### Bug Fixes
+
+* **SDK:** IBM Cloud SCC Java SDK ([135feb4](https://github.com/IBM/scc-java-sdk/commit/135feb4e41db81650a68479378131c9a21a29c2e))
+
 ## [0.0.18](https://github.com/IBM/scc-java-sdk/compare/0.0.17...0.0.18) (2021-06-02)
 
 
