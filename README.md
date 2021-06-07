@@ -4,10 +4,10 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![codecov](https://codecov.io/gh/IBM/scc-java-sdk/branch/main/graph/badge.svg?token=9E3PB14AKI)](https://codecov.io/gh/IBM/scc-java-sdk)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.ibm.cloud/scc/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.ibm.cloud/scc)
+[![Maven Central](https://img.shields.io/maven-central/v/com.ibm.cloud/scc)](https://maven-badges.herokuapp.com/maven-central/com.ibm.cloud/scc)
 
 # IBM Cloud Security & Compliance Center Java SDK Version 0.0.19
-Java client library to interact with various [IBM Cloud Security & Compliance Center](https://cloud.ibm.com/apidocs/security-and-compliance-center).
+Java client library to interact with various [IBM Cloud Security & Compliance Center](https://cloud.ibm.com/docs?tab=api-docs&category=platform_services%2Csecurity).
 
 Disclaimer: this SDK is being released initially as a **pre-release** version.
 Changes might occur which impact applications that use this SDK.
@@ -46,9 +46,9 @@ The IBM Cloud Security & Compliance Center Java SDK allows developers to program
 
 Service Name | Imported Class Name
 --- | ---
-[FindingsApi](https://cloud.ibm.com/apidocs/security-and-compliance-center/findings) | FindingsApi:0.0.19
-[NotificationsApi](https://cloud.ibm.com/apidocs/security-and-compliance-center/notifications) | NotificationsApi:0.0.19
-[ConfigurationGovernanceApi](https://cloud.ibm.com/apidocs/security-and-compliance-center/configuration-governance) | ConfigurationGovernanceApi:0.0.19
+[FindingsApi](https://cloud.ibm.com/apidocs/security-advisor/findings) | FindingsApi:0.0.19
+[NotificationsApi](https://cloud.ibm.com/apidocs/security-advisor/notifications) | NotificationsApi:0.0.19
+[ConfigurationGovernanceApi](https://cloud.ibm.com/apidocs/security-compliance/config) | ConfigurationGovernanceApi:0.0.19
 
 ## Prerequisites
 
