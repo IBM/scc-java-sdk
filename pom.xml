@@ -83,21 +83,21 @@
 
     <!-- >>> Update these values to reflect your project -->
     <scm>
-        <connection>scm:git:https://github.com/ibm-cloud-security/scc-java-sdk</connection>
-        <developerConnection>scm:git:https://github.com/ibm-cloud-security/scc-java-sdk</developerConnection>
-        <url>https://github.com/ibm-cloud-security/scc-java-sdk/tree/main</url>
+        <connection>scm:git:https://github.com/IBM/scc-java-sdk</connection>
+        <developerConnection>scm:git:https://github.com/IBM/scc-java-sdk</developerConnection>
+        <url>https://github.com/IBM/scc-java-sdk/tree/main</url>
     </scm>
 
     <!-- >>> Update these values to reflect your project -->
     <issueManagement>
         <system>Github</system>
-        <url>https://github.com/ibm-cloud-security/scc-java-sdk/issues</url>
+        <url>https://github.com/IBM/scc-java-sdk/issues</url>
     </issueManagement>
 
     <!-- >>> Update these values to reflect your project -->
     <ciManagement>
         <system>Travis-CI</system>
-        <url>https://travis.com/ibm-cloud-security/scc-java-sdk/</url>
+        <url>https://travis.com/IBM/scc-java-sdk/</url>
     </ciManagement>
 
     <!-- This section is commented out because we use an alternate deploy plugin.

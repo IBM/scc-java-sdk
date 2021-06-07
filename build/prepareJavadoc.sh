@@ -21,7 +21,7 @@ echo '<!DOCTYPE html>
         <h1>IBM Cloud Security & Compliance Center Java SDK Documentation</h1>
     </div>
     <p><a href="https://cloud.ibm.com/docs?tab=api-docs&category=security%2Cplatform_services">Security & Compliance Center Info</a>
-        | <a href="https://github.com/ibm-cloud-security/scc-java-sdk">GitHub</a>
+        | <a href="https://github.com/IBM/scc-java-sdk">GitHub</a>
     </p>
     <p><a href="docs">Javadoc</a></p>
 </div>
