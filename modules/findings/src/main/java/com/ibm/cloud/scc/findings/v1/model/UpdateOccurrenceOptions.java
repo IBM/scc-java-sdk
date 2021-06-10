@@ -43,7 +43,6 @@ public class UpdateOccurrenceOptions extends GenericModel {
     String SECTION = "SECTION";
   }
 
-  protected String accountId;
   protected String providerId;
   protected String occurrenceId;
   protected String noteName;
@@ -61,7 +60,6 @@ public class UpdateOccurrenceOptions extends GenericModel {
    * Builder.
    */
   public static class Builder {
-    private String accountId;
     private String providerId;
     private String occurrenceId;
     private String noteName;
@@ -76,7 +74,6 @@ public class UpdateOccurrenceOptions extends GenericModel {
     private String transactionId;
 
     private Builder(UpdateOccurrenceOptions updateOccurrenceOptions) {
-      this.accountId = updateOccurrenceOptions.accountId;
       this.providerId = updateOccurrenceOptions.providerId;
       this.occurrenceId = updateOccurrenceOptions.occurrenceId;
       this.noteName = updateOccurrenceOptions.noteName;
@@ -100,15 +97,13 @@ public class UpdateOccurrenceOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param accountId the accountId
      * @param providerId the providerId
      * @param occurrenceId the occurrenceId
      * @param noteName the noteName
      * @param kind the kind
      * @param id the id
      */
-    public Builder(String accountId, String providerId, String occurrenceId, String noteName, String kind, String id) {
-      this.accountId = accountId;
+    public Builder(String providerId, String occurrenceId, String noteName, String kind, String id) {
       this.providerId = providerId;
       this.occurrenceId = occurrenceId;
       this.noteName = noteName;
@@ -123,17 +118,6 @@ public class UpdateOccurrenceOptions extends GenericModel {
      */
     public UpdateOccurrenceOptions build() {
       return new UpdateOccurrenceOptions(this);
-    }
-
-    /**
-     * Set the accountId.
-     *
-     * @param accountId the accountId
-     * @return the UpdateOccurrenceOptions builder
-     */
-    public Builder accountId(String accountId) {
-      this.accountId = accountId;
-      return this;
     }
 
     /**
@@ -289,8 +273,6 @@ public class UpdateOccurrenceOptions extends GenericModel {
   }
 
   protected UpdateOccurrenceOptions(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.accountId,
-      "accountId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.providerId,
       "providerId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.occurrenceId,
@@ -301,7 +283,6 @@ public class UpdateOccurrenceOptions extends GenericModel {
       "kind cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.id,
       "id cannot be null");
-    accountId = builder.accountId;
     providerId = builder.providerId;
     occurrenceId = builder.occurrenceId;
     noteName = builder.noteName;
@@ -323,17 +304,6 @@ public class UpdateOccurrenceOptions extends GenericModel {
    */
   public Builder newBuilder() {
     return new Builder(this);
-  }
-
-  /**
-   * Gets the accountId.
-   *
-   * Account ID.
-   *
-   * @return the accountId
-   */
-  public String accountId() {
-    return accountId;
   }
 
   /**

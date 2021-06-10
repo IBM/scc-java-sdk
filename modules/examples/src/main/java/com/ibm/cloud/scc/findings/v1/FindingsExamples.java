@@ -60,7 +60,9 @@ public class FindingsExamples {
 
   @SuppressWarnings("checkstyle:methodlength")
   public static void main(String[] args) throws Exception {
-    Findings service = Findings.newInstance();
+    String accountId = "testString";
+
+    Findings findingsService = Findings.newInstance(accountId);
 
     // Load up our test-specific config properties.
     Map<String, String> config = CredentialUtils.getServiceProperties(Findings.DEFAULT_SERVICE_NAME);
@@ -68,15 +70,14 @@ public class FindingsExamples {
     try {
       // begin-postGraph
       PostGraphOptions postGraphOptions = new PostGraphOptions.Builder()
-        .accountId("testString")
         .body(new java.io.ByteArrayInputStream("This is a mock file.".getBytes()))
         .build();
 
-      Response<Void> response = service.postGraph(postGraphOptions).execute();
+      Response<Void> response = findingsService.postGraph(postGraphOptions).execute();
       // end-postGraph
       System.out.printf("postGraph() response status code: %d%n", response.getStatusCode());
     } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s\nError details: %s",
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
@@ -88,7 +89,6 @@ public class FindingsExamples {
         .title("testString")
         .build();
       CreateNoteOptions createNoteOptions = new CreateNoteOptions.Builder()
-        .accountId("testString")
         .providerId("testString")
         .shortDescription("testString")
         .longDescription("testString")
@@ -97,13 +97,13 @@ public class FindingsExamples {
         .reportedBy(reporterModel)
         .build();
 
-      Response<ApiNote> response = service.createNote(createNoteOptions).execute();
+      Response<ApiNote> response = findingsService.createNote(createNoteOptions).execute();
       ApiNote apiNote = response.getResult();
 
       System.out.println(apiNote);
       // end-createNote
     } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s\nError details: %s",
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
@@ -111,17 +111,16 @@ public class FindingsExamples {
       System.out.println("listNotes() result:");
       // begin-listNotes
       ListNotesOptions listNotesOptions = new ListNotesOptions.Builder()
-        .accountId("testString")
         .providerId("testString")
         .build();
 
-      Response<ApiListNotesResponse> response = service.listNotes(listNotesOptions).execute();
+      Response<ApiListNotesResponse> response = findingsService.listNotes(listNotesOptions).execute();
       ApiListNotesResponse apiListNotesResponse = response.getResult();
 
       System.out.println(apiListNotesResponse);
       // end-listNotes
     } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s\nError details: %s",
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
@@ -129,18 +128,17 @@ public class FindingsExamples {
       System.out.println("getNote() result:");
       // begin-getNote
       GetNoteOptions getNoteOptions = new GetNoteOptions.Builder()
-        .accountId("testString")
         .providerId("testString")
         .noteId("testString")
         .build();
 
-      Response<ApiNote> response = service.getNote(getNoteOptions).execute();
+      Response<ApiNote> response = findingsService.getNote(getNoteOptions).execute();
       ApiNote apiNote = response.getResult();
 
       System.out.println(apiNote);
       // end-getNote
     } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s\nError details: %s",
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
@@ -152,7 +150,6 @@ public class FindingsExamples {
         .title("testString")
         .build();
       UpdateNoteOptions updateNoteOptions = new UpdateNoteOptions.Builder()
-        .accountId("testString")
         .providerId("testString")
         .noteId("testString")
         .shortDescription("testString")
@@ -162,13 +159,13 @@ public class FindingsExamples {
         .reportedBy(reporterModel)
         .build();
 
-      Response<ApiNote> response = service.updateNote(updateNoteOptions).execute();
+      Response<ApiNote> response = findingsService.updateNote(updateNoteOptions).execute();
       ApiNote apiNote = response.getResult();
 
       System.out.println(apiNote);
       // end-updateNote
     } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s\nError details: %s",
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
@@ -176,18 +173,17 @@ public class FindingsExamples {
       System.out.println("getOccurrenceNote() result:");
       // begin-getOccurrenceNote
       GetOccurrenceNoteOptions getOccurrenceNoteOptions = new GetOccurrenceNoteOptions.Builder()
-        .accountId("testString")
         .providerId("testString")
         .occurrenceId("testString")
         .build();
 
-      Response<ApiNote> response = service.getOccurrenceNote(getOccurrenceNoteOptions).execute();
+      Response<ApiNote> response = findingsService.getOccurrenceNote(getOccurrenceNoteOptions).execute();
       ApiNote apiNote = response.getResult();
 
       System.out.println(apiNote);
       // end-getOccurrenceNote
     } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s\nError details: %s",
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
@@ -195,20 +191,19 @@ public class FindingsExamples {
       System.out.println("createOccurrence() result:");
       // begin-createOccurrence
       CreateOccurrenceOptions createOccurrenceOptions = new CreateOccurrenceOptions.Builder()
-        .accountId("testString")
         .providerId("testString")
         .noteName("testString")
         .kind("FINDING")
         .id("testString")
         .build();
 
-      Response<ApiOccurrence> response = service.createOccurrence(createOccurrenceOptions).execute();
+      Response<ApiOccurrence> response = findingsService.createOccurrence(createOccurrenceOptions).execute();
       ApiOccurrence apiOccurrence = response.getResult();
 
       System.out.println(apiOccurrence);
       // end-createOccurrence
     } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s\nError details: %s",
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
@@ -216,17 +211,16 @@ public class FindingsExamples {
       System.out.println("listOccurrences() result:");
       // begin-listOccurrences
       ListOccurrencesOptions listOccurrencesOptions = new ListOccurrencesOptions.Builder()
-        .accountId("testString")
         .providerId("testString")
         .build();
 
-      Response<ApiListOccurrencesResponse> response = service.listOccurrences(listOccurrencesOptions).execute();
+      Response<ApiListOccurrencesResponse> response = findingsService.listOccurrences(listOccurrencesOptions).execute();
       ApiListOccurrencesResponse apiListOccurrencesResponse = response.getResult();
 
       System.out.println(apiListOccurrencesResponse);
       // end-listOccurrences
     } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s\nError details: %s",
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
@@ -234,18 +228,17 @@ public class FindingsExamples {
       System.out.println("listNoteOccurrences() result:");
       // begin-listNoteOccurrences
       ListNoteOccurrencesOptions listNoteOccurrencesOptions = new ListNoteOccurrencesOptions.Builder()
-        .accountId("testString")
         .providerId("testString")
         .noteId("testString")
         .build();
 
-      Response<ApiListNoteOccurrencesResponse> response = service.listNoteOccurrences(listNoteOccurrencesOptions).execute();
+      Response<ApiListNoteOccurrencesResponse> response = findingsService.listNoteOccurrences(listNoteOccurrencesOptions).execute();
       ApiListNoteOccurrencesResponse apiListNoteOccurrencesResponse = response.getResult();
 
       System.out.println(apiListNoteOccurrencesResponse);
       // end-listNoteOccurrences
     } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s\nError details: %s",
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
@@ -253,18 +246,17 @@ public class FindingsExamples {
       System.out.println("getOccurrence() result:");
       // begin-getOccurrence
       GetOccurrenceOptions getOccurrenceOptions = new GetOccurrenceOptions.Builder()
-        .accountId("testString")
         .providerId("testString")
         .occurrenceId("testString")
         .build();
 
-      Response<ApiListOccurrencesResponse> response = service.getOccurrence(getOccurrenceOptions).execute();
+      Response<ApiListOccurrencesResponse> response = findingsService.getOccurrence(getOccurrenceOptions).execute();
       ApiListOccurrencesResponse apiListOccurrencesResponse = response.getResult();
 
       System.out.println(apiListOccurrencesResponse);
       // end-getOccurrence
     } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s\nError details: %s",
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
@@ -272,7 +264,6 @@ public class FindingsExamples {
       System.out.println("updateOccurrence() result:");
       // begin-updateOccurrence
       UpdateOccurrenceOptions updateOccurrenceOptions = new UpdateOccurrenceOptions.Builder()
-        .accountId("testString")
         .providerId("testString")
         .occurrenceId("testString")
         .noteName("testString")
@@ -280,13 +271,13 @@ public class FindingsExamples {
         .id("testString")
         .build();
 
-      Response<ApiOccurrence> response = service.updateOccurrence(updateOccurrenceOptions).execute();
+      Response<ApiOccurrence> response = findingsService.updateOccurrence(updateOccurrenceOptions).execute();
       ApiOccurrence apiOccurrence = response.getResult();
 
       System.out.println(apiOccurrence);
       // end-updateOccurrence
     } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s\nError details: %s",
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
@@ -294,48 +285,45 @@ public class FindingsExamples {
       System.out.println("listProviders() result:");
       // begin-listProviders
       ListProvidersOptions listProvidersOptions = new ListProvidersOptions.Builder()
-        .accountId("testString")
         .build();
 
-      Response<ApiListProvidersResponse> response = service.listProviders(listProvidersOptions).execute();
+      Response<ApiListProvidersResponse> response = findingsService.listProviders(listProvidersOptions).execute();
       ApiListProvidersResponse apiListProvidersResponse = response.getResult();
 
       System.out.println(apiListProvidersResponse);
       // end-listProviders
     } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s\nError details: %s",
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
     try {
       // begin-deleteOccurrence
       DeleteOccurrenceOptions deleteOccurrenceOptions = new DeleteOccurrenceOptions.Builder()
-        .accountId("testString")
         .providerId("testString")
         .occurrenceId("testString")
         .build();
 
-      Response<Void> response = service.deleteOccurrence(deleteOccurrenceOptions).execute();
+      Response<Void> response = findingsService.deleteOccurrence(deleteOccurrenceOptions).execute();
       // end-deleteOccurrence
       System.out.printf("deleteOccurrence() response status code: %d%n", response.getStatusCode());
     } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s\nError details: %s",
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
     try {
       // begin-deleteNote
       DeleteNoteOptions deleteNoteOptions = new DeleteNoteOptions.Builder()
-        .accountId("testString")
         .providerId("testString")
         .noteId("testString")
         .build();
 
-      Response<Void> response = service.deleteNote(deleteNoteOptions).execute();
+      Response<Void> response = findingsService.deleteNote(deleteNoteOptions).execute();
       // end-deleteNote
       System.out.printf("deleteNote() response status code: %d%n", response.getStatusCode());
     } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s\nError details: %s",
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 

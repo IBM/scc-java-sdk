@@ -120,7 +120,6 @@ public class UpdateOccurrenceOptionsTest {
     assertEquals(kpiModel.total(), Double.valueOf("72.5"));
 
     UpdateOccurrenceOptions updateOccurrenceOptionsModel = new UpdateOccurrenceOptions.Builder()
-      .accountId("testString")
       .providerId("testString")
       .occurrenceId("testString")
       .noteName("testString")
@@ -134,7 +133,6 @@ public class UpdateOccurrenceOptionsTest {
       .referenceData(new java.util.HashMap<String, Object>() { { put("foo", "testString"); } })
       .transactionId("testString")
       .build();
-    assertEquals(updateOccurrenceOptionsModel.accountId(), "testString");
     assertEquals(updateOccurrenceOptionsModel.providerId(), "testString");
     assertEquals(updateOccurrenceOptionsModel.occurrenceId(), "testString");
     assertEquals(updateOccurrenceOptionsModel.noteName(), "testString");

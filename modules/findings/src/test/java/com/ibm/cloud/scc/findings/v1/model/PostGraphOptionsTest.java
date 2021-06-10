@@ -33,20 +33,12 @@ public class PostGraphOptionsTest {
   @Test
   public void testPostGraphOptions() throws Throwable {
     PostGraphOptions postGraphOptionsModel = new PostGraphOptions.Builder()
-      .accountId("testString")
       .body(TestUtilities.createMockStream("This is a mock file."))
       .contentType("application/json")
       .transactionId("testString")
       .build();
-    assertEquals(postGraphOptionsModel.accountId(), "testString");
     assertEquals(IOUtils.toString(postGraphOptionsModel.body()), IOUtils.toString(TestUtilities.createMockStream("This is a mock file.")));
     assertEquals(postGraphOptionsModel.contentType(), "application/json");
     assertEquals(postGraphOptionsModel.transactionId(), "testString");
   }
-
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testPostGraphOptionsError() throws Throwable {
-    new PostGraphOptions.Builder().build();
-  }
-
 }

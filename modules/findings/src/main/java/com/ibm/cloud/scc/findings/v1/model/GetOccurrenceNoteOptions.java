@@ -19,7 +19,6 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class GetOccurrenceNoteOptions extends GenericModel {
 
-  protected String accountId;
   protected String providerId;
   protected String occurrenceId;
   protected String transactionId;
@@ -28,13 +27,11 @@ public class GetOccurrenceNoteOptions extends GenericModel {
    * Builder.
    */
   public static class Builder {
-    private String accountId;
     private String providerId;
     private String occurrenceId;
     private String transactionId;
 
     private Builder(GetOccurrenceNoteOptions getOccurrenceNoteOptions) {
-      this.accountId = getOccurrenceNoteOptions.accountId;
       this.providerId = getOccurrenceNoteOptions.providerId;
       this.occurrenceId = getOccurrenceNoteOptions.occurrenceId;
       this.transactionId = getOccurrenceNoteOptions.transactionId;
@@ -49,12 +46,10 @@ public class GetOccurrenceNoteOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param accountId the accountId
      * @param providerId the providerId
      * @param occurrenceId the occurrenceId
      */
-    public Builder(String accountId, String providerId, String occurrenceId) {
-      this.accountId = accountId;
+    public Builder(String providerId, String occurrenceId) {
       this.providerId = providerId;
       this.occurrenceId = occurrenceId;
     }
@@ -66,17 +61,6 @@ public class GetOccurrenceNoteOptions extends GenericModel {
      */
     public GetOccurrenceNoteOptions build() {
       return new GetOccurrenceNoteOptions(this);
-    }
-
-    /**
-     * Set the accountId.
-     *
-     * @param accountId the accountId
-     * @return the GetOccurrenceNoteOptions builder
-     */
-    public Builder accountId(String accountId) {
-      this.accountId = accountId;
-      return this;
     }
 
     /**
@@ -114,13 +98,10 @@ public class GetOccurrenceNoteOptions extends GenericModel {
   }
 
   protected GetOccurrenceNoteOptions(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.accountId,
-      "accountId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.providerId,
       "providerId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.occurrenceId,
       "occurrenceId cannot be empty");
-    accountId = builder.accountId;
     providerId = builder.providerId;
     occurrenceId = builder.occurrenceId;
     transactionId = builder.transactionId;
@@ -133,17 +114,6 @@ public class GetOccurrenceNoteOptions extends GenericModel {
    */
   public Builder newBuilder() {
     return new Builder(this);
-  }
-
-  /**
-   * Gets the accountId.
-   *
-   * Account ID.
-   *
-   * @return the accountId
-   */
-  public String accountId() {
-    return accountId;
   }
 
   /**

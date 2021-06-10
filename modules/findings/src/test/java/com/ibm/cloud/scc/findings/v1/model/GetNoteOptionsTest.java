@@ -32,12 +32,10 @@ public class GetNoteOptionsTest {
   @Test
   public void testGetNoteOptions() throws Throwable {
     GetNoteOptions getNoteOptionsModel = new GetNoteOptions.Builder()
-      .accountId("testString")
       .providerId("testString")
       .noteId("testString")
       .transactionId("testString")
       .build();
-    assertEquals(getNoteOptionsModel.accountId(), "testString");
     assertEquals(getNoteOptionsModel.providerId(), "testString");
     assertEquals(getNoteOptionsModel.noteId(), "testString");
     assertEquals(getNoteOptionsModel.transactionId(), "testString");

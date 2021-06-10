@@ -34,5 +34,8 @@ public class ApiListProvidersResponseTest {
   public void testApiListProvidersResponse() throws Throwable {
     ApiListProvidersResponse apiListProvidersResponseModel = new ApiListProvidersResponse();
     assertNull(apiListProvidersResponseModel.getProviders());
+    assertNull(apiListProvidersResponseModel.getLimit());
+    assertNull(apiListProvidersResponseModel.getSkip());
+    assertNull(apiListProvidersResponseModel.getTotalCount());
   }
 }

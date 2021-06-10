@@ -32,12 +32,10 @@ public class GetOccurrenceOptionsTest {
   @Test
   public void testGetOccurrenceOptions() throws Throwable {
     GetOccurrenceOptions getOccurrenceOptionsModel = new GetOccurrenceOptions.Builder()
-      .accountId("testString")
       .providerId("testString")
       .occurrenceId("testString")
       .transactionId("testString")
       .build();
-    assertEquals(getOccurrenceOptionsModel.accountId(), "testString");
     assertEquals(getOccurrenceOptionsModel.providerId(), "testString");
     assertEquals(getOccurrenceOptionsModel.occurrenceId(), "testString");
     assertEquals(getOccurrenceOptionsModel.transactionId(), "testString");

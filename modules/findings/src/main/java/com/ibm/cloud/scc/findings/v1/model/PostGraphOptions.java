@@ -24,7 +24,6 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class PostGraphOptions extends GenericModel {
 
-  protected String accountId;
   protected InputStream body;
   protected String contentType;
   protected String transactionId;
@@ -33,13 +32,11 @@ public class PostGraphOptions extends GenericModel {
    * Builder.
    */
   public static class Builder {
-    private String accountId;
     private InputStream body;
     private String contentType;
     private String transactionId;
 
     private Builder(PostGraphOptions postGraphOptions) {
-      this.accountId = postGraphOptions.accountId;
       this.body = postGraphOptions.body;
       this.contentType = postGraphOptions.contentType;
       this.transactionId = postGraphOptions.transactionId;
@@ -52,32 +49,12 @@ public class PostGraphOptions extends GenericModel {
     }
 
     /**
-     * Instantiates a new builder with required properties.
-     *
-     * @param accountId the accountId
-     */
-    public Builder(String accountId) {
-      this.accountId = accountId;
-    }
-
-    /**
      * Builds a PostGraphOptions.
      *
      * @return the new PostGraphOptions instance
      */
     public PostGraphOptions build() {
       return new PostGraphOptions(this);
-    }
-
-    /**
-     * Set the accountId.
-     *
-     * @param accountId the accountId
-     * @return the PostGraphOptions builder
-     */
-    public Builder accountId(String accountId) {
-      this.accountId = accountId;
-      return this;
     }
 
     /**
@@ -128,9 +105,6 @@ public class PostGraphOptions extends GenericModel {
   }
 
   protected PostGraphOptions(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.accountId,
-      "accountId cannot be empty");
-    accountId = builder.accountId;
     body = builder.body;
     contentType = builder.contentType;
     transactionId = builder.transactionId;
@@ -143,17 +117,6 @@ public class PostGraphOptions extends GenericModel {
    */
   public Builder newBuilder() {
     return new Builder(this);
-  }
-
-  /**
-   * Gets the accountId.
-   *
-   * Account ID.
-   *
-   * @return the accountId
-   */
-  public String accountId() {
-    return accountId;
   }
 
   /**

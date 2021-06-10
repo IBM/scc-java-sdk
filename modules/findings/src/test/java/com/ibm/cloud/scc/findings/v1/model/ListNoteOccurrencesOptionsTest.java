@@ -32,14 +32,12 @@ public class ListNoteOccurrencesOptionsTest {
   @Test
   public void testListNoteOccurrencesOptions() throws Throwable {
     ListNoteOccurrencesOptions listNoteOccurrencesOptionsModel = new ListNoteOccurrencesOptions.Builder()
-      .accountId("testString")
       .providerId("testString")
       .noteId("testString")
       .transactionId("testString")
       .pageSize(Long.valueOf("2"))
       .pageToken("testString")
       .build();
-    assertEquals(listNoteOccurrencesOptionsModel.accountId(), "testString");
     assertEquals(listNoteOccurrencesOptionsModel.providerId(), "testString");
     assertEquals(listNoteOccurrencesOptionsModel.noteId(), "testString");
     assertEquals(listNoteOccurrencesOptionsModel.transactionId(), "testString");

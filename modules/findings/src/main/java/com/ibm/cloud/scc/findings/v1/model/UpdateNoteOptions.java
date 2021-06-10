@@ -45,7 +45,6 @@ public class UpdateNoteOptions extends GenericModel {
     String SECTION = "SECTION";
   }
 
-  protected String accountId;
   protected String providerId;
   protected String noteId;
   protected String shortDescription;
@@ -66,7 +65,6 @@ public class UpdateNoteOptions extends GenericModel {
    * Builder.
    */
   public static class Builder {
-    private String accountId;
     private String providerId;
     private String noteId;
     private String shortDescription;
@@ -84,7 +82,6 @@ public class UpdateNoteOptions extends GenericModel {
     private String transactionId;
 
     private Builder(UpdateNoteOptions updateNoteOptions) {
-      this.accountId = updateNoteOptions.accountId;
       this.providerId = updateNoteOptions.providerId;
       this.noteId = updateNoteOptions.noteId;
       this.shortDescription = updateNoteOptions.shortDescription;
@@ -111,7 +108,6 @@ public class UpdateNoteOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param accountId the accountId
      * @param providerId the providerId
      * @param noteId the noteId
      * @param shortDescription the shortDescription
@@ -120,8 +116,7 @@ public class UpdateNoteOptions extends GenericModel {
      * @param id the id
      * @param reportedBy the reportedBy
      */
-    public Builder(String accountId, String providerId, String noteId, String shortDescription, String longDescription, String kind, String id, Reporter reportedBy) {
-      this.accountId = accountId;
+    public Builder(String providerId, String noteId, String shortDescription, String longDescription, String kind, String id, Reporter reportedBy) {
       this.providerId = providerId;
       this.noteId = noteId;
       this.shortDescription = shortDescription;
@@ -153,17 +148,6 @@ public class UpdateNoteOptions extends GenericModel {
         this.relatedUrl = new ArrayList<ApiNoteRelatedUrl>();
       }
       this.relatedUrl.add(relatedUrl);
-      return this;
-    }
-
-    /**
-     * Set the accountId.
-     *
-     * @param accountId the accountId
-     * @return the UpdateNoteOptions builder
-     */
-    public Builder accountId(String accountId) {
-      this.accountId = accountId;
       return this;
     }
 
@@ -357,8 +341,6 @@ public class UpdateNoteOptions extends GenericModel {
   }
 
   protected UpdateNoteOptions(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.accountId,
-      "accountId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.providerId,
       "providerId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.noteId,
@@ -373,7 +355,6 @@ public class UpdateNoteOptions extends GenericModel {
       "id cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.reportedBy,
       "reportedBy cannot be null");
-    accountId = builder.accountId;
     providerId = builder.providerId;
     noteId = builder.noteId;
     shortDescription = builder.shortDescription;
@@ -398,17 +379,6 @@ public class UpdateNoteOptions extends GenericModel {
    */
   public Builder newBuilder() {
     return new Builder(this);
-  }
-
-  /**
-   * Gets the accountId.
-   *
-   * Account ID.
-   *
-   * @return the accountId
-   */
-  public String accountId() {
-    return accountId;
   }
 
   /**
