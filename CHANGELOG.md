@@ -1,3 +1,10 @@
+## [0.0.20](https://github.com/IBM/scc-java-sdk/compare/0.0.19...0.0.20) (2021-06-11)
+
+
+### Bug Fixes
+
+* **apidef:** Addressed api definition review comments ([86b54af](https://github.com/IBM/scc-java-sdk/commit/86b54afe595ca44940c91a374479b5b3cec31900))
+
 ## [0.0.19](https://github.com/IBM/scc-java-sdk/compare/0.0.18...0.0.19) (2021-06-07)
 
 
