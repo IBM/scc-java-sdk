@@ -19,7 +19,6 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class ListProvidersOptions extends GenericModel {
 
-  protected String accountId;
   protected String transactionId;
   protected Long limit;
   protected Long skip;
@@ -30,7 +29,6 @@ public class ListProvidersOptions extends GenericModel {
    * Builder.
    */
   public static class Builder {
-    private String accountId;
     private String transactionId;
     private Long limit;
     private Long skip;
@@ -38,7 +36,6 @@ public class ListProvidersOptions extends GenericModel {
     private String endProviderId;
 
     private Builder(ListProvidersOptions listProvidersOptions) {
-      this.accountId = listProvidersOptions.accountId;
       this.transactionId = listProvidersOptions.transactionId;
       this.limit = listProvidersOptions.limit;
       this.skip = listProvidersOptions.skip;
@@ -53,32 +50,12 @@ public class ListProvidersOptions extends GenericModel {
     }
 
     /**
-     * Instantiates a new builder with required properties.
-     *
-     * @param accountId the accountId
-     */
-    public Builder(String accountId) {
-      this.accountId = accountId;
-    }
-
-    /**
      * Builds a ListProvidersOptions.
      *
      * @return the new ListProvidersOptions instance
      */
     public ListProvidersOptions build() {
       return new ListProvidersOptions(this);
-    }
-
-    /**
-     * Set the accountId.
-     *
-     * @param accountId the accountId
-     * @return the ListProvidersOptions builder
-     */
-    public Builder accountId(String accountId) {
-      this.accountId = accountId;
-      return this;
     }
 
     /**
@@ -138,9 +115,6 @@ public class ListProvidersOptions extends GenericModel {
   }
 
   protected ListProvidersOptions(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.accountId,
-      "accountId cannot be empty");
-    accountId = builder.accountId;
     transactionId = builder.transactionId;
     limit = builder.limit;
     skip = builder.skip;
@@ -155,17 +129,6 @@ public class ListProvidersOptions extends GenericModel {
    */
   public Builder newBuilder() {
     return new Builder(this);
-  }
-
-  /**
-   * Gets the accountId.
-   *
-   * Account ID.
-   *
-   * @return the accountId
-   */
-  public String accountId() {
-    return accountId;
   }
 
   /**

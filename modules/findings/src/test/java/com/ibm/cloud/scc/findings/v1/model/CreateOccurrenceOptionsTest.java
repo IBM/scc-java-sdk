@@ -120,7 +120,6 @@ public class CreateOccurrenceOptionsTest {
     assertEquals(kpiModel.total(), Double.valueOf("72.5"));
 
     CreateOccurrenceOptions createOccurrenceOptionsModel = new CreateOccurrenceOptions.Builder()
-      .accountId("testString")
       .providerId("testString")
       .noteName("testString")
       .kind("FINDING")
@@ -134,7 +133,6 @@ public class CreateOccurrenceOptionsTest {
       .replaceIfExists(true)
       .transactionId("testString")
       .build();
-    assertEquals(createOccurrenceOptionsModel.accountId(), "testString");
     assertEquals(createOccurrenceOptionsModel.providerId(), "testString");
     assertEquals(createOccurrenceOptionsModel.noteName(), "testString");
     assertEquals(createOccurrenceOptionsModel.kind(), "FINDING");

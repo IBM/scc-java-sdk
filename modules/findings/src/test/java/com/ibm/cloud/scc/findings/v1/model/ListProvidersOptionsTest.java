@@ -32,24 +32,16 @@ public class ListProvidersOptionsTest {
   @Test
   public void testListProvidersOptions() throws Throwable {
     ListProvidersOptions listProvidersOptionsModel = new ListProvidersOptions.Builder()
-      .accountId("testString")
       .transactionId("testString")
       .limit(Long.valueOf("2"))
       .skip(Long.valueOf("26"))
       .startProviderId("testString")
       .endProviderId("testString")
       .build();
-    assertEquals(listProvidersOptionsModel.accountId(), "testString");
     assertEquals(listProvidersOptionsModel.transactionId(), "testString");
     assertEquals(listProvidersOptionsModel.limit(), Long.valueOf("2"));
     assertEquals(listProvidersOptionsModel.skip(), Long.valueOf("26"));
     assertEquals(listProvidersOptionsModel.startProviderId(), "testString");
     assertEquals(listProvidersOptionsModel.endProviderId(), "testString");
   }
-
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testListProvidersOptionsError() throws Throwable {
-    new ListProvidersOptions.Builder().build();
-  }
-
 }

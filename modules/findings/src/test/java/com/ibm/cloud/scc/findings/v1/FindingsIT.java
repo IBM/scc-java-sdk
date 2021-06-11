@@ -70,11 +70,11 @@ import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.sdk.core.util.CredentialUtils;
 import com.ibm.cloud.sdk.core.util.DateUtils;
-
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterGroups;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import static org.testng.Assert.*;
+import org.testng.annotations.AfterGroups;
 
 /**
  * Integration test class for the Findings service.
@@ -113,7 +113,7 @@ public class FindingsIT extends SdkIntegrationTestBase {
       return;
     }
 
-    service = Findings.newInstance();
+    service = Findings.newInstance(accountID);
     assertNotNull(service);
     assertNotNull(service.getServiceUrl());
 
@@ -130,7 +130,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
   public void testPostGraph() throws Exception {
     try {
       PostGraphOptions postGraphOptions = new PostGraphOptions.Builder()
-      .accountId(accountID)
       .body(TestUtilities.createMockStream("{notes{id}}"))
       .contentType("application/graphql")
       .build();
@@ -171,7 +170,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
       .build();
 
       CreateNoteOptions createNoteOptions = new CreateNoteOptions.Builder()
-      .accountId(accountID)
       .providerId(providerID)
       .shortDescription(testString)
       .longDescription(testString)
@@ -213,7 +211,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
       .build();
 
       CreateNoteOptions createNoteOptions = new CreateNoteOptions.Builder()
-      .accountId(accountID)
       .providerId(providerID)
       .shortDescription(testString)
       .longDescription(testString)
@@ -275,7 +272,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
       .build();
 
       CreateNoteOptions createNoteOptions = new CreateNoteOptions.Builder()
-      .accountId(accountID)
       .providerId(providerID)
       .shortDescription(testString)
       .longDescription(testString)
@@ -317,7 +313,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
       .build();
 
       CreateNoteOptions createNoteOptions = new CreateNoteOptions.Builder()
-      .accountId(accountID)
       .providerId(providerID)
       .shortDescription(testString)
       .longDescription(testString)
@@ -343,12 +338,10 @@ public class FindingsIT extends SdkIntegrationTestBase {
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
-
   @Test
   public void testListNotes() throws Exception {
     try {
       ListNotesOptions listNotesOptions = new ListNotesOptions.Builder()
-      .accountId(accountID)
       .providerId(providerID)
       .build();
 
@@ -371,7 +364,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
   public void testGetNote() throws Exception {
     try {
       GetNoteOptions getNoteOptions = new GetNoteOptions.Builder()
-      .accountId(accountID)
       .providerId(providerID)
       .noteId(String.format("kpi-note-%s", identifier))
       .build();
@@ -416,7 +408,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
       .build();
 
       UpdateNoteOptions updateNoteOptions = new UpdateNoteOptions.Builder()
-      .accountId(accountID)
       .providerId(providerID)
       .noteId(String.format("finding-note-%s", identifier))
       .shortDescription(testString)
@@ -459,7 +450,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
       .build();
 
       UpdateNoteOptions updateNoteOptions = new UpdateNoteOptions.Builder()
-      .accountId(accountID)
       .providerId(providerID)
       .noteId(String.format("kpi-note-%s", identifier))
       .shortDescription(testString)
@@ -522,7 +512,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
       .build();
 
       UpdateNoteOptions updateNoteOptions = new UpdateNoteOptions.Builder()
-      .accountId(accountID)
       .providerId(providerID)
       .noteId(String.format("card-note-%s", identifier))
       .shortDescription(testString)
@@ -565,7 +554,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
       .build();
 
       UpdateNoteOptions updateNoteOptions = new UpdateNoteOptions.Builder()
-      .accountId(accountID)
       .providerId(providerID)
       .noteId(String.format("section-note-%s", identifier))
       .shortDescription(testString)
@@ -594,7 +582,8 @@ public class FindingsIT extends SdkIntegrationTestBase {
   }
 
   @Test
-  public void testCreateOccurrenceFinding() throws Exception {
+  public void testCreateOccurrenceFinding() throws Exception 
+  {
     try {
       Context contextModel = new Context.Builder()
       .region(testString)
@@ -642,7 +631,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
       .build();
 
       CreateOccurrenceOptions createOccurrenceOptions = new CreateOccurrenceOptions.Builder()
-      .accountId(accountID)
       .providerId(providerID)
       .noteName(String.format("%s/providers/%s/notes/finding-note-%s", accountID, providerID, identifier))
       .kind("FINDING")
@@ -691,7 +679,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
       .build();
 
       CreateOccurrenceOptions createOccurrenceOptions = new CreateOccurrenceOptions.Builder()
-      .accountId(accountID)
       .providerId(providerID)
       .noteName(String.format("%s/providers/%s/notes/kpi-note-%s", accountID, providerID, identifier))
       .kind("KPI")
@@ -722,7 +709,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
   public void testGetOccurrenceNote() throws Exception {
     try {
       GetOccurrenceNoteOptions getOccurrenceNoteOptions = new GetOccurrenceNoteOptions.Builder()
-      .accountId(accountID)
       .providerId(providerID)
       .occurrenceId(String.format("kpi-occurrence-%s", identifier))
       .build();
@@ -746,7 +732,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
   public void testListOccurrences() throws Exception {
     try {
       ListOccurrencesOptions listOccurrencesOptions = new ListOccurrencesOptions.Builder()
-      .accountId(accountID)
       .providerId(providerID)
       .build();
 
@@ -769,7 +754,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
   public void testListNoteOccurrences() throws Exception {
     try {
       ListNoteOccurrencesOptions listNoteOccurrencesOptions = new ListNoteOccurrencesOptions.Builder()
-      .accountId(accountID)
       .providerId(providerID)
       .noteId(String.format("kpi-note-%s", identifier))
       .build();
@@ -793,7 +777,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
   public void testGetOccurrence() throws Exception {
     try {
       GetOccurrenceOptions getOccurrenceOptions = new GetOccurrenceOptions.Builder()
-      .accountId(accountID)
       .providerId(providerID)
       .occurrenceId(String.format("kpi-occurrence-%s", identifier))
       .build();
@@ -862,7 +845,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
       .build();
 
       UpdateOccurrenceOptions updateOccurrenceOptions = new UpdateOccurrenceOptions.Builder()
-      .accountId(accountID)
       .providerId(providerID)
       .occurrenceId(String.format("finding-occurrence-%s", identifier))
       .noteName(String.format("%s/providers/%s/notes/finding-note-%s", accountID, providerID, identifier))
@@ -911,7 +893,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
       .build();
 
       UpdateOccurrenceOptions updateOccurrenceOptions = new UpdateOccurrenceOptions.Builder()
-      .accountId(accountID)
       .providerId(providerID)
       .occurrenceId(String.format("kpi-occurrence-%s", identifier))
       .noteName(String.format("%s/providers/%s/notes/kpi-note-%s", accountID, providerID, identifier))
@@ -937,12 +918,10 @@ public class FindingsIT extends SdkIntegrationTestBase {
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
-
   @Test
   public void testListProviders() throws Exception {
     try {
       ListProvidersOptions listProvidersOptions = new ListProvidersOptions.Builder()
-      .accountId(accountID)
       .build();
 
       // Invoke operation
@@ -964,7 +943,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
   public void testDeleteOccurrence() throws Exception {
     try {
       DeleteOccurrenceOptions deleteOccurrenceOptions = new DeleteOccurrenceOptions.Builder()
-      .accountId(accountID)
       .providerId(providerID)
       .occurrenceId(String.format("kpi-occurrence-%s", identifier))
       .build();
@@ -984,7 +962,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
   public void testDeleteNote() throws Exception {
     try {
       DeleteNoteOptions deleteNoteOptions = new DeleteNoteOptions.Builder()
-      .accountId(accountID)
       .providerId(providerID)
       .noteId(String.format("kpi-note-%s", identifier))
       .build();
@@ -1002,14 +979,13 @@ public class FindingsIT extends SdkIntegrationTestBase {
 
   @AfterClass
   public void tearDown() {
-    service = Findings.newInstance();
+    service = Findings.newInstance(accountID);
     config = CredentialUtils.getServiceProperties(Findings.DEFAULT_SERVICE_NAME);
     System.out.println("Setup complete.");
 
     System.out.println(String.format("cleaning up account: %s with provider: %s", accountID, providerID));
     
     ListNotesOptions listNotesOptions = new ListNotesOptions.Builder()
-    .accountId(accountID)
     .providerId(providerID)
     .build();
     Response<ApiListNotesResponse> notes = service.listNotes(listNotesOptions).execute();
@@ -1017,7 +993,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
       String[] parts = note.id().split("-");
       if(parts[parts.length-1]==identifier){
         DeleteNoteOptions deleteNoteOptions = new DeleteNoteOptions.Builder()
-        .accountId(accountID)
         .providerId(providerID)
         .noteId(note.id())
         .build();
@@ -1026,7 +1001,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
     }
 
     ListOccurrencesOptions listOccurrencesOptions = new ListOccurrencesOptions.Builder()
-    .accountId(accountID)
     .providerId(providerID)
     .build();
     Response<ApiListOccurrencesResponse> occurrences = service.listOccurrences(listOccurrencesOptions).execute();
@@ -1034,7 +1008,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
       String[] parts = occurrence.id().split("-");
       if(parts[parts.length-1]==identifier){
         DeleteOccurrenceOptions deleteOccurrenceOptions = new DeleteOccurrenceOptions.Builder()
-        .accountId(accountID)
         .providerId(providerID)
         .occurrenceId(occurrence.id())
         .build();
@@ -1044,7 +1017,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
     System.out.println("cleanup was successful");
 
     ListProvidersOptions listProvidersOptions = new ListProvidersOptions.Builder()
-    .accountId(accountID)
     .build();
     Response<ApiListProvidersResponse> providers = service.listProviders(listProvidersOptions).execute();
     for(ApiProvider provider: providers.getResult().getProviders()){

@@ -19,7 +19,6 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class GetNoteOptions extends GenericModel {
 
-  protected String accountId;
   protected String providerId;
   protected String noteId;
   protected String transactionId;
@@ -28,13 +27,11 @@ public class GetNoteOptions extends GenericModel {
    * Builder.
    */
   public static class Builder {
-    private String accountId;
     private String providerId;
     private String noteId;
     private String transactionId;
 
     private Builder(GetNoteOptions getNoteOptions) {
-      this.accountId = getNoteOptions.accountId;
       this.providerId = getNoteOptions.providerId;
       this.noteId = getNoteOptions.noteId;
       this.transactionId = getNoteOptions.transactionId;
@@ -49,12 +46,10 @@ public class GetNoteOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param accountId the accountId
      * @param providerId the providerId
      * @param noteId the noteId
      */
-    public Builder(String accountId, String providerId, String noteId) {
-      this.accountId = accountId;
+    public Builder(String providerId, String noteId) {
       this.providerId = providerId;
       this.noteId = noteId;
     }
@@ -66,17 +61,6 @@ public class GetNoteOptions extends GenericModel {
      */
     public GetNoteOptions build() {
       return new GetNoteOptions(this);
-    }
-
-    /**
-     * Set the accountId.
-     *
-     * @param accountId the accountId
-     * @return the GetNoteOptions builder
-     */
-    public Builder accountId(String accountId) {
-      this.accountId = accountId;
-      return this;
     }
 
     /**
@@ -114,13 +98,10 @@ public class GetNoteOptions extends GenericModel {
   }
 
   protected GetNoteOptions(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.accountId,
-      "accountId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.providerId,
       "providerId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.noteId,
       "noteId cannot be empty");
-    accountId = builder.accountId;
     providerId = builder.providerId;
     noteId = builder.noteId;
     transactionId = builder.transactionId;
@@ -133,17 +114,6 @@ public class GetNoteOptions extends GenericModel {
    */
   public Builder newBuilder() {
     return new Builder(this);
-  }
-
-  /**
-   * Gets the accountId.
-   *
-   * Account ID.
-   *
-   * @return the accountId
-   */
-  public String accountId() {
-    return accountId;
   }
 
   /**

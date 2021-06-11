@@ -32,12 +32,10 @@ public class DeleteNoteOptionsTest {
   @Test
   public void testDeleteNoteOptions() throws Throwable {
     DeleteNoteOptions deleteNoteOptionsModel = new DeleteNoteOptions.Builder()
-      .accountId("testString")
       .providerId("testString")
       .noteId("testString")
       .transactionId("testString")
       .build();
-    assertEquals(deleteNoteOptionsModel.accountId(), "testString");
     assertEquals(deleteNoteOptionsModel.providerId(), "testString");
     assertEquals(deleteNoteOptionsModel.noteId(), "testString");
     assertEquals(deleteNoteOptionsModel.transactionId(), "testString");

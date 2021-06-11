@@ -14,6 +14,7 @@ package com.ibm.cloud.scc.findings.v1.model;
 
 import java.util.List;
 
+import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
@@ -22,6 +23,10 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class ApiListProvidersResponse extends GenericModel {
 
   protected List<ApiProvider> providers;
+  protected Long limit;
+  protected Long skip;
+  @SerializedName("total_count")
+  protected Long totalCount;
 
   /**
    * Gets the providers.
@@ -32,6 +37,39 @@ public class ApiListProvidersResponse extends GenericModel {
    */
   public List<ApiProvider> getProviders() {
     return providers;
+  }
+
+  /**
+   * Gets the limit.
+   *
+   * The number of elements returned in the current instance. Default is 200.
+   *
+   * @return the limit
+   */
+  public Long getLimit() {
+    return limit;
+  }
+
+  /**
+   * Gets the skip.
+   *
+   * The offset is the index of the item from which you want to start returning data from. Default is 0.
+   *
+   * @return the skip
+   */
+  public Long getSkip() {
+    return skip;
+  }
+
+  /**
+   * Gets the totalCount.
+   *
+   * The total number of providers available.
+   *
+   * @return the totalCount
+   */
+  public Long getTotalCount() {
+    return totalCount;
   }
 }
 

@@ -129,7 +129,6 @@ public class UpdateNoteOptionsTest {
     assertEquals(sectionModel.image(), "testString");
 
     UpdateNoteOptions updateNoteOptionsModel = new UpdateNoteOptions.Builder()
-      .accountId("testString")
       .providerId("testString")
       .noteId("testString")
       .shortDescription("testString")
@@ -146,7 +145,6 @@ public class UpdateNoteOptionsTest {
       .section(sectionModel)
       .transactionId("testString")
       .build();
-    assertEquals(updateNoteOptionsModel.accountId(), "testString");
     assertEquals(updateNoteOptionsModel.providerId(), "testString");
     assertEquals(updateNoteOptionsModel.noteId(), "testString");
     assertEquals(updateNoteOptionsModel.shortDescription(), "testString");

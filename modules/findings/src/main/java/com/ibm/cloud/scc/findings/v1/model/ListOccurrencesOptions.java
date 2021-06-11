@@ -19,7 +19,6 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class ListOccurrencesOptions extends GenericModel {
 
-  protected String accountId;
   protected String providerId;
   protected String transactionId;
   protected Long pageSize;
@@ -29,14 +28,12 @@ public class ListOccurrencesOptions extends GenericModel {
    * Builder.
    */
   public static class Builder {
-    private String accountId;
     private String providerId;
     private String transactionId;
     private Long pageSize;
     private String pageToken;
 
     private Builder(ListOccurrencesOptions listOccurrencesOptions) {
-      this.accountId = listOccurrencesOptions.accountId;
       this.providerId = listOccurrencesOptions.providerId;
       this.transactionId = listOccurrencesOptions.transactionId;
       this.pageSize = listOccurrencesOptions.pageSize;
@@ -52,11 +49,9 @@ public class ListOccurrencesOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param accountId the accountId
      * @param providerId the providerId
      */
-    public Builder(String accountId, String providerId) {
-      this.accountId = accountId;
+    public Builder(String providerId) {
       this.providerId = providerId;
     }
 
@@ -67,17 +62,6 @@ public class ListOccurrencesOptions extends GenericModel {
      */
     public ListOccurrencesOptions build() {
       return new ListOccurrencesOptions(this);
-    }
-
-    /**
-     * Set the accountId.
-     *
-     * @param accountId the accountId
-     * @return the ListOccurrencesOptions builder
-     */
-    public Builder accountId(String accountId) {
-      this.accountId = accountId;
-      return this;
     }
 
     /**
@@ -126,11 +110,8 @@ public class ListOccurrencesOptions extends GenericModel {
   }
 
   protected ListOccurrencesOptions(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.accountId,
-      "accountId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.providerId,
       "providerId cannot be empty");
-    accountId = builder.accountId;
     providerId = builder.providerId;
     transactionId = builder.transactionId;
     pageSize = builder.pageSize;
@@ -144,17 +125,6 @@ public class ListOccurrencesOptions extends GenericModel {
    */
   public Builder newBuilder() {
     return new Builder(this);
-  }
-
-  /**
-   * Gets the accountId.
-   *
-   * Account ID.
-   *
-   * @return the accountId
-   */
-  public String accountId() {
-    return accountId;
   }
 
   /**

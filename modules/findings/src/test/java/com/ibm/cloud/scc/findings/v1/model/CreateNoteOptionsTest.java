@@ -129,7 +129,6 @@ public class CreateNoteOptionsTest {
     assertEquals(sectionModel.image(), "testString");
 
     CreateNoteOptions createNoteOptionsModel = new CreateNoteOptions.Builder()
-      .accountId("testString")
       .providerId("testString")
       .shortDescription("testString")
       .longDescription("testString")
@@ -145,7 +144,6 @@ public class CreateNoteOptionsTest {
       .section(sectionModel)
       .transactionId("testString")
       .build();
-    assertEquals(createNoteOptionsModel.accountId(), "testString");
     assertEquals(createNoteOptionsModel.providerId(), "testString");
     assertEquals(createNoteOptionsModel.shortDescription(), "testString");
     assertEquals(createNoteOptionsModel.longDescription(), "testString");

@@ -32,12 +32,10 @@ public class DeleteOccurrenceOptionsTest {
   @Test
   public void testDeleteOccurrenceOptions() throws Throwable {
     DeleteOccurrenceOptions deleteOccurrenceOptionsModel = new DeleteOccurrenceOptions.Builder()
-      .accountId("testString")
       .providerId("testString")
       .occurrenceId("testString")
       .transactionId("testString")
       .build();
-    assertEquals(deleteOccurrenceOptionsModel.accountId(), "testString");
     assertEquals(deleteOccurrenceOptionsModel.providerId(), "testString");
     assertEquals(deleteOccurrenceOptionsModel.occurrenceId(), "testString");
     assertEquals(deleteOccurrenceOptionsModel.transactionId(), "testString");

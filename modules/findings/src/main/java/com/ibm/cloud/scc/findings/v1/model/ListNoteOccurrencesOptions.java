@@ -19,7 +19,6 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class ListNoteOccurrencesOptions extends GenericModel {
 
-  protected String accountId;
   protected String providerId;
   protected String noteId;
   protected String transactionId;
@@ -30,7 +29,6 @@ public class ListNoteOccurrencesOptions extends GenericModel {
    * Builder.
    */
   public static class Builder {
-    private String accountId;
     private String providerId;
     private String noteId;
     private String transactionId;
@@ -38,7 +36,6 @@ public class ListNoteOccurrencesOptions extends GenericModel {
     private String pageToken;
 
     private Builder(ListNoteOccurrencesOptions listNoteOccurrencesOptions) {
-      this.accountId = listNoteOccurrencesOptions.accountId;
       this.providerId = listNoteOccurrencesOptions.providerId;
       this.noteId = listNoteOccurrencesOptions.noteId;
       this.transactionId = listNoteOccurrencesOptions.transactionId;
@@ -55,12 +52,10 @@ public class ListNoteOccurrencesOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param accountId the accountId
      * @param providerId the providerId
      * @param noteId the noteId
      */
-    public Builder(String accountId, String providerId, String noteId) {
-      this.accountId = accountId;
+    public Builder(String providerId, String noteId) {
       this.providerId = providerId;
       this.noteId = noteId;
     }
@@ -72,17 +67,6 @@ public class ListNoteOccurrencesOptions extends GenericModel {
      */
     public ListNoteOccurrencesOptions build() {
       return new ListNoteOccurrencesOptions(this);
-    }
-
-    /**
-     * Set the accountId.
-     *
-     * @param accountId the accountId
-     * @return the ListNoteOccurrencesOptions builder
-     */
-    public Builder accountId(String accountId) {
-      this.accountId = accountId;
-      return this;
     }
 
     /**
@@ -142,13 +126,10 @@ public class ListNoteOccurrencesOptions extends GenericModel {
   }
 
   protected ListNoteOccurrencesOptions(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.accountId,
-      "accountId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.providerId,
       "providerId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.noteId,
       "noteId cannot be empty");
-    accountId = builder.accountId;
     providerId = builder.providerId;
     noteId = builder.noteId;
     transactionId = builder.transactionId;
@@ -163,17 +144,6 @@ public class ListNoteOccurrencesOptions extends GenericModel {
    */
   public Builder newBuilder() {
     return new Builder(this);
-  }
-
-  /**
-   * Gets the accountId.
-   *
-   * Account ID.
-   *
-   * @return the accountId
-   */
-  public String accountId() {
-    return accountId;
   }
 
   /**

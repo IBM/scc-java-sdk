@@ -12,7 +12,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.32.0-4c6a3129-20210514-210323
+ * IBM OpenAPI SDK Code Generator Version: 3.33.0-caf29bd0-20210603-225214
  */
 
 package com.ibm.cloud.scc.findings.v1;
@@ -61,26 +61,30 @@ public class Findings extends BaseService {
 
   public static final String DEFAULT_SERVICE_URL = "https://us-south.secadvisor.cloud.ibm.com/findings";
 
+  private String accountId;
+
  /**
    * Class method which constructs an instance of the `Findings` client.
    * The default service name is used to configure the client instance.
    *
+   * @param accountId Account ID.
    * @return an instance of the `Findings` client using external configuration
    */
-  public static Findings newInstance() {
-    return newInstance(DEFAULT_SERVICE_NAME);
+  public static Findings newInstance(String accountId) {
+    return newInstance(accountId, DEFAULT_SERVICE_NAME);
   }
 
   /**
    * Class method which constructs an instance of the `Findings` client.
    * The specified service name is used to configure the client instance.
    *
+   * @param accountId Account ID.
    * @param serviceName the service name to be used when configuring the client instance
    * @return an instance of the `Findings` client using external configuration
    */
-  public static Findings newInstance(String serviceName) {
+  public static Findings newInstance(String accountId, String serviceName) {
     Authenticator authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(serviceName);
-    Findings service = new Findings(serviceName, authenticator);
+    Findings service = new Findings(accountId, serviceName, authenticator);
     service.configureService(serviceName);
     return service;
   }
@@ -89,12 +93,35 @@ public class Findings extends BaseService {
    * Constructs an instance of the `Findings` client.
    * The specified service name and authenticator are used to configure the client instance.
    *
+   * @param accountId Account ID.
    * @param serviceName the service name to be used when configuring the client instance
    * @param authenticator the {@link Authenticator} instance to be configured for this client
    */
-  public Findings(String serviceName, Authenticator authenticator) {
+  public Findings(String accountId, String serviceName, Authenticator authenticator) {
     super(serviceName, authenticator);
     setServiceUrl(DEFAULT_SERVICE_URL);
+    setAccountId(accountId);
+  }
+
+  /**
+   * Gets the accountId.
+   *
+   * Account ID.
+   *
+   * @return the accountId
+   */
+  public String getAccountId() {
+    return this.accountId;
+  }
+
+  /**
+   * Sets the accountId.
+   *
+   * @param accountId the new accountId
+   */
+  public void setAccountId(final String accountId) {
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(accountId, "accountId cannot be empty.");
+    this.accountId = accountId;
   }
 
   /**
@@ -113,7 +140,7 @@ public class Findings extends BaseService {
       postGraphOptions = postGraphOptions.newBuilder().contentType("application/json").build();
     }
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("account_id", postGraphOptions.accountId());
+    pathParamsMap.put("account_id", this.accountId);
     RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v1/{account_id}/graph", pathParamsMap));
     Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("findings", "v1", "postGraph");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
@@ -129,6 +156,7 @@ public class Findings extends BaseService {
     builder.bodyContent(postGraphOptions.contentType(), null,
       null, postGraphOptions.body());
     ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
+
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -142,7 +170,7 @@ public class Findings extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(createNoteOptions,
       "createNoteOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("account_id", createNoteOptions.accountId());
+    pathParamsMap.put("account_id", this.accountId);
     pathParamsMap.put("provider_id", createNoteOptions.providerId());
     RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v1/{account_id}/providers/{provider_id}/notes", pathParamsMap));
     Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("findings", "v1", "createNote");
@@ -196,7 +224,7 @@ public class Findings extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(listNotesOptions,
       "listNotesOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("account_id", listNotesOptions.accountId());
+    pathParamsMap.put("account_id", this.accountId);
     pathParamsMap.put("provider_id", listNotesOptions.providerId());
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v1/{account_id}/providers/{provider_id}/notes", pathParamsMap));
     Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("findings", "v1", "listNotes");
@@ -228,7 +256,7 @@ public class Findings extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(getNoteOptions,
       "getNoteOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("account_id", getNoteOptions.accountId());
+    pathParamsMap.put("account_id", this.accountId);
     pathParamsMap.put("provider_id", getNoteOptions.providerId());
     pathParamsMap.put("note_id", getNoteOptions.noteId());
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v1/{account_id}/providers/{provider_id}/notes/{note_id}", pathParamsMap));
@@ -255,7 +283,7 @@ public class Findings extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(updateNoteOptions,
       "updateNoteOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("account_id", updateNoteOptions.accountId());
+    pathParamsMap.put("account_id", this.accountId);
     pathParamsMap.put("provider_id", updateNoteOptions.providerId());
     pathParamsMap.put("note_id", updateNoteOptions.noteId());
     RequestBuilder builder = RequestBuilder.put(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v1/{account_id}/providers/{provider_id}/notes/{note_id}", pathParamsMap));
@@ -310,7 +338,7 @@ public class Findings extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(deleteNoteOptions,
       "deleteNoteOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("account_id", deleteNoteOptions.accountId());
+    pathParamsMap.put("account_id", this.accountId);
     pathParamsMap.put("provider_id", deleteNoteOptions.providerId());
     pathParamsMap.put("note_id", deleteNoteOptions.noteId());
     RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v1/{account_id}/providers/{provider_id}/notes/{note_id}", pathParamsMap));
@@ -336,7 +364,7 @@ public class Findings extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(getOccurrenceNoteOptions,
       "getOccurrenceNoteOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("account_id", getOccurrenceNoteOptions.accountId());
+    pathParamsMap.put("account_id", this.accountId);
     pathParamsMap.put("provider_id", getOccurrenceNoteOptions.providerId());
     pathParamsMap.put("occurrence_id", getOccurrenceNoteOptions.occurrenceId());
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v1/{account_id}/providers/{provider_id}/occurrences/{occurrence_id}/note", pathParamsMap));
@@ -363,7 +391,7 @@ public class Findings extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(createOccurrenceOptions,
       "createOccurrenceOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("account_id", createOccurrenceOptions.accountId());
+    pathParamsMap.put("account_id", this.accountId);
     pathParamsMap.put("provider_id", createOccurrenceOptions.providerId());
     RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v1/{account_id}/providers/{provider_id}/occurrences", pathParamsMap));
     Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("findings", "v1", "createOccurrence");
@@ -415,7 +443,7 @@ public class Findings extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(listOccurrencesOptions,
       "listOccurrencesOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("account_id", listOccurrencesOptions.accountId());
+    pathParamsMap.put("account_id", this.accountId);
     pathParamsMap.put("provider_id", listOccurrencesOptions.providerId());
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v1/{account_id}/providers/{provider_id}/occurrences", pathParamsMap));
     Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("findings", "v1", "listOccurrences");
@@ -447,7 +475,7 @@ public class Findings extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(listNoteOccurrencesOptions,
       "listNoteOccurrencesOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("account_id", listNoteOccurrencesOptions.accountId());
+    pathParamsMap.put("account_id", this.accountId);
     pathParamsMap.put("provider_id", listNoteOccurrencesOptions.providerId());
     pathParamsMap.put("note_id", listNoteOccurrencesOptions.noteId());
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v1/{account_id}/providers/{provider_id}/notes/{note_id}/occurrences", pathParamsMap));
@@ -480,7 +508,7 @@ public class Findings extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(getOccurrenceOptions,
       "getOccurrenceOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("account_id", getOccurrenceOptions.accountId());
+    pathParamsMap.put("account_id", this.accountId);
     pathParamsMap.put("provider_id", getOccurrenceOptions.providerId());
     pathParamsMap.put("occurrence_id", getOccurrenceOptions.occurrenceId());
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v1/{account_id}/providers/{provider_id}/occurrences/{occurrence_id}", pathParamsMap));
@@ -507,7 +535,7 @@ public class Findings extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(updateOccurrenceOptions,
       "updateOccurrenceOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("account_id", updateOccurrenceOptions.accountId());
+    pathParamsMap.put("account_id", this.accountId);
     pathParamsMap.put("provider_id", updateOccurrenceOptions.providerId());
     pathParamsMap.put("occurrence_id", updateOccurrenceOptions.occurrenceId());
     RequestBuilder builder = RequestBuilder.put(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v1/{account_id}/providers/{provider_id}/occurrences/{occurrence_id}", pathParamsMap));
@@ -557,7 +585,7 @@ public class Findings extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(deleteOccurrenceOptions,
       "deleteOccurrenceOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("account_id", deleteOccurrenceOptions.accountId());
+    pathParamsMap.put("account_id", this.accountId);
     pathParamsMap.put("provider_id", deleteOccurrenceOptions.providerId());
     pathParamsMap.put("occurrence_id", deleteOccurrenceOptions.occurrenceId());
     RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v1/{account_id}/providers/{provider_id}/occurrences/{occurrence_id}", pathParamsMap));
@@ -580,10 +608,11 @@ public class Findings extends BaseService {
    * @return a {@link ServiceCall} with a result of type {@link ApiListProvidersResponse}
    */
   public ServiceCall<ApiListProvidersResponse> listProviders(ListProvidersOptions listProvidersOptions) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(listProvidersOptions,
-      "listProvidersOptions cannot be null");
+    if (listProvidersOptions == null) {
+      listProvidersOptions = new ListProvidersOptions.Builder().build();
+    }
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("account_id", listProvidersOptions.accountId());
+    pathParamsMap.put("account_id", this.accountId);
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v1/{account_id}/providers", pathParamsMap));
     Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("findings", "v1", "listProviders");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
@@ -608,6 +637,15 @@ public class Findings extends BaseService {
     ResponseConverter<ApiListProvidersResponse> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ApiListProvidersResponse>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Lists all `Providers` for a given account id.
+   *
+   * @return a {@link ServiceCall} with a result of type {@link ApiListProvidersResponse}
+   */
+  public ServiceCall<ApiListProvidersResponse> listProviders() {
+    return listProviders(null);
   }
 
 }

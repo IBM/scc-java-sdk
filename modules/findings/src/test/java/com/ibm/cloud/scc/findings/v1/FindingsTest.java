@@ -105,8 +105,10 @@ public class FindingsTest extends PowerMockTestCase {
     PowerMockito.spy(EnvironmentUtils.class);
     PowerMockito.when(EnvironmentUtils.getenv()).thenReturn(getTestProcessEnvironment());
     final String serviceName = "testService";
+    // set mock values for global params
+    String accountId = "testString";
 
-    findingsService = Findings.newInstance(serviceName);
+    findingsService = Findings.newInstance(accountId, serviceName);
     String url = server.url("/").toString();
     findingsService.setServiceUrl(url);
   }
@@ -117,8 +119,17 @@ public class FindingsTest extends PowerMockTestCase {
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testConstructorWithNullAuthenticator() throws Throwable {
     final String serviceName = "testService";
+    // set mock values for global params
+    String accountId = "testString";
 
-    new Findings(serviceName, null);
+    new Findings(accountId, serviceName, null);
+  }
+
+
+  @Test
+  public void testGetAccountId() throws Throwable {
+    constructClientService();
+    assertEquals(findingsService.getAccountId(), "testString");
   }
 
   @Test
@@ -135,7 +146,6 @@ public class FindingsTest extends PowerMockTestCase {
 
     // Construct an instance of the PostGraphOptions model
     PostGraphOptions postGraphOptionsModel = new PostGraphOptions.Builder()
-    .accountId("testString")
     .body(TestUtilities.createMockStream("This is a mock file."))
     .contentType("application/json")
     .transactionId("testString")
@@ -254,7 +264,6 @@ public class FindingsTest extends PowerMockTestCase {
 
     // Construct an instance of the CreateNoteOptions model
     CreateNoteOptions createNoteOptionsModel = new CreateNoteOptions.Builder()
-    .accountId("testString")
     .providerId("testString")
     .shortDescription("testString")
     .longDescription("testString")
@@ -318,7 +327,6 @@ public class FindingsTest extends PowerMockTestCase {
 
     // Construct an instance of the ListNotesOptions model
     ListNotesOptions listNotesOptionsModel = new ListNotesOptions.Builder()
-    .accountId("testString")
     .providerId("testString")
     .transactionId("testString")
     .pageSize(Long.valueOf("2"))
@@ -374,7 +382,6 @@ public class FindingsTest extends PowerMockTestCase {
 
     // Construct an instance of the GetNoteOptions model
     GetNoteOptions getNoteOptionsModel = new GetNoteOptions.Builder()
-    .accountId("testString")
     .providerId("testString")
     .noteId("testString")
     .transactionId("testString")
@@ -492,7 +499,6 @@ public class FindingsTest extends PowerMockTestCase {
 
     // Construct an instance of the UpdateNoteOptions model
     UpdateNoteOptions updateNoteOptionsModel = new UpdateNoteOptions.Builder()
-    .accountId("testString")
     .providerId("testString")
     .noteId("testString")
     .shortDescription("testString")
@@ -556,7 +562,6 @@ public class FindingsTest extends PowerMockTestCase {
 
     // Construct an instance of the DeleteNoteOptions model
     DeleteNoteOptions deleteNoteOptionsModel = new DeleteNoteOptions.Builder()
-    .accountId("testString")
     .providerId("testString")
     .noteId("testString")
     .transactionId("testString")
@@ -610,7 +615,6 @@ public class FindingsTest extends PowerMockTestCase {
 
     // Construct an instance of the GetOccurrenceNoteOptions model
     GetOccurrenceNoteOptions getOccurrenceNoteOptionsModel = new GetOccurrenceNoteOptions.Builder()
-    .accountId("testString")
     .providerId("testString")
     .occurrenceId("testString")
     .transactionId("testString")
@@ -720,7 +724,6 @@ public class FindingsTest extends PowerMockTestCase {
 
     // Construct an instance of the CreateOccurrenceOptions model
     CreateOccurrenceOptions createOccurrenceOptionsModel = new CreateOccurrenceOptions.Builder()
-    .accountId("testString")
     .providerId("testString")
     .noteName("testString")
     .kind("FINDING")
@@ -782,7 +785,6 @@ public class FindingsTest extends PowerMockTestCase {
 
     // Construct an instance of the ListOccurrencesOptions model
     ListOccurrencesOptions listOccurrencesOptionsModel = new ListOccurrencesOptions.Builder()
-    .accountId("testString")
     .providerId("testString")
     .transactionId("testString")
     .pageSize(Long.valueOf("2"))
@@ -838,7 +840,6 @@ public class FindingsTest extends PowerMockTestCase {
 
     // Construct an instance of the ListNoteOccurrencesOptions model
     ListNoteOccurrencesOptions listNoteOccurrencesOptionsModel = new ListNoteOccurrencesOptions.Builder()
-    .accountId("testString")
     .providerId("testString")
     .noteId("testString")
     .transactionId("testString")
@@ -895,7 +896,6 @@ public class FindingsTest extends PowerMockTestCase {
 
     // Construct an instance of the GetOccurrenceOptions model
     GetOccurrenceOptions getOccurrenceOptionsModel = new GetOccurrenceOptions.Builder()
-    .accountId("testString")
     .providerId("testString")
     .occurrenceId("testString")
     .transactionId("testString")
@@ -1005,7 +1005,6 @@ public class FindingsTest extends PowerMockTestCase {
 
     // Construct an instance of the UpdateOccurrenceOptions model
     UpdateOccurrenceOptions updateOccurrenceOptionsModel = new UpdateOccurrenceOptions.Builder()
-    .accountId("testString")
     .providerId("testString")
     .occurrenceId("testString")
     .noteName("testString")
@@ -1066,7 +1065,6 @@ public class FindingsTest extends PowerMockTestCase {
 
     // Construct an instance of the DeleteOccurrenceOptions model
     DeleteOccurrenceOptions deleteOccurrenceOptionsModel = new DeleteOccurrenceOptions.Builder()
-    .accountId("testString")
     .providerId("testString")
     .occurrenceId("testString")
     .transactionId("testString")
@@ -1108,7 +1106,7 @@ public class FindingsTest extends PowerMockTestCase {
   @Test
   public void testListProvidersWOptions() throws Throwable {
     // Schedule some responses.
-    String mockResponseBody = "{\"providers\": [{\"name\": \"name\", \"id\": \"id\"}]}";
+    String mockResponseBody = "{\"providers\": [{\"name\": \"name\", \"id\": \"id\"}], \"limit\": 5, \"skip\": 4, \"total_count\": 10}";
     String listProvidersPath = "/v1/testString/providers";
 
     server.enqueue(new MockResponse()
@@ -1120,7 +1118,6 @@ public class FindingsTest extends PowerMockTestCase {
 
     // Construct an instance of the ListProvidersOptions model
     ListProvidersOptions listProvidersOptionsModel = new ListProvidersOptions.Builder()
-    .accountId("testString")
     .transactionId("testString")
     .limit(Long.valueOf("2"))
     .skip(Long.valueOf("26"))
@@ -1150,18 +1147,6 @@ public class FindingsTest extends PowerMockTestCase {
     // Check request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, listProvidersPath);
-  }
-
-  // Test the listProviders operation with null options model parameter
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testListProvidersNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
-    server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
-    findingsService.listProviders(null).execute();
   }
 
   /** Initialize the server */
