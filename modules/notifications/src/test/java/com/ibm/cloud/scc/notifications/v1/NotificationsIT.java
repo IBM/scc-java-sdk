@@ -329,7 +329,7 @@ public class NotificationsIT extends SdkIntegrationTestBase {
   public void tearDown() {
     service = Notifications.newInstance();
     config = CredentialUtils.getServiceProperties(Notifications.DEFAULT_SERVICE_NAME);
-    System.out.println("Clean up complete.");
+    System.out.println("Setup up complete.");
 
     System.out.println(String.format("cleaning up account: %s", accountID));
 

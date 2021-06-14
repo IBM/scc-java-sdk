@@ -80,10 +80,17 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
   // Globlal variables to hold link values
   String ruleAttachmentIdLink = null;
   String ruleIdLink = null;
+  String ruleAttachmentEtag = null;
+  String ruleEtag = null;
 
   /**
    * This method provides our config filename to the base class.
    */
+
+  final String accountID = System.getenv("ACCOUNT_ID");
+  String ruleLabel = System.getenv("RULE_LABEL");
+  final String testString = "testString";
+  String resourceGroupID = System.getenv("RESOURCE_GROUP_ID");
 
   public String getConfigFilename() {
     return "../../configuration_governance_v1.env";
@@ -91,6 +98,11 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
 
   @BeforeClass
   public void constructService() {
+
+    if (ruleLabel==null){
+      ruleLabel = "sdk-it";
+    }
+
     // Ask super if we should skip the tests.
     if (skipTests()) {
       return;
@@ -119,16 +131,15 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
       .build();
 
       TargetResource targetResourceModel = new TargetResource.Builder()
-      .serviceName("iam-groups")
-      .resourceKind("service")
-      .additionalTargetAttributes(new java.util.ArrayList<TargetResourceAdditionalTargetAttributesItem>(java.util.Arrays.asList(targetResourceAdditionalTargetAttributesItemModel)))
+      .serviceName("cloud-object-storage")
+      .resourceKind("bucket")
       .build();
 
       RuleConditionSingleProperty ruleConditionModel = new RuleConditionSingleProperty.Builder()
-      .description("testString")
-      .property("public_access_enabled")
-      .operator("is_false")
-      .value("testString")
+      .description(testString)
+      .property("location")
+      .operator("string_equals")
+      .value("us-south")
       .build();
 
       RuleRequiredConfigMultiplePropertiesConditionAnd ruleRequiredConfigModel = new RuleRequiredConfigMultiplePropertiesConditionAnd.Builder()
@@ -141,14 +152,14 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
       .build();
 
       RuleRequest ruleRequestModel = new RuleRequest.Builder()
-      .accountId("531fc3e28bfc43c5a2cea07786d93f5c")
+      .accountId(accountID)
       .name("Disable public access")
       .description("Ensure that public access to account resources is disabled.")
       .ruleType("user_defined")
       .target(targetResourceModel)
       .requiredConfig(ruleRequiredConfigModel)
       .enforcementActions(new java.util.ArrayList<EnforcementAction>(java.util.Arrays.asList(enforcementActionModel)))
-      .labels(new java.util.ArrayList<String>(java.util.Arrays.asList("Access", "IAM")))
+      .labels(new java.util.ArrayList<String>(java.util.Arrays.asList(ruleLabel)))
       .build();
 
       CreateRuleRequest createRuleRequestModel = new CreateRuleRequest.Builder()
@@ -158,7 +169,7 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
 
       CreateRulesOptions createRulesOptions = new CreateRulesOptions.Builder()
       .rules(new java.util.ArrayList<CreateRuleRequest>(java.util.Arrays.asList(createRuleRequestModel)))
-      .transactionId("testString")
+      .transactionId(testString)
       .build();
 
       // Invoke operation
@@ -181,21 +192,27 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
   public void testCreateRuleAttachments() throws Exception {
     try {
       RuleScope ruleScopeModel = new RuleScope.Builder()
-      .note("My enterprise")
-      .scopeId("282cf433ac91493ba860480d92519990")
-      .scopeType("enterprise")
+      .note("My account")
+      .scopeId(accountID)
+      .scopeType("account")
+      .build();
+
+      RuleScope excludedRuleScope = new RuleScope.Builder()
+      .note("My account resource group")
+      .scopeId(resourceGroupID)
+      .scopeType("account.resource_group")
       .build();
 
       RuleAttachmentRequest ruleAttachmentRequestModel = new RuleAttachmentRequest.Builder()
-      .accountId("531fc3e28bfc43c5a2cea07786d93f5c")
+      .accountId(accountID)
       .includedScope(ruleScopeModel)
-      .excludedScopes(new java.util.ArrayList<RuleScope>(java.util.Arrays.asList(ruleScopeModel)))
+      .excludedScopes(new java.util.ArrayList<RuleScope>(java.util.Arrays.asList(excludedRuleScope)))
       .build();
 
       CreateRuleAttachmentsOptions createRuleAttachmentsOptions = new CreateRuleAttachmentsOptions.Builder()
       .ruleId(ruleIdLink)
       .attachments(new java.util.ArrayList<RuleAttachmentRequest>(java.util.Arrays.asList(ruleAttachmentRequestModel)))
-      .transactionId("testString")
+      .transactionId(testString)
       .build();
 
       // Invoke operation
@@ -218,10 +235,10 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
   public void testListRules() throws Exception {
     try {
       ListRulesOptions listRulesOptions = new ListRulesOptions.Builder()
-      .accountId("531fc3e28bfc43c5a2cea07786d93f5c")
-      .transactionId("testString")
+      .accountId(accountID)
+      .transactionId(testString)
       .attached(true)
-      .labels("SOC2,ITCS300")
+      .labels(ruleLabel)
       .scopes("scope_id")
       .limit(Long.valueOf("1000"))
       .offset(Long.valueOf("26"))
@@ -247,7 +264,7 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
     try {
       GetRuleOptions getRuleOptions = new GetRuleOptions.Builder()
       .ruleId(ruleIdLink)
-      .transactionId("testString")
+      .transactionId(testString)
       .build();
 
       // Invoke operation
@@ -259,6 +276,8 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
       Rule ruleResult = response.getResult();
 
       assertNotNull(ruleResult);
+
+      ruleEtag = response.getHeaders().values("etag").get(0);
     } catch (ServiceResponseException e) {
         fail(String.format("Service returned status code %d: %s\nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
@@ -269,40 +288,40 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
   public void testUpdateRule() throws Exception {
     try {
       TargetResourceAdditionalTargetAttributesItem targetResourceAdditionalTargetAttributesItemModel = new TargetResourceAdditionalTargetAttributesItem.Builder()
-      .name("testString")
-      .value("testString")
+      .name("resource_id")
+      .value("81f3db5e-f9db-4c46-9de3-a4a76e66adbf")
       .operator("string_equals")
       .build();
 
       TargetResource targetResourceModel = new TargetResource.Builder()
-      .serviceName("iam-groups")
-      .resourceKind("service")
+      .serviceName("cloud-object-storage")
+      .resourceKind("bucket")
       .additionalTargetAttributes(new java.util.ArrayList<TargetResourceAdditionalTargetAttributesItem>(java.util.Arrays.asList(targetResourceAdditionalTargetAttributesItemModel)))
       .build();
 
       RuleRequiredConfigSingleProperty ruleRequiredConfigModel = new RuleRequiredConfigSingleProperty.Builder()
-      .description("testString")
-      .property("public_access_enabled")
-      .operator("is_false")
-      .value("testString")
+      .description(testString)
+      .property("location")
+      .operator("string_equals")
+      .value("eu-gb")
       .build();
 
       EnforcementAction enforcementActionModel = new EnforcementAction.Builder()
-      .action("audit_log")
+      .action("disallow")
       .build();
 
       UpdateRuleOptions updateRuleOptions = new UpdateRuleOptions.Builder()
       .ruleId(ruleIdLink)
-      .ifMatch("testString")
+      .ifMatch(ruleEtag)
       .name("Disable public access")
       .description("Ensure that public access to account resources is disabled.")
       .target(targetResourceModel)
       .requiredConfig(ruleRequiredConfigModel)
       .enforcementActions(new java.util.ArrayList<EnforcementAction>(java.util.Arrays.asList(enforcementActionModel)))
-      .accountId("531fc3e28bfc43c5a2cea07786d93f5c")
+      .accountId(accountID)
       .ruleType("user_defined")
-      .labels(new java.util.ArrayList<String>(java.util.Arrays.asList("SOC2", "ITCS300")))
-      .transactionId("testString")
+      .labels(new java.util.ArrayList<String>(java.util.Arrays.asList(ruleLabel)))
+      .transactionId(testString)
       .build();
 
       // Invoke operation
@@ -325,7 +344,7 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
     try {
       ListRuleAttachmentsOptions listRuleAttachmentsOptions = new ListRuleAttachmentsOptions.Builder()
       .ruleId(ruleIdLink)
-      .transactionId("testString")
+      .transactionId(testString)
       .limit(Long.valueOf("1000"))
       .offset(Long.valueOf("26"))
       .build();
@@ -351,7 +370,7 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
       GetRuleAttachmentOptions getRuleAttachmentOptions = new GetRuleAttachmentOptions.Builder()
       .ruleId(ruleIdLink)
       .attachmentId(ruleAttachmentIdLink)
-      .transactionId("testString")
+      .transactionId(testString)
       .build();
 
       // Invoke operation
@@ -363,6 +382,8 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
       RuleAttachment ruleAttachmentResult = response.getResult();
 
       assertNotNull(ruleAttachmentResult);
+      
+      ruleAttachmentEtag = response.getHeaders().values("etag").get(0);
     } catch (ServiceResponseException e) {
         fail(String.format("Service returned status code %d: %s\nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
@@ -373,19 +394,25 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
   public void testUpdateRuleAttachment() throws Exception {
     try {
       RuleScope ruleScopeModel = new RuleScope.Builder()
-      .note("My enterprise")
-      .scopeId("282cf433ac91493ba860480d92519990")
-      .scopeType("enterprise")
+      .note("My account")
+      .scopeId(accountID)
+      .scopeType("account")
+      .build();
+
+      RuleScope excludedRuleScopeModel = new RuleScope.Builder()
+      .note("My account resource group")
+      .scopeId(resourceGroupID)
+      .scopeType("account.resource_group")
       .build();
 
       UpdateRuleAttachmentOptions updateRuleAttachmentOptions = new UpdateRuleAttachmentOptions.Builder()
       .ruleId(ruleIdLink)
       .attachmentId(ruleAttachmentIdLink)
-      .ifMatch("testString")
-      .accountId("531fc3e28bfc43c5a2cea07786d93f5c")
+      .ifMatch(ruleAttachmentEtag)
+      .accountId(accountID)
       .includedScope(ruleScopeModel)
-      .excludedScopes(new java.util.ArrayList<RuleScope>(java.util.Arrays.asList(ruleScopeModel)))
-      .transactionId("testString")
+      .excludedScopes(new java.util.ArrayList<RuleScope>(java.util.Arrays.asList(excludedRuleScopeModel)))
+      .transactionId(testString)
       .build();
 
       // Invoke operation
@@ -403,13 +430,13 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
     }
   }
 
-  @Test(dependsOnMethods = { "testCreateRuleAttachments", "testCreateRules" })
+  @Test(dependsOnMethods = { "testCreateRuleAttachments", "testCreateRules", "testGetRuleAttachment", "testListRuleAttachments", "testGetRule", "testListRules" })
   public void testDeleteRuleAttachment() throws Exception {
     try {
       DeleteRuleAttachmentOptions deleteRuleAttachmentOptions = new DeleteRuleAttachmentOptions.Builder()
       .ruleId(ruleIdLink)
       .attachmentId(ruleAttachmentIdLink)
-      .transactionId("testString")
+      .transactionId(testString)
       .build();
 
       // Invoke operation
@@ -423,12 +450,12 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
     }
   }
 
-  @Test(dependsOnMethods = { "testCreateRules" })
+  @Test(dependsOnMethods = { "testDeleteRuleAttachment", "testCreateRules", "testGetRule", "testListRules" })
   public void testDeleteRule() throws Exception {
     try {
       DeleteRuleOptions deleteRuleOptions = new DeleteRuleOptions.Builder()
       .ruleId(ruleIdLink)
-      .transactionId("testString")
+      .transactionId(testString)
       .build();
 
       // Invoke operation
@@ -444,7 +471,26 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
 
   @AfterClass
   public void tearDown() {
-    // Add any clean up logic here
-    System.out.println("Clean up complete.");
+    service = ConfigurationGovernance.newInstance();
+    config = CredentialUtils.getServiceProperties(ConfigurationGovernance.DEFAULT_SERVICE_NAME);
+    System.out.println("Setup up complete.");
+
+    System.out.println(String.format("cleaning up account: %s with rules labelled %s", accountID, ruleLabel));
+
+    ListRulesOptions listRulesOptions = new ListRulesOptions.Builder()
+    .accountId(accountID)
+    .build();
+
+    Response<RuleList> rules = service.listRules(listRulesOptions).execute();
+    for(Rule rule: rules.getResult().getRules()) {
+      if (rule.getLabels().get(0) == ruleLabel) {
+        DeleteRuleOptions deleteRuleOptions = new DeleteRuleOptions.Builder()
+        .ruleId(rule.getRuleId())
+        .build();
+
+        service.deleteRule(deleteRuleOptions);
+      }
+    }
+    System.out.println("cleanup was successful");
   }
  }
