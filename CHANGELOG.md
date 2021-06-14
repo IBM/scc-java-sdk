@@ -1,3 +1,10 @@
+## [0.0.21](https://github.com/IBM/scc-java-sdk/compare/0.0.20...0.0.21) (2021-06-14)
+
+
+### Bug Fixes
+
+* **ITs:** config gov ITs fixed ([f53590b](https://github.com/IBM/scc-java-sdk/commit/f53590b6e74765a14831330cb981b1a7db21e751))
+
 ## [0.0.20](https://github.com/IBM/scc-java-sdk/compare/0.0.19...0.0.20) (2021-06-11)
 
 
