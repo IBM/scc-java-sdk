@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/IBM/scc-java-sdk.svg?branch=main)](https://travis-ci.com/github/IBM/scc-java-sdk)
+[![CI/CD Pipeline](https://github.com/IBM/scc-java-sdk/actions/workflows/main.yaml/badge.svg)](https://github.com/IBM/scc-java-sdk/actions/workflows/main.yaml)
 [![Javadoc](https://img.shields.io/static/v1?label=javadoc&message=latest&color=blue)](http://IBM.github.io/scc-java-sdk)
 [![Release](https://img.shields.io/github/v/release/IBM/scc-java-sdk)](https://img.shields.io/github/v/release/IBM/scc-java-sdk)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)

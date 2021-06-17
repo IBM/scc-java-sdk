@@ -69,7 +69,7 @@ public class NotificationsIT extends SdkIntegrationTestBase {
   final String accountID = System.getenv("ACCOUNT_ID");
   String channelID = "";
   final String testString = "testString";
-  String identifier = System.getenv("TRAVIS_BUILD_NUMBER");
+  String identifier = "jv-"+(System.currentTimeMillis()/1000);
 
   public String getConfigFilename() {
     return "../../notifications_v1.env";
@@ -77,10 +77,6 @@ public class NotificationsIT extends SdkIntegrationTestBase {
 
   @BeforeClass
   public void constructService() {
-
-    if(identifier == null){
-      identifier = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-    }
 
     // Ask super if we should skip the tests.
     if (skipTests()) {
@@ -339,7 +335,7 @@ public class NotificationsIT extends SdkIntegrationTestBase {
 
     Response<ChannelsList> channels = service.listAllChannels(listAllChannelsOptions).execute();
     for(Channel channel: channels.getResult().getChannels()) {
-      if (channel.getChannelId() == channelID) {
+      if (channelID.equals(channel.getChannelId())) {
         DeleteNotificationChannelOptions deleteNotificationChannelOptions = new DeleteNotificationChannelOptions.Builder()
         .accountId(accountID)
         .channelId(channelID)
