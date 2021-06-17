@@ -91,7 +91,7 @@ public class FindingsIT extends SdkIntegrationTestBase {
   final String accountID = System.getenv("ACCOUNT_ID");
   String providerID = System.getenv("PROVIDER_ID");
   final String testString = "testString";
-  String identifier = System.getenv("TRAVIS_BUILD_NUMBER");
+  String identifier = "jv-"+(System.currentTimeMillis()/1000);
 
   public String getConfigFilename() {
     return "../../findings_v1.env";
@@ -99,10 +99,6 @@ public class FindingsIT extends SdkIntegrationTestBase {
 
   @BeforeClass
   public void constructService() {
-
-    if(identifier == null){
-      identifier = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-    }
 
     if(providerID == null){
       providerID = "sdk-it";
@@ -991,7 +987,7 @@ public class FindingsIT extends SdkIntegrationTestBase {
     Response<ApiListNotesResponse> notes = service.listNotes(listNotesOptions).execute();
     for(ApiNote note: notes.getResult().getNotes()){
       String[] parts = note.id().split("-");
-      if(parts[parts.length-1]==identifier){
+      if(identifier.equals(parts[parts.length-2]+"-"+parts[parts.length-1])){
         DeleteNoteOptions deleteNoteOptions = new DeleteNoteOptions.Builder()
         .providerId(providerID)
         .noteId(note.id())
@@ -1006,7 +1002,7 @@ public class FindingsIT extends SdkIntegrationTestBase {
     Response<ApiListOccurrencesResponse> occurrences = service.listOccurrences(listOccurrencesOptions).execute();
     for(ApiOccurrence occurrence: occurrences.getResult().getOccurrences()){
       String[] parts = occurrence.id().split("-");
-      if(parts[parts.length-1]==identifier){
+      if(identifier.equals(parts[parts.length-2]+"-"+parts[parts.length-1])){
         DeleteOccurrenceOptions deleteOccurrenceOptions = new DeleteOccurrenceOptions.Builder()
         .providerId(providerID)
         .occurrenceId(occurrence.id())

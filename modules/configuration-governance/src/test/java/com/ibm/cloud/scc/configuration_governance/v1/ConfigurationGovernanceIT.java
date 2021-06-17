@@ -91,6 +91,7 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
   String ruleLabel = System.getenv("RULE_LABEL");
   final String testString = "testString";
   String resourceGroupID = System.getenv("RESOURCE_GROUP_ID");
+  String identifier = "jv-"+(System.currentTimeMillis()/1000);
 
   public String getConfigFilename() {
     return "../../configuration_governance_v1.env";
@@ -159,7 +160,7 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
       .target(targetResourceModel)
       .requiredConfig(ruleRequiredConfigModel)
       .enforcementActions(new java.util.ArrayList<EnforcementAction>(java.util.Arrays.asList(enforcementActionModel)))
-      .labels(new java.util.ArrayList<String>(java.util.Arrays.asList(ruleLabel)))
+      .labels(new java.util.ArrayList<String>(java.util.Arrays.asList(ruleLabel+"-"+identifier)))
       .build();
 
       CreateRuleRequest createRuleRequestModel = new CreateRuleRequest.Builder()
@@ -238,7 +239,7 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
       .accountId(accountID)
       .transactionId(testString)
       .attached(true)
-      .labels(ruleLabel)
+      .labels(ruleLabel+"-"+identifier)
       .scopes("scope_id")
       .limit(Long.valueOf("1000"))
       .offset(Long.valueOf("26"))
@@ -320,7 +321,7 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
       .enforcementActions(new java.util.ArrayList<EnforcementAction>(java.util.Arrays.asList(enforcementActionModel)))
       .accountId(accountID)
       .ruleType("user_defined")
-      .labels(new java.util.ArrayList<String>(java.util.Arrays.asList(ruleLabel)))
+      .labels(new java.util.ArrayList<String>(java.util.Arrays.asList(ruleLabel+"-"+identifier)))
       .transactionId(testString)
       .build();
 
@@ -479,17 +480,16 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
 
     ListRulesOptions listRulesOptions = new ListRulesOptions.Builder()
     .accountId(accountID)
+    .labels(ruleLabel+"-"+identifier)
     .build();
 
     Response<RuleList> rules = service.listRules(listRulesOptions).execute();
     for(Rule rule: rules.getResult().getRules()) {
-      if (rule.getLabels().get(0) == ruleLabel) {
-        DeleteRuleOptions deleteRuleOptions = new DeleteRuleOptions.Builder()
-        .ruleId(rule.getRuleId())
-        .build();
+      DeleteRuleOptions deleteRuleOptions = new DeleteRuleOptions.Builder()
+      .ruleId(rule.getRuleId())
+      .build();
 
-        service.deleteRule(deleteRuleOptions);
-      }
+      service.deleteRule(deleteRuleOptions);
     }
     System.out.println("cleanup was successful");
   }
