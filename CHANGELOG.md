@@ -1,3 +1,10 @@
+## [0.0.22](https://github.com/IBM/scc-java-sdk/compare/0.0.21...0.0.22) (2021-06-17)
+
+
+### Bug Fixes
+
+* **GitHubActions:** migrated from TravisCI ([9ce7a06](https://github.com/IBM/scc-java-sdk/commit/9ce7a06345ca4836e745d152ff7ab35935a679cb))
+
 ## [0.0.21](https://github.com/IBM/scc-java-sdk/compare/0.0.20...0.0.21) (2021-06-14)
 
 
