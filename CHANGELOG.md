@@ -1,3 +1,10 @@
+## [0.0.25](https://github.com/IBM/scc-java-sdk/compare/0.0.24...0.0.25) (2021-06-18)
+
+
+### Bug Fixes
+
+* **GPG:** signing files before publishing ([df40f3e](https://github.com/IBM/scc-java-sdk/commit/df40f3ec8e41b87b6331fb9e7dd4b7c7c4b6a92d))
+
 ## [0.0.24](https://github.com/IBM/scc-java-sdk/compare/0.0.23...0.0.24) (2021-06-18)
 
 
