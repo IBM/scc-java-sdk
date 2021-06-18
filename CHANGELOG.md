@@ -1,3 +1,10 @@
+## [0.0.23](https://github.com/IBM/scc-java-sdk/compare/0.0.22...0.0.23) (2021-06-18)
+
+
+### Bug Fixes
+
+* **GithubAction:** workflow altered ([0cee3c0](https://github.com/IBM/scc-java-sdk/commit/0cee3c018f2179b1ef9fd1d371306d439ebfda5a))
+
 ## [0.0.22](https://github.com/IBM/scc-java-sdk/compare/0.0.21...0.0.22) (2021-06-17)
 
 
