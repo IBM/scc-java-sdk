@@ -1,3 +1,10 @@
+## [0.0.26](https://github.com/IBM/scc-java-sdk/compare/0.0.25...0.0.26) (2021-06-18)
+
+
+### Bug Fixes
+
+* **TTY:** export GPG_TTY before gpg signing ([5711627](https://github.com/IBM/scc-java-sdk/commit/57116270189093a041587c0b79d3aca32c6b528f))
+
 ## [0.0.25](https://github.com/IBM/scc-java-sdk/compare/0.0.24...0.0.25) (2021-06-18)
 
 
