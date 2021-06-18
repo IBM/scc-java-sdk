@@ -1,3 +1,10 @@
+## [0.0.24](https://github.com/IBM/scc-java-sdk/compare/0.0.23...0.0.24) (2021-06-18)
+
+
+### Bug Fixes
+
+* **GithubAction:** publish and document for any tag ([3914cb8](https://github.com/IBM/scc-java-sdk/commit/3914cb81eb042040f88c44e6aad6f57802c16fb6))
+
 ## [0.0.23](https://github.com/IBM/scc-java-sdk/compare/0.0.22...0.0.23) (2021-06-18)
 
 
