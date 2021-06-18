@@ -1,3 +1,10 @@
+## [0.0.27](https://github.com/IBM/scc-java-sdk/compare/0.0.26...0.0.27) (2021-06-18)
+
+
+### Bug Fixes
+
+* **GithubAction:** GHAction using gpg2 by default ([0632ca1](https://github.com/IBM/scc-java-sdk/commit/0632ca1b8cd387455f54069838628acb1a0353d4))
+
 ## [0.0.26](https://github.com/IBM/scc-java-sdk/compare/0.0.25...0.0.26) (2021-06-18)
 
 
