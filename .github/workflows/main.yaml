@@ -107,7 +107,9 @@ jobs:
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-        run: mvn deploy $MVN_ARGS -DskipITs -P central
+        run: |
+          export GPG_TTY=$(tty)
+          mvn deploy $MVN_ARGS -DskipITs -P central
 
   documentation:
     runs-on: ubuntu-latest
