@@ -1,3 +1,10 @@
+## [0.0.28](https://github.com/IBM/scc-java-sdk/compare/0.0.27...0.0.28) (2021-06-21)
+
+
+### Bug Fixes
+
+* **GPG:** ioctl error while deploying ([1fd14f2](https://github.com/IBM/scc-java-sdk/commit/1fd14f24dba9d5a629c234c1c862f2ff6e918b62))
+
 ## [0.0.27](https://github.com/IBM/scc-java-sdk/compare/0.0.26...0.0.27) (2021-06-18)
 
 
