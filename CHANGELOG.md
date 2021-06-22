@@ -1,3 +1,10 @@
+## [0.0.30](https://github.com/IBM/scc-java-sdk/compare/0.0.29...0.0.30) (2021-06-22)
+
+
+### Bug Fixes
+
+* **Maven:** added flags from gpg2 and gpg ([5ca1a71](https://github.com/IBM/scc-java-sdk/commit/5ca1a710bde27e42465ca7988c2fbd4f5d3c31b0))
+
 ## [0.0.29](https://github.com/IBM/scc-java-sdk/compare/0.0.28...0.0.29) (2021-06-22)
 
 
