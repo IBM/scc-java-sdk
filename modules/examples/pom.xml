@@ -5,7 +5,7 @@
     <parent>
         <artifactId>scc</artifactId>
         <groupId>com.ibm.cloud</groupId>
-        <version>0.0.29</version>
+        <version>0.0.30</version>
         <relativePath>../..</relativePath>
     </parent>
 
