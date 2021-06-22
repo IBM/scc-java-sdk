@@ -1,3 +1,10 @@
+## [0.0.29](https://github.com/IBM/scc-java-sdk/compare/0.0.28...0.0.29) (2021-06-22)
+
+
+### Bug Fixes
+
+* **MavenCentral:** gpg2 arguments in pom ([08085a6](https://github.com/IBM/scc-java-sdk/commit/08085a644802e6a2fe5313222a1c092453f33d15))
+
 ## [0.0.28](https://github.com/IBM/scc-java-sdk/compare/0.0.27...0.0.28) (2021-06-21)
 
 
