@@ -20,13 +20,12 @@ import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * Provides a detailed description of a `Note`.
+ * Provides a detailed description of a note.
  */
 public class ApiNote extends GenericModel {
 
   /**
-   * This must be 1&amp;#58;1 with members of our oneofs, it can be used for filtering Note and Occurrence on their
-   * kind.
+   * The type of note. Use this field to filter notes and occurences by kind.
    *  - FINDING&amp;#58; The note and occurrence represent a finding.
    *  - KPI&amp;#58; The note and occurrence represent a KPI value.
    *  - CARD&amp;#58; The note represents a card showing findings and related metric values.
@@ -319,7 +318,7 @@ public class ApiNote extends GenericModel {
   /**
    * Gets the shortDescription.
    *
-   * A one sentence description of this `Note`.
+   * A one sentence description of your note.
    *
    * @return the shortDescription
    */
@@ -330,7 +329,7 @@ public class ApiNote extends GenericModel {
   /**
    * Gets the longDescription.
    *
-   * A detailed description of this `Note`.
+   * A more detailed description of your note.
    *
    * @return the longDescription
    */
@@ -341,8 +340,7 @@ public class ApiNote extends GenericModel {
   /**
    * Gets the kind.
    *
-   * This must be 1&amp;#58;1 with members of our oneofs, it can be used for filtering Note and Occurrence on their
-   * kind.
+   * The type of note. Use this field to filter notes and occurences by kind.
    *  - FINDING&amp;#58; The note and occurrence represent a finding.
    *  - KPI&amp;#58; The note and occurrence represent a KPI value.
    *  - CARD&amp;#58; The note represents a card showing findings and related metric values.
@@ -357,8 +355,6 @@ public class ApiNote extends GenericModel {
 
   /**
    * Gets the relatedUrl.
-   *
-   * URLs associated with this note.
    *
    * @return the relatedUrl
    */
@@ -402,7 +398,7 @@ public class ApiNote extends GenericModel {
   /**
    * Gets the id.
    *
-   * The id of the note.
+   * The ID of the note.
    *
    * @return the id
    */
@@ -413,7 +409,7 @@ public class ApiNote extends GenericModel {
   /**
    * Gets the shared.
    *
-   * True if this `Note` can be shared by multiple accounts.
+   * True if this note can be shared by multiple accounts.
    *
    * @return the shared
    */

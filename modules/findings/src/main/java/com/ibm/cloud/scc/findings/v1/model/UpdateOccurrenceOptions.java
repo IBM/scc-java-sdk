@@ -22,8 +22,7 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class UpdateOccurrenceOptions extends GenericModel {
 
   /**
-   * This must be 1&amp;#58;1 with members of our oneofs, it can be used for filtering Note and Occurrence on their
-   * kind.
+   * The type of note. Use this field to filter notes and occurences by kind.
    *  - FINDING&amp;#58; The note and occurrence represent a finding.
    *  - KPI&amp;#58; The note and occurrence represent a KPI value.
    *  - CARD&amp;#58; The note represents a card showing findings and related metric values.
@@ -309,7 +308,7 @@ public class UpdateOccurrenceOptions extends GenericModel {
   /**
    * Gets the providerId.
    *
-   * First part of occurrence `name`: providers/{provider_id}/occurrences/{occurrence_id}.
+   * Part of the parent. This field contains the provider ID. For example: providers/{provider_id}.
    *
    * @return the providerId
    */
@@ -343,8 +342,7 @@ public class UpdateOccurrenceOptions extends GenericModel {
   /**
    * Gets the kind.
    *
-   * This must be 1&amp;#58;1 with members of our oneofs, it can be used for filtering Note and Occurrence on their
-   * kind.
+   * The type of note. Use this field to filter notes and occurences by kind.
    *  - FINDING&amp;#58; The note and occurrence represent a finding.
    *  - KPI&amp;#58; The note and occurrence represent a KPI value.
    *  - CARD&amp;#58; The note represents a card showing findings and related metric values.
@@ -436,7 +434,7 @@ public class UpdateOccurrenceOptions extends GenericModel {
   /**
    * Gets the transactionId.
    *
-   * The transaction id for the request in uuid v4 format.
+   * The transaction ID for the request in UUID v4 format.
    *
    * @return the transactionId
    */

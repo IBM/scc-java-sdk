@@ -130,8 +130,8 @@ public class CreateOccurrenceOptionsTest {
       .finding(findingModel)
       .kpi(kpiModel)
       .referenceData(new java.util.HashMap<String, Object>() { { put("foo", "testString"); } })
-      .replaceIfExists(true)
       .transactionId("testString")
+      .replaceIfExists(true)
       .build();
     assertEquals(createOccurrenceOptionsModel.providerId(), "testString");
     assertEquals(createOccurrenceOptionsModel.noteName(), "testString");
@@ -143,8 +143,8 @@ public class CreateOccurrenceOptionsTest {
     assertEquals(createOccurrenceOptionsModel.finding(), findingModel);
     assertEquals(createOccurrenceOptionsModel.kpi(), kpiModel);
     assertEquals(createOccurrenceOptionsModel.referenceData(), new java.util.HashMap<String, Object>() { { put("foo", "testString"); } });
-    assertEquals(createOccurrenceOptionsModel.replaceIfExists(), Boolean.valueOf(true));
     assertEquals(createOccurrenceOptionsModel.transactionId(), "testString");
+    assertEquals(createOccurrenceOptionsModel.replaceIfExists(), Boolean.valueOf(true));
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

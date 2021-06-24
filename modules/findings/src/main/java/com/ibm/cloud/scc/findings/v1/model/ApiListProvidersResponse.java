@@ -18,7 +18,7 @@ import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * Response including listed providers.
+ * A list of providers is returned.
  */
 public class ApiListProvidersResponse extends GenericModel {
 
@@ -42,7 +42,7 @@ public class ApiListProvidersResponse extends GenericModel {
   /**
    * Gets the limit.
    *
-   * The number of elements returned in the current instance. Default is 200.
+   * The number of elements returned in the current instance. The default is 200.
    *
    * @return the limit
    */
@@ -53,7 +53,7 @@ public class ApiListProvidersResponse extends GenericModel {
   /**
    * Gets the skip.
    *
-   * The offset is the index of the item from which you want to start returning data from. Default is 0.
+   * The offset is the index of the item from which you want to start returning data from. The default is 0.
    *
    * @return the skip
    */

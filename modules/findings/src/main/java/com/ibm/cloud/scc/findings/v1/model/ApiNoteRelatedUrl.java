@@ -115,7 +115,7 @@ public class ApiNoteRelatedUrl extends GenericModel {
   /**
    * Gets the url.
    *
-   * Specific URL to associate with the note.
+   * The URL that you want to associate with the note.
    *
    * @return the url
    */

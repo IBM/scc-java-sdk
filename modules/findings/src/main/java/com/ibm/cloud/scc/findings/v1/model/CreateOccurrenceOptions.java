@@ -22,8 +22,7 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class CreateOccurrenceOptions extends GenericModel {
 
   /**
-   * This must be 1&amp;#58;1 with members of our oneofs, it can be used for filtering Note and Occurrence on their
-   * kind.
+   * The type of note. Use this field to filter notes and occurences by kind.
    *  - FINDING&amp;#58; The note and occurrence represent a finding.
    *  - KPI&amp;#58; The note and occurrence represent a KPI value.
    *  - CARD&amp;#58; The note represents a card showing findings and related metric values.
@@ -53,8 +52,8 @@ public class CreateOccurrenceOptions extends GenericModel {
   protected Finding finding;
   protected Kpi kpi;
   protected Map<String, Object> referenceData;
-  protected Boolean replaceIfExists;
   protected String transactionId;
+  protected Boolean replaceIfExists;
 
   /**
    * Builder.
@@ -70,8 +69,8 @@ public class CreateOccurrenceOptions extends GenericModel {
     private Finding finding;
     private Kpi kpi;
     private Map<String, Object> referenceData;
-    private Boolean replaceIfExists;
     private String transactionId;
+    private Boolean replaceIfExists;
 
     private Builder(CreateOccurrenceOptions createOccurrenceOptions) {
       this.providerId = createOccurrenceOptions.providerId;
@@ -84,8 +83,8 @@ public class CreateOccurrenceOptions extends GenericModel {
       this.finding = createOccurrenceOptions.finding;
       this.kpi = createOccurrenceOptions.kpi;
       this.referenceData = createOccurrenceOptions.referenceData;
-      this.replaceIfExists = createOccurrenceOptions.replaceIfExists;
       this.transactionId = createOccurrenceOptions.transactionId;
+      this.replaceIfExists = createOccurrenceOptions.replaceIfExists;
     }
 
     /**
@@ -229,17 +228,6 @@ public class CreateOccurrenceOptions extends GenericModel {
     }
 
     /**
-     * Set the replaceIfExists.
-     *
-     * @param replaceIfExists the replaceIfExists
-     * @return the CreateOccurrenceOptions builder
-     */
-    public Builder replaceIfExists(Boolean replaceIfExists) {
-      this.replaceIfExists = replaceIfExists;
-      return this;
-    }
-
-    /**
      * Set the transactionId.
      *
      * @param transactionId the transactionId
@@ -247,6 +235,17 @@ public class CreateOccurrenceOptions extends GenericModel {
      */
     public Builder transactionId(String transactionId) {
       this.transactionId = transactionId;
+      return this;
+    }
+
+    /**
+     * Set the replaceIfExists.
+     *
+     * @param replaceIfExists the replaceIfExists
+     * @return the CreateOccurrenceOptions builder
+     */
+    public Builder replaceIfExists(Boolean replaceIfExists) {
+      this.replaceIfExists = replaceIfExists;
       return this;
     }
 
@@ -289,8 +288,8 @@ public class CreateOccurrenceOptions extends GenericModel {
     finding = builder.finding;
     kpi = builder.kpi;
     referenceData = builder.referenceData;
-    replaceIfExists = builder.replaceIfExists;
     transactionId = builder.transactionId;
+    replaceIfExists = builder.replaceIfExists;
   }
 
   /**
@@ -305,7 +304,7 @@ public class CreateOccurrenceOptions extends GenericModel {
   /**
    * Gets the providerId.
    *
-   * Part of `parent`. This contains the provider_id for example: providers/{provider_id}.
+   * Part of the parent. This field contains the provider ID. For example: providers/{provider_id}.
    *
    * @return the providerId
    */
@@ -328,8 +327,7 @@ public class CreateOccurrenceOptions extends GenericModel {
   /**
    * Gets the kind.
    *
-   * This must be 1&amp;#58;1 with members of our oneofs, it can be used for filtering Note and Occurrence on their
-   * kind.
+   * The type of note. Use this field to filter notes and occurences by kind.
    *  - FINDING&amp;#58; The note and occurrence represent a finding.
    *  - KPI&amp;#58; The note and occurrence represent a KPI value.
    *  - CARD&amp;#58; The note represents a card showing findings and related metric values.
@@ -419,25 +417,25 @@ public class CreateOccurrenceOptions extends GenericModel {
   }
 
   /**
-   * Gets the replaceIfExists.
-   *
-   * It allows replacing an existing occurrence when set to true.
-   *
-   * @return the replaceIfExists
-   */
-  public Boolean replaceIfExists() {
-    return replaceIfExists;
-  }
-
-  /**
    * Gets the transactionId.
    *
-   * The transaction id for the request in uuid v4 format.
+   * The transaction ID for the request in UUID v4 format.
    *
    * @return the transactionId
    */
   public String transactionId() {
     return transactionId;
+  }
+
+  /**
+   * Gets the replaceIfExists.
+   *
+   * When set to true, an existing occurrence is replaced rather than duplicated.
+   *
+   * @return the replaceIfExists
+   */
+  public Boolean replaceIfExists() {
+    return replaceIfExists;
   }
 }
 
