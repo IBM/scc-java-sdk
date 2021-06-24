@@ -1,3 +1,10 @@
+## [0.0.31](https://github.com/IBM/scc-java-sdk/compare/0.0.30...0.0.31) (2021-06-24)
+
+
+### Bug Fixes
+
+* **GPG:** use passphrase while importing gpg keys ([87f1fdf](https://github.com/IBM/scc-java-sdk/commit/87f1fdf46104b9855024da1924c9dcd33ab8b4c2))
+
 ## [0.0.30](https://github.com/IBM/scc-java-sdk/compare/0.0.29...0.0.30) (2021-06-22)
 
 
