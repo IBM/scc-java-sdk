@@ -18,6 +18,8 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    env:
+      MVN_ARGS: "--settings build/.travis.settings.xml"
     if: "!startsWith(github.event.head_commit.message, 'chore') && !startsWith(github.ref, 'refs/tags/v')"
     steps:
       - uses: actions/checkout@v1
@@ -54,17 +56,16 @@ jobs:
     needs: [verify, test]
     if: "github.event_name == 'push' && github.ref == 'refs/heads/main' && !startsWith(github.event.head_commit.message, 'chore')"
     steps:
-      - name: setup extensions
+      - name: setting up extensions
         uses: actions/checkout@v1
 
-      - name: setup nodejs
+      - name: setting up nodejs
         uses: actions/setup-node@v2
         with:
           node-version: '12'
 
-      - name: release using semantic-release
+      - name: releasing using semantic-release
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.ADMIN_TOKEN }}
           GIT_AUTHOR_NAME: sccdeveloper
           GIT_AUTHOR_EMAIL: scccomm@in.ibm.com
@@ -82,9 +83,11 @@ jobs:
 
   publish:
     runs-on: ubuntu-latest
+    env:
+      MVN_ARGS: "--settings build/.travis.settings.xml"
     if: "github.event_name == 'push' && contains(github.ref, 'refs/tags')"
     steps:
-      - name: setup extensions
+      - name: setting up extensions
         uses: actions/checkout@v1
 
       - uses: actions/setup-java@v2
@@ -92,7 +95,7 @@ jobs:
           distribution: 'adopt'
           java-version: '8'
 
-      - name: signing files with gpg key
+      - name: setting up gnupg for mvn
         env:
           GPG_SECRET_KEYS: ${{ secrets.GPG_SECRET_KEYS }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
@@ -100,13 +103,17 @@ jobs:
           GPG_EXECUTABLE: ${{ secrets.GPG_EXECUTABLE }}
         run: |
           export GPG_TTY=$(tty)
-          echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --batch --import
-          echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust
+          echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --batch --passphrase $GPG_PASSPHRASE --import
+          echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --passphrase $GPG_PASSPHRASE --import-ownertrust
 
-      - name: publish to maven central
+      - name: publishing to maven central
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          GPG_SECRET_KEYS: ${{ secrets.GPG_SECRET_KEYS }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          GPG_OWNERTRUST: ${{ secrets.GPG_OWNERTRUST }}
+          GPG_EXECUTABLE: ${{ secrets.GPG_EXECUTABLE }}
         run: |
           export GPG_TTY=$(tty)
           mvn deploy $MVN_ARGS -DskipITs -P central
@@ -115,7 +122,7 @@ jobs:
     runs-on: ubuntu-latest
     if: "github.event_name == 'push' && contains(github.ref, 'refs/tags')"
     steps:
-      - name: setup extensions
+      - name: setting up extensions
         uses: actions/checkout@v1
 
       - uses: actions/setup-java@v2
@@ -123,10 +130,10 @@ jobs:
           distribution: 'adopt'
           java-version: '8'
 
-      - name: generate javadoc
+      - name: generating javadocs
         run: build/prepareJavadoc.sh
       
-      - name: deploy javadocs to gh-pages
+      - name: deploying javadocs to gh-pages
         uses: crazy-max/ghaction-github-pages@v1
         with:
           target_branch: gh-pages
