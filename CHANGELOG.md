@@ -1,3 +1,10 @@
+## [0.0.33](https://github.com/IBM/scc-java-sdk/compare/0.0.32...0.0.33) (2021-06-25)
+
+
+### Bug Fixes
+
+* **SDK:** TransactionID parameter to comply with findingsapi ([95ce915](https://github.com/IBM/scc-java-sdk/commit/95ce9153135bbc957da91f424c0d56da8337586c))
+
 ## [0.0.32](https://github.com/IBM/scc-java-sdk/compare/0.0.31...0.0.32) (2021-06-25)
 
 
