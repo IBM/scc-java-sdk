@@ -1,3 +1,10 @@
+## [0.0.32](https://github.com/IBM/scc-java-sdk/compare/0.0.31...0.0.32) (2021-06-25)
+
+
+### Bug Fixes
+
+* **SDK:** regeneration after content review ([55d4dde](https://github.com/IBM/scc-java-sdk/commit/55d4ddec4c4a703a73c14571b6084b0b3f051c28))
+
 ## [0.0.31](https://github.com/IBM/scc-java-sdk/compare/0.0.30...0.0.31) (2021-06-24)
 
 
