@@ -154,7 +154,7 @@ public class Findings extends BaseService {
       builder.header("Content-Type", postGraphOptions.contentType());
     }
     if (postGraphOptions.transactionId() != null) {
-      builder.header("transaction_id", postGraphOptions.transactionId());
+      builder.header("Transaction-Id", postGraphOptions.transactionId());
     }
     builder.bodyContent(postGraphOptions.contentType(), null,
       null, postGraphOptions.body());
@@ -183,7 +183,7 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (listProvidersOptions.transactionId() != null) {
-      builder.header("transaction_id", listProvidersOptions.transactionId());
+      builder.header("Transaction-Id", listProvidersOptions.transactionId());
     }
     if (listProvidersOptions.limit() != null) {
       builder.query("limit", String.valueOf(listProvidersOptions.limit()));
@@ -238,7 +238,7 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (createNoteOptions.transactionId() != null) {
-      builder.header("transaction_id", createNoteOptions.transactionId());
+      builder.header("Transaction-Id", createNoteOptions.transactionId());
     }
     final JsonObject contentJson = new JsonObject();
     contentJson.addProperty("short_description", createNoteOptions.shortDescription());
@@ -294,7 +294,7 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (listNotesOptions.transactionId() != null) {
-      builder.header("transaction_id", listNotesOptions.transactionId());
+      builder.header("Transaction-Id", listNotesOptions.transactionId());
     }
     if (listNotesOptions.pageSize() != null) {
       builder.query("page_size", String.valueOf(listNotesOptions.pageSize()));
@@ -329,7 +329,7 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (getNoteOptions.transactionId() != null) {
-      builder.header("transaction_id", getNoteOptions.transactionId());
+      builder.header("Transaction-Id", getNoteOptions.transactionId());
     }
     ResponseConverter<ApiNote> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ApiNote>() { }.getType());
@@ -358,7 +358,7 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (updateNoteOptions.transactionId() != null) {
-      builder.header("transaction_id", updateNoteOptions.transactionId());
+      builder.header("Transaction-Id", updateNoteOptions.transactionId());
     }
     final JsonObject contentJson = new JsonObject();
     contentJson.addProperty("short_description", updateNoteOptions.shortDescription());
@@ -415,7 +415,7 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (deleteNoteOptions.transactionId() != null) {
-      builder.header("transaction_id", deleteNoteOptions.transactionId());
+      builder.header("Transaction-Id", deleteNoteOptions.transactionId());
     }
     ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
     return createServiceCall(builder.build(), responseConverter);
@@ -443,7 +443,7 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (getOccurrenceNoteOptions.transactionId() != null) {
-      builder.header("transaction_id", getOccurrenceNoteOptions.transactionId());
+      builder.header("Transaction-Id", getOccurrenceNoteOptions.transactionId());
     }
     ResponseConverter<ApiNote> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ApiNote>() { }.getType());
@@ -474,7 +474,7 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (createOccurrenceOptions.transactionId() != null) {
-      builder.header("transaction_id", createOccurrenceOptions.transactionId());
+      builder.header("Transaction-Id", createOccurrenceOptions.transactionId());
     }
     if (createOccurrenceOptions.replaceIfExists() != null) {
       builder.header("Replace-If-Exists", createOccurrenceOptions.replaceIfExists());
@@ -528,7 +528,7 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (listOccurrencesOptions.transactionId() != null) {
-      builder.header("transaction_id", listOccurrencesOptions.transactionId());
+      builder.header("Transaction-Id", listOccurrencesOptions.transactionId());
     }
     if (listOccurrencesOptions.pageSize() != null) {
       builder.query("page_size", String.valueOf(listOccurrencesOptions.pageSize()));
@@ -563,7 +563,7 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (listNoteOccurrencesOptions.transactionId() != null) {
-      builder.header("transaction_id", listNoteOccurrencesOptions.transactionId());
+      builder.header("Transaction-Id", listNoteOccurrencesOptions.transactionId());
     }
     if (listNoteOccurrencesOptions.pageSize() != null) {
       builder.query("page_size", String.valueOf(listNoteOccurrencesOptions.pageSize()));
@@ -598,7 +598,7 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (getOccurrenceOptions.transactionId() != null) {
-      builder.header("transaction_id", getOccurrenceOptions.transactionId());
+      builder.header("Transaction-Id", getOccurrenceOptions.transactionId());
     }
     ResponseConverter<ApiListOccurrencesResponse> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ApiListOccurrencesResponse>() { }.getType());
@@ -627,7 +627,7 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (updateOccurrenceOptions.transactionId() != null) {
-      builder.header("transaction_id", updateOccurrenceOptions.transactionId());
+      builder.header("Transaction-Id", updateOccurrenceOptions.transactionId());
     }
     final JsonObject contentJson = new JsonObject();
     contentJson.addProperty("note_name", updateOccurrenceOptions.noteName());
@@ -679,7 +679,7 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (deleteOccurrenceOptions.transactionId() != null) {
-      builder.header("transaction_id", deleteOccurrenceOptions.transactionId());
+      builder.header("Transaction-Id", deleteOccurrenceOptions.transactionId());
     }
     ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
     return createServiceCall(builder.build(), responseConverter);
