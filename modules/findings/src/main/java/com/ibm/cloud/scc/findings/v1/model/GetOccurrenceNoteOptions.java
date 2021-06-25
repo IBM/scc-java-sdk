@@ -119,7 +119,7 @@ public class GetOccurrenceNoteOptions extends GenericModel {
   /**
    * Gets the providerId.
    *
-   * First part of occurrence `name`: providers/{provider_id}/occurrences/{occurrence_id}.
+   * Part of the parent. This field contains the provider ID. For example: providers/{provider_id}.
    *
    * @return the providerId
    */
@@ -141,7 +141,7 @@ public class GetOccurrenceNoteOptions extends GenericModel {
   /**
    * Gets the transactionId.
    *
-   * The transaction id for the request in uuid v4 format.
+   * The transaction ID for the request in UUID v4 format.
    *
    * @return the transactionId
    */

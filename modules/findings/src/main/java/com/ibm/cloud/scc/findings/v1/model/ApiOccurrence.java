@@ -24,8 +24,7 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class ApiOccurrence extends GenericModel {
 
   /**
-   * This must be 1&amp;#58;1 with members of our oneofs, it can be used for filtering Note and Occurrence on their
-   * kind.
+   * The type of note. Use this field to filter notes and occurences by kind.
    *  - FINDING&amp;#58; The note and occurrence represent a finding.
    *  - KPI&amp;#58; The note and occurrence represent a KPI value.
    *  - CARD&amp;#58; The note represents a card showing findings and related metric values.
@@ -270,8 +269,7 @@ public class ApiOccurrence extends GenericModel {
   /**
    * Gets the kind.
    *
-   * This must be 1&amp;#58;1 with members of our oneofs, it can be used for filtering Note and Occurrence on their
-   * kind.
+   * The type of note. Use this field to filter notes and occurences by kind.
    *  - FINDING&amp;#58; The note and occurrence represent a finding.
    *  - KPI&amp;#58; The note and occurrence represent a KPI value.
    *  - CARD&amp;#58; The note represents a card showing findings and related metric values.

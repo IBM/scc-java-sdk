@@ -134,7 +134,7 @@ public class ListProvidersOptions extends GenericModel {
   /**
    * Gets the transactionId.
    *
-   * The transaction id for the request in uuid v4 format.
+   * The transaction ID for the request in UUID v4 format.
    *
    * @return the transactionId
    */
@@ -145,7 +145,7 @@ public class ListProvidersOptions extends GenericModel {
   /**
    * Gets the limit.
    *
-   * Limit the number of the returned documents to the specified number.
+   * The number of documents that you want to return.
    *
    * @return the limit
    */
@@ -167,7 +167,8 @@ public class ListProvidersOptions extends GenericModel {
   /**
    * Gets the startProviderId.
    *
-   * The first provider_id to include in the result (sorted in ascending order). Ignored if not provided.
+   * The first provider ID included in the result, sorted in ascending order. If not provided, this parameter is
+   * ignored.
    *
    * @return the startProviderId
    */
@@ -178,7 +179,7 @@ public class ListProvidersOptions extends GenericModel {
   /**
    * Gets the endProviderId.
    *
-   * The last provider_id to include in the result (sorted in ascending order). Ignored if not provided.
+   * The last provider ID included in the result, sorted in ascending order. If not provided, this parameter is ignored.
    *
    * @return the endProviderId
    */

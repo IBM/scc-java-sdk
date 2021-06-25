@@ -130,7 +130,7 @@ public class ListOccurrencesOptions extends GenericModel {
   /**
    * Gets the providerId.
    *
-   * Part of `parent`. This contains the provider_id for example: providers/{provider_id}.
+   * Part of the parent. This field contains the provider ID. For example: providers/{provider_id}.
    *
    * @return the providerId
    */
@@ -141,7 +141,7 @@ public class ListOccurrencesOptions extends GenericModel {
   /**
    * Gets the transactionId.
    *
-   * The transaction id for the request in uuid v4 format.
+   * The transaction ID for the request in UUID v4 format.
    *
    * @return the transactionId
    */
@@ -152,7 +152,7 @@ public class ListOccurrencesOptions extends GenericModel {
   /**
    * Gets the pageSize.
    *
-   * Number of occurrences to return in the list.
+   * Number of notes to return in the list.
    *
    * @return the pageSize
    */

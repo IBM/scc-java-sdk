@@ -15,7 +15,7 @@ package com.ibm.cloud.scc.findings.v1.model;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * Provides a detailed description of a `Provider`.
+ * Provides a detailed description of a provider.
  */
 public class ApiProvider extends GenericModel {
 
@@ -25,7 +25,7 @@ public class ApiProvider extends GenericModel {
   /**
    * Gets the name.
    *
-   * The name of the provider in the form "{account_id}/providers/{provider_id}".
+   * The name of the provider in the form '{account_id}/providers/{provider_id}'.
    *
    * @return the name
    */
@@ -36,7 +36,7 @@ public class ApiProvider extends GenericModel {
   /**
    * Gets the id.
    *
-   * The id of the provider.
+   * The ID of the provider.
    *
    * @return the id
    */

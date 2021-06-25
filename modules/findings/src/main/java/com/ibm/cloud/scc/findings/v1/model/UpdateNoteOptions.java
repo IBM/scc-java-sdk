@@ -24,8 +24,7 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class UpdateNoteOptions extends GenericModel {
 
   /**
-   * This must be 1&amp;#58;1 with members of our oneofs, it can be used for filtering Note and Occurrence on their
-   * kind.
+   * The type of note. Use this field to filter notes and occurences by kind.
    *  - FINDING&amp;#58; The note and occurrence represent a finding.
    *  - KPI&amp;#58; The note and occurrence represent a KPI value.
    *  - CARD&amp;#58; The note represents a card showing findings and related metric values.
@@ -384,7 +383,7 @@ public class UpdateNoteOptions extends GenericModel {
   /**
    * Gets the providerId.
    *
-   * First part of note `name`: providers/{provider_id}/notes/{note_id}.
+   * Part of the parent. This field contains the provider ID. For example: providers/{provider_id}.
    *
    * @return the providerId
    */
@@ -406,7 +405,7 @@ public class UpdateNoteOptions extends GenericModel {
   /**
    * Gets the shortDescription.
    *
-   * A one sentence description of this `Note`.
+   * A one sentence description of your note.
    *
    * @return the shortDescription
    */
@@ -417,7 +416,7 @@ public class UpdateNoteOptions extends GenericModel {
   /**
    * Gets the longDescription.
    *
-   * A detailed description of this `Note`.
+   * A more detailed description of your note.
    *
    * @return the longDescription
    */
@@ -428,8 +427,7 @@ public class UpdateNoteOptions extends GenericModel {
   /**
    * Gets the kind.
    *
-   * This must be 1&amp;#58;1 with members of our oneofs, it can be used for filtering Note and Occurrence on their
-   * kind.
+   * The type of note. Use this field to filter notes and occurences by kind.
    *  - FINDING&amp;#58; The note and occurrence represent a finding.
    *  - KPI&amp;#58; The note and occurrence represent a KPI value.
    *  - CARD&amp;#58; The note represents a card showing findings and related metric values.
@@ -445,7 +443,7 @@ public class UpdateNoteOptions extends GenericModel {
   /**
    * Gets the id.
    *
-   * The id of the note.
+   * The ID of the note.
    *
    * @return the id
    */
@@ -467,8 +465,6 @@ public class UpdateNoteOptions extends GenericModel {
   /**
    * Gets the relatedUrl.
    *
-   * URLs associated with this note.
-   *
    * @return the relatedUrl
    */
   public List<ApiNoteRelatedUrl> relatedUrl() {
@@ -489,7 +485,7 @@ public class UpdateNoteOptions extends GenericModel {
   /**
    * Gets the shared.
    *
-   * True if this `Note` can be shared by multiple accounts.
+   * True if this note can be shared by multiple accounts.
    *
    * @return the shared
    */
@@ -544,7 +540,7 @@ public class UpdateNoteOptions extends GenericModel {
   /**
    * Gets the transactionId.
    *
-   * The transaction id for the request in uuid v4 format.
+   * The transaction ID for the request in UUID v4 format.
    *
    * @return the transactionId
    */

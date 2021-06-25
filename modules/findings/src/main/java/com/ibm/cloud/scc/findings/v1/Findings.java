@@ -12,7 +12,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.33.0-caf29bd0-20210603-225214
+ * IBM OpenAPI SDK Code Generator Version: 3.34.1-ad041667-20210617-195430
  */
 
 package com.ibm.cloud.scc.findings.v1;
@@ -51,7 +51,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * API specification for the Findings service.
+ * The Findings API is used to find and display occurrences of security issues in your IBM Cloud account by using the
+ * artifact metadata specification. Findings are summarized in cards in the Security and Compliance Center that allow
+ * you to see the security status of your account at a glance and start an investigation into any potential issues.
  *
  * @version v1
  */
@@ -125,9 +127,10 @@ public class Findings extends BaseService {
   }
 
   /**
-   * query findings.
+   * Query findings.
    *
-   * query findings.
+   * Query findings by using the GraphQL query language. For more information about using GraphQL, see the [GraphQL
+   * documentation](https://graphql.org/learn/).
    *
    * @param postGraphOptions the {@link PostGraphOptions} containing the options for the call
    * @return a {@link ServiceCall} with a void result
@@ -151,17 +154,73 @@ public class Findings extends BaseService {
       builder.header("Content-Type", postGraphOptions.contentType());
     }
     if (postGraphOptions.transactionId() != null) {
-      builder.header("Transaction-Id", postGraphOptions.transactionId());
+      builder.header("transaction_id", postGraphOptions.transactionId());
     }
     builder.bodyContent(postGraphOptions.contentType(), null,
       null, postGraphOptions.body());
     ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
-
     return createServiceCall(builder.build(), responseConverter);
   }
 
   /**
-   * Creates a new `Note`.
+   * List providers.
+   *
+   * List all of the providers for a specified account.
+   *
+   * @param listProvidersOptions the {@link ListProvidersOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link ApiListProvidersResponse}
+   */
+  public ServiceCall<ApiListProvidersResponse> listProviders(ListProvidersOptions listProvidersOptions) {
+    if (listProvidersOptions == null) {
+      listProvidersOptions = new ListProvidersOptions.Builder().build();
+    }
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("account_id", this.accountId);
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v1/{account_id}/providers", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("findings", "v1", "listProviders");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    if (listProvidersOptions.transactionId() != null) {
+      builder.header("transaction_id", listProvidersOptions.transactionId());
+    }
+    if (listProvidersOptions.limit() != null) {
+      builder.query("limit", String.valueOf(listProvidersOptions.limit()));
+    }
+    if (listProvidersOptions.skip() != null) {
+      builder.query("skip", String.valueOf(listProvidersOptions.skip()));
+    }
+    if (listProvidersOptions.startProviderId() != null) {
+      builder.query("start_provider_id", String.valueOf(listProvidersOptions.startProviderId()));
+    }
+    if (listProvidersOptions.endProviderId() != null) {
+      builder.query("end_provider_id", String.valueOf(listProvidersOptions.endProviderId()));
+    }
+    ResponseConverter<ApiListProvidersResponse> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ApiListProvidersResponse>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * List providers.
+   *
+   * List all of the providers for a specified account.
+   *
+   * @return a {@link ServiceCall} with a result of type {@link ApiListProvidersResponse}
+   */
+  public ServiceCall<ApiListProvidersResponse> listProviders() {
+    return listProviders(null);
+  }
+
+  /**
+   * Create a note.
+   *
+   * Register a new finding type with the Security and Compliance Center.
+   *
+   * A successful request creates a note with a high-level description of a particular type of finding. To learn more
+   * about creating notes to register findings, see [Custom
+   * findings](/docs/security-advisor?topic=security-advisor-setup_custom).
    *
    * @param createNoteOptions the {@link CreateNoteOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link ApiNote}
@@ -179,7 +238,7 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (createNoteOptions.transactionId() != null) {
-      builder.header("Transaction-Id", createNoteOptions.transactionId());
+      builder.header("transaction_id", createNoteOptions.transactionId());
     }
     final JsonObject contentJson = new JsonObject();
     contentJson.addProperty("short_description", createNoteOptions.shortDescription());
@@ -215,7 +274,9 @@ public class Findings extends BaseService {
   }
 
   /**
-   * Lists all `Notes` for a given provider.
+   * List notes.
+   *
+   * List all of the available notes for a specific provider.
    *
    * @param listNotesOptions the {@link ListNotesOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link ApiListNotesResponse}
@@ -233,7 +294,7 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (listNotesOptions.transactionId() != null) {
-      builder.header("Transaction-Id", listNotesOptions.transactionId());
+      builder.header("transaction_id", listNotesOptions.transactionId());
     }
     if (listNotesOptions.pageSize() != null) {
       builder.query("page_size", String.valueOf(listNotesOptions.pageSize()));
@@ -247,7 +308,9 @@ public class Findings extends BaseService {
   }
 
   /**
-   * Returns the requested `Note`.
+   * Get a note by provider.
+   *
+   * Get the details of the note that is associated with a specified note ID and provider ID.
    *
    * @param getNoteOptions the {@link GetNoteOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link ApiNote}
@@ -266,7 +329,7 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (getNoteOptions.transactionId() != null) {
-      builder.header("Transaction-Id", getNoteOptions.transactionId());
+      builder.header("transaction_id", getNoteOptions.transactionId());
     }
     ResponseConverter<ApiNote> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ApiNote>() { }.getType());
@@ -274,7 +337,9 @@ public class Findings extends BaseService {
   }
 
   /**
-   * Updates an existing `Note`.
+   * Update a note.
+   *
+   * Update a note that already exists in your account.
    *
    * @param updateNoteOptions the {@link UpdateNoteOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link ApiNote}
@@ -293,7 +358,7 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (updateNoteOptions.transactionId() != null) {
-      builder.header("Transaction-Id", updateNoteOptions.transactionId());
+      builder.header("transaction_id", updateNoteOptions.transactionId());
     }
     final JsonObject contentJson = new JsonObject();
     contentJson.addProperty("short_description", updateNoteOptions.shortDescription());
@@ -329,7 +394,9 @@ public class Findings extends BaseService {
   }
 
   /**
-   * Deletes the given `Note` from the system.
+   * Delete a note.
+   *
+   * Delete a note with the ID and provider ID that you specify.
    *
    * @param deleteNoteOptions the {@link DeleteNoteOptions} containing the options for the call
    * @return a {@link ServiceCall} with a void result
@@ -348,14 +415,16 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (deleteNoteOptions.transactionId() != null) {
-      builder.header("Transaction-Id", deleteNoteOptions.transactionId());
+      builder.header("transaction_id", deleteNoteOptions.transactionId());
     }
     ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
     return createServiceCall(builder.build(), responseConverter);
   }
 
   /**
-   * Gets the `Note` attached to the given `Occurrence`.
+   * Get a note by occurrence.
+   *
+   * Get a note that is associated with the occurrence ID that you specify.
    *
    * @param getOccurrenceNoteOptions the {@link GetOccurrenceNoteOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link ApiNote}
@@ -374,7 +443,7 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (getOccurrenceNoteOptions.transactionId() != null) {
-      builder.header("Transaction-Id", getOccurrenceNoteOptions.transactionId());
+      builder.header("transaction_id", getOccurrenceNoteOptions.transactionId());
     }
     ResponseConverter<ApiNote> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ApiNote>() { }.getType());
@@ -382,7 +451,12 @@ public class Findings extends BaseService {
   }
 
   /**
-   * Creates a new `Occurrence`. Use this method to create `Occurrences` for a resource.
+   * Create an occurrence.
+   *
+   * Create an occurrence to denote the existence of a particular type of finding.
+   *
+   * An occurrence describes provider-specific details of a note and contains vulnerability details, remediation steps,
+   * and other general information.
    *
    * @param createOccurrenceOptions the {@link CreateOccurrenceOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link ApiOccurrence}
@@ -399,11 +473,11 @@ public class Findings extends BaseService {
       builder.header(header.getKey(), header.getValue());
     }
     builder.header("Accept", "application/json");
+    if (createOccurrenceOptions.transactionId() != null) {
+      builder.header("transaction_id", createOccurrenceOptions.transactionId());
+    }
     if (createOccurrenceOptions.replaceIfExists() != null) {
       builder.header("Replace-If-Exists", createOccurrenceOptions.replaceIfExists());
-    }
-    if (createOccurrenceOptions.transactionId() != null) {
-      builder.header("Transaction-Id", createOccurrenceOptions.transactionId());
     }
     final JsonObject contentJson = new JsonObject();
     contentJson.addProperty("note_name", createOccurrenceOptions.noteName());
@@ -434,7 +508,9 @@ public class Findings extends BaseService {
   }
 
   /**
-   * Lists active `Occurrences` for a given provider matching the filters.
+   * List occurrences.
+   *
+   * List all of the occurrences that are associated with the provider ID that you specify.
    *
    * @param listOccurrencesOptions the {@link ListOccurrencesOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link ApiListOccurrencesResponse}
@@ -452,7 +528,7 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (listOccurrencesOptions.transactionId() != null) {
-      builder.header("Transaction-Id", listOccurrencesOptions.transactionId());
+      builder.header("transaction_id", listOccurrencesOptions.transactionId());
     }
     if (listOccurrencesOptions.pageSize() != null) {
       builder.query("page_size", String.valueOf(listOccurrencesOptions.pageSize()));
@@ -466,7 +542,9 @@ public class Findings extends BaseService {
   }
 
   /**
-   * Lists `Occurrences` referencing the specified `Note`. Use this method to get all occurrences referencing your `Note` across all your customer providers.
+   * List occurrences by note.
+   *
+   * Get a list of occurrences that are associated with a specific note.
    *
    * @param listNoteOccurrencesOptions the {@link ListNoteOccurrencesOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link ApiListNoteOccurrencesResponse}
@@ -485,7 +563,7 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (listNoteOccurrencesOptions.transactionId() != null) {
-      builder.header("Transaction-Id", listNoteOccurrencesOptions.transactionId());
+      builder.header("transaction_id", listNoteOccurrencesOptions.transactionId());
     }
     if (listNoteOccurrencesOptions.pageSize() != null) {
       builder.query("page_size", String.valueOf(listNoteOccurrencesOptions.pageSize()));
@@ -499,7 +577,9 @@ public class Findings extends BaseService {
   }
 
   /**
-   * Returns the requested `Occurrence`.
+   * Get a specific occurrence.
+   *
+   * Get the details of a specific occurrence by specifying the ID and provider ID.
    *
    * @param getOccurrenceOptions the {@link GetOccurrenceOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link ApiListOccurrencesResponse}
@@ -518,7 +598,7 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (getOccurrenceOptions.transactionId() != null) {
-      builder.header("Transaction-Id", getOccurrenceOptions.transactionId());
+      builder.header("transaction_id", getOccurrenceOptions.transactionId());
     }
     ResponseConverter<ApiListOccurrencesResponse> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ApiListOccurrencesResponse>() { }.getType());
@@ -526,7 +606,9 @@ public class Findings extends BaseService {
   }
 
   /**
-   * Updates an existing `Occurrence`.
+   * Update an occurrence.
+   *
+   * Update an occurrence that already exists in your account.
    *
    * @param updateOccurrenceOptions the {@link UpdateOccurrenceOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link ApiOccurrence}
@@ -545,7 +627,7 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (updateOccurrenceOptions.transactionId() != null) {
-      builder.header("Transaction-Id", updateOccurrenceOptions.transactionId());
+      builder.header("transaction_id", updateOccurrenceOptions.transactionId());
     }
     final JsonObject contentJson = new JsonObject();
     contentJson.addProperty("note_name", updateOccurrenceOptions.noteName());
@@ -576,7 +658,9 @@ public class Findings extends BaseService {
   }
 
   /**
-   * Deletes the given `Occurrence` from the system.
+   * Delete an occurrence.
+   *
+   * Delete an occurrence by specifying the occurrence ID and provider ID.
    *
    * @param deleteOccurrenceOptions the {@link DeleteOccurrenceOptions} containing the options for the call
    * @return a {@link ServiceCall} with a void result
@@ -595,57 +679,10 @@ public class Findings extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (deleteOccurrenceOptions.transactionId() != null) {
-      builder.header("Transaction-Id", deleteOccurrenceOptions.transactionId());
+      builder.header("transaction_id", deleteOccurrenceOptions.transactionId());
     }
     ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
     return createServiceCall(builder.build(), responseConverter);
-  }
-
-  /**
-   * Lists all `Providers` for a given account id.
-   *
-   * @param listProvidersOptions the {@link ListProvidersOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link ApiListProvidersResponse}
-   */
-  public ServiceCall<ApiListProvidersResponse> listProviders(ListProvidersOptions listProvidersOptions) {
-    if (listProvidersOptions == null) {
-      listProvidersOptions = new ListProvidersOptions.Builder().build();
-    }
-    Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("account_id", this.accountId);
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v1/{account_id}/providers", pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("findings", "v1", "listProviders");
-    for (Entry<String, String> header : sdkHeaders.entrySet()) {
-      builder.header(header.getKey(), header.getValue());
-    }
-    builder.header("Accept", "application/json");
-    if (listProvidersOptions.transactionId() != null) {
-      builder.header("Transaction-Id", listProvidersOptions.transactionId());
-    }
-    if (listProvidersOptions.limit() != null) {
-      builder.query("limit", String.valueOf(listProvidersOptions.limit()));
-    }
-    if (listProvidersOptions.skip() != null) {
-      builder.query("skip", String.valueOf(listProvidersOptions.skip()));
-    }
-    if (listProvidersOptions.startProviderId() != null) {
-      builder.query("start_provider_id", String.valueOf(listProvidersOptions.startProviderId()));
-    }
-    if (listProvidersOptions.endProviderId() != null) {
-      builder.query("end_provider_id", String.valueOf(listProvidersOptions.endProviderId()));
-    }
-    ResponseConverter<ApiListProvidersResponse> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ApiListProvidersResponse>() { }.getType());
-    return createServiceCall(builder.build(), responseConverter);
-  }
-
-  /**
-   * Lists all `Providers` for a given account id.
-   *
-   * @return a {@link ServiceCall} with a result of type {@link ApiListProvidersResponse}
-   */
-  public ServiceCall<ApiListProvidersResponse> listProviders() {
-    return listProviders(null);
   }
 
 }

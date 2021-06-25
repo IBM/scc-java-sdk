@@ -185,6 +185,52 @@ public class FindingsTest extends PowerMockTestCase {
   }
 
   @Test
+  public void testListProvidersWOptions() throws Throwable {
+    // Schedule some responses.
+    String mockResponseBody = "{\"providers\": [{\"name\": \"name\", \"id\": \"id\"}], \"limit\": 5, \"skip\": 4, \"total_count\": 10}";
+    String listProvidersPath = "/v1/testString/providers";
+
+    server.enqueue(new MockResponse()
+    .setHeader("Content-type", "application/json")
+    .setResponseCode(200)
+    .setBody(mockResponseBody));
+
+    constructClientService();
+
+    // Construct an instance of the ListProvidersOptions model
+    ListProvidersOptions listProvidersOptionsModel = new ListProvidersOptions.Builder()
+    .transactionId("testString")
+    .limit(Long.valueOf("2"))
+    .skip(Long.valueOf("26"))
+    .startProviderId("testString")
+    .endProviderId("testString")
+    .build();
+
+    // Invoke operation with valid options model (positive test)
+    Response<ApiListProvidersResponse> response = findingsService.listProviders(listProvidersOptionsModel).execute();
+    assertNotNull(response);
+    ApiListProvidersResponse responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+
+    // Check query
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    // Get query params
+    assertEquals(Long.valueOf(query.get("limit")), Long.valueOf("2"));
+    assertEquals(Long.valueOf(query.get("skip")), Long.valueOf("26"));
+    assertEquals(query.get("start_provider_id"), "testString");
+    assertEquals(query.get("end_provider_id"), "testString");
+    // Check request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, listProvidersPath);
+  }
+
+  @Test
   public void testCreateNoteWOptions() throws Throwable {
     // Schedule some responses.
     String mockResponseBody = "{\"short_description\": \"shortDescription\", \"long_description\": \"longDescription\", \"kind\": \"FINDING\", \"related_url\": [{\"label\": \"label\", \"url\": \"url\"}], \"expiration_time\": \"2019-01-01T12:00:00.000Z\", \"create_time\": \"2019-01-01T12:00:00.000Z\", \"update_time\": \"2019-01-01T12:00:00.000Z\", \"id\": \"id\", \"shared\": true, \"reported_by\": {\"id\": \"id\", \"title\": \"title\", \"url\": \"url\"}, \"finding\": {\"severity\": \"LOW\", \"next_steps\": [{\"title\": \"title\", \"url\": \"url\"}]}, \"kpi\": {\"aggregation_type\": \"SUM\"}, \"card\": {\"section\": \"section\", \"title\": \"title\", \"subtitle\": \"subtitle\", \"order\": 1, \"finding_note_names\": [\"findingNoteNames\"], \"requires_configuration\": false, \"badge_text\": \"badgeText\", \"badge_image\": \"badgeImage\", \"elements\": [{\"text\": \"text\", \"default_interval\": \"defaultInterval\", \"kind\": \"TIME_SERIES\", \"default_time_range\": \"1d\", \"value_types\": [{\"kind\": \"FINDING_COUNT\", \"finding_note_names\": [\"findingNoteNames\"], \"text\": \"text\"}]}]}, \"section\": {\"title\": \"title\", \"image\": \"image\"}}";
@@ -734,8 +780,8 @@ public class FindingsTest extends PowerMockTestCase {
     .finding(findingModel)
     .kpi(kpiModel)
     .referenceData(new java.util.HashMap<String, Object>() { { put("foo", "testString"); } })
-    .replaceIfExists(true)
     .transactionId("testString")
+    .replaceIfExists(true)
     .build();
 
     // Invoke operation with valid options model (positive test)
@@ -1101,52 +1147,6 @@ public class FindingsTest extends PowerMockTestCase {
 
     // Invoke operation with null options model (negative test)
     findingsService.deleteOccurrence(null).execute();
-  }
-
-  @Test
-  public void testListProvidersWOptions() throws Throwable {
-    // Schedule some responses.
-    String mockResponseBody = "{\"providers\": [{\"name\": \"name\", \"id\": \"id\"}], \"limit\": 5, \"skip\": 4, \"total_count\": 10}";
-    String listProvidersPath = "/v1/testString/providers";
-
-    server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
-
-    // Construct an instance of the ListProvidersOptions model
-    ListProvidersOptions listProvidersOptionsModel = new ListProvidersOptions.Builder()
-    .transactionId("testString")
-    .limit(Long.valueOf("2"))
-    .skip(Long.valueOf("26"))
-    .startProviderId("testString")
-    .endProviderId("testString")
-    .build();
-
-    // Invoke operation with valid options model (positive test)
-    Response<ApiListProvidersResponse> response = findingsService.listProviders(listProvidersOptionsModel).execute();
-    assertNotNull(response);
-    ApiListProvidersResponse responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "GET");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNotNull(query);
-    // Get query params
-    assertEquals(Long.valueOf(query.get("limit")), Long.valueOf("2"));
-    assertEquals(Long.valueOf(query.get("skip")), Long.valueOf("26"));
-    assertEquals(query.get("start_provider_id"), "testString");
-    assertEquals(query.get("end_provider_id"), "testString");
-    // Check request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, listProvidersPath);
   }
 
   /** Initialize the server */

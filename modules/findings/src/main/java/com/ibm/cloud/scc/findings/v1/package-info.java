@@ -11,6 +11,6 @@
  * specific language governing permissions and limitations under the License.
  */
 /**
- * Findings API v1.
+ * Security Insights Findings API v1.
  */
 package com.ibm.cloud.scc.findings.v1;
