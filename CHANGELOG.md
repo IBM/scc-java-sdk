@@ -1,3 +1,13 @@
+# [1.0.0](https://github.com/IBM/scc-java-sdk/compare/0.0.33...1.0.0) (2021-06-30)
+
+
+* Merge pull request #41 from IBM/major ([ecd24cd](https://github.com/IBM/scc-java-sdk/commit/ecd24cd02e44291f1803432d10fd06f65a01afa2)), closes [#41](https://github.com/IBM/scc-java-sdk/issues/41)
+
+
+### BREAKING CHANGES
+
+* Major release for GA
+
 ## [0.0.33](https://github.com/IBM/scc-java-sdk/compare/0.0.32...0.0.33) (2021-06-25)
 
 
