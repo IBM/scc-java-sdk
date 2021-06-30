@@ -6,7 +6,7 @@
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![Maven Central](https://img.shields.io/maven-central/v/com.ibm.cloud/scc)](https://maven-badges.herokuapp.com/maven-central/com.ibm.cloud/scc)
 
-# IBM Cloud Security & Compliance Center Java SDK Version 0.0.33
+# IBM Cloud Security & Compliance Center Java SDK Version 1.0.0
 Java client library to interact with various [IBM Cloud Security & Compliance Center](https://cloud.ibm.com/docs?tab=api-docs&category=platform_services%2Csecurity).
 
 Disclaimer: this SDK is being released initially as a **pre-release** version.
@@ -46,9 +46,9 @@ The IBM Cloud Security & Compliance Center Java SDK allows developers to program
 
 Service Name | Imported Class Name
 --- | ---
-[FindingsApi](https://cloud.ibm.com/apidocs/security-advisor/findings) | FindingsApi:0.0.33
-[NotificationsApi](https://cloud.ibm.com/apidocs/security-advisor/notifications) | NotificationsApi:0.0.33
-[ConfigurationGovernanceApi](https://cloud.ibm.com/apidocs/security-compliance/config) | ConfigurationGovernanceApi:0.0.33
+[FindingsApi](https://cloud.ibm.com/apidocs/security-advisor/findings) | FindingsApi:1.0.0
+[NotificationsApi](https://cloud.ibm.com/apidocs/security-advisor/notifications) | NotificationsApi:1.0.0
+[ConfigurationGovernanceApi](https://cloud.ibm.com/apidocs/security-compliance/config) | ConfigurationGovernanceApi:1.0.0
 
 ## Prerequisites
 
@@ -59,7 +59,7 @@ Service Name | Imported Class Name
 * Java 8 or above.
 
 ## Installation
-The current version of this SDK is: 0.0.33
+The current version of this SDK is: 1.0.0
 
 Each service's artifact coordinates are listed in the table above.
 
@@ -78,13 +78,13 @@ Here are examples for maven and gradle:
 <dependency>
     <groupId>com.ibm.cloud</groupId>
     <artifactId>findings</artifactId>
-    <version>0.0.33</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
 ### Gradle
 ```gradle
-compile 'com.ibm.cloud:findings:0.0.33'
+compile 'com.ibm.cloud:findings:1.0.0'
 ```
 
 ## Using the SDK
