@@ -171,6 +171,16 @@ public class FindingsTest extends PowerMockTestCase {
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, postGraphPath);
   }
+  
+  public void testPostGraphWOptionsWRetries() throws Throwable {
+    // Enable retries and run testPostGraphWOptions.
+    // findingsService.enableRetries(4, 30);
+    testPostGraphWOptions();
+
+    // Disable retries and run testPostGraphWOptions.
+    // findingsService.disableRetries();
+    testPostGraphWOptions();
+  }  
 
   // Test the postGraph operation with null options model parameter
   @Test(expectedExceptions = IllegalArgumentException.class)
@@ -229,11 +239,21 @@ public class FindingsTest extends PowerMockTestCase {
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, listProvidersPath);
   }
+  
+  public void testListProvidersWOptionsWRetries() throws Throwable {
+    // Enable retries and run testListProvidersWOptions.
+    // findingsService.enableRetries(4, 30);
+    testListProvidersWOptions();
+
+    // Disable retries and run testListProvidersWOptions.
+    // findingsService.disableRetries();
+    testListProvidersWOptions();
+  }  
 
   @Test
   public void testCreateNoteWOptions() throws Throwable {
     // Schedule some responses.
-    String mockResponseBody = "{\"short_description\": \"shortDescription\", \"long_description\": \"longDescription\", \"kind\": \"FINDING\", \"related_url\": [{\"label\": \"label\", \"url\": \"url\"}], \"expiration_time\": \"2019-01-01T12:00:00.000Z\", \"create_time\": \"2019-01-01T12:00:00.000Z\", \"update_time\": \"2019-01-01T12:00:00.000Z\", \"id\": \"id\", \"shared\": true, \"reported_by\": {\"id\": \"id\", \"title\": \"title\", \"url\": \"url\"}, \"finding\": {\"severity\": \"LOW\", \"next_steps\": [{\"title\": \"title\", \"url\": \"url\"}]}, \"kpi\": {\"aggregation_type\": \"SUM\"}, \"card\": {\"section\": \"section\", \"title\": \"title\", \"subtitle\": \"subtitle\", \"order\": 1, \"finding_note_names\": [\"findingNoteNames\"], \"requires_configuration\": false, \"badge_text\": \"badgeText\", \"badge_image\": \"badgeImage\", \"elements\": [{\"text\": \"text\", \"default_interval\": \"defaultInterval\", \"kind\": \"TIME_SERIES\", \"default_time_range\": \"1d\", \"value_types\": [{\"kind\": \"FINDING_COUNT\", \"finding_note_names\": [\"findingNoteNames\"], \"text\": \"text\"}]}]}, \"section\": {\"title\": \"title\", \"image\": \"image\"}}";
+    String mockResponseBody = "{\"short_description\": \"shortDescription\", \"long_description\": \"longDescription\", \"kind\": \"FINDING\", \"related_url\": [{\"label\": \"label\", \"url\": \"url\"}], \"create_time\": \"2019-01-01T12:00:00.000Z\", \"update_time\": \"2019-01-01T12:00:00.000Z\", \"id\": \"id\", \"shared\": true, \"reported_by\": {\"id\": \"id\", \"title\": \"title\", \"url\": \"url\"}, \"finding\": {\"severity\": \"LOW\", \"next_steps\": [{\"title\": \"title\", \"url\": \"url\"}]}, \"kpi\": {\"Severity\": \"MEDIUM\", \"aggregation_type\": \"SUM\"}, \"card\": {\"section\": \"section\", \"title\": \"title\", \"subtitle\": \"subtitle\", \"order\": 1, \"finding_note_names\": [\"findingNoteNames\"], \"requires_configuration\": false, \"badge_text\": \"badgeText\", \"badge_image\": \"badgeImage\", \"elements\": [{\"text\": \"text\", \"default_interval\": \"d\", \"kind\": \"TIME_SERIES\", \"default_time_range\": \"4d\", \"value_types\": [{\"kind\": \"FINDING_COUNT\", \"finding_note_names\": [\"findingNoteNames\"], \"text\": \"label\"}]}]}, \"section\": {\"title\": \"title\", \"image\": \"image\"}}";
     String createNotePath = "/v1/testString/providers/testString/notes";
 
     server.enqueue(new MockResponse()
@@ -270,6 +290,7 @@ public class FindingsTest extends PowerMockTestCase {
 
     // Construct an instance of the KpiType model
     KpiType kpiTypeModel = new KpiType.Builder()
+    .severity("MEDIUM")
     .aggregationType("SUM")
     .build();
 
@@ -277,15 +298,15 @@ public class FindingsTest extends PowerMockTestCase {
     ValueTypeFindingCountValueType valueTypeModel = new ValueTypeFindingCountValueType.Builder()
     .kind("FINDING_COUNT")
     .findingNoteNames(new java.util.ArrayList<String>(java.util.Arrays.asList("testString")))
-    .text("testString")
+    .text("label")
     .build();
 
     // Construct an instance of the CardElementTimeSeriesCardElement model
     CardElementTimeSeriesCardElement cardElementModel = new CardElementTimeSeriesCardElement.Builder()
     .text("testString")
-    .defaultInterval("testString")
+    .defaultInterval("d")
     .kind("TIME_SERIES")
-    .defaultTimeRange("1d")
+    .defaultTimeRange("4d")
     .valueTypes(new java.util.ArrayList<ValueType>(java.util.Arrays.asList(valueTypeModel)))
     .build();
 
@@ -296,7 +317,7 @@ public class FindingsTest extends PowerMockTestCase {
     .subtitle("testString")
     .order(Long.valueOf("1"))
     .findingNoteNames(new java.util.ArrayList<String>(java.util.Arrays.asList("testString")))
-    .requiresConfiguration(true)
+    .requiresConfiguration(false)
     .badgeText("testString")
     .badgeImage("testString")
     .elements(new java.util.ArrayList<CardElement>(java.util.Arrays.asList(cardElementModel)))
@@ -317,7 +338,8 @@ public class FindingsTest extends PowerMockTestCase {
     .id("testString")
     .reportedBy(reporterModel)
     .relatedUrl(new java.util.ArrayList<ApiNoteRelatedUrl>(java.util.Arrays.asList(apiNoteRelatedUrlModel)))
-    .expirationTime(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
+    .createTime(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
+    .updateTime(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
     .shared(true)
     .finding(findingTypeModel)
     .kpi(kpiTypeModel)
@@ -345,6 +367,16 @@ public class FindingsTest extends PowerMockTestCase {
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, createNotePath);
   }
+  
+  public void testCreateNoteWOptionsWRetries() throws Throwable {
+    // Enable retries and run testCreateNoteWOptions.
+    // findingsService.enableRetries(4, 30);
+    testCreateNoteWOptions();
+
+    // Disable retries and run testCreateNoteWOptions.
+    // findingsService.disableRetries();
+    testCreateNoteWOptions();
+  }  
 
   // Test the createNote operation with null options model parameter
   @Test(expectedExceptions = IllegalArgumentException.class)
@@ -361,7 +393,7 @@ public class FindingsTest extends PowerMockTestCase {
   @Test
   public void testListNotesWOptions() throws Throwable {
     // Schedule some responses.
-    String mockResponseBody = "{\"notes\": [{\"short_description\": \"shortDescription\", \"long_description\": \"longDescription\", \"kind\": \"FINDING\", \"related_url\": [{\"label\": \"label\", \"url\": \"url\"}], \"expiration_time\": \"2019-01-01T12:00:00.000Z\", \"create_time\": \"2019-01-01T12:00:00.000Z\", \"update_time\": \"2019-01-01T12:00:00.000Z\", \"id\": \"id\", \"shared\": true, \"reported_by\": {\"id\": \"id\", \"title\": \"title\", \"url\": \"url\"}, \"finding\": {\"severity\": \"LOW\", \"next_steps\": [{\"title\": \"title\", \"url\": \"url\"}]}, \"kpi\": {\"aggregation_type\": \"SUM\"}, \"card\": {\"section\": \"section\", \"title\": \"title\", \"subtitle\": \"subtitle\", \"order\": 1, \"finding_note_names\": [\"findingNoteNames\"], \"requires_configuration\": false, \"badge_text\": \"badgeText\", \"badge_image\": \"badgeImage\", \"elements\": [{\"text\": \"text\", \"default_interval\": \"defaultInterval\", \"kind\": \"TIME_SERIES\", \"default_time_range\": \"1d\", \"value_types\": [{\"kind\": \"FINDING_COUNT\", \"finding_note_names\": [\"findingNoteNames\"], \"text\": \"text\"}]}]}, \"section\": {\"title\": \"title\", \"image\": \"image\"}}], \"next_page_token\": \"nextPageToken\"}";
+    String mockResponseBody = "{\"notes\": [{\"short_description\": \"shortDescription\", \"long_description\": \"longDescription\", \"kind\": \"FINDING\", \"related_url\": [{\"label\": \"label\", \"url\": \"url\"}], \"create_time\": \"2019-01-01T12:00:00.000Z\", \"update_time\": \"2019-01-01T12:00:00.000Z\", \"id\": \"id\", \"shared\": true, \"reported_by\": {\"id\": \"id\", \"title\": \"title\", \"url\": \"url\"}, \"finding\": {\"severity\": \"LOW\", \"next_steps\": [{\"title\": \"title\", \"url\": \"url\"}]}, \"kpi\": {\"Severity\": \"MEDIUM\", \"aggregation_type\": \"SUM\"}, \"card\": {\"section\": \"section\", \"title\": \"title\", \"subtitle\": \"subtitle\", \"order\": 1, \"finding_note_names\": [\"findingNoteNames\"], \"requires_configuration\": false, \"badge_text\": \"badgeText\", \"badge_image\": \"badgeImage\", \"elements\": [{\"text\": \"text\", \"default_interval\": \"d\", \"kind\": \"TIME_SERIES\", \"default_time_range\": \"4d\", \"value_types\": [{\"kind\": \"FINDING_COUNT\", \"finding_note_names\": [\"findingNoteNames\"], \"text\": \"label\"}]}]}, \"section\": {\"title\": \"title\", \"image\": \"image\"}}], \"next_page_token\": \"nextPageToken\"}";
     String listNotesPath = "/v1/testString/providers/testString/notes";
 
     server.enqueue(new MockResponse()
@@ -400,6 +432,16 @@ public class FindingsTest extends PowerMockTestCase {
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, listNotesPath);
   }
+  
+  public void testListNotesWOptionsWRetries() throws Throwable {
+    // Enable retries and run testListNotesWOptions.
+    // findingsService.enableRetries(4, 30);
+    testListNotesWOptions();
+
+    // Disable retries and run testListNotesWOptions.
+    // findingsService.disableRetries();
+    testListNotesWOptions();
+  }  
 
   // Test the listNotes operation with null options model parameter
   @Test(expectedExceptions = IllegalArgumentException.class)
@@ -416,7 +458,7 @@ public class FindingsTest extends PowerMockTestCase {
   @Test
   public void testGetNoteWOptions() throws Throwable {
     // Schedule some responses.
-    String mockResponseBody = "{\"short_description\": \"shortDescription\", \"long_description\": \"longDescription\", \"kind\": \"FINDING\", \"related_url\": [{\"label\": \"label\", \"url\": \"url\"}], \"expiration_time\": \"2019-01-01T12:00:00.000Z\", \"create_time\": \"2019-01-01T12:00:00.000Z\", \"update_time\": \"2019-01-01T12:00:00.000Z\", \"id\": \"id\", \"shared\": true, \"reported_by\": {\"id\": \"id\", \"title\": \"title\", \"url\": \"url\"}, \"finding\": {\"severity\": \"LOW\", \"next_steps\": [{\"title\": \"title\", \"url\": \"url\"}]}, \"kpi\": {\"aggregation_type\": \"SUM\"}, \"card\": {\"section\": \"section\", \"title\": \"title\", \"subtitle\": \"subtitle\", \"order\": 1, \"finding_note_names\": [\"findingNoteNames\"], \"requires_configuration\": false, \"badge_text\": \"badgeText\", \"badge_image\": \"badgeImage\", \"elements\": [{\"text\": \"text\", \"default_interval\": \"defaultInterval\", \"kind\": \"TIME_SERIES\", \"default_time_range\": \"1d\", \"value_types\": [{\"kind\": \"FINDING_COUNT\", \"finding_note_names\": [\"findingNoteNames\"], \"text\": \"text\"}]}]}, \"section\": {\"title\": \"title\", \"image\": \"image\"}}";
+    String mockResponseBody = "{\"short_description\": \"shortDescription\", \"long_description\": \"longDescription\", \"kind\": \"FINDING\", \"related_url\": [{\"label\": \"label\", \"url\": \"url\"}], \"create_time\": \"2019-01-01T12:00:00.000Z\", \"update_time\": \"2019-01-01T12:00:00.000Z\", \"id\": \"id\", \"shared\": true, \"reported_by\": {\"id\": \"id\", \"title\": \"title\", \"url\": \"url\"}, \"finding\": {\"severity\": \"LOW\", \"next_steps\": [{\"title\": \"title\", \"url\": \"url\"}]}, \"kpi\": {\"Severity\": \"MEDIUM\", \"aggregation_type\": \"SUM\"}, \"card\": {\"section\": \"section\", \"title\": \"title\", \"subtitle\": \"subtitle\", \"order\": 1, \"finding_note_names\": [\"findingNoteNames\"], \"requires_configuration\": false, \"badge_text\": \"badgeText\", \"badge_image\": \"badgeImage\", \"elements\": [{\"text\": \"text\", \"default_interval\": \"d\", \"kind\": \"TIME_SERIES\", \"default_time_range\": \"4d\", \"value_types\": [{\"kind\": \"FINDING_COUNT\", \"finding_note_names\": [\"findingNoteNames\"], \"text\": \"label\"}]}]}, \"section\": {\"title\": \"title\", \"image\": \"image\"}}";
     String getNotePath = "/v1/testString/providers/testString/notes/testString";
 
     server.enqueue(new MockResponse()
@@ -452,6 +494,16 @@ public class FindingsTest extends PowerMockTestCase {
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, getNotePath);
   }
+  
+  public void testGetNoteWOptionsWRetries() throws Throwable {
+    // Enable retries and run testGetNoteWOptions.
+    // findingsService.enableRetries(4, 30);
+    testGetNoteWOptions();
+
+    // Disable retries and run testGetNoteWOptions.
+    // findingsService.disableRetries();
+    testGetNoteWOptions();
+  }  
 
   // Test the getNote operation with null options model parameter
   @Test(expectedExceptions = IllegalArgumentException.class)
@@ -468,7 +520,7 @@ public class FindingsTest extends PowerMockTestCase {
   @Test
   public void testUpdateNoteWOptions() throws Throwable {
     // Schedule some responses.
-    String mockResponseBody = "{\"short_description\": \"shortDescription\", \"long_description\": \"longDescription\", \"kind\": \"FINDING\", \"related_url\": [{\"label\": \"label\", \"url\": \"url\"}], \"expiration_time\": \"2019-01-01T12:00:00.000Z\", \"create_time\": \"2019-01-01T12:00:00.000Z\", \"update_time\": \"2019-01-01T12:00:00.000Z\", \"id\": \"id\", \"shared\": true, \"reported_by\": {\"id\": \"id\", \"title\": \"title\", \"url\": \"url\"}, \"finding\": {\"severity\": \"LOW\", \"next_steps\": [{\"title\": \"title\", \"url\": \"url\"}]}, \"kpi\": {\"aggregation_type\": \"SUM\"}, \"card\": {\"section\": \"section\", \"title\": \"title\", \"subtitle\": \"subtitle\", \"order\": 1, \"finding_note_names\": [\"findingNoteNames\"], \"requires_configuration\": false, \"badge_text\": \"badgeText\", \"badge_image\": \"badgeImage\", \"elements\": [{\"text\": \"text\", \"default_interval\": \"defaultInterval\", \"kind\": \"TIME_SERIES\", \"default_time_range\": \"1d\", \"value_types\": [{\"kind\": \"FINDING_COUNT\", \"finding_note_names\": [\"findingNoteNames\"], \"text\": \"text\"}]}]}, \"section\": {\"title\": \"title\", \"image\": \"image\"}}";
+    String mockResponseBody = "{\"short_description\": \"shortDescription\", \"long_description\": \"longDescription\", \"kind\": \"FINDING\", \"related_url\": [{\"label\": \"label\", \"url\": \"url\"}], \"create_time\": \"2019-01-01T12:00:00.000Z\", \"update_time\": \"2019-01-01T12:00:00.000Z\", \"id\": \"id\", \"shared\": true, \"reported_by\": {\"id\": \"id\", \"title\": \"title\", \"url\": \"url\"}, \"finding\": {\"severity\": \"LOW\", \"next_steps\": [{\"title\": \"title\", \"url\": \"url\"}]}, \"kpi\": {\"Severity\": \"MEDIUM\", \"aggregation_type\": \"SUM\"}, \"card\": {\"section\": \"section\", \"title\": \"title\", \"subtitle\": \"subtitle\", \"order\": 1, \"finding_note_names\": [\"findingNoteNames\"], \"requires_configuration\": false, \"badge_text\": \"badgeText\", \"badge_image\": \"badgeImage\", \"elements\": [{\"text\": \"text\", \"default_interval\": \"d\", \"kind\": \"TIME_SERIES\", \"default_time_range\": \"4d\", \"value_types\": [{\"kind\": \"FINDING_COUNT\", \"finding_note_names\": [\"findingNoteNames\"], \"text\": \"label\"}]}]}, \"section\": {\"title\": \"title\", \"image\": \"image\"}}";
     String updateNotePath = "/v1/testString/providers/testString/notes/testString";
 
     server.enqueue(new MockResponse()
@@ -505,6 +557,7 @@ public class FindingsTest extends PowerMockTestCase {
 
     // Construct an instance of the KpiType model
     KpiType kpiTypeModel = new KpiType.Builder()
+    .severity("MEDIUM")
     .aggregationType("SUM")
     .build();
 
@@ -512,15 +565,15 @@ public class FindingsTest extends PowerMockTestCase {
     ValueTypeFindingCountValueType valueTypeModel = new ValueTypeFindingCountValueType.Builder()
     .kind("FINDING_COUNT")
     .findingNoteNames(new java.util.ArrayList<String>(java.util.Arrays.asList("testString")))
-    .text("testString")
+    .text("label")
     .build();
 
     // Construct an instance of the CardElementTimeSeriesCardElement model
     CardElementTimeSeriesCardElement cardElementModel = new CardElementTimeSeriesCardElement.Builder()
     .text("testString")
-    .defaultInterval("testString")
+    .defaultInterval("d")
     .kind("TIME_SERIES")
-    .defaultTimeRange("1d")
+    .defaultTimeRange("4d")
     .valueTypes(new java.util.ArrayList<ValueType>(java.util.Arrays.asList(valueTypeModel)))
     .build();
 
@@ -531,7 +584,7 @@ public class FindingsTest extends PowerMockTestCase {
     .subtitle("testString")
     .order(Long.valueOf("1"))
     .findingNoteNames(new java.util.ArrayList<String>(java.util.Arrays.asList("testString")))
-    .requiresConfiguration(true)
+    .requiresConfiguration(false)
     .badgeText("testString")
     .badgeImage("testString")
     .elements(new java.util.ArrayList<CardElement>(java.util.Arrays.asList(cardElementModel)))
@@ -553,7 +606,8 @@ public class FindingsTest extends PowerMockTestCase {
     .id("testString")
     .reportedBy(reporterModel)
     .relatedUrl(new java.util.ArrayList<ApiNoteRelatedUrl>(java.util.Arrays.asList(apiNoteRelatedUrlModel)))
-    .expirationTime(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
+    .createTime(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
+    .updateTime(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
     .shared(true)
     .finding(findingTypeModel)
     .kpi(kpiTypeModel)
@@ -581,6 +635,16 @@ public class FindingsTest extends PowerMockTestCase {
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, updateNotePath);
   }
+  
+  public void testUpdateNoteWOptionsWRetries() throws Throwable {
+    // Enable retries and run testUpdateNoteWOptions.
+    // findingsService.enableRetries(4, 30);
+    testUpdateNoteWOptions();
+
+    // Disable retries and run testUpdateNoteWOptions.
+    // findingsService.disableRetries();
+    testUpdateNoteWOptions();
+  }  
 
   // Test the updateNote operation with null options model parameter
   @Test(expectedExceptions = IllegalArgumentException.class)
@@ -633,6 +697,16 @@ public class FindingsTest extends PowerMockTestCase {
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, deleteNotePath);
   }
+  
+  public void testDeleteNoteWOptionsWRetries() throws Throwable {
+    // Enable retries and run testDeleteNoteWOptions.
+    // findingsService.enableRetries(4, 30);
+    testDeleteNoteWOptions();
+
+    // Disable retries and run testDeleteNoteWOptions.
+    // findingsService.disableRetries();
+    testDeleteNoteWOptions();
+  }  
 
   // Test the deleteNote operation with null options model parameter
   @Test(expectedExceptions = IllegalArgumentException.class)
@@ -649,7 +723,7 @@ public class FindingsTest extends PowerMockTestCase {
   @Test
   public void testGetOccurrenceNoteWOptions() throws Throwable {
     // Schedule some responses.
-    String mockResponseBody = "{\"short_description\": \"shortDescription\", \"long_description\": \"longDescription\", \"kind\": \"FINDING\", \"related_url\": [{\"label\": \"label\", \"url\": \"url\"}], \"expiration_time\": \"2019-01-01T12:00:00.000Z\", \"create_time\": \"2019-01-01T12:00:00.000Z\", \"update_time\": \"2019-01-01T12:00:00.000Z\", \"id\": \"id\", \"shared\": true, \"reported_by\": {\"id\": \"id\", \"title\": \"title\", \"url\": \"url\"}, \"finding\": {\"severity\": \"LOW\", \"next_steps\": [{\"title\": \"title\", \"url\": \"url\"}]}, \"kpi\": {\"aggregation_type\": \"SUM\"}, \"card\": {\"section\": \"section\", \"title\": \"title\", \"subtitle\": \"subtitle\", \"order\": 1, \"finding_note_names\": [\"findingNoteNames\"], \"requires_configuration\": false, \"badge_text\": \"badgeText\", \"badge_image\": \"badgeImage\", \"elements\": [{\"text\": \"text\", \"default_interval\": \"defaultInterval\", \"kind\": \"TIME_SERIES\", \"default_time_range\": \"1d\", \"value_types\": [{\"kind\": \"FINDING_COUNT\", \"finding_note_names\": [\"findingNoteNames\"], \"text\": \"text\"}]}]}, \"section\": {\"title\": \"title\", \"image\": \"image\"}}";
+    String mockResponseBody = "{\"short_description\": \"shortDescription\", \"long_description\": \"longDescription\", \"kind\": \"FINDING\", \"related_url\": [{\"label\": \"label\", \"url\": \"url\"}], \"create_time\": \"2019-01-01T12:00:00.000Z\", \"update_time\": \"2019-01-01T12:00:00.000Z\", \"id\": \"id\", \"shared\": true, \"reported_by\": {\"id\": \"id\", \"title\": \"title\", \"url\": \"url\"}, \"finding\": {\"severity\": \"LOW\", \"next_steps\": [{\"title\": \"title\", \"url\": \"url\"}]}, \"kpi\": {\"Severity\": \"MEDIUM\", \"aggregation_type\": \"SUM\"}, \"card\": {\"section\": \"section\", \"title\": \"title\", \"subtitle\": \"subtitle\", \"order\": 1, \"finding_note_names\": [\"findingNoteNames\"], \"requires_configuration\": false, \"badge_text\": \"badgeText\", \"badge_image\": \"badgeImage\", \"elements\": [{\"text\": \"text\", \"default_interval\": \"d\", \"kind\": \"TIME_SERIES\", \"default_time_range\": \"4d\", \"value_types\": [{\"kind\": \"FINDING_COUNT\", \"finding_note_names\": [\"findingNoteNames\"], \"text\": \"label\"}]}]}, \"section\": {\"title\": \"title\", \"image\": \"image\"}}";
     String getOccurrenceNotePath = "/v1/testString/providers/testString/occurrences/testString/note";
 
     server.enqueue(new MockResponse()
@@ -685,6 +759,16 @@ public class FindingsTest extends PowerMockTestCase {
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, getOccurrenceNotePath);
   }
+  
+  public void testGetOccurrenceNoteWOptionsWRetries() throws Throwable {
+    // Enable retries and run testGetOccurrenceNoteWOptions.
+    // findingsService.enableRetries(4, 30);
+    testGetOccurrenceNoteWOptions();
+
+    // Disable retries and run testGetOccurrenceNoteWOptions.
+    // findingsService.disableRetries();
+    testGetOccurrenceNoteWOptions();
+  }  
 
   // Test the getOccurrenceNote operation with null options model parameter
   @Test(expectedExceptions = IllegalArgumentException.class)
@@ -803,6 +887,16 @@ public class FindingsTest extends PowerMockTestCase {
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, createOccurrencePath);
   }
+  
+  public void testCreateOccurrenceWOptionsWRetries() throws Throwable {
+    // Enable retries and run testCreateOccurrenceWOptions.
+    // findingsService.enableRetries(4, 30);
+    testCreateOccurrenceWOptions();
+
+    // Disable retries and run testCreateOccurrenceWOptions.
+    // findingsService.disableRetries();
+    testCreateOccurrenceWOptions();
+  }  
 
   // Test the createOccurrence operation with null options model parameter
   @Test(expectedExceptions = IllegalArgumentException.class)
@@ -858,6 +952,16 @@ public class FindingsTest extends PowerMockTestCase {
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, listOccurrencesPath);
   }
+  
+  public void testListOccurrencesWOptionsWRetries() throws Throwable {
+    // Enable retries and run testListOccurrencesWOptions.
+    // findingsService.enableRetries(4, 30);
+    testListOccurrencesWOptions();
+
+    // Disable retries and run testListOccurrencesWOptions.
+    // findingsService.disableRetries();
+    testListOccurrencesWOptions();
+  }  
 
   // Test the listOccurrences operation with null options model parameter
   @Test(expectedExceptions = IllegalArgumentException.class)
@@ -914,6 +1018,16 @@ public class FindingsTest extends PowerMockTestCase {
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, listNoteOccurrencesPath);
   }
+  
+  public void testListNoteOccurrencesWOptionsWRetries() throws Throwable {
+    // Enable retries and run testListNoteOccurrencesWOptions.
+    // findingsService.enableRetries(4, 30);
+    testListNoteOccurrencesWOptions();
+
+    // Disable retries and run testListNoteOccurrencesWOptions.
+    // findingsService.disableRetries();
+    testListNoteOccurrencesWOptions();
+  }  
 
   // Test the listNoteOccurrences operation with null options model parameter
   @Test(expectedExceptions = IllegalArgumentException.class)
@@ -966,6 +1080,16 @@ public class FindingsTest extends PowerMockTestCase {
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, getOccurrencePath);
   }
+  
+  public void testGetOccurrenceWOptionsWRetries() throws Throwable {
+    // Enable retries and run testGetOccurrenceWOptions.
+    // findingsService.enableRetries(4, 30);
+    testGetOccurrenceWOptions();
+
+    // Disable retries and run testGetOccurrenceWOptions.
+    // findingsService.disableRetries();
+    testGetOccurrenceWOptions();
+  }  
 
   // Test the getOccurrence operation with null options model parameter
   @Test(expectedExceptions = IllegalArgumentException.class)
@@ -1084,6 +1208,16 @@ public class FindingsTest extends PowerMockTestCase {
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, updateOccurrencePath);
   }
+  
+  public void testUpdateOccurrenceWOptionsWRetries() throws Throwable {
+    // Enable retries and run testUpdateOccurrenceWOptions.
+    // findingsService.enableRetries(4, 30);
+    testUpdateOccurrenceWOptions();
+
+    // Disable retries and run testUpdateOccurrenceWOptions.
+    // findingsService.disableRetries();
+    testUpdateOccurrenceWOptions();
+  }  
 
   // Test the updateOccurrence operation with null options model parameter
   @Test(expectedExceptions = IllegalArgumentException.class)
@@ -1136,6 +1270,16 @@ public class FindingsTest extends PowerMockTestCase {
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, deleteOccurrencePath);
   }
+  
+  public void testDeleteOccurrenceWOptionsWRetries() throws Throwable {
+    // Enable retries and run testDeleteOccurrenceWOptions.
+    // findingsService.enableRetries(4, 30);
+    testDeleteOccurrenceWOptions();
+
+    // Disable retries and run testDeleteOccurrenceWOptions.
+    // findingsService.disableRetries();
+    testDeleteOccurrenceWOptions();
+  }  
 
   // Test the deleteOccurrence operation with null options model parameter
   @Test(expectedExceptions = IllegalArgumentException.class)

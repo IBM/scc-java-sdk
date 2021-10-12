@@ -12,7 +12,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.34.1-ad041667-20210617-195430
+ * IBM OpenAPI SDK Code Generator Version: 3.40.0-910cf8c2-20211006-154754
  */
 
 package com.ibm.cloud.scc.findings.v1;
@@ -55,7 +55,7 @@ import java.util.Map.Entry;
  * artifact metadata specification. Findings are summarized in cards in the Security and Compliance Center that allow
  * you to see the security status of your account at a glance and start an investigation into any potential issues.
  *
- * @version v1
+ * API Version: 1.0.0
  */
 public class Findings extends BaseService {
 
@@ -249,8 +249,11 @@ public class Findings extends BaseService {
     if (createNoteOptions.relatedUrl() != null) {
       contentJson.add("related_url", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createNoteOptions.relatedUrl()));
     }
-    if (createNoteOptions.expirationTime() != null) {
-      contentJson.add("expiration_time", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createNoteOptions.expirationTime()));
+    if (createNoteOptions.createTime() != null) {
+      contentJson.add("create_time", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createNoteOptions.createTime()));
+    }
+    if (createNoteOptions.updateTime() != null) {
+      contentJson.add("update_time", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createNoteOptions.updateTime()));
     }
     if (createNoteOptions.shared() != null) {
       contentJson.addProperty("shared", createNoteOptions.shared());
@@ -369,8 +372,11 @@ public class Findings extends BaseService {
     if (updateNoteOptions.relatedUrl() != null) {
       contentJson.add("related_url", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateNoteOptions.relatedUrl()));
     }
-    if (updateNoteOptions.expirationTime() != null) {
-      contentJson.add("expiration_time", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateNoteOptions.expirationTime()));
+    if (updateNoteOptions.createTime() != null) {
+      contentJson.add("create_time", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateNoteOptions.createTime()));
+    }
+    if (updateNoteOptions.updateTime() != null) {
+      contentJson.add("update_time", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateNoteOptions.updateTime()));
     }
     if (updateNoteOptions.shared() != null) {
       contentJson.addProperty("shared", updateNoteOptions.shared());
