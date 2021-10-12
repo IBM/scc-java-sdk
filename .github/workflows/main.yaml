@@ -62,7 +62,7 @@ jobs:
       - name: setting up nodejs
         uses: actions/setup-node@v2
         with:
-          node-version: '12'
+          node-version: '16'
 
       - name: releasing using semantic-release
         env:
