@@ -174,11 +174,11 @@ public class FindingsTest extends PowerMockTestCase {
   
   public void testPostGraphWOptionsWRetries() throws Throwable {
     // Enable retries and run testPostGraphWOptions.
-    // findingsService.enableRetries(4, 30);
+    findingsService.enableRetries(4, 30);
     testPostGraphWOptions();
 
     // Disable retries and run testPostGraphWOptions.
-    // findingsService.disableRetries();
+    findingsService.disableRetries();
     testPostGraphWOptions();
   }  
 
@@ -242,11 +242,11 @@ public class FindingsTest extends PowerMockTestCase {
   
   public void testListProvidersWOptionsWRetries() throws Throwable {
     // Enable retries and run testListProvidersWOptions.
-    // findingsService.enableRetries(4, 30);
+    findingsService.enableRetries(4, 30);
     testListProvidersWOptions();
 
     // Disable retries and run testListProvidersWOptions.
-    // findingsService.disableRetries();
+    findingsService.disableRetries();
     testListProvidersWOptions();
   }  
 
@@ -370,11 +370,11 @@ public class FindingsTest extends PowerMockTestCase {
   
   public void testCreateNoteWOptionsWRetries() throws Throwable {
     // Enable retries and run testCreateNoteWOptions.
-    // findingsService.enableRetries(4, 30);
+    findingsService.enableRetries(4, 30);
     testCreateNoteWOptions();
 
     // Disable retries and run testCreateNoteWOptions.
-    // findingsService.disableRetries();
+    findingsService.disableRetries();
     testCreateNoteWOptions();
   }  
 
@@ -435,11 +435,11 @@ public class FindingsTest extends PowerMockTestCase {
   
   public void testListNotesWOptionsWRetries() throws Throwable {
     // Enable retries and run testListNotesWOptions.
-    // findingsService.enableRetries(4, 30);
+    findingsService.enableRetries(4, 30);
     testListNotesWOptions();
 
     // Disable retries and run testListNotesWOptions.
-    // findingsService.disableRetries();
+    findingsService.disableRetries();
     testListNotesWOptions();
   }  
 
@@ -497,11 +497,11 @@ public class FindingsTest extends PowerMockTestCase {
   
   public void testGetNoteWOptionsWRetries() throws Throwable {
     // Enable retries and run testGetNoteWOptions.
-    // findingsService.enableRetries(4, 30);
+    findingsService.enableRetries(4, 30);
     testGetNoteWOptions();
 
     // Disable retries and run testGetNoteWOptions.
-    // findingsService.disableRetries();
+    findingsService.disableRetries();
     testGetNoteWOptions();
   }  
 
@@ -638,11 +638,11 @@ public class FindingsTest extends PowerMockTestCase {
   
   public void testUpdateNoteWOptionsWRetries() throws Throwable {
     // Enable retries and run testUpdateNoteWOptions.
-    // findingsService.enableRetries(4, 30);
+    findingsService.enableRetries(4, 30);
     testUpdateNoteWOptions();
 
     // Disable retries and run testUpdateNoteWOptions.
-    // findingsService.disableRetries();
+    findingsService.disableRetries();
     testUpdateNoteWOptions();
   }  
 
@@ -700,11 +700,11 @@ public class FindingsTest extends PowerMockTestCase {
   
   public void testDeleteNoteWOptionsWRetries() throws Throwable {
     // Enable retries and run testDeleteNoteWOptions.
-    // findingsService.enableRetries(4, 30);
+    findingsService.enableRetries(4, 30);
     testDeleteNoteWOptions();
 
     // Disable retries and run testDeleteNoteWOptions.
-    // findingsService.disableRetries();
+    findingsService.disableRetries();
     testDeleteNoteWOptions();
   }  
 
@@ -762,11 +762,11 @@ public class FindingsTest extends PowerMockTestCase {
   
   public void testGetOccurrenceNoteWOptionsWRetries() throws Throwable {
     // Enable retries and run testGetOccurrenceNoteWOptions.
-    // findingsService.enableRetries(4, 30);
+    findingsService.enableRetries(4, 30);
     testGetOccurrenceNoteWOptions();
 
     // Disable retries and run testGetOccurrenceNoteWOptions.
-    // findingsService.disableRetries();
+    findingsService.disableRetries();
     testGetOccurrenceNoteWOptions();
   }  
 
@@ -890,11 +890,11 @@ public class FindingsTest extends PowerMockTestCase {
   
   public void testCreateOccurrenceWOptionsWRetries() throws Throwable {
     // Enable retries and run testCreateOccurrenceWOptions.
-    // findingsService.enableRetries(4, 30);
+    findingsService.enableRetries(4, 30);
     testCreateOccurrenceWOptions();
 
     // Disable retries and run testCreateOccurrenceWOptions.
-    // findingsService.disableRetries();
+    findingsService.disableRetries();
     testCreateOccurrenceWOptions();
   }  
 
@@ -955,11 +955,11 @@ public class FindingsTest extends PowerMockTestCase {
   
   public void testListOccurrencesWOptionsWRetries() throws Throwable {
     // Enable retries and run testListOccurrencesWOptions.
-    // findingsService.enableRetries(4, 30);
+    findingsService.enableRetries(4, 30);
     testListOccurrencesWOptions();
 
     // Disable retries and run testListOccurrencesWOptions.
-    // findingsService.disableRetries();
+    findingsService.disableRetries();
     testListOccurrencesWOptions();
   }  
 
@@ -1021,11 +1021,11 @@ public class FindingsTest extends PowerMockTestCase {
   
   public void testListNoteOccurrencesWOptionsWRetries() throws Throwable {
     // Enable retries and run testListNoteOccurrencesWOptions.
-    // findingsService.enableRetries(4, 30);
+    findingsService.enableRetries(4, 30);
     testListNoteOccurrencesWOptions();
 
     // Disable retries and run testListNoteOccurrencesWOptions.
-    // findingsService.disableRetries();
+    findingsService.disableRetries();
     testListNoteOccurrencesWOptions();
   }  
 
@@ -1044,7 +1044,7 @@ public class FindingsTest extends PowerMockTestCase {
   @Test
   public void testGetOccurrenceWOptions() throws Throwable {
     // Schedule some responses.
-    String mockResponseBody = "{\"occurrences\": [{\"resource_url\": \"resourceUrl\", \"note_name\": \"noteName\", \"kind\": \"FINDING\", \"remediation\": \"remediation\", \"create_time\": \"2019-01-01T12:00:00.000Z\", \"update_time\": \"2019-01-01T12:00:00.000Z\", \"id\": \"id\", \"context\": {\"region\": \"region\", \"resource_crn\": \"resourceCrn\", \"resource_id\": \"resourceId\", \"resource_name\": \"resourceName\", \"resource_type\": \"resourceType\", \"service_crn\": \"serviceCrn\", \"service_name\": \"serviceName\", \"environment_name\": \"environmentName\", \"component_name\": \"componentName\", \"toolchain_id\": \"toolchainId\"}, \"finding\": {\"severity\": \"LOW\", \"certainty\": \"LOW\", \"next_steps\": [{\"title\": \"title\", \"url\": \"url\"}], \"network_connection\": {\"direction\": \"direction\", \"protocol\": \"protocol\", \"client\": {\"address\": \"address\", \"port\": 4}, \"server\": {\"address\": \"address\", \"port\": 4}}, \"data_transferred\": {\"client_bytes\": 11, \"server_bytes\": 11, \"client_packets\": 13, \"server_packets\": 13}}, \"kpi\": {\"value\": 5, \"total\": 5}, \"reference_data\": {\"mapKey\": \"anyValue\"}}], \"next_page_token\": \"nextPageToken\"}";
+    String mockResponseBody = "{\"resource_url\": \"resourceUrl\", \"note_name\": \"noteName\", \"kind\": \"FINDING\", \"remediation\": \"remediation\", \"create_time\": \"2019-01-01T12:00:00.000Z\", \"update_time\": \"2019-01-01T12:00:00.000Z\", \"id\": \"id\", \"context\": {\"region\": \"region\", \"resource_crn\": \"resourceCrn\", \"resource_id\": \"resourceId\", \"resource_name\": \"resourceName\", \"resource_type\": \"resourceType\", \"service_crn\": \"serviceCrn\", \"service_name\": \"serviceName\", \"environment_name\": \"environmentName\", \"component_name\": \"componentName\", \"toolchain_id\": \"toolchainId\"}, \"finding\": {\"severity\": \"LOW\", \"certainty\": \"LOW\", \"next_steps\": [{\"title\": \"title\", \"url\": \"url\"}], \"network_connection\": {\"direction\": \"direction\", \"protocol\": \"protocol\", \"client\": {\"address\": \"address\", \"port\": 4}, \"server\": {\"address\": \"address\", \"port\": 4}}, \"data_transferred\": {\"client_bytes\": 11, \"server_bytes\": 11, \"client_packets\": 13, \"server_packets\": 13}}, \"kpi\": {\"value\": 5, \"total\": 5}, \"reference_data\": {\"mapKey\": \"anyValue\"}}";
     String getOccurrencePath = "/v1/testString/providers/testString/occurrences/testString";
 
     server.enqueue(new MockResponse()
@@ -1062,9 +1062,9 @@ public class FindingsTest extends PowerMockTestCase {
     .build();
 
     // Invoke operation with valid options model (positive test)
-    Response<ApiListOccurrencesResponse> response = findingsService.getOccurrence(getOccurrenceOptionsModel).execute();
+    Response<ApiOccurrence> response = findingsService.getOccurrence(getOccurrenceOptionsModel).execute();
     assertNotNull(response);
-    ApiListOccurrencesResponse responseObj = response.getResult();
+    ApiOccurrence responseObj = response.getResult();
     assertNotNull(responseObj);
 
     // Verify the contents of the request
@@ -1083,11 +1083,11 @@ public class FindingsTest extends PowerMockTestCase {
   
   public void testGetOccurrenceWOptionsWRetries() throws Throwable {
     // Enable retries and run testGetOccurrenceWOptions.
-    // findingsService.enableRetries(4, 30);
+    findingsService.enableRetries(4, 30);
     testGetOccurrenceWOptions();
 
     // Disable retries and run testGetOccurrenceWOptions.
-    // findingsService.disableRetries();
+    findingsService.disableRetries();
     testGetOccurrenceWOptions();
   }  
 
@@ -1211,11 +1211,11 @@ public class FindingsTest extends PowerMockTestCase {
   
   public void testUpdateOccurrenceWOptionsWRetries() throws Throwable {
     // Enable retries and run testUpdateOccurrenceWOptions.
-    // findingsService.enableRetries(4, 30);
+    findingsService.enableRetries(4, 30);
     testUpdateOccurrenceWOptions();
 
     // Disable retries and run testUpdateOccurrenceWOptions.
-    // findingsService.disableRetries();
+    findingsService.disableRetries();
     testUpdateOccurrenceWOptions();
   }  
 
@@ -1273,11 +1273,11 @@ public class FindingsTest extends PowerMockTestCase {
   
   public void testDeleteOccurrenceWOptionsWRetries() throws Throwable {
     // Enable retries and run testDeleteOccurrenceWOptions.
-    // findingsService.enableRetries(4, 30);
+    findingsService.enableRetries(4, 30);
     testDeleteOccurrenceWOptions();
 
     // Disable retries and run testDeleteOccurrenceWOptions.
-    // findingsService.disableRetries();
+    findingsService.disableRetries();
     testDeleteOccurrenceWOptions();
   }  
 

@@ -250,10 +250,10 @@ public class FindingsExamples {
         .occurrenceId("testString")
         .build();
 
-      Response<ApiListOccurrencesResponse> response = findingsService.getOccurrence(getOccurrenceOptions).execute();
-      ApiListOccurrencesResponse apiListOccurrencesResponse = response.getResult();
+      Response<ApiOccurrence> response = findingsService.getOccurrence(getOccurrenceOptions).execute();
+      ApiOccurrence apiOccurrence = response.getResult();
 
-      System.out.println(apiListOccurrencesResponse);
+      System.out.println(apiOccurrence);
       // end-getOccurrence
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
