@@ -91,7 +91,7 @@ public class FindingsIT extends SdkIntegrationTestBase {
   final String accountID = System.getenv("ACCOUNT_ID");
   String providerID = System.getenv("PROVIDER_ID");
   final String testString = "testString";
-  String identifier = "jv-"+(System.currentTimeMillis()/1000);
+  String identifier = "jv-" + (System.currentTimeMillis() / 1000);
 
   public String getConfigFilename() {
     return "../../findings_v1.env";
@@ -100,7 +100,7 @@ public class FindingsIT extends SdkIntegrationTestBase {
   @BeforeClass
   public void constructService() {
 
-    if(providerID == null){
+    if (providerID == null) {
       providerID = "sdk-it";
     }
 
@@ -126,9 +126,7 @@ public class FindingsIT extends SdkIntegrationTestBase {
   public void testPostGraph() throws Exception {
     try {
       PostGraphOptions postGraphOptions = new PostGraphOptions.Builder()
-      .body(TestUtilities.createMockStream("{notes{id}}"))
-      .contentType("application/graphql")
-      .build();
+          .body(TestUtilities.createMockStream("{notes{id}}")).contentType("application/graphql").build();
 
       // Invoke operation
       Response<Void> response = service.postGraph(postGraphOptions).execute();
@@ -136,47 +134,29 @@ public class FindingsIT extends SdkIntegrationTestBase {
       assertNotNull(response);
       assertEquals(response.getStatusCode(), 200);
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
+          e.getDebuggingInfo()));
     }
   }
 
   @Test
   public void testCreateNoteFinding() throws Exception {
     try {
-      Reporter reporterModel = new Reporter.Builder()
-      .id(testString)
-      .title(testString)
-      .url(testString)
-      .build();
+      Reporter reporterModel = new Reporter.Builder().id(testString).title(testString).url(testString).build();
 
-      ApiNoteRelatedUrl apiNoteRelatedUrlModel = new ApiNoteRelatedUrl.Builder()
-      .label(testString)
-      .url(testString)
-      .build();
+      ApiNoteRelatedUrl apiNoteRelatedUrlModel = new ApiNoteRelatedUrl.Builder().label(testString).url(testString)
+          .build();
 
-      RemediationStep remediationStepModel = new RemediationStep.Builder()
-      .title(testString)
-      .url(testString)
-      .build();
+      RemediationStep remediationStepModel = new RemediationStep.Builder().title(testString).url(testString).build();
 
-      FindingType findingTypeModel = new FindingType.Builder()
-      .severity("LOW")
-      .nextSteps(new java.util.ArrayList<RemediationStep>(java.util.Arrays.asList(remediationStepModel)))
-      .build();
+      FindingType findingTypeModel = new FindingType.Builder().severity("LOW")
+          .nextSteps(new java.util.ArrayList<RemediationStep>(java.util.Arrays.asList(remediationStepModel))).build();
 
-      CreateNoteOptions createNoteOptions = new CreateNoteOptions.Builder()
-      .providerId(providerID)
-      .shortDescription(testString)
-      .longDescription(testString)
-      .kind("FINDING")
-      .id(String.format("finding-note-%s", identifier))
-      .reportedBy(reporterModel)
-      .relatedUrl(new java.util.ArrayList<ApiNoteRelatedUrl>(java.util.Arrays.asList(apiNoteRelatedUrlModel)))
-      .expirationTime(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
-      .shared(true)
-      .finding(findingTypeModel)
-      .build();
+      CreateNoteOptions createNoteOptions = new CreateNoteOptions.Builder().providerId(providerID)
+          .shortDescription(testString).longDescription(testString).kind("FINDING")
+          .id(String.format("finding-note-%s", identifier)).reportedBy(reporterModel)
+          .relatedUrl(new java.util.ArrayList<ApiNoteRelatedUrl>(java.util.Arrays.asList(apiNoteRelatedUrlModel)))
+          .shared(true).finding(findingTypeModel).build();
 
       // Invoke operation
       Response<ApiNote> response = service.createNote(createNoteOptions).execute();
@@ -188,35 +168,23 @@ public class FindingsIT extends SdkIntegrationTestBase {
 
       assertNotNull(apiNoteResult);
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
+          e.getDebuggingInfo()));
     }
   }
 
-  @Test(groups={"kpi"})
+  @Test(groups = { "kpi" })
   public void testCreateNoteKpi() throws Exception {
     try {
-      Reporter reporterModel = new Reporter.Builder()
-      .id(testString)
-      .title(testString)
-      .url(testString)
-      .build();
+      Reporter reporterModel = new Reporter.Builder().id(testString).title(testString).url(testString).build();
 
-      KpiType kpiTypeModel = new KpiType.Builder()
-      .aggregationType("SUM")
-      .build();
+      KpiType kpiTypeModel = new KpiType.Builder().aggregationType("SUM").build();
 
-      CreateNoteOptions createNoteOptions = new CreateNoteOptions.Builder()
-      .providerId(providerID)
-      .shortDescription(testString)
-      .longDescription(testString)
-      .kind("KPI")
-      .id(String.format("kpi-note-%s", identifier))
-      .reportedBy(reporterModel)
-      .expirationTime(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
-      .shared(true)
-      .kpi(kpiTypeModel)
-      .build();
+      CreateNoteOptions createNoteOptions = new CreateNoteOptions.Builder().providerId(providerID)
+          .shortDescription(testString).longDescription(testString).kind("KPI")
+          .id(String.format("kpi-note-%s", identifier)).reportedBy(reporterModel)
+
+          .shared(true).kpi(kpiTypeModel).build();
 
       // Invoke operation
       Response<ApiNote> response = service.createNote(createNoteOptions).execute();
@@ -228,56 +196,35 @@ public class FindingsIT extends SdkIntegrationTestBase {
 
       assertNotNull(apiNoteResult);
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
+          e.getDebuggingInfo()));
     }
   }
 
   @Test
   public void testCreateNoteCard() throws Exception {
     try {
-      Reporter reporterModel = new Reporter.Builder()
-      .id(testString)
-      .title(testString)
-      .url(testString)
-      .build();
+      Reporter reporterModel = new Reporter.Builder().id(testString).title(testString).url(testString).build();
 
-      ValueTypeFindingCountValueType valueTypeModel = new ValueTypeFindingCountValueType.Builder()
-      .kind("FINDING_COUNT")
-      .findingNoteNames(new java.util.ArrayList<String>(java.util.Arrays.asList(testString)))
-      .text(testString)
-      .build();
+      ValueTypeFindingCountValueType valueTypeModel = new ValueTypeFindingCountValueType.Builder().kind("FINDING_COUNT")
+          .findingNoteNames(new java.util.ArrayList<String>(java.util.Arrays.asList(testString))).text(testString)
+          .build();
 
       CardElementTimeSeriesCardElement cardElementModel = new CardElementTimeSeriesCardElement.Builder()
-      .text(testString)
-      .defaultInterval(testString)
-      .kind("TIME_SERIES")
-      .defaultTimeRange("1d")
-      .valueTypes(new java.util.ArrayList<ValueType>(java.util.Arrays.asList(valueTypeModel)))
-      .build();
+          .text(testString).defaultInterval(testString).kind("TIME_SERIES").defaultTimeRange("1d")
+          .valueTypes(new java.util.ArrayList<ValueType>(java.util.Arrays.asList(valueTypeModel))).build();
 
-      Card cardModel = new Card.Builder()
-      .section(testString)
-      .title(testString)
-      .subtitle(testString)
-      .findingNoteNames(new java.util.ArrayList<String>(java.util.Arrays.asList(String.format("%s/providers/%s/notes/finding-note-%s", accountID, providerID, identifier))))
-      .requiresConfiguration(true)
-      .badgeText(testString)
-      .badgeImage(testString)
-      .elements(new java.util.ArrayList<CardElement>(java.util.Arrays.asList(cardElementModel)))
-      .build();
+      Card cardModel = new Card.Builder().section(testString).title(testString).subtitle(testString)
+          .findingNoteNames(new java.util.ArrayList<String>(java.util.Arrays
+              .asList(String.format("%s/providers/%s/notes/finding-note-%s", accountID, providerID, identifier))))
+          .requiresConfiguration(true).badgeText(testString).badgeImage(testString)
+          .elements(new java.util.ArrayList<CardElement>(java.util.Arrays.asList(cardElementModel))).build();
 
-      CreateNoteOptions createNoteOptions = new CreateNoteOptions.Builder()
-      .providerId(providerID)
-      .shortDescription(testString)
-      .longDescription(testString)
-      .kind("CARD")
-      .id(String.format("card-note-%s", identifier))
-      .reportedBy(reporterModel)
-      .expirationTime(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
-      .shared(true)
-      .card(cardModel)
-      .build();
+      CreateNoteOptions createNoteOptions = new CreateNoteOptions.Builder().providerId(providerID)
+          .shortDescription(testString).longDescription(testString).kind("CARD")
+          .id(String.format("card-note-%s", identifier)).reportedBy(reporterModel)
+
+          .shared(true).card(cardModel).build();
 
       // Invoke operation
       Response<ApiNote> response = service.createNote(createNoteOptions).execute();
@@ -289,36 +236,23 @@ public class FindingsIT extends SdkIntegrationTestBase {
 
       assertNotNull(apiNoteResult);
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
+          e.getDebuggingInfo()));
     }
   }
 
   @Test
   public void testCreateNoteSection() throws Exception {
     try {
-      Reporter reporterModel = new Reporter.Builder()
-      .id(testString)
-      .title(testString)
-      .url(testString)
-      .build();
+      Reporter reporterModel = new Reporter.Builder().id(testString).title(testString).url(testString).build();
 
-      Section sectionModel = new Section.Builder()
-      .title(testString)
-      .image(testString)
-      .build();
+      Section sectionModel = new Section.Builder().title(testString).image(testString).build();
 
-      CreateNoteOptions createNoteOptions = new CreateNoteOptions.Builder()
-      .providerId(providerID)
-      .shortDescription(testString)
-      .longDescription(testString)
-      .kind("SECTION")
-      .id(String.format("section-note-%s", identifier))
-      .reportedBy(reporterModel)
-      .expirationTime(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
-      .shared(true)
-      .section(sectionModel)
-      .build();
+      CreateNoteOptions createNoteOptions = new CreateNoteOptions.Builder().providerId(providerID)
+          .shortDescription(testString).longDescription(testString).kind("SECTION")
+          .id(String.format("section-note-%s", identifier)).reportedBy(reporterModel)
+
+          .shared(true).section(sectionModel).build();
 
       // Invoke operation
       Response<ApiNote> response = service.createNote(createNoteOptions).execute();
@@ -330,16 +264,15 @@ public class FindingsIT extends SdkIntegrationTestBase {
 
       assertNotNull(apiNoteResult);
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
+          e.getDebuggingInfo()));
     }
   }
+
   @Test
   public void testListNotes() throws Exception {
     try {
-      ListNotesOptions listNotesOptions = new ListNotesOptions.Builder()
-      .providerId(providerID)
-      .build();
+      ListNotesOptions listNotesOptions = new ListNotesOptions.Builder().providerId(providerID).build();
 
       // Invoke operation
       Response<ApiListNotesResponse> response = service.listNotes(listNotesOptions).execute();
@@ -351,18 +284,16 @@ public class FindingsIT extends SdkIntegrationTestBase {
 
       assertNotNull(apiListNotesResponseResult);
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
+          e.getDebuggingInfo()));
     }
   }
 
-  @Test(groups={"kpi"})
+  @Test(groups = { "kpi" })
   public void testGetNote() throws Exception {
     try {
-      GetNoteOptions getNoteOptions = new GetNoteOptions.Builder()
-      .providerId(providerID)
-      .noteId(String.format("kpi-note-%s", identifier))
-      .build();
+      GetNoteOptions getNoteOptions = new GetNoteOptions.Builder().providerId(providerID)
+          .noteId(String.format("kpi-note-%s", identifier)).build();
 
       // Invoke operation
       Response<ApiNote> response = service.getNote(getNoteOptions).execute();
@@ -374,48 +305,30 @@ public class FindingsIT extends SdkIntegrationTestBase {
 
       assertNotNull(apiNoteResult);
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
+          e.getDebuggingInfo()));
     }
   }
 
   @Test
   public void testUpdateNoteFinding() throws Exception {
     try {
-      Reporter reporterModel = new Reporter.Builder()
-      .id(testString)
-      .title(testString)
-      .url(testString)
-      .build();
+      Reporter reporterModel = new Reporter.Builder().id(testString).title(testString).url(testString).build();
 
-      ApiNoteRelatedUrl apiNoteRelatedUrlModel = new ApiNoteRelatedUrl.Builder()
-      .label(testString)
-      .url(testString)
-      .build();
+      ApiNoteRelatedUrl apiNoteRelatedUrlModel = new ApiNoteRelatedUrl.Builder().label(testString).url(testString)
+          .build();
 
-      RemediationStep remediationStepModel = new RemediationStep.Builder()
-      .title(testString)
-      .url(testString)
-      .build();
+      RemediationStep remediationStepModel = new RemediationStep.Builder().title(testString).url(testString).build();
 
-      FindingType findingTypeModel = new FindingType.Builder()
-      .severity("LOW")
-      .nextSteps(new java.util.ArrayList<RemediationStep>(java.util.Arrays.asList(remediationStepModel)))
-      .build();
+      FindingType findingTypeModel = new FindingType.Builder().severity("LOW")
+          .nextSteps(new java.util.ArrayList<RemediationStep>(java.util.Arrays.asList(remediationStepModel))).build();
 
-      UpdateNoteOptions updateNoteOptions = new UpdateNoteOptions.Builder()
-      .providerId(providerID)
-      .noteId(String.format("finding-note-%s", identifier))
-      .shortDescription(testString)
-      .longDescription(testString)
-      .kind("FINDING")
-      .id(String.format("finding-note-%s", identifier))
-      .reportedBy(reporterModel)
-      .relatedUrl(new java.util.ArrayList<ApiNoteRelatedUrl>(java.util.Arrays.asList(apiNoteRelatedUrlModel)))
-      .expirationTime(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
-      .shared(true)
-      .finding(findingTypeModel)
-      .build();
+      UpdateNoteOptions updateNoteOptions = new UpdateNoteOptions.Builder().providerId(providerID)
+          .noteId(String.format("finding-note-%s", identifier)).shortDescription(testString).longDescription(testString)
+          .kind("FINDING").id(String.format("finding-note-%s", identifier)).reportedBy(reporterModel)
+          .relatedUrl(new java.util.ArrayList<ApiNoteRelatedUrl>(java.util.Arrays.asList(apiNoteRelatedUrlModel)))
+
+          .shared(true).finding(findingTypeModel).build();
 
       // Invoke operation
       Response<ApiNote> response = service.updateNote(updateNoteOptions).execute();
@@ -427,36 +340,23 @@ public class FindingsIT extends SdkIntegrationTestBase {
 
       assertNotNull(apiNoteResult);
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
+          e.getDebuggingInfo()));
     }
   }
 
-  @Test(groups={"kpi"})
+  @Test(groups = { "kpi" })
   public void testUpdateNoteKpi() throws Exception {
     try {
-      Reporter reporterModel = new Reporter.Builder()
-      .id(testString)
-      .title(testString)
-      .url(testString)
-      .build();
+      Reporter reporterModel = new Reporter.Builder().id(testString).title(testString).url(testString).build();
 
-      KpiType kpiTypeModel = new KpiType.Builder()
-      .aggregationType("SUM")
-      .build();
+      KpiType kpiTypeModel = new KpiType.Builder().aggregationType("SUM").build();
 
-      UpdateNoteOptions updateNoteOptions = new UpdateNoteOptions.Builder()
-      .providerId(providerID)
-      .noteId(String.format("kpi-note-%s", identifier))
-      .shortDescription(testString)
-      .longDescription(testString)
-      .kind("KPI")
-      .id(String.format("kpi-note-%s", identifier))
-      .reportedBy(reporterModel)
-      .expirationTime(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
-      .shared(true)
-      .kpi(kpiTypeModel)
-      .build();
+      UpdateNoteOptions updateNoteOptions = new UpdateNoteOptions.Builder().providerId(providerID)
+          .noteId(String.format("kpi-note-%s", identifier)).shortDescription(testString).longDescription(testString)
+          .kind("KPI").id(String.format("kpi-note-%s", identifier)).reportedBy(reporterModel)
+
+          .shared(true).kpi(kpiTypeModel).build();
 
       // Invoke operation
       Response<ApiNote> response = service.updateNote(updateNoteOptions).execute();
@@ -468,57 +368,34 @@ public class FindingsIT extends SdkIntegrationTestBase {
 
       assertNotNull(apiNoteResult);
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
+          e.getDebuggingInfo()));
     }
   }
 
   @Test
   public void testUpdateNoteCard() throws Exception {
     try {
-      Reporter reporterModel = new Reporter.Builder()
-      .id(testString)
-      .title(testString)
-      .url(testString)
-      .build();
+      Reporter reporterModel = new Reporter.Builder().id(testString).title(testString).url(testString).build();
 
-      ValueTypeFindingCountValueType valueTypeModel = new ValueTypeFindingCountValueType.Builder()
-      .kind("FINDING_COUNT")
-      .findingNoteNames(new java.util.ArrayList<String>(java.util.Arrays.asList(testString)))
-      .text(testString)
-      .build();
+      ValueTypeFindingCountValueType valueTypeModel = new ValueTypeFindingCountValueType.Builder().kind("FINDING_COUNT")
+          .findingNoteNames(new java.util.ArrayList<String>(java.util.Arrays.asList(testString))).text(testString)
+          .build();
 
       CardElementTimeSeriesCardElement cardElementModel = new CardElementTimeSeriesCardElement.Builder()
-      .text(testString)
-      .defaultInterval(testString)
-      .kind("TIME_SERIES")
-      .defaultTimeRange("1d")
-      .valueTypes(new java.util.ArrayList<ValueType>(java.util.Arrays.asList(valueTypeModel)))
-      .build();
+          .text(testString).defaultInterval(testString).kind("TIME_SERIES").defaultTimeRange("1d")
+          .valueTypes(new java.util.ArrayList<ValueType>(java.util.Arrays.asList(valueTypeModel))).build();
 
-      Card cardModel = new Card.Builder()
-      .section(testString)
-      .title(testString)
-      .subtitle(testString)
-      .findingNoteNames(new java.util.ArrayList<String>(java.util.Arrays.asList(testString)))
-      .requiresConfiguration(true)
-      .badgeText(testString)
-      .badgeImage(testString)
-      .elements(new java.util.ArrayList<CardElement>(java.util.Arrays.asList(cardElementModel)))
-      .build();
+      Card cardModel = new Card.Builder().section(testString).title(testString).subtitle(testString)
+          .findingNoteNames(new java.util.ArrayList<String>(java.util.Arrays.asList(testString)))
+          .requiresConfiguration(true).badgeText(testString).badgeImage(testString)
+          .elements(new java.util.ArrayList<CardElement>(java.util.Arrays.asList(cardElementModel))).build();
 
-      UpdateNoteOptions updateNoteOptions = new UpdateNoteOptions.Builder()
-      .providerId(providerID)
-      .noteId(String.format("card-note-%s", identifier))
-      .shortDescription(testString)
-      .longDescription(testString)
-      .kind("CARD")
-      .id(String.format("card-note-%s", identifier))
-      .reportedBy(reporterModel)
-      .expirationTime(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
-      .shared(true)
-      .card(cardModel)
-      .build();
+      UpdateNoteOptions updateNoteOptions = new UpdateNoteOptions.Builder().providerId(providerID)
+          .noteId(String.format("card-note-%s", identifier)).shortDescription(testString).longDescription(testString)
+          .kind("CARD").id(String.format("card-note-%s", identifier)).reportedBy(reporterModel)
+
+          .shared(true).card(cardModel).build();
 
       // Invoke operation
       Response<ApiNote> response = service.updateNote(updateNoteOptions).execute();
@@ -530,37 +407,23 @@ public class FindingsIT extends SdkIntegrationTestBase {
 
       assertNotNull(apiNoteResult);
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
+          e.getDebuggingInfo()));
     }
   }
 
   @Test
   public void testUpdateNoteSection() throws Exception {
     try {
-      Reporter reporterModel = new Reporter.Builder()
-      .id(testString)
-      .title(testString)
-      .url(testString)
-      .build();
+      Reporter reporterModel = new Reporter.Builder().id(testString).title(testString).url(testString).build();
 
-      Section sectionModel = new Section.Builder()
-      .title(testString)
-      .image(testString)
-      .build();
+      Section sectionModel = new Section.Builder().title(testString).image(testString).build();
 
-      UpdateNoteOptions updateNoteOptions = new UpdateNoteOptions.Builder()
-      .providerId(providerID)
-      .noteId(String.format("section-note-%s", identifier))
-      .shortDescription(testString)
-      .longDescription(testString)
-      .kind("SECTION")
-      .id(String.format("section-note-%s", identifier))
-      .reportedBy(reporterModel)
-      .expirationTime(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
-      .shared(true)
-      .section(sectionModel)
-      .build();
+      UpdateNoteOptions updateNoteOptions = new UpdateNoteOptions.Builder().providerId(providerID)
+          .noteId(String.format("section-note-%s", identifier)).shortDescription(testString).longDescription(testString)
+          .kind("SECTION").id(String.format("section-note-%s", identifier)).reportedBy(reporterModel)
+
+          .shared(true).section(sectionModel).build();
 
       // Invoke operation
       Response<ApiNote> response = service.updateNote(updateNoteOptions).execute();
@@ -572,71 +435,37 @@ public class FindingsIT extends SdkIntegrationTestBase {
 
       assertNotNull(apiNoteResult);
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
+          e.getDebuggingInfo()));
     }
   }
 
   @Test
-  public void testCreateOccurrenceFinding() throws Exception 
-  {
+  public void testCreateOccurrenceFinding() throws Exception {
     try {
-      Context contextModel = new Context.Builder()
-      .region(testString)
-      .resourceCrn(testString)
-      .resourceId(testString)
-      .resourceName(testString)
-      .resourceType(testString)
-      .serviceCrn(testString)
-      .serviceName(testString)
-      .environmentName(testString)
-      .componentName(testString)
-      .toolchainId(testString)
-      .build();
+      Context contextModel = new Context.Builder().region(testString).resourceCrn(testString).resourceId(testString)
+          .resourceName(testString).resourceType(testString).serviceCrn(testString).serviceName(testString)
+          .environmentName(testString).componentName(testString).toolchainId(testString).build();
 
-      RemediationStep remediationStepModel = new RemediationStep.Builder()
-      .title(testString)
-      .url(testString)
-      .build();
+      RemediationStep remediationStepModel = new RemediationStep.Builder().title(testString).url(testString).build();
 
-      SocketAddress socketAddressModel = new SocketAddress.Builder()
-      .address(testString)
-      .port(Long.valueOf("26"))
-      .build();
+      SocketAddress socketAddressModel = new SocketAddress.Builder().address(testString).port(Long.valueOf("26"))
+          .build();
 
-      NetworkConnection networkConnectionModel = new NetworkConnection.Builder()
-      .direction(testString)
-      .protocol(testString)
-      .client(socketAddressModel)
-      .server(socketAddressModel)
-      .build();
+      NetworkConnection networkConnectionModel = new NetworkConnection.Builder().direction(testString)
+          .protocol(testString).client(socketAddressModel).server(socketAddressModel).build();
 
-      DataTransferred dataTransferredModel = new DataTransferred.Builder()
-      .clientBytes(Long.valueOf("26"))
-      .serverBytes(Long.valueOf("26"))
-      .clientPackets(Long.valueOf("26"))
-      .serverPackets(Long.valueOf("26"))
-      .build();
+      DataTransferred dataTransferredModel = new DataTransferred.Builder().clientBytes(Long.valueOf("26"))
+          .serverBytes(Long.valueOf("26")).clientPackets(Long.valueOf("26")).serverPackets(Long.valueOf("26")).build();
 
-      Finding findingModel = new Finding.Builder()
-      .severity("LOW")
-      .certainty("LOW")
-      .nextSteps(new java.util.ArrayList<RemediationStep>(java.util.Arrays.asList(remediationStepModel)))
-      .networkConnection(networkConnectionModel)
-      .dataTransferred(dataTransferredModel)
-      .build();
+      Finding findingModel = new Finding.Builder().severity("LOW").certainty("LOW")
+          .nextSteps(new java.util.ArrayList<RemediationStep>(java.util.Arrays.asList(remediationStepModel)))
+          .networkConnection(networkConnectionModel).dataTransferred(dataTransferredModel).build();
 
-      CreateOccurrenceOptions createOccurrenceOptions = new CreateOccurrenceOptions.Builder()
-      .providerId(providerID)
-      .noteName(String.format("%s/providers/%s/notes/finding-note-%s", accountID, providerID, identifier))
-      .kind("FINDING")
-      .id(String.format("finding-occurrence-%s", identifier))
-      .resourceUrl(testString)
-      .remediation(testString)
-      .context(contextModel)
-      .finding(findingModel)
-      .replaceIfExists(true)
-      .build();
+      CreateOccurrenceOptions createOccurrenceOptions = new CreateOccurrenceOptions.Builder().providerId(providerID)
+          .noteName(String.format("%s/providers/%s/notes/finding-note-%s", accountID, providerID, identifier))
+          .kind("FINDING").id(String.format("finding-occurrence-%s", identifier)).resourceUrl(testString)
+          .remediation(testString).context(contextModel).finding(findingModel).replaceIfExists(true).build();
 
       // Invoke operation
       Response<ApiOccurrence> response = service.createOccurrence(createOccurrenceOptions).execute();
@@ -648,43 +477,24 @@ public class FindingsIT extends SdkIntegrationTestBase {
 
       assertNotNull(apiOccurrenceResult);
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
+          e.getDebuggingInfo()));
     }
   }
 
-  @Test(groups={"kpi"})
+  @Test(groups = { "kpi" })
   public void testCreateOccurrenceKpi() throws Exception {
     try {
-      Context contextModel = new Context.Builder()
-      .region(testString)
-      .resourceCrn(testString)
-      .resourceId(testString)
-      .resourceName(testString)
-      .resourceType(testString)
-      .serviceCrn(testString)
-      .serviceName(testString)
-      .environmentName(testString)
-      .componentName(testString)
-      .toolchainId(testString)
-      .build();
+      Context contextModel = new Context.Builder().region(testString).resourceCrn(testString).resourceId(testString)
+          .resourceName(testString).resourceType(testString).serviceCrn(testString).serviceName(testString)
+          .environmentName(testString).componentName(testString).toolchainId(testString).build();
 
-      Kpi kpiModel = new Kpi.Builder()
-      .value(Double.valueOf("72.5"))
-      .total(Double.valueOf("72.5"))
-      .build();
+      Kpi kpiModel = new Kpi.Builder().value(Double.valueOf("72.5")).total(Double.valueOf("72.5")).build();
 
-      CreateOccurrenceOptions createOccurrenceOptions = new CreateOccurrenceOptions.Builder()
-      .providerId(providerID)
-      .noteName(String.format("%s/providers/%s/notes/kpi-note-%s", accountID, providerID, identifier))
-      .kind("KPI")
-      .id(String.format("kpi-occurrence-%s", identifier))
-      .resourceUrl(testString)
-      .remediation(testString)
-      .context(contextModel)
-      .kpi(kpiModel)
-      .replaceIfExists(true)
-      .build();
+      CreateOccurrenceOptions createOccurrenceOptions = new CreateOccurrenceOptions.Builder().providerId(providerID)
+          .noteName(String.format("%s/providers/%s/notes/kpi-note-%s", accountID, providerID, identifier)).kind("KPI")
+          .id(String.format("kpi-occurrence-%s", identifier)).resourceUrl(testString).remediation(testString)
+          .context(contextModel).kpi(kpiModel).replaceIfExists(true).build();
 
       // Invoke operation
       Response<ApiOccurrence> response = service.createOccurrence(createOccurrenceOptions).execute();
@@ -696,18 +506,16 @@ public class FindingsIT extends SdkIntegrationTestBase {
 
       assertNotNull(apiOccurrenceResult);
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
+          e.getDebuggingInfo()));
     }
   }
 
   @Test
   public void testGetOccurrenceNote() throws Exception {
     try {
-      GetOccurrenceNoteOptions getOccurrenceNoteOptions = new GetOccurrenceNoteOptions.Builder()
-      .providerId(providerID)
-      .occurrenceId(String.format("kpi-occurrence-%s", identifier))
-      .build();
+      GetOccurrenceNoteOptions getOccurrenceNoteOptions = new GetOccurrenceNoteOptions.Builder().providerId(providerID)
+          .occurrenceId(String.format("kpi-occurrence-%s", identifier)).build();
 
       // Invoke operation
       Response<ApiNote> response = service.getOccurrenceNote(getOccurrenceNoteOptions).execute();
@@ -719,17 +527,16 @@ public class FindingsIT extends SdkIntegrationTestBase {
 
       assertNotNull(apiNoteResult);
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
+          e.getDebuggingInfo()));
     }
   }
 
   @Test
   public void testListOccurrences() throws Exception {
     try {
-      ListOccurrencesOptions listOccurrencesOptions = new ListOccurrencesOptions.Builder()
-      .providerId(providerID)
-      .build();
+      ListOccurrencesOptions listOccurrencesOptions = new ListOccurrencesOptions.Builder().providerId(providerID)
+          .build();
 
       // Invoke operation
       Response<ApiListOccurrencesResponse> response = service.listOccurrences(listOccurrencesOptions).execute();
@@ -741,8 +548,8 @@ public class FindingsIT extends SdkIntegrationTestBase {
 
       assertNotNull(apiListOccurrencesResponseResult);
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
+          e.getDebuggingInfo()));
     }
   }
 
@@ -750,12 +557,11 @@ public class FindingsIT extends SdkIntegrationTestBase {
   public void testListNoteOccurrences() throws Exception {
     try {
       ListNoteOccurrencesOptions listNoteOccurrencesOptions = new ListNoteOccurrencesOptions.Builder()
-      .providerId(providerID)
-      .noteId(String.format("kpi-note-%s", identifier))
-      .build();
+          .providerId(providerID).noteId(String.format("kpi-note-%s", identifier)).build();
 
       // Invoke operation
-      Response<ApiListNoteOccurrencesResponse> response = service.listNoteOccurrences(listNoteOccurrencesOptions).execute();
+      Response<ApiListNoteOccurrencesResponse> response = service.listNoteOccurrences(listNoteOccurrencesOptions)
+          .execute();
       // Validate response
       assertNotNull(response);
       assertEquals(response.getStatusCode(), 200);
@@ -764,18 +570,16 @@ public class FindingsIT extends SdkIntegrationTestBase {
 
       assertNotNull(apiListNoteOccurrencesResponseResult);
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
+          e.getDebuggingInfo()));
     }
   }
 
   @Test
   public void testGetOccurrence() throws Exception {
     try {
-      GetOccurrenceOptions getOccurrenceOptions = new GetOccurrenceOptions.Builder()
-      .providerId(providerID)
-      .occurrenceId(String.format("kpi-occurrence-%s", identifier))
-      .build();
+      GetOccurrenceOptions getOccurrenceOptions = new GetOccurrenceOptions.Builder().providerId(providerID)
+          .occurrenceId(String.format("kpi-occurrence-%s", identifier)).build();
 
       // Invoke operation
       Response<ApiListOccurrencesResponse> response = service.getOccurrence(getOccurrenceOptions).execute();
@@ -787,70 +591,38 @@ public class FindingsIT extends SdkIntegrationTestBase {
 
       assertNotNull(apiListOccurrencesResponseResult);
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
+          e.getDebuggingInfo()));
     }
   }
 
   @Test
   public void testUpdateOccurrenceFinding() throws Exception {
     try {
-      Context contextModel = new Context.Builder()
-      .region(testString)
-      .resourceCrn(testString)
-      .resourceId(testString)
-      .resourceName(testString)
-      .resourceType(testString)
-      .serviceCrn(testString)
-      .serviceName(testString)
-      .environmentName(testString)
-      .componentName(testString)
-      .toolchainId(testString)
-      .build();
+      Context contextModel = new Context.Builder().region(testString).resourceCrn(testString).resourceId(testString)
+          .resourceName(testString).resourceType(testString).serviceCrn(testString).serviceName(testString)
+          .environmentName(testString).componentName(testString).toolchainId(testString).build();
 
-      RemediationStep remediationStepModel = new RemediationStep.Builder()
-      .title(testString)
-      .url(testString)
-      .build();
+      RemediationStep remediationStepModel = new RemediationStep.Builder().title(testString).url(testString).build();
 
-      SocketAddress socketAddressModel = new SocketAddress.Builder()
-      .address(testString)
-      .port(Long.valueOf("26"))
-      .build();
+      SocketAddress socketAddressModel = new SocketAddress.Builder().address(testString).port(Long.valueOf("26"))
+          .build();
 
-      NetworkConnection networkConnectionModel = new NetworkConnection.Builder()
-      .direction(testString)
-      .protocol(testString)
-      .client(socketAddressModel)
-      .server(socketAddressModel)
-      .build();
+      NetworkConnection networkConnectionModel = new NetworkConnection.Builder().direction(testString)
+          .protocol(testString).client(socketAddressModel).server(socketAddressModel).build();
 
-      DataTransferred dataTransferredModel = new DataTransferred.Builder()
-      .clientBytes(Long.valueOf("26"))
-      .serverBytes(Long.valueOf("26"))
-      .clientPackets(Long.valueOf("26"))
-      .serverPackets(Long.valueOf("26"))
-      .build();
+      DataTransferred dataTransferredModel = new DataTransferred.Builder().clientBytes(Long.valueOf("26"))
+          .serverBytes(Long.valueOf("26")).clientPackets(Long.valueOf("26")).serverPackets(Long.valueOf("26")).build();
 
-      Finding findingModel = new Finding.Builder()
-      .severity("LOW")
-      .certainty("LOW")
-      .nextSteps(new java.util.ArrayList<RemediationStep>(java.util.Arrays.asList(remediationStepModel)))
-      .networkConnection(networkConnectionModel)
-      .dataTransferred(dataTransferredModel)
-      .build();
+      Finding findingModel = new Finding.Builder().severity("LOW").certainty("LOW")
+          .nextSteps(new java.util.ArrayList<RemediationStep>(java.util.Arrays.asList(remediationStepModel)))
+          .networkConnection(networkConnectionModel).dataTransferred(dataTransferredModel).build();
 
-      UpdateOccurrenceOptions updateOccurrenceOptions = new UpdateOccurrenceOptions.Builder()
-      .providerId(providerID)
-      .occurrenceId(String.format("finding-occurrence-%s", identifier))
-      .noteName(String.format("%s/providers/%s/notes/finding-note-%s", accountID, providerID, identifier))
-      .kind("FINDING")
-      .id(String.format("finding-occurrence-%s", identifier))
-      .resourceUrl(testString)
-      .remediation(testString)
-      .context(contextModel)
-      .finding(findingModel)
-      .build();
+      UpdateOccurrenceOptions updateOccurrenceOptions = new UpdateOccurrenceOptions.Builder().providerId(providerID)
+          .occurrenceId(String.format("finding-occurrence-%s", identifier))
+          .noteName(String.format("%s/providers/%s/notes/finding-note-%s", accountID, providerID, identifier))
+          .kind("FINDING").id(String.format("finding-occurrence-%s", identifier)).resourceUrl(testString)
+          .remediation(testString).context(contextModel).finding(findingModel).build();
 
       // Invoke operation
       Response<ApiOccurrence> response = service.updateOccurrence(updateOccurrenceOptions).execute();
@@ -862,43 +634,25 @@ public class FindingsIT extends SdkIntegrationTestBase {
 
       assertNotNull(apiOccurrenceResult);
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
+          e.getDebuggingInfo()));
     }
   }
 
-  @Test(groups={"kpi"})
+  @Test(groups = { "kpi" })
   public void testUpdateOccurrenceKpi() throws Exception {
     try {
-      Context contextModel = new Context.Builder()
-      .region(testString)
-      .resourceCrn(testString)
-      .resourceId(testString)
-      .resourceName(testString)
-      .resourceType(testString)
-      .serviceCrn(testString)
-      .serviceName(testString)
-      .environmentName(testString)
-      .componentName(testString)
-      .toolchainId(testString)
-      .build();
+      Context contextModel = new Context.Builder().region(testString).resourceCrn(testString).resourceId(testString)
+          .resourceName(testString).resourceType(testString).serviceCrn(testString).serviceName(testString)
+          .environmentName(testString).componentName(testString).toolchainId(testString).build();
 
-      Kpi kpiModel = new Kpi.Builder()
-      .value(Double.valueOf("72.5"))
-      .total(Double.valueOf("72.5"))
-      .build();
+      Kpi kpiModel = new Kpi.Builder().value(Double.valueOf("72.5")).total(Double.valueOf("72.5")).build();
 
-      UpdateOccurrenceOptions updateOccurrenceOptions = new UpdateOccurrenceOptions.Builder()
-      .providerId(providerID)
-      .occurrenceId(String.format("kpi-occurrence-%s", identifier))
-      .noteName(String.format("%s/providers/%s/notes/kpi-note-%s", accountID, providerID, identifier))
-      .kind("KPI")
-      .id(String.format("kpi-occurrence-%s", identifier))
-      .resourceUrl(testString)
-      .remediation(testString)
-      .context(contextModel)
-      .kpi(kpiModel)
-      .build();
+      UpdateOccurrenceOptions updateOccurrenceOptions = new UpdateOccurrenceOptions.Builder().providerId(providerID)
+          .occurrenceId(String.format("kpi-occurrence-%s", identifier))
+          .noteName(String.format("%s/providers/%s/notes/kpi-note-%s", accountID, providerID, identifier)).kind("KPI")
+          .id(String.format("kpi-occurrence-%s", identifier)).resourceUrl(testString).remediation(testString)
+          .context(contextModel).kpi(kpiModel).build();
 
       // Invoke operation
       Response<ApiOccurrence> response = service.updateOccurrence(updateOccurrenceOptions).execute();
@@ -910,15 +664,15 @@ public class FindingsIT extends SdkIntegrationTestBase {
 
       assertNotNull(apiOccurrenceResult);
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
+          e.getDebuggingInfo()));
     }
   }
+
   @Test
   public void testListProviders() throws Exception {
     try {
-      ListProvidersOptions listProvidersOptions = new ListProvidersOptions.Builder()
-      .build();
+      ListProvidersOptions listProvidersOptions = new ListProvidersOptions.Builder().build();
 
       // Invoke operation
       Response<ApiListProvidersResponse> response = service.listProviders(listProvidersOptions).execute();
@@ -930,18 +684,16 @@ public class FindingsIT extends SdkIntegrationTestBase {
 
       assertNotNull(apiListProvidersResponseResult);
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
+          e.getDebuggingInfo()));
     }
   }
 
-  @AfterGroups(groups={"kpi"})
+  @AfterGroups(groups = { "kpi" })
   public void testDeleteOccurrence() throws Exception {
     try {
-      DeleteOccurrenceOptions deleteOccurrenceOptions = new DeleteOccurrenceOptions.Builder()
-      .providerId(providerID)
-      .occurrenceId(String.format("kpi-occurrence-%s", identifier))
-      .build();
+      DeleteOccurrenceOptions deleteOccurrenceOptions = new DeleteOccurrenceOptions.Builder().providerId(providerID)
+          .occurrenceId(String.format("kpi-occurrence-%s", identifier)).build();
 
       // Invoke operation
       Response<Void> response = service.deleteOccurrence(deleteOccurrenceOptions).execute();
@@ -949,18 +701,16 @@ public class FindingsIT extends SdkIntegrationTestBase {
       assertNotNull(response);
       assertEquals(response.getStatusCode(), 200);
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
+          e.getDebuggingInfo()));
     }
   }
 
-  @AfterGroups(groups={"kpi"})
+  @AfterGroups(groups = { "kpi" })
   public void testDeleteNote() throws Exception {
     try {
-      DeleteNoteOptions deleteNoteOptions = new DeleteNoteOptions.Builder()
-      .providerId(providerID)
-      .noteId(String.format("kpi-note-%s", identifier))
-      .build();
+      DeleteNoteOptions deleteNoteOptions = new DeleteNoteOptions.Builder().providerId(providerID)
+          .noteId(String.format("kpi-note-%s", identifier)).build();
 
       // Invoke operation
       Response<Void> response = service.deleteNote(deleteNoteOptions).execute();
@@ -968,8 +718,8 @@ public class FindingsIT extends SdkIntegrationTestBase {
       assertNotNull(response);
       assertEquals(response.getStatusCode(), 200);
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s\nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
+          e.getDebuggingInfo()));
     }
   }
 
@@ -980,45 +730,38 @@ public class FindingsIT extends SdkIntegrationTestBase {
     System.out.println("Setup complete.");
 
     System.out.println(String.format("cleaning up account: %s with provider: %s", accountID, providerID));
-    
-    ListNotesOptions listNotesOptions = new ListNotesOptions.Builder()
-    .providerId(providerID)
-    .build();
+
+    ListNotesOptions listNotesOptions = new ListNotesOptions.Builder().providerId(providerID).build();
     Response<ApiListNotesResponse> notes = service.listNotes(listNotesOptions).execute();
-    for(ApiNote note: notes.getResult().getNotes()){
+    for (ApiNote note : notes.getResult().getNotes()) {
       String[] parts = note.id().split("-");
-      if(identifier.equals(parts[parts.length-2]+"-"+parts[parts.length-1])){
-        DeleteNoteOptions deleteNoteOptions = new DeleteNoteOptions.Builder()
-        .providerId(providerID)
-        .noteId(note.id())
-        .build();
+      if (identifier.equals(parts[parts.length - 2] + "-" + parts[parts.length - 1])) {
+        DeleteNoteOptions deleteNoteOptions = new DeleteNoteOptions.Builder().providerId(providerID).noteId(note.id())
+            .build();
         service.deleteNote(deleteNoteOptions).execute();
       }
     }
 
-    ListOccurrencesOptions listOccurrencesOptions = new ListOccurrencesOptions.Builder()
-    .providerId(providerID)
-    .build();
+    ListOccurrencesOptions listOccurrencesOptions = new ListOccurrencesOptions.Builder().providerId(providerID).build();
     Response<ApiListOccurrencesResponse> occurrences = service.listOccurrences(listOccurrencesOptions).execute();
-    for(ApiOccurrence occurrence: occurrences.getResult().getOccurrences()){
+    for (ApiOccurrence occurrence : occurrences.getResult().getOccurrences()) {
       String[] parts = occurrence.id().split("-");
-      if(identifier.equals(parts[parts.length-2]+"-"+parts[parts.length-1])){
-        DeleteOccurrenceOptions deleteOccurrenceOptions = new DeleteOccurrenceOptions.Builder()
-        .providerId(providerID)
-        .occurrenceId(occurrence.id())
-        .build();
+      if (identifier.equals(parts[parts.length - 2] + "-" + parts[parts.length - 1])) {
+        DeleteOccurrenceOptions deleteOccurrenceOptions = new DeleteOccurrenceOptions.Builder().providerId(providerID)
+            .occurrenceId(occurrence.id()).build();
         service.deleteOccurrence(deleteOccurrenceOptions).execute();
       }
     }
     System.out.println("cleanup was successful");
 
-    ListProvidersOptions listProvidersOptions = new ListProvidersOptions.Builder()
-    .build();
+    ListProvidersOptions listProvidersOptions = new ListProvidersOptions.Builder().build();
     Response<ApiListProvidersResponse> providers = service.listProviders(listProvidersOptions).execute();
-    for(ApiProvider provider: providers.getResult().getProviders()){
-      if(provider.getId() == providerID) {
-        System.out.println(String.format("seems like account has some resources left even after a successful cleanup, please consider manual cleanup for account: %s and provider: %s", accountID, providerID));
+    for (ApiProvider provider : providers.getResult().getProviders()) {
+      if (provider.getId() == providerID) {
+        System.out.println(String.format(
+            "seems like account has some resources left even after a successful cleanup, please consider manual cleanup for account: %s and provider: %s",
+            accountID, providerID));
       }
     }
   }
- }
+}
