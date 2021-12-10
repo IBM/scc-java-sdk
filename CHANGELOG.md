@@ -1,3 +1,18 @@
+## [1.0.2](https://github.com/IBM/scc-java-sdk/compare/1.0.1...1.0.2) (2021-12-10)
+
+
+### Bug Fixes
+
+* **FindingsAPI:** getOccurrence should not return list ([fb58f89](https://github.com/IBM/scc-java-sdk/commit/fb58f8987472915260a0348e52e95111c29c6787))
+
+## [1.0.1](https://github.com/IBM/scc-java-sdk/compare/1.0.0...1.0.1) (2021-10-12)
+
+
+### Bug Fixes
+
+* **Findings:** createTime and updateTime in NoteOptions ([71dd5f1](https://github.com/IBM/scc-java-sdk/commit/71dd5f191ded6f7f0f5584687ac75a2fcbd6ff6f))
+* **SemanticRelease:** latest SR needs node >= 14.17 ([0e66f85](https://github.com/IBM/scc-java-sdk/commit/0e66f85de27f0ccc6a0200530e78cf36b6a99de2))
+
 # [1.0.0](https://github.com/IBM/scc-java-sdk/compare/0.0.33...1.0.0) (2021-06-30)
 
 
