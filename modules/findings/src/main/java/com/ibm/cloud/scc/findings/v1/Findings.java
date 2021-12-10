@@ -588,9 +588,9 @@ public class Findings extends BaseService {
    * Get the details of a specific occurrence by specifying the ID and provider ID.
    *
    * @param getOccurrenceOptions the {@link GetOccurrenceOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link ApiListOccurrencesResponse}
+   * @return a {@link ServiceCall} with a result of type {@link ApiOccurrence}
    */
-  public ServiceCall<ApiListOccurrencesResponse> getOccurrence(GetOccurrenceOptions getOccurrenceOptions) {
+  public ServiceCall<ApiOccurrence> getOccurrence(GetOccurrenceOptions getOccurrenceOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(getOccurrenceOptions,
       "getOccurrenceOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
@@ -606,8 +606,8 @@ public class Findings extends BaseService {
     if (getOccurrenceOptions.transactionId() != null) {
       builder.header("Transaction-Id", getOccurrenceOptions.transactionId());
     }
-    ResponseConverter<ApiListOccurrencesResponse> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ApiListOccurrencesResponse>() { }.getType());
+    ResponseConverter<ApiOccurrence> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ApiOccurrence>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 

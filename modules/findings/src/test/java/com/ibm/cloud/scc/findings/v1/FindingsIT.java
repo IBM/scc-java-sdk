@@ -582,14 +582,14 @@ public class FindingsIT extends SdkIntegrationTestBase {
           .occurrenceId(String.format("kpi-occurrence-%s", identifier)).build();
 
       // Invoke operation
-      Response<ApiListOccurrencesResponse> response = service.getOccurrence(getOccurrenceOptions).execute();
+      Response<ApiOccurrence> response = service.getOccurrence(getOccurrenceOptions).execute();
       // Validate response
       assertNotNull(response);
       assertEquals(response.getStatusCode(), 200);
 
-      ApiListOccurrencesResponse apiListOccurrencesResponseResult = response.getResult();
+      ApiOccurrence apiOccurrenceResponseResult = response.getResult();
 
-      assertNotNull(apiListOccurrencesResponseResult);
+      assertNotNull(apiOccurrenceResponseResult);
     } catch (ServiceResponseException e) {
       fail(String.format("Service returned status code %d: %s\nError details: %s", e.getStatusCode(), e.getMessage(),
           e.getDebuggingInfo()));
