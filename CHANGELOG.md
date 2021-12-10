@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/IBM/scc-java-sdk/compare/1.0.1...1.0.2) (2021-12-10)
+
+
+### Bug Fixes
+
+* **FindingsAPI:** getOccurrence should not return list ([fb58f89](https://github.com/IBM/scc-java-sdk/commit/fb58f8987472915260a0348e52e95111c29c6787))
+
 ## [1.0.1](https://github.com/IBM/scc-java-sdk/compare/1.0.0...1.0.1) (2021-10-12)
 
 
