@@ -2,9 +2,9 @@
 [![Javadoc](https://img.shields.io/static/v1?label=javadoc&message=latest&color=blue)](http://IBM.github.io/scc-java-sdk)
 [![Release](https://img.shields.io/github/v/release/IBM/scc-java-sdk)](https://img.shields.io/github/v/release/IBM/scc-java-sdk)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![codecov](https://codecov.io/gh/IBM/scc-java-sdk/branch/main/graph/badge.svg?token=9E3PB14AKI)](https://codecov.io/gh/IBM/scc-java-sdk)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/c01d10d1017a7fa7c8cb/test_coverage)](https://codeclimate.com/github/IBM/scc-java-sdk/test_coverage)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-[![Maven Central](https://img.shields.io/maven-central/v/com.ibm.cloud/scc)](https://maven-badges.herokuapp.com/maven-central/com.ibm.cloud/scc)
+[![Maven Central](https://img.shields.io/maven-central/v/com.ibm.cloud/scc.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.ibm.cloud%22%20AND%20a:%22scc%22)
 
 # IBM Cloud Security & Compliance Center Java SDK Version 1.0.2
 Java client library to interact with various [IBM Cloud Security & Compliance Center](https://cloud.ibm.com/docs?tab=api-docs&category=platform_services%2Csecurity).
