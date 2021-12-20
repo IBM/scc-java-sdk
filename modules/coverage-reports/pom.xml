@@ -5,7 +5,7 @@
         <!-- >>> Update this to reflect your parent project's artifact id -->
         <artifactId>scc</artifactId>
         <groupId>com.ibm.cloud</groupId>
-        <version>2.0.0</version>
+        <version>2.0.1</version>
         <relativePath>../..</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
