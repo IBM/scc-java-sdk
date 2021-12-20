@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/IBM/scc-java-sdk/compare/2.0.0...2.0.1) (2021-12-20)
+
+
+### Bug Fixes
+
+* **SCC:** deprecating NotificationsAPI ([54675b5](https://github.com/IBM/scc-java-sdk/commit/54675b52fb6b1e09d85aa03d32770d170f8b9ec4))
+
 # [2.0.0](https://github.com/IBM/scc-java-sdk/compare/1.0.2...2.0.0) (2021-12-20)
 
 
