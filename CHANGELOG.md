@@ -1,3 +1,13 @@
+# [2.0.0](https://github.com/IBM/scc-java-sdk/compare/1.0.2...2.0.0) (2021-12-20)
+
+
+* Merge pull request #49 from IBM/deprecate ([e8dbdaf](https://github.com/IBM/scc-java-sdk/commit/e8dbdaf1c7ba58c3172bbb5faa6b39b36e2ca8e7)), closes [#49](https://github.com/IBM/scc-java-sdk/issues/49)
+
+
+### BREAKING CHANGES
+
+* deprecating NotificationsAPI
+
 ## [1.0.2](https://github.com/IBM/scc-java-sdk/compare/1.0.1...1.0.2) (2021-12-10)
 
 
