@@ -47,7 +47,6 @@ The IBM Cloud Security & Compliance Center Java SDK allows developers to program
 Service Name | Imported Class Name
 --- | ---
 [FindingsApi](https://cloud.ibm.com/apidocs/security-compliance/findings) | FindingsApi:1.0.2
-[NotificationsApi](https://cloud.ibm.com/apidocs/security-compliance/si-notifications) | NotificationsApi:1.0.2
 [ConfigurationGovernanceApi](https://cloud.ibm.com/apidocs/security-compliance/config) | ConfigurationGovernanceApi:1.0.2
 
 ## Prerequisites
