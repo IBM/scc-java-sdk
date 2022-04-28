@@ -19,11 +19,6 @@
             below should reflect the "artifactId" value specified in each module's pom.xml file (i.e. not the module's directory name). -->
         <dependency>
             <groupId>com.ibm.cloud</groupId>
-            <artifactId>findings</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ibm.cloud</groupId>
             <artifactId>configuration_governance</artifactId>
             <version>${project.version}</version>
         </dependency>

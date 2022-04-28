@@ -46,7 +46,6 @@ The IBM Cloud Security & Compliance Center Java SDK allows developers to program
 
 Service Name | Imported Class Name
 --- | ---
-[FindingsApi](https://cloud.ibm.com/apidocs/security-compliance/findings) | FindingsApi:2.0.1
 [ConfigurationGovernanceApi](https://cloud.ibm.com/apidocs/security-compliance/config) | ConfigurationGovernanceApi:2.0.1
 
 ## Prerequisites
@@ -76,14 +75,14 @@ Here are examples for maven and gradle:
 ```xml
 <dependency>
     <groupId>com.ibm.cloud</groupId>
-    <artifactId>findings</artifactId>
+    <artifactId>configuration_governance</artifactId>
     <version>2.0.1</version>
 </dependency>
 ```
 
 ### Gradle
 ```gradle
-compile 'com.ibm.cloud:findings:2.0.1'
+compile 'com.ibm.cloud:configuration_governance:2.0.1'
 ```
 
 ## Using the SDK
