@@ -6,7 +6,7 @@
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![Maven Central](https://img.shields.io/maven-central/v/com.ibm.cloud/scc.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.ibm.cloud%22%20AND%20a:%22scc%22)
 
-# IBM Cloud Security & Compliance Center Java SDK Version 2.0.1
+# IBM Cloud Security & Compliance Center Java SDK Version 3.0.0
 Java client library to interact with various [IBM Cloud Security & Compliance Center](https://cloud.ibm.com/docs?tab=api-docs&category=platform_services%2Csecurity).
 
 Disclaimer: this SDK is being released initially as a **pre-release** version.
@@ -46,7 +46,7 @@ The IBM Cloud Security & Compliance Center Java SDK allows developers to program
 
 Service Name | Imported Class Name
 --- | ---
-[ConfigurationGovernanceApi](https://cloud.ibm.com/apidocs/security-compliance/config) | ConfigurationGovernanceApi:2.0.1
+[ConfigurationGovernanceApi](https://cloud.ibm.com/apidocs/security-compliance/config) | ConfigurationGovernanceApi:3.0.0
 
 ## Prerequisites
 
@@ -57,7 +57,7 @@ Service Name | Imported Class Name
 * Java 8 or above.
 
 ## Installation
-The current version of this SDK is: 2.0.1
+The current version of this SDK is: 3.0.0
 
 Each service's artifact coordinates are listed in the table above.
 
@@ -76,13 +76,13 @@ Here are examples for maven and gradle:
 <dependency>
     <groupId>com.ibm.cloud</groupId>
     <artifactId>configuration_governance</artifactId>
-    <version>2.0.1</version>
+    <version>3.0.0</version>
 </dependency>
 ```
 
 ### Gradle
 ```gradle
-compile 'com.ibm.cloud:configuration_governance:2.0.1'
+compile 'com.ibm.cloud:configuration_governance:3.0.0'
 ```
 
 ## Using the SDK
