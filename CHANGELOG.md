@@ -1,3 +1,19 @@
+# [3.0.0](https://github.com/IBM/scc-java-sdk/compare/2.0.1...3.0.0) (2022-08-05)
+
+
+### Bug Fixes
+
+* **FindingsAPI:** deprecated ([fe11482](https://github.com/IBM/scc-java-sdk/commit/fe11482670f9fbaf0b37db1039b7416cef1607c4))
+
+
+* Merge pull request #51 from IBM/si-deprecation ([7458078](https://github.com/IBM/scc-java-sdk/commit/7458078e97f35a158e72ad72ce861c01719ab598)), closes [#51](https://github.com/IBM/scc-java-sdk/issues/51)
+
+
+### BREAKING CHANGES
+
+* Deprecating Security Insights
+* **FindingsAPI:** deprecating Security Insights
+
 ## [2.0.1](https://github.com/IBM/scc-java-sdk/compare/2.0.0...2.0.1) (2021-12-20)
 
 
