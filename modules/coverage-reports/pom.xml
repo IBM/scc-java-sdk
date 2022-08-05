@@ -38,11 +38,6 @@
         </dependency>
 
         <!-- Copy and update this section for each service added to the project. -->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>findings</artifactId>
-            <version>${project.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>${project.groupId}</groupId>
