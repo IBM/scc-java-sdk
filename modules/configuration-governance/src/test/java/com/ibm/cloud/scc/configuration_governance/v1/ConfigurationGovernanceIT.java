@@ -94,7 +94,7 @@ public class ConfigurationGovernanceIT extends SdkIntegrationTestBase {
   String identifier = "jv-"+(System.currentTimeMillis()/1000);
 
   public String getConfigFilename() {
-    return "compliance_v2.env";
+    return "../../configuration_governance_v1.env";
   }
 
   @BeforeClass
