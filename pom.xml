@@ -1,71 +1,52 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- >>> Replace this with your service category (e.g. "platform-services") -->
-    <artifactId>scc</artifactId>
+    <artifactId>security-and-compliance-center-sdk</artifactId>
 
-    <!-- >>> Update this field to reflect your project -->
-    <name>IBM Cloud Security &amp; Compliance Center Java SDK</name>
+    <name>IBM Cloud Security and Compliance Center Service Java SDK</name>
 
-    <!-- >>> Update this field to reflect your project -->
-    <description>Java Client Library to access the IBM Cloud Security &amp; Compliance Center</description>
+    <description>Java Client Library to access the IBM Cloud Security and Compliance Center APIs</description>
 
-    <!-- >>> Update this field to reflect your project's github URL -->
-    <url>https://github.ibm.com/CloudEngineering/java-sdk-template</url>
+    <url>https://github.com/IBM/security-and-compliance-center-api-java-sdk</url>
 
     <groupId>com.ibm.cloud</groupId>
-    <version>3.0.0</version>
+    <version>2.0.0</version>
     <packaging>pom</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!--
-            This is the version associated with the Java core. The version used here should be compatible with the version
-            of the SDK generator used to generate your SDK code.
-            See this link for details: https://github.ibm.com/CloudEngineering/openapi-sdkgen/wiki/Compatibility-Chart
-        -->
-        <sdk-core-version>9.13.3</sdk-core-version>
+        <sdk-core-version>9.17.4</sdk-core-version>
 
-        <!-- >>> Replace this with the name of your SDK's github repository -->
-        <git-repository-name>scc-java-sdk</git-repository-name>
+        <git-repository-name>security-and-compliance-center-java-sdk</git-repository-name>
 
-        <testng-version>7.1.0</testng-version>
-        <okhttp3-version>4.9.0</okhttp3-version>
-        <surefire-version>3.0.0-M3</surefire-version>
-        <jacoco-plugin-version>0.8.5</jacoco-plugin-version>
-        <maven-deploy-plugin-version>3.0.0-M1</maven-deploy-plugin-version>
-        <nexus-staging-plugin-version>1.6.8</nexus-staging-plugin-version>
-        <maven-gpg-plugin-version>1.6</maven-gpg-plugin-version>
-        <maven-source-plugin-version>3.1.0</maven-source-plugin-version>
-        <maven-shade-plugin-version>3.2.2</maven-shade-plugin-version>
-        <maven-jar-plugin-version>3.2.0</maven-jar-plugin-version>
-        <maven-javadoc-plugin-version>3.1.1</maven-javadoc-plugin-version>
-        <maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
-        <maven-site-plugin-version>3.7.1</maven-site-plugin-version>
-        <maven-checkstyle-plugin-version>3.1.0</maven-checkstyle-plugin-version>
-        <maven-reports-plugin-version>3.0.0</maven-reports-plugin-version>
-        <maven-failsafe-plugin-version>3.0.0-M4</maven-failsafe-plugin-version>
-        <maven-buildnumber-plugin-version>1.4</maven-buildnumber-plugin-version>
-        <powermock-version>2.0.5</powermock-version>
-        <mockito-version>3.2.4</mockito-version>
-        <slf4j-version>1.7.28</slf4j-version>
+        <testng-version>7.4.0</testng-version>
+        <okhttp3-version>4.10.0</okhttp3-version>
+        <surefire-version>3.0.0-M7</surefire-version>
+        <jacoco-plugin-version>0.8.8</jacoco-plugin-version>
+        <maven-deploy-plugin-version>3.0.0</maven-deploy-plugin-version>
+        <nexus-staging-plugin-version>1.6.13</nexus-staging-plugin-version>
+        <maven-gpg-plugin-version>3.0.1</maven-gpg-plugin-version>
+        <maven-source-plugin-version>3.2.1</maven-source-plugin-version>
+        <maven-shade-plugin-version>3.3.0</maven-shade-plugin-version>
+        <maven-jar-plugin-version>3.2.2</maven-jar-plugin-version>
+        <maven-javadoc-plugin-version>3.4.1</maven-javadoc-plugin-version>
+        <maven-compiler-plugin-version>3.10.1</maven-compiler-plugin-version>
+        <maven-site-plugin-version>3.12.1</maven-site-plugin-version>
+        <maven-checkstyle-plugin-version>3.2.0</maven-checkstyle-plugin-version>
+        <checkstyle-version>8.41</checkstyle-version>
+        <maven-reports-plugin-version>3.4.1</maven-reports-plugin-version>
+        <maven-failsafe-plugin-version>3.0.0-M7</maven-failsafe-plugin-version>
+        <maven-buildnumber-plugin-version>3.0.0</maven-buildnumber-plugin-version>
+        <slf4j-version>2.0.6</slf4j-version>
+        <junit-version>4.13.2</junit-version>
     </properties>
 
     <modules>
-        <!-- This module should always be listed first -->
         <module>modules/common</module>
-
-        <!-- >>> List each service's module here -->
-        <module>modules/configuration-governance</module>
-
-        <!-- This module should be listed after all the service-related modules above -->
+        <module>modules/security-and-compliance-center-api</module>
         <module>modules/coverage-reports</module>
-
-        <!-- This module should always be listed last -->
-        <!-- >>> Uncomment the following line if you want to build the examples -->
-        <module>modules/examples</module>
     </modules>
 
     <licenses>
@@ -79,29 +60,18 @@
         <name>IBM Cloud</name>
     </organization>
 
-    <!-- >>> Update these values to reflect your project -->
     <scm>
-        <connection>scm:git:https://github.com/IBM/scc-java-sdk</connection>
-        <developerConnection>scm:git:https://github.com/IBM/scc-java-sdk</developerConnection>
-        <url>https://github.com/IBM/scc-java-sdk/tree/main</url>
+        <connection>scm:git:https://github.com/IBM/security-and-compliance-center-api-java-sdk</connection>
+        <developerConnection>scm:git:https://github.com/IBM/security-and-compliance-center-api-java-sdk</developerConnection>
+        <url>https://github.com/IBM/security-and-compliance-center-api-java-sdk/tree/master</url>
     </scm>
 
-    <!-- >>> Update these values to reflect your project -->
     <issueManagement>
         <system>Github</system>
-        <url>https://github.com/IBM/scc-java-sdk/issues</url>
+        <url>https://github.com/IBM/security-and-compliance-center-api-java-sdk/issues</url>
     </issueManagement>
 
-    <!-- >>> Update these values to reflect your project -->
-    <ciManagement>
-        <system>Travis-CI</system>
-        <url>https://travis.com/IBM/scc-java-sdk/</url>
-    </ciManagement>
-
-    <!-- This section is commented out because we use an alternate deploy plugin.
-    <distributionManagement>
-    </distributionManagement>
-    -->
+    <repositories></repositories>
 
     <dependencyManagement>
         <dependencies>
@@ -111,17 +81,13 @@
                 <artifactId>sdk-core</artifactId>
                 <version>${sdk-core-version}</version>
             </dependency>
-
-            <!-- Each module (except "common") should depend on this artifact -->
             <dependency>
-                <!-- >>> Replace this with the common module's artifactId -->
-                <artifactId>common</artifactId>
+                <artifactId>security-and-compliance-center-sdk-common</artifactId>
                 <groupId>${project.groupId}</groupId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <!-- >>> Replace this with the common module's artifactId -->
-                <artifactId>common</artifactId>
+                <artifactId>security-and-compliance-center-sdk-common</artifactId>
                 <groupId>${project.groupId}</groupId>
                 <version>${project.version}</version>
                 <type>test-jar</type>
@@ -137,6 +103,12 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit-version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>com.squareup.okhttp3</groupId>
                 <artifactId>okhttp</artifactId>
                 <version>${okhttp3-version}</version>
@@ -148,18 +120,10 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>org.powermock</groupId>
-                <artifactId>powermock-api-mockito2</artifactId>
-                <version>${powermock-version}</version>
-                <scope>test</scope>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j-version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.powermock</groupId>
-                <artifactId>powermock-module-testng</artifactId>
-                <version>${powermock-version}</version>
-                <scope>test</scope>
-            </dependency>
-            <!-- Depedency needed to build examples -->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-jdk14</artifactId>
@@ -351,8 +315,8 @@
             </plugins>
         </pluginManagement>
         <plugins>
-            <!-- Disable default maven-deploy-plugin -->
             <plugin>
+                <!-- Disable default maven-deploy-plugin -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <configuration>
@@ -408,12 +372,12 @@
                 <artifactId>maven-checkstyle-plugin</artifactId>
             </plugin>
             <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-surefire-plugin</artifactId>
-              <version>${surefire-version}</version>
-              <configuration>
-                <skipTests>${skip.unit.tests}</skipTests>
-              </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire-version}</version>
+                <configuration>
+                    <skipTests>${skip.unit.tests}</skipTests>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -469,18 +433,13 @@
     </developers>
 
     <profiles>
-
         <!-- "central" is used to deploy artifacts on maven central -->
         <profile>
             <id>central</id>
 
             <!-- For this profile, we'll get dependencies from maven central -->
             <repositories></repositories>
-
             <distributionManagement>
-                <snapshotRepository>
-                    <!-- We don't deploy snapshot releases -->
-                </snapshotRepository>
                 <repository>
                     <!-- This is where the nexus staging plugin will publish artifacts -->
                     <id>ossrh</id>

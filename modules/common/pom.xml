@@ -1,21 +1,18 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <!-- >>> Replace this with the parent pom's artifactId -->
-        <artifactId>scc</artifactId>
+        <artifactId>security-and-compliance-center-sdk</artifactId>
         <groupId>com.ibm.cloud</groupId>
-        <version>3.0.0</version>
+        <version>2.0.0</version>
         <relativePath>../..</relativePath>
     </parent>
 
-    <!-- >>> Replace this with the common module's artifactId (e.g. platform-services-common) -->
-    <artifactId>common</artifactId>
+    <artifactId>security-and-compliance-center-sdk-common</artifactId>
 
-    <!-- >>> Replace this with the common module's description (e.g. Platform Services Common Library) -->
-    <name>IBM Cloud Security &amp; Compliance Center Common Library</name>
+    <name>Security and Compliance Center SDK Common Library</name>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -29,13 +26,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-api-mockito2</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-module-testng</artifactId>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
