@@ -20,8 +20,8 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  * The required configurations.
  *
  * Classes which extend this class:
- * - RequiredConfigRequiredConfigAnd
- * - RequiredConfigRequiredConfigOr
+ * - RequiredConfigAnd
+ * - RequiredConfigOr
  * - RequiredConfigRequiredConfigBase
  */
 public class RequiredConfig extends GenericModel {

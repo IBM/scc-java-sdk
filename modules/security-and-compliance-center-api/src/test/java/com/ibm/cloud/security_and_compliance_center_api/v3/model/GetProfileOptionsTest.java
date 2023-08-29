@@ -32,11 +32,11 @@ public class GetProfileOptionsTest {
   @Test
   public void testGetProfileOptions() throws Throwable {
     GetProfileOptions getProfileOptionsModel = new GetProfileOptions.Builder()
-      .profilesId("testString")
+      .profileId("testString")
       .xCorrelationId("testString")
       .xRequestId("testString")
       .build();
-    assertEquals(getProfileOptionsModel.profilesId(), "testString");
+    assertEquals(getProfileOptionsModel.profileId(), "testString");
     assertEquals(getProfileOptionsModel.xCorrelationId(), "testString");
     assertEquals(getProfileOptionsModel.xRequestId(), "testString");
   }

@@ -32,11 +32,11 @@ public class DeleteCustomProfileOptionsTest {
   @Test
   public void testDeleteCustomProfileOptions() throws Throwable {
     DeleteCustomProfileOptions deleteCustomProfileOptionsModel = new DeleteCustomProfileOptions.Builder()
-      .profilesId("testString")
+      .profileId("testString")
       .xCorrelationId("testString")
       .xRequestId("testString")
       .build();
-    assertEquals(deleteCustomProfileOptionsModel.profilesId(), "testString");
+    assertEquals(deleteCustomProfileOptionsModel.profileId(), "testString");
     assertEquals(deleteCustomProfileOptionsModel.xCorrelationId(), "testString");
     assertEquals(deleteCustomProfileOptionsModel.xRequestId(), "testString");
   }

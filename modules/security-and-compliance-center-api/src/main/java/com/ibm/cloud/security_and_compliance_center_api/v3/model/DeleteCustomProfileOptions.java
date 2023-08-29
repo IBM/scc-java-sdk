@@ -19,7 +19,7 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class DeleteCustomProfileOptions extends GenericModel {
 
-  protected String profilesId;
+  protected String profileId;
   protected String xCorrelationId;
   protected String xRequestId;
 
@@ -27,7 +27,7 @@ public class DeleteCustomProfileOptions extends GenericModel {
    * Builder.
    */
   public static class Builder {
-    private String profilesId;
+    private String profileId;
     private String xCorrelationId;
     private String xRequestId;
 
@@ -37,7 +37,7 @@ public class DeleteCustomProfileOptions extends GenericModel {
      * @param deleteCustomProfileOptions the instance to initialize the Builder with
      */
     private Builder(DeleteCustomProfileOptions deleteCustomProfileOptions) {
-      this.profilesId = deleteCustomProfileOptions.profilesId;
+      this.profileId = deleteCustomProfileOptions.profileId;
       this.xCorrelationId = deleteCustomProfileOptions.xCorrelationId;
       this.xRequestId = deleteCustomProfileOptions.xRequestId;
     }
@@ -51,10 +51,10 @@ public class DeleteCustomProfileOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param profilesId the profilesId
+     * @param profileId the profileId
      */
-    public Builder(String profilesId) {
-      this.profilesId = profilesId;
+    public Builder(String profileId) {
+      this.profileId = profileId;
     }
 
     /**
@@ -67,13 +67,13 @@ public class DeleteCustomProfileOptions extends GenericModel {
     }
 
     /**
-     * Set the profilesId.
+     * Set the profileId.
      *
-     * @param profilesId the profilesId
+     * @param profileId the profileId
      * @return the DeleteCustomProfileOptions builder
      */
-    public Builder profilesId(String profilesId) {
-      this.profilesId = profilesId;
+    public Builder profileId(String profileId) {
+      this.profileId = profileId;
       return this;
     }
 
@@ -103,9 +103,9 @@ public class DeleteCustomProfileOptions extends GenericModel {
   protected DeleteCustomProfileOptions() { }
 
   protected DeleteCustomProfileOptions(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.profilesId,
-      "profilesId cannot be empty");
-    profilesId = builder.profilesId;
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.profileId,
+      "profileId cannot be empty");
+    profileId = builder.profileId;
     xCorrelationId = builder.xCorrelationId;
     xRequestId = builder.xRequestId;
   }
@@ -120,14 +120,14 @@ public class DeleteCustomProfileOptions extends GenericModel {
   }
 
   /**
-   * Gets the profilesId.
+   * Gets the profileId.
    *
    * The profile ID.
    *
-   * @return the profilesId
+   * @return the profileId
    */
-  public String profilesId() {
-    return profilesId;
+  public String profileId() {
+    return profileId;
   }
 
   /**

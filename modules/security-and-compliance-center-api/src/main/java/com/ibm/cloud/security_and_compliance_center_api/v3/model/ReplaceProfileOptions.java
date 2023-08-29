@@ -32,7 +32,7 @@ public class ReplaceProfileOptions extends GenericModel {
     String CUSTOM = "custom";
   }
 
-  protected String profilesId;
+  protected String profileId;
   protected String profileName;
   protected String profileDescription;
   protected String profileType;
@@ -45,7 +45,7 @@ public class ReplaceProfileOptions extends GenericModel {
    * Builder.
    */
   public static class Builder {
-    private String profilesId;
+    private String profileId;
     private String profileName;
     private String profileDescription;
     private String profileType;
@@ -60,7 +60,7 @@ public class ReplaceProfileOptions extends GenericModel {
      * @param replaceProfileOptions the instance to initialize the Builder with
      */
     private Builder(ReplaceProfileOptions replaceProfileOptions) {
-      this.profilesId = replaceProfileOptions.profilesId;
+      this.profileId = replaceProfileOptions.profileId;
       this.profileName = replaceProfileOptions.profileName;
       this.profileDescription = replaceProfileOptions.profileDescription;
       this.profileType = replaceProfileOptions.profileType;
@@ -79,15 +79,15 @@ public class ReplaceProfileOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param profilesId the profilesId
+     * @param profileId the profileId
      * @param profileName the profileName
      * @param profileDescription the profileDescription
      * @param profileType the profileType
      * @param controls the controls
      * @param defaultParameters the defaultParameters
      */
-    public Builder(String profilesId, String profileName, String profileDescription, String profileType, List<ProfileControlsPrototype> controls, List<DefaultParametersPrototype> defaultParameters) {
-      this.profilesId = profilesId;
+    public Builder(String profileId, String profileName, String profileDescription, String profileType, List<ProfileControlsPrototype> controls, List<DefaultParametersPrototype> defaultParameters) {
+      this.profileId = profileId;
       this.profileName = profileName;
       this.profileDescription = profileDescription;
       this.profileType = profileType;
@@ -137,13 +137,13 @@ public class ReplaceProfileOptions extends GenericModel {
     }
 
     /**
-     * Set the profilesId.
+     * Set the profileId.
      *
-     * @param profilesId the profilesId
+     * @param profileId the profileId
      * @return the ReplaceProfileOptions builder
      */
-    public Builder profilesId(String profilesId) {
-      this.profilesId = profilesId;
+    public Builder profileId(String profileId) {
+      this.profileId = profileId;
       return this;
     }
 
@@ -230,8 +230,8 @@ public class ReplaceProfileOptions extends GenericModel {
   protected ReplaceProfileOptions() { }
 
   protected ReplaceProfileOptions(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.profilesId,
-      "profilesId cannot be empty");
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.profileId,
+      "profileId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.profileName,
       "profileName cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.profileDescription,
@@ -242,7 +242,7 @@ public class ReplaceProfileOptions extends GenericModel {
       "controls cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.defaultParameters,
       "defaultParameters cannot be null");
-    profilesId = builder.profilesId;
+    profileId = builder.profileId;
     profileName = builder.profileName;
     profileDescription = builder.profileDescription;
     profileType = builder.profileType;
@@ -262,14 +262,14 @@ public class ReplaceProfileOptions extends GenericModel {
   }
 
   /**
-   * Gets the profilesId.
+   * Gets the profileId.
    *
    * The profile ID.
    *
-   * @return the profilesId
+   * @return the profileId
    */
-  public String profilesId() {
-    return profilesId;
+  public String profileId() {
+    return profileId;
   }
 
   /**

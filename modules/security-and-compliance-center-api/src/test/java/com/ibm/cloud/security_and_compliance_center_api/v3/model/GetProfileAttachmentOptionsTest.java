@@ -33,12 +33,12 @@ public class GetProfileAttachmentOptionsTest {
   public void testGetProfileAttachmentOptions() throws Throwable {
     GetProfileAttachmentOptions getProfileAttachmentOptionsModel = new GetProfileAttachmentOptions.Builder()
       .attachmentId("testString")
-      .profilesId("testString")
+      .profileId("testString")
       .xCorrelationId("testString")
       .xRequestId("testString")
       .build();
     assertEquals(getProfileAttachmentOptionsModel.attachmentId(), "testString");
-    assertEquals(getProfileAttachmentOptionsModel.profilesId(), "testString");
+    assertEquals(getProfileAttachmentOptionsModel.profileId(), "testString");
     assertEquals(getProfileAttachmentOptionsModel.xCorrelationId(), "testString");
     assertEquals(getProfileAttachmentOptionsModel.xRequestId(), "testString");
   }

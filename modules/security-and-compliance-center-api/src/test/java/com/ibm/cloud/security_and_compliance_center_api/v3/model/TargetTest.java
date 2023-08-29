@@ -32,38 +32,10 @@ public class TargetTest {
 
   @Test
   public void testTarget() throws Throwable {
-    AdditionalTargetAttribute additionalTargetAttributeModel = new AdditionalTargetAttribute.Builder()
-      .name("name")
-      .operator("string_equals")
-      .value("value")
-      .build();
-    assertEquals(additionalTargetAttributeModel.name(), "name");
-    assertEquals(additionalTargetAttributeModel.operator(), "string_equals");
-    assertEquals(additionalTargetAttributeModel.value(), "value");
-
-    Target targetModel = new Target.Builder()
-      .serviceName("testString")
-      .serviceDisplayName("testString")
-      .resourceKind("testString")
-      .additionalTargetAttributes(java.util.Arrays.asList(additionalTargetAttributeModel))
-      .build();
-    assertEquals(targetModel.serviceName(), "testString");
-    assertEquals(targetModel.serviceDisplayName(), "testString");
-    assertEquals(targetModel.resourceKind(), "testString");
-    assertEquals(targetModel.additionalTargetAttributes(), java.util.Arrays.asList(additionalTargetAttributeModel));
-
-    String json = TestUtilities.serialize(targetModel);
-
-    Target targetModelNew = TestUtilities.deserialize(json, Target.class);
-    assertTrue(targetModelNew instanceof Target);
-    assertEquals(targetModelNew.serviceName(), "testString");
-    assertEquals(targetModelNew.serviceDisplayName(), "testString");
-    assertEquals(targetModelNew.resourceKind(), "testString");
+    Target targetModel = new Target();
+    assertNull(targetModel.getServiceName());
+    assertNull(targetModel.getServiceDisplayName());
+    assertNull(targetModel.getResourceKind());
+    assertNull(targetModel.getAdditionalTargetAttributes());
   }
-
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testTargetError() throws Throwable {
-    new Target.Builder().build();
-  }
-
 }

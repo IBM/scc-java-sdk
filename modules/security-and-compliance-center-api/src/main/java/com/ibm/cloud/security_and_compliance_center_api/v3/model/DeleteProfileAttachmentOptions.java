@@ -20,7 +20,7 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class DeleteProfileAttachmentOptions extends GenericModel {
 
   protected String attachmentId;
-  protected String profilesId;
+  protected String profileId;
   protected String xCorrelationId;
   protected String xRequestId;
 
@@ -29,7 +29,7 @@ public class DeleteProfileAttachmentOptions extends GenericModel {
    */
   public static class Builder {
     private String attachmentId;
-    private String profilesId;
+    private String profileId;
     private String xCorrelationId;
     private String xRequestId;
 
@@ -40,7 +40,7 @@ public class DeleteProfileAttachmentOptions extends GenericModel {
      */
     private Builder(DeleteProfileAttachmentOptions deleteProfileAttachmentOptions) {
       this.attachmentId = deleteProfileAttachmentOptions.attachmentId;
-      this.profilesId = deleteProfileAttachmentOptions.profilesId;
+      this.profileId = deleteProfileAttachmentOptions.profileId;
       this.xCorrelationId = deleteProfileAttachmentOptions.xCorrelationId;
       this.xRequestId = deleteProfileAttachmentOptions.xRequestId;
     }
@@ -55,11 +55,11 @@ public class DeleteProfileAttachmentOptions extends GenericModel {
      * Instantiates a new builder with required properties.
      *
      * @param attachmentId the attachmentId
-     * @param profilesId the profilesId
+     * @param profileId the profileId
      */
-    public Builder(String attachmentId, String profilesId) {
+    public Builder(String attachmentId, String profileId) {
       this.attachmentId = attachmentId;
-      this.profilesId = profilesId;
+      this.profileId = profileId;
     }
 
     /**
@@ -83,13 +83,13 @@ public class DeleteProfileAttachmentOptions extends GenericModel {
     }
 
     /**
-     * Set the profilesId.
+     * Set the profileId.
      *
-     * @param profilesId the profilesId
+     * @param profileId the profileId
      * @return the DeleteProfileAttachmentOptions builder
      */
-    public Builder profilesId(String profilesId) {
-      this.profilesId = profilesId;
+    public Builder profileId(String profileId) {
+      this.profileId = profileId;
       return this;
     }
 
@@ -121,10 +121,10 @@ public class DeleteProfileAttachmentOptions extends GenericModel {
   protected DeleteProfileAttachmentOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.attachmentId,
       "attachmentId cannot be empty");
-    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.profilesId,
-      "profilesId cannot be empty");
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.profileId,
+      "profileId cannot be empty");
     attachmentId = builder.attachmentId;
-    profilesId = builder.profilesId;
+    profileId = builder.profileId;
     xCorrelationId = builder.xCorrelationId;
     xRequestId = builder.xRequestId;
   }
@@ -150,14 +150,14 @@ public class DeleteProfileAttachmentOptions extends GenericModel {
   }
 
   /**
-   * Gets the profilesId.
+   * Gets the profileId.
    *
    * The profile ID.
    *
-   * @return the profilesId
+   * @return the profileId
    */
-  public String profilesId() {
-    return profilesId;
+  public String profileId() {
+    return profileId;
   }
 
   /**

@@ -14,7 +14,7 @@
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigItemsRequiredConfigAnd;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.ProviderTypeInstanceAttributes;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -23,23 +23,15 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 /**
- * Unit test class for the RequiredConfigItemsRequiredConfigAnd model.
+ * Unit test class for the ProviderTypeInstanceAttributes model.
  */
-public class RequiredConfigItemsRequiredConfigAndTest {
+public class ProviderTypeInstanceAttributesTest {
   final HashMap<String, InputStream> mockStreamMap = TestUtilities.createMockStreamMap();
   final List<FileWithMetadata> mockListFileWithMetadata = TestUtilities.creatMockListFileWithMetadata();
 
   @Test
-  public void testRequiredConfigItemsRequiredConfigAnd() throws Throwable {
-    RequiredConfigItemsRequiredConfigAnd requiredConfigItemsRequiredConfigAndModel = new RequiredConfigItemsRequiredConfigAnd.Builder()
-      .description("testString")
-      .build();
-    assertEquals(requiredConfigItemsRequiredConfigAndModel.description(), "testString");
-
-    String json = TestUtilities.serialize(requiredConfigItemsRequiredConfigAndModel);
-
-    RequiredConfigItemsRequiredConfigAnd requiredConfigItemsRequiredConfigAndModelNew = TestUtilities.deserialize(json, RequiredConfigItemsRequiredConfigAnd.class);
-    assertTrue(requiredConfigItemsRequiredConfigAndModelNew instanceof RequiredConfigItemsRequiredConfigAnd);
-    assertEquals(requiredConfigItemsRequiredConfigAndModelNew.description(), "testString");
+  public void testProviderTypeInstanceAttributes() throws Throwable {
+    ProviderTypeInstanceAttributes providerTypeInstanceAttributesModel = new ProviderTypeInstanceAttributes();
+    assertNotNull(providerTypeInstanceAttributesModel);
   }
 }

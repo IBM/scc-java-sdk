@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * The `OR` required configurations.
  */
-public class RequiredConfigRequiredConfigOr extends RequiredConfig {
+public class RequiredConfigOr extends RequiredConfig {
 
 
   /**
@@ -29,13 +29,13 @@ public class RequiredConfigRequiredConfigOr extends RequiredConfig {
     private List<RequiredConfigItems> or;
 
     /**
-     * Instantiates a new Builder from an existing RequiredConfigRequiredConfigOr instance.
+     * Instantiates a new Builder from an existing RequiredConfigOr instance.
      *
-     * @param requiredConfigRequiredConfigOr the instance to initialize the Builder with
+     * @param requiredConfigOr the instance to initialize the Builder with
      */
-    public Builder(RequiredConfig requiredConfigRequiredConfigOr) {
-      this.description = requiredConfigRequiredConfigOr.description;
-      this.or = requiredConfigRequiredConfigOr.or;
+    public Builder(RequiredConfig requiredConfigOr) {
+      this.description = requiredConfigOr.description;
+      this.or = requiredConfigOr.or;
     }
 
     /**
@@ -45,19 +45,19 @@ public class RequiredConfigRequiredConfigOr extends RequiredConfig {
     }
 
     /**
-     * Builds a RequiredConfigRequiredConfigOr.
+     * Builds a RequiredConfigOr.
      *
-     * @return the new RequiredConfigRequiredConfigOr instance
+     * @return the new RequiredConfigOr instance
      */
-    public RequiredConfigRequiredConfigOr build() {
-      return new RequiredConfigRequiredConfigOr(this);
+    public RequiredConfigOr build() {
+      return new RequiredConfigOr(this);
     }
 
     /**
      * Adds an or to or.
      *
      * @param or the new or
-     * @return the RequiredConfigRequiredConfigOr builder
+     * @return the RequiredConfigOr builder
      */
     public Builder addOr(RequiredConfigItems or) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(or,
@@ -73,7 +73,7 @@ public class RequiredConfigRequiredConfigOr extends RequiredConfig {
      * Set the description.
      *
      * @param description the description
-     * @return the RequiredConfigRequiredConfigOr builder
+     * @return the RequiredConfigOr builder
      */
     public Builder description(String description) {
       this.description = description;
@@ -85,7 +85,7 @@ public class RequiredConfigRequiredConfigOr extends RequiredConfig {
      * Existing or will be replaced.
      *
      * @param or the or
-     * @return the RequiredConfigRequiredConfigOr builder
+     * @return the RequiredConfigOr builder
      */
     public Builder or(List<RequiredConfigItems> or) {
       this.or = or;
@@ -93,9 +93,9 @@ public class RequiredConfigRequiredConfigOr extends RequiredConfig {
     }
   }
 
-  protected RequiredConfigRequiredConfigOr() { }
+  protected RequiredConfigOr() { }
 
-  protected RequiredConfigRequiredConfigOr(Builder builder) {
+  protected RequiredConfigOr(Builder builder) {
     description = builder.description;
     or = builder.or;
   }
@@ -103,7 +103,7 @@ public class RequiredConfigRequiredConfigOr extends RequiredConfig {
   /**
    * New builder.
    *
-   * @return a RequiredConfigRequiredConfigOr builder
+   * @return a RequiredConfigOr builder
    */
   public Builder newBuilder() {
     return new Builder(this);

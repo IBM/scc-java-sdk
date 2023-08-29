@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * The `OR` required configurations.
  */
-public class RequiredConfigItemsRequiredConfigOr extends RequiredConfigItems {
+public class RequiredConfigItemsRequiredConfigOrDepth1 extends RequiredConfigItems {
 
 
   /**
@@ -26,16 +26,16 @@ public class RequiredConfigItemsRequiredConfigOr extends RequiredConfigItems {
    */
   public static class Builder {
     private String description;
-    private List<RequiredConfigItems> or;
+    private List<RequiredConfigBase> or;
 
     /**
-     * Instantiates a new Builder from an existing RequiredConfigItemsRequiredConfigOr instance.
+     * Instantiates a new Builder from an existing RequiredConfigItemsRequiredConfigOrDepth1 instance.
      *
-     * @param requiredConfigItemsRequiredConfigOr the instance to initialize the Builder with
+     * @param requiredConfigItemsRequiredConfigOrDepth1 the instance to initialize the Builder with
      */
-    public Builder(RequiredConfigItems requiredConfigItemsRequiredConfigOr) {
-      this.description = requiredConfigItemsRequiredConfigOr.description;
-      this.or = requiredConfigItemsRequiredConfigOr.or;
+    public Builder(RequiredConfigItems requiredConfigItemsRequiredConfigOrDepth1) {
+      this.description = requiredConfigItemsRequiredConfigOrDepth1.description;
+      this.or = requiredConfigItemsRequiredConfigOrDepth1.or;
     }
 
     /**
@@ -45,25 +45,25 @@ public class RequiredConfigItemsRequiredConfigOr extends RequiredConfigItems {
     }
 
     /**
-     * Builds a RequiredConfigItemsRequiredConfigOr.
+     * Builds a RequiredConfigItemsRequiredConfigOrDepth1.
      *
-     * @return the new RequiredConfigItemsRequiredConfigOr instance
+     * @return the new RequiredConfigItemsRequiredConfigOrDepth1 instance
      */
-    public RequiredConfigItemsRequiredConfigOr build() {
-      return new RequiredConfigItemsRequiredConfigOr(this);
+    public RequiredConfigItemsRequiredConfigOrDepth1 build() {
+      return new RequiredConfigItemsRequiredConfigOrDepth1(this);
     }
 
     /**
      * Adds an or to or.
      *
      * @param or the new or
-     * @return the RequiredConfigItemsRequiredConfigOr builder
+     * @return the RequiredConfigItemsRequiredConfigOrDepth1 builder
      */
-    public Builder addOr(RequiredConfigItems or) {
+    public Builder addOr(RequiredConfigBase or) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(or,
         "or cannot be null");
       if (this.or == null) {
-        this.or = new ArrayList<RequiredConfigItems>();
+        this.or = new ArrayList<RequiredConfigBase>();
       }
       this.or.add(or);
       return this;
@@ -73,7 +73,7 @@ public class RequiredConfigItemsRequiredConfigOr extends RequiredConfigItems {
      * Set the description.
      *
      * @param description the description
-     * @return the RequiredConfigItemsRequiredConfigOr builder
+     * @return the RequiredConfigItemsRequiredConfigOrDepth1 builder
      */
     public Builder description(String description) {
       this.description = description;
@@ -85,17 +85,17 @@ public class RequiredConfigItemsRequiredConfigOr extends RequiredConfigItems {
      * Existing or will be replaced.
      *
      * @param or the or
-     * @return the RequiredConfigItemsRequiredConfigOr builder
+     * @return the RequiredConfigItemsRequiredConfigOrDepth1 builder
      */
-    public Builder or(List<RequiredConfigItems> or) {
+    public Builder or(List<RequiredConfigBase> or) {
       this.or = or;
       return this;
     }
   }
 
-  protected RequiredConfigItemsRequiredConfigOr() { }
+  protected RequiredConfigItemsRequiredConfigOrDepth1() { }
 
-  protected RequiredConfigItemsRequiredConfigOr(Builder builder) {
+  protected RequiredConfigItemsRequiredConfigOrDepth1(Builder builder) {
     description = builder.description;
     or = builder.or;
   }
@@ -103,7 +103,7 @@ public class RequiredConfigItemsRequiredConfigOr extends RequiredConfigItems {
   /**
    * New builder.
    *
-   * @return a RequiredConfigItemsRequiredConfigOr builder
+   * @return a RequiredConfigItemsRequiredConfigOrDepth1 builder
    */
   public Builder newBuilder() {
     return new Builder(this);

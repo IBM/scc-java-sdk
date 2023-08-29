@@ -12,8 +12,6 @@
  */
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
-import java.util.Map;
-
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
@@ -23,8 +21,7 @@ public class UpdateProviderTypeInstanceOptions extends GenericModel {
 
   protected String providerTypeId;
   protected String providerTypeInstanceId;
-  protected String name;
-  protected Map<String, Object> attributes;
+  protected UpdateProviderTypeInstanceRequest updateProviderTypeInstanceRequest;
   protected String xCorrelationId;
   protected String xRequestId;
 
@@ -34,8 +31,7 @@ public class UpdateProviderTypeInstanceOptions extends GenericModel {
   public static class Builder {
     private String providerTypeId;
     private String providerTypeInstanceId;
-    private String name;
-    private Map<String, Object> attributes;
+    private UpdateProviderTypeInstanceRequest updateProviderTypeInstanceRequest;
     private String xCorrelationId;
     private String xRequestId;
 
@@ -47,8 +43,7 @@ public class UpdateProviderTypeInstanceOptions extends GenericModel {
     private Builder(UpdateProviderTypeInstanceOptions updateProviderTypeInstanceOptions) {
       this.providerTypeId = updateProviderTypeInstanceOptions.providerTypeId;
       this.providerTypeInstanceId = updateProviderTypeInstanceOptions.providerTypeInstanceId;
-      this.name = updateProviderTypeInstanceOptions.name;
-      this.attributes = updateProviderTypeInstanceOptions.attributes;
+      this.updateProviderTypeInstanceRequest = updateProviderTypeInstanceOptions.updateProviderTypeInstanceRequest;
       this.xCorrelationId = updateProviderTypeInstanceOptions.xCorrelationId;
       this.xRequestId = updateProviderTypeInstanceOptions.xRequestId;
     }
@@ -64,10 +59,12 @@ public class UpdateProviderTypeInstanceOptions extends GenericModel {
      *
      * @param providerTypeId the providerTypeId
      * @param providerTypeInstanceId the providerTypeInstanceId
+     * @param updateProviderTypeInstanceRequest the updateProviderTypeInstanceRequest
      */
-    public Builder(String providerTypeId, String providerTypeInstanceId) {
+    public Builder(String providerTypeId, String providerTypeInstanceId, UpdateProviderTypeInstanceRequest updateProviderTypeInstanceRequest) {
       this.providerTypeId = providerTypeId;
       this.providerTypeInstanceId = providerTypeInstanceId;
+      this.updateProviderTypeInstanceRequest = updateProviderTypeInstanceRequest;
     }
 
     /**
@@ -102,24 +99,13 @@ public class UpdateProviderTypeInstanceOptions extends GenericModel {
     }
 
     /**
-     * Set the name.
+     * Set the updateProviderTypeInstanceRequest.
      *
-     * @param name the name
+     * @param updateProviderTypeInstanceRequest the updateProviderTypeInstanceRequest
      * @return the UpdateProviderTypeInstanceOptions builder
      */
-    public Builder name(String name) {
-      this.name = name;
-      return this;
-    }
-
-    /**
-     * Set the attributes.
-     *
-     * @param attributes the attributes
-     * @return the UpdateProviderTypeInstanceOptions builder
-     */
-    public Builder attributes(Map<String, Object> attributes) {
-      this.attributes = attributes;
+    public Builder updateProviderTypeInstanceRequest(UpdateProviderTypeInstanceRequest updateProviderTypeInstanceRequest) {
+      this.updateProviderTypeInstanceRequest = updateProviderTypeInstanceRequest;
       return this;
     }
 
@@ -153,10 +139,11 @@ public class UpdateProviderTypeInstanceOptions extends GenericModel {
       "providerTypeId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.providerTypeInstanceId,
       "providerTypeInstanceId cannot be empty");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.updateProviderTypeInstanceRequest,
+      "updateProviderTypeInstanceRequest cannot be null");
     providerTypeId = builder.providerTypeId;
     providerTypeInstanceId = builder.providerTypeInstanceId;
-    name = builder.name;
-    attributes = builder.attributes;
+    updateProviderTypeInstanceRequest = builder.updateProviderTypeInstanceRequest;
     xCorrelationId = builder.xCorrelationId;
     xRequestId = builder.xRequestId;
   }
@@ -193,25 +180,14 @@ public class UpdateProviderTypeInstanceOptions extends GenericModel {
   }
 
   /**
-   * Gets the name.
+   * Gets the updateProviderTypeInstanceRequest.
    *
-   * The provider type instance name.
+   * Provider type instance object to be patched.
    *
-   * @return the name
+   * @return the updateProviderTypeInstanceRequest
    */
-  public String name() {
-    return name;
-  }
-
-  /**
-   * Gets the attributes.
-   *
-   * The attributes for connecting to the provider type instance.
-   *
-   * @return the attributes
-   */
-  public Map<String, Object> attributes() {
-    return attributes;
+  public UpdateProviderTypeInstanceRequest updateProviderTypeInstanceRequest() {
+    return updateProviderTypeInstanceRequest;
   }
 
   /**

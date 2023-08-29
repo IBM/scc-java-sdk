@@ -60,9 +60,13 @@ public class CreateProviderTypeInstanceOptions extends GenericModel {
      * Instantiates a new builder with required properties.
      *
      * @param providerTypeId the providerTypeId
+     * @param name the name
+     * @param attributes the attributes
      */
-    public Builder(String providerTypeId) {
+    public Builder(String providerTypeId, String name, Map<String, Object> attributes) {
       this.providerTypeId = providerTypeId;
+      this.name = name;
+      this.attributes = attributes;
     }
 
     /**
@@ -135,6 +139,10 @@ public class CreateProviderTypeInstanceOptions extends GenericModel {
   protected CreateProviderTypeInstanceOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.providerTypeId,
       "providerTypeId cannot be empty");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.name,
+      "name cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.attributes,
+      "attributes cannot be null");
     providerTypeId = builder.providerTypeId;
     name = builder.name;
     attributes = builder.attributes;

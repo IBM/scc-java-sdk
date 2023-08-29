@@ -13,7 +13,6 @@
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import java.util.Date;
-import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -26,7 +25,7 @@ public class ProviderTypeInstanceItem extends GenericModel {
   protected String id;
   protected String type;
   protected String name;
-  protected Map<String, Object> attributes;
+  protected ProviderTypeInstanceAttributes attributes;
   @SerializedName("created_at")
   protected Date createdAt;
   @SerializedName("updated_at")
@@ -74,7 +73,7 @@ public class ProviderTypeInstanceItem extends GenericModel {
    *
    * @return the attributes
    */
-  public Map<String, Object> getAttributes() {
+  public ProviderTypeInstanceAttributes getAttributes() {
     return attributes;
   }
 
