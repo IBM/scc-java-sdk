@@ -42,3 +42,6 @@ package-lock.json
 
 # Examples depedency file
 /**/dependency-reduced-pom.xml
+
+*.iml
+*.DS_Store
