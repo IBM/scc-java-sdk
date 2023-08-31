@@ -16,9 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * RequiredConfigItemsRequiredConfigAnd.
+ * RequiredConfigItemsRequiredConfigAndDepth1.
  */
-public class RequiredConfigItemsRequiredConfigAnd extends RequiredConfigItems {
+public class RequiredConfigItemsRequiredConfigAndDepth1 extends RequiredConfigItems {
 
 
   /**
@@ -26,16 +26,16 @@ public class RequiredConfigItemsRequiredConfigAnd extends RequiredConfigItems {
    */
   public static class Builder {
     private String description;
-    private List<RequiredConfigItems> and;
+    private List<RequiredConfigBase> and;
 
     /**
-     * Instantiates a new Builder from an existing RequiredConfigItemsRequiredConfigAnd instance.
+     * Instantiates a new Builder from an existing RequiredConfigItemsRequiredConfigAndDepth1 instance.
      *
-     * @param requiredConfigItemsRequiredConfigAnd the instance to initialize the Builder with
+     * @param requiredConfigItemsRequiredConfigAndDepth1 the instance to initialize the Builder with
      */
-    public Builder(RequiredConfigItems requiredConfigItemsRequiredConfigAnd) {
-      this.description = requiredConfigItemsRequiredConfigAnd.description;
-      this.and = requiredConfigItemsRequiredConfigAnd.and;
+    public Builder(RequiredConfigItems requiredConfigItemsRequiredConfigAndDepth1) {
+      this.description = requiredConfigItemsRequiredConfigAndDepth1.description;
+      this.and = requiredConfigItemsRequiredConfigAndDepth1.and;
     }
 
     /**
@@ -45,25 +45,25 @@ public class RequiredConfigItemsRequiredConfigAnd extends RequiredConfigItems {
     }
 
     /**
-     * Builds a RequiredConfigItemsRequiredConfigAnd.
+     * Builds a RequiredConfigItemsRequiredConfigAndDepth1.
      *
-     * @return the new RequiredConfigItemsRequiredConfigAnd instance
+     * @return the new RequiredConfigItemsRequiredConfigAndDepth1 instance
      */
-    public RequiredConfigItemsRequiredConfigAnd build() {
-      return new RequiredConfigItemsRequiredConfigAnd(this);
+    public RequiredConfigItemsRequiredConfigAndDepth1 build() {
+      return new RequiredConfigItemsRequiredConfigAndDepth1(this);
     }
 
     /**
      * Adds an and to and.
      *
      * @param and the new and
-     * @return the RequiredConfigItemsRequiredConfigAnd builder
+     * @return the RequiredConfigItemsRequiredConfigAndDepth1 builder
      */
-    public Builder addAnd(RequiredConfigItems and) {
+    public Builder addAnd(RequiredConfigBase and) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(and,
         "and cannot be null");
       if (this.and == null) {
-        this.and = new ArrayList<RequiredConfigItems>();
+        this.and = new ArrayList<RequiredConfigBase>();
       }
       this.and.add(and);
       return this;
@@ -73,7 +73,7 @@ public class RequiredConfigItemsRequiredConfigAnd extends RequiredConfigItems {
      * Set the description.
      *
      * @param description the description
-     * @return the RequiredConfigItemsRequiredConfigAnd builder
+     * @return the RequiredConfigItemsRequiredConfigAndDepth1 builder
      */
     public Builder description(String description) {
       this.description = description;
@@ -85,17 +85,17 @@ public class RequiredConfigItemsRequiredConfigAnd extends RequiredConfigItems {
      * Existing and will be replaced.
      *
      * @param and the and
-     * @return the RequiredConfigItemsRequiredConfigAnd builder
+     * @return the RequiredConfigItemsRequiredConfigAndDepth1 builder
      */
-    public Builder and(List<RequiredConfigItems> and) {
+    public Builder and(List<RequiredConfigBase> and) {
       this.and = and;
       return this;
     }
   }
 
-  protected RequiredConfigItemsRequiredConfigAnd() { }
+  protected RequiredConfigItemsRequiredConfigAndDepth1() { }
 
-  protected RequiredConfigItemsRequiredConfigAnd(Builder builder) {
+  protected RequiredConfigItemsRequiredConfigAndDepth1(Builder builder) {
     description = builder.description;
     and = builder.and;
   }
@@ -103,7 +103,7 @@ public class RequiredConfigItemsRequiredConfigAnd extends RequiredConfigItems {
   /**
    * New builder.
    *
-   * @return a RequiredConfigItemsRequiredConfigAnd builder
+   * @return a RequiredConfigItemsRequiredConfigAndDepth1 builder
    */
   public Builder newBuilder() {
     return new Builder(this);

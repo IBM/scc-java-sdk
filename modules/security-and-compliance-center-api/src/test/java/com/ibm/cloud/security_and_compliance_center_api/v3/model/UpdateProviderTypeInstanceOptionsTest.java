@@ -15,6 +15,7 @@ package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpdateProviderTypeInstanceOptions;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpdateProviderTypeInstanceRequestProviderTypeInstancePrototypeForPatchingName;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -31,18 +32,21 @@ public class UpdateProviderTypeInstanceOptionsTest {
 
   @Test
   public void testUpdateProviderTypeInstanceOptions() throws Throwable {
+    UpdateProviderTypeInstanceRequestProviderTypeInstancePrototypeForPatchingName updateProviderTypeInstanceRequestModel = new UpdateProviderTypeInstanceRequestProviderTypeInstancePrototypeForPatchingName.Builder()
+      .name("workload-protection-instance-1")
+      .build();
+    assertEquals(updateProviderTypeInstanceRequestModel.name(), "workload-protection-instance-1");
+
     UpdateProviderTypeInstanceOptions updateProviderTypeInstanceOptionsModel = new UpdateProviderTypeInstanceOptions.Builder()
       .providerTypeId("testString")
       .providerTypeInstanceId("testString")
-      .name("workload-protection-instance-1")
-      .attributes(java.util.Collections.singletonMap("anyKey", "anyValue"))
+      .updateProviderTypeInstanceRequest(updateProviderTypeInstanceRequestModel)
       .xCorrelationId("testString")
       .xRequestId("testString")
       .build();
     assertEquals(updateProviderTypeInstanceOptionsModel.providerTypeId(), "testString");
     assertEquals(updateProviderTypeInstanceOptionsModel.providerTypeInstanceId(), "testString");
-    assertEquals(updateProviderTypeInstanceOptionsModel.name(), "workload-protection-instance-1");
-    assertEquals(updateProviderTypeInstanceOptionsModel.attributes(), java.util.Collections.singletonMap("anyKey", "anyValue"));
+    assertEquals(updateProviderTypeInstanceOptionsModel.updateProviderTypeInstanceRequest(), updateProviderTypeInstanceRequestModel);
     assertEquals(updateProviderTypeInstanceOptionsModel.xCorrelationId(), "testString");
     assertEquals(updateProviderTypeInstanceOptionsModel.xRequestId(), "testString");
   }

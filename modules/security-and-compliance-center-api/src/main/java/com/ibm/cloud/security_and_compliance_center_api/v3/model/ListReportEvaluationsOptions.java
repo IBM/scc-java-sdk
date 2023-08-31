@@ -37,8 +37,10 @@ public class ListReportEvaluationsOptions extends GenericModel {
   protected String xCorrelationId;
   protected String xRequestId;
   protected String assessmentId;
+  protected String assessmentMethod;
   protected String componentId;
   protected String targetId;
+  protected String targetEnv;
   protected String targetName;
   protected String status;
   protected String start;
@@ -52,8 +54,10 @@ public class ListReportEvaluationsOptions extends GenericModel {
     private String xCorrelationId;
     private String xRequestId;
     private String assessmentId;
+    private String assessmentMethod;
     private String componentId;
     private String targetId;
+    private String targetEnv;
     private String targetName;
     private String status;
     private String start;
@@ -69,8 +73,10 @@ public class ListReportEvaluationsOptions extends GenericModel {
       this.xCorrelationId = listReportEvaluationsOptions.xCorrelationId;
       this.xRequestId = listReportEvaluationsOptions.xRequestId;
       this.assessmentId = listReportEvaluationsOptions.assessmentId;
+      this.assessmentMethod = listReportEvaluationsOptions.assessmentMethod;
       this.componentId = listReportEvaluationsOptions.componentId;
       this.targetId = listReportEvaluationsOptions.targetId;
+      this.targetEnv = listReportEvaluationsOptions.targetEnv;
       this.targetName = listReportEvaluationsOptions.targetName;
       this.status = listReportEvaluationsOptions.status;
       this.start = listReportEvaluationsOptions.start;
@@ -146,6 +152,17 @@ public class ListReportEvaluationsOptions extends GenericModel {
     }
 
     /**
+     * Set the assessmentMethod.
+     *
+     * @param assessmentMethod the assessmentMethod
+     * @return the ListReportEvaluationsOptions builder
+     */
+    public Builder assessmentMethod(String assessmentMethod) {
+      this.assessmentMethod = assessmentMethod;
+      return this;
+    }
+
+    /**
      * Set the componentId.
      *
      * @param componentId the componentId
@@ -164,6 +181,17 @@ public class ListReportEvaluationsOptions extends GenericModel {
      */
     public Builder targetId(String targetId) {
       this.targetId = targetId;
+      return this;
+    }
+
+    /**
+     * Set the targetEnv.
+     *
+     * @param targetEnv the targetEnv
+     * @return the ListReportEvaluationsOptions builder
+     */
+    public Builder targetEnv(String targetEnv) {
+      this.targetEnv = targetEnv;
       return this;
     }
 
@@ -221,8 +249,10 @@ public class ListReportEvaluationsOptions extends GenericModel {
     xCorrelationId = builder.xCorrelationId;
     xRequestId = builder.xRequestId;
     assessmentId = builder.assessmentId;
+    assessmentMethod = builder.assessmentMethod;
     componentId = builder.componentId;
     targetId = builder.targetId;
+    targetEnv = builder.targetEnv;
     targetName = builder.targetName;
     status = builder.status;
     start = builder.start;
@@ -287,6 +317,17 @@ public class ListReportEvaluationsOptions extends GenericModel {
   }
 
   /**
+   * Gets the assessmentMethod.
+   *
+   * The assessment method.
+   *
+   * @return the assessmentMethod
+   */
+  public String assessmentMethod() {
+    return assessmentMethod;
+  }
+
+  /**
    * Gets the componentId.
    *
    * The ID of component.
@@ -306,6 +347,17 @@ public class ListReportEvaluationsOptions extends GenericModel {
    */
   public String targetId() {
     return targetId;
+  }
+
+  /**
+   * Gets the targetEnv.
+   *
+   * The environment of the evaluation target.
+   *
+   * @return the targetEnv
+   */
+  public String targetEnv() {
+    return targetEnv;
   }
 
   /**

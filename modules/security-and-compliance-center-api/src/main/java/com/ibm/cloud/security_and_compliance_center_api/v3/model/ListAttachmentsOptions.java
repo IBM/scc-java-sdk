@@ -19,7 +19,7 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class ListAttachmentsOptions extends GenericModel {
 
-  protected String profilesId;
+  protected String profileId;
   protected String xCorrelationId;
   protected String xRequestId;
   protected Long limit;
@@ -29,7 +29,7 @@ public class ListAttachmentsOptions extends GenericModel {
    * Builder.
    */
   public static class Builder {
-    private String profilesId;
+    private String profileId;
     private String xCorrelationId;
     private String xRequestId;
     private Long limit;
@@ -41,7 +41,7 @@ public class ListAttachmentsOptions extends GenericModel {
      * @param listAttachmentsOptions the instance to initialize the Builder with
      */
     private Builder(ListAttachmentsOptions listAttachmentsOptions) {
-      this.profilesId = listAttachmentsOptions.profilesId;
+      this.profileId = listAttachmentsOptions.profileId;
       this.xCorrelationId = listAttachmentsOptions.xCorrelationId;
       this.xRequestId = listAttachmentsOptions.xRequestId;
       this.limit = listAttachmentsOptions.limit;
@@ -57,10 +57,10 @@ public class ListAttachmentsOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param profilesId the profilesId
+     * @param profileId the profileId
      */
-    public Builder(String profilesId) {
-      this.profilesId = profilesId;
+    public Builder(String profileId) {
+      this.profileId = profileId;
     }
 
     /**
@@ -73,13 +73,13 @@ public class ListAttachmentsOptions extends GenericModel {
     }
 
     /**
-     * Set the profilesId.
+     * Set the profileId.
      *
-     * @param profilesId the profilesId
+     * @param profileId the profileId
      * @return the ListAttachmentsOptions builder
      */
-    public Builder profilesId(String profilesId) {
-      this.profilesId = profilesId;
+    public Builder profileId(String profileId) {
+      this.profileId = profileId;
       return this;
     }
 
@@ -131,9 +131,9 @@ public class ListAttachmentsOptions extends GenericModel {
   protected ListAttachmentsOptions() { }
 
   protected ListAttachmentsOptions(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.profilesId,
-      "profilesId cannot be empty");
-    profilesId = builder.profilesId;
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.profileId,
+      "profileId cannot be empty");
+    profileId = builder.profileId;
     xCorrelationId = builder.xCorrelationId;
     xRequestId = builder.xRequestId;
     limit = builder.limit;
@@ -150,14 +150,14 @@ public class ListAttachmentsOptions extends GenericModel {
   }
 
   /**
-   * Gets the profilesId.
+   * Gets the profileId.
    *
    * The profile ID.
    *
-   * @return the profilesId
+   * @return the profileId
    */
-  public String profilesId() {
-    return profilesId;
+  public String profileId() {
+    return profileId;
   }
 
   /**

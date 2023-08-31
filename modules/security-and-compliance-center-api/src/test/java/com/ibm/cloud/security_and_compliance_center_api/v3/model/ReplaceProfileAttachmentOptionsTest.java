@@ -92,7 +92,6 @@ public class ReplaceProfileAttachmentOptionsTest {
 
     ReplaceProfileAttachmentOptions replaceProfileAttachmentOptionsModel = new ReplaceProfileAttachmentOptions.Builder()
       .attachmentId("testString")
-      .profilesId("testString")
       .id("130003ea8bfa43c5aacea07a86da3000")
       .profileId("7ec45986-54fc-4b66-a303-d9577b078c65")
       .accountId("130003ea8bfa43c5aacea07a86da3000")
@@ -114,7 +113,6 @@ public class ReplaceProfileAttachmentOptionsTest {
       .xRequestId("testString")
       .build();
     assertEquals(replaceProfileAttachmentOptionsModel.attachmentId(), "testString");
-    assertEquals(replaceProfileAttachmentOptionsModel.profilesId(), "testString");
     assertEquals(replaceProfileAttachmentOptionsModel.id(), "130003ea8bfa43c5aacea07a86da3000");
     assertEquals(replaceProfileAttachmentOptionsModel.profileId(), "7ec45986-54fc-4b66-a303-d9577b078c65");
     assertEquals(replaceProfileAttachmentOptionsModel.accountId(), "130003ea8bfa43c5aacea07a86da3000");

@@ -103,17 +103,18 @@ import com.ibm.cloud.security_and_compliance_center_api.v3.model.ReportSummary;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ReportTags;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ReportViolationsDrift;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ReportsPager;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigAnd;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigItemsRequiredConfigBase;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigRequiredConfigAnd;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Resource;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Rule;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.RuleInfo;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.RulesPageBase;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Scan;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Settings;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.Target;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.TargetPrototype;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.TestEvent;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpdateProviderTypeInstanceOptions;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpdateProviderTypeInstanceRequestProviderTypeInstancePrototypeForPatchingName;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpdateSettingsOptions;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -173,24 +174,307 @@ public class SecurityAndComplianceCenterApiExamples {
     String reportIdForReportLink = null;
     String ruleIdLink = null;
     String typeForReportLink = null;
+    String xCorrelationIdLink = null;
 
     try {
-      System.out.println("getSettings() result:");
-      // begin-get_settings
-      GetSettingsOptions getSettingsOptions = new GetSettingsOptions.Builder()
-        .xCorrelationId("1a2b3c4d-5e6f-4a7b-8c9d-e0f1a2b3c4d5")
+      System.out.println("getReportViolationsDrift() result:");
+      // begin-get_report_violations_drift
+      GetReportViolationsDriftOptions getReportViolationsDriftOptions = new GetReportViolationsDriftOptions.Builder()
+        .reportId(reportIdForReportLink)
         .build();
 
-      Response<Settings> response = securityAndComplianceCenterApiService.getSettings(getSettingsOptions).execute();
-      Settings settings = response.getResult();
+      Response<ReportViolationsDrift> response = securityAndComplianceCenterApiService.getReportViolationsDrift(getReportViolationsDriftOptions).execute();
+      ReportViolationsDrift reportViolationsDrift = response.getResult();
 
-      System.out.println(settings);
-      // end-get_settings
+      System.out.println(reportViolationsDrift);
+      // end-get_report_violations_drift
 
-      eventNotificationsCrnForUpdateSettingsLink = settings.eventNotifications().instanceCrn();
-      objectStorageCrnForUpdateSettingsLink = settings.objectStorage().instanceCrn();
-      objectStorageBucketForUpdateSettingsLink = settings.objectStorage().bucket();
-      objectStorageLocationForUpdateSettingsLink = settings.objectStorage().bucketLocation();
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
+
+    try {
+      System.out.println("getReportTags() result:");
+      // begin-get_report_tags
+      GetReportTagsOptions getReportTagsOptions = new GetReportTagsOptions.Builder()
+        .reportId(reportIdForReportLink)
+        .build();
+
+      Response<ReportTags> response = securityAndComplianceCenterApiService.getReportTags(getReportTagsOptions).execute();
+      ReportTags reportTags = response.getResult();
+
+      System.out.println(reportTags);
+      // end-get_report_tags
+
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
+
+    try {
+      System.out.println("listReportResources() result:");
+      // begin-list_report_resources
+      ListReportResourcesOptions listReportResourcesOptions = new ListReportResourcesOptions.Builder()
+        .reportId(reportIdForReportLink)
+        .xCorrelationId(xCorrelationIdLink)
+        .xRequestId("testString")
+        .id("testString")
+        .resourceName("testString")
+        .accountId(accountIdForReportLink)
+        .componentId("testString")
+        .status("compliant")
+        .sort("account_id")
+        .limit(Long.valueOf("10"))
+        .build();
+
+      ReportResourcesPager pager = new ReportResourcesPager(securityAndComplianceCenterApiService, listReportResourcesOptions);
+      List<Resource> allResults = new ArrayList<>();
+      while (pager.hasNext()) {
+        List<Resource> nextPage = pager.getNext();
+        allResults.addAll(nextPage);
+      }
+
+      System.out.println(GsonSingleton.getGson().toJson(allResults));
+      // end-list_report_resources
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
+
+    try {
+      System.out.println("listReportEvaluations() result:");
+      // begin-list_report_evaluations
+      ListReportEvaluationsOptions listReportEvaluationsOptions = new ListReportEvaluationsOptions.Builder()
+        .reportId(reportIdForReportLink)
+        .xCorrelationId(xCorrelationIdLink)
+        .xRequestId("testString")
+        .assessmentId("testString")
+        .assessmentMethod("testString")
+        .componentId("testString")
+        .targetId("testString")
+        .targetEnv("testString")
+        .targetName("testString")
+        .status("failure")
+        .limit(Long.valueOf("10"))
+        .build();
+
+      ReportEvaluationsPager pager = new ReportEvaluationsPager(securityAndComplianceCenterApiService, listReportEvaluationsOptions);
+      List<Evaluation> allResults = new ArrayList<>();
+      while (pager.hasNext()) {
+        List<Evaluation> nextPage = pager.getNext();
+        allResults.addAll(nextPage);
+      }
+
+      System.out.println(GsonSingleton.getGson().toJson(allResults));
+      // end-list_report_evaluations
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
+
+    try {
+      System.out.println("getReportRule() result:");
+      // begin-get_report_rule
+      GetReportRuleOptions getReportRuleOptions = new GetReportRuleOptions.Builder()
+        .reportId(reportIdForReportLink)
+        .ruleId("rule-8d444f8c-fd1d-48de-bcaa-f43732568761")
+        .build();
+
+      Response<RuleInfo> response = securityAndComplianceCenterApiService.getReportRule(getReportRuleOptions).execute();
+      RuleInfo ruleInfo = response.getResult();
+
+      System.out.println(ruleInfo);
+      // end-get_report_rule
+
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
+
+    try {
+      System.out.println("getReportControls() result:");
+      // begin-get_report_controls
+      GetReportControlsOptions getReportControlsOptions = new GetReportControlsOptions.Builder()
+        .reportId(reportIdForReportLink)
+        .status("compliant")
+        .build();
+
+      Response<ReportControls> response = securityAndComplianceCenterApiService.getReportControls(getReportControlsOptions).execute();
+      ReportControls reportControls = response.getResult();
+
+      System.out.println(reportControls);
+      // end-get_report_controls
+
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
+
+    try {
+      System.out.println("getReportEvaluation() result:");
+      // begin-get_report_evaluation
+      GetReportEvaluationOptions getReportEvaluationOptions = new GetReportEvaluationOptions.Builder()
+        .reportId(reportIdForReportLink)
+        .build();
+
+      Response<InputStream> response = securityAndComplianceCenterApiService.getReportEvaluation(getReportEvaluationOptions).execute();
+      InputStream inputStream = response.getResult();
+
+      System.out.println(inputStream);
+      // end-get_report_evaluation
+
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
+
+    try {
+      System.out.println("getReportSummary() result:");
+      // begin-get_report_summary
+      GetReportSummaryOptions getReportSummaryOptions = new GetReportSummaryOptions.Builder()
+        .reportId(reportIdForReportLink)
+        .build();
+
+      Response<ReportSummary> response = securityAndComplianceCenterApiService.getReportSummary(getReportSummaryOptions).execute();
+      ReportSummary reportSummary = response.getResult();
+
+      System.out.println(reportSummary);
+      // end-get_report_summary
+
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
+
+    try {
+      System.out.println("getReport() result:");
+      // begin-get_report
+      GetReportOptions getReportOptions = new GetReportOptions.Builder()
+        .reportId(reportIdForReportLink)
+        .build();
+
+      Response<Report> response = securityAndComplianceCenterApiService.getReport(getReportOptions).execute();
+      Report report = response.getResult();
+
+      System.out.println(report);
+      // end-get_report
+
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
+
+    try {
+      System.out.println("listReports() result:");
+      // begin-list_reports
+      ListReportsOptions listReportsOptions = new ListReportsOptions.Builder()
+        .xCorrelationId(xCorrelationIdLink)
+        .xRequestId("testString")
+        .attachmentId(attachmentIdForReportLink)
+        .groupId(groupIdForReportLink)
+        .profileId(profileIdForReportLink)
+        .type(typeForReportLink)
+        .limit(Long.valueOf("10"))
+        .sort("profile_name")
+        .build();
+
+      ReportsPager pager = new ReportsPager(securityAndComplianceCenterApiService, listReportsOptions);
+      List<Report> allResults = new ArrayList<>();
+      while (pager.hasNext()) {
+        List<Report> nextPage = pager.getNext();
+        allResults.addAll(nextPage);
+      }
+
+      System.out.println(GsonSingleton.getGson().toJson(allResults));
+      // end-list_reports
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
+
+    try {
+      System.out.println("getLatestReports() result:");
+      // begin-get_latest_reports
+      GetLatestReportsOptions getLatestReportsOptions = new GetLatestReportsOptions.Builder()
+        .sort("profile_name")
+        .build();
+
+      Response<ReportLatest> response = securityAndComplianceCenterApiService.getLatestReports(getLatestReportsOptions).execute();
+      ReportLatest reportLatest = response.getResult();
+
+      System.out.println(reportLatest);
+      // end-get_latest_reports
+
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
+      accountIdForReportLink = reportLatest.getReports().get(0).getAccount().getId();
+      reportIdForReportLink = reportLatest.getReports().get(0).getId();
+      attachmentIdForReportLink = reportLatest.getReports().get(0).getAttachment().getId();
+      groupIdForReportLink = reportLatest.getReports().get(0).getGroupId();
+      profileIdForReportLink = reportLatest.getReports().get(0).getProfile().getId();
+      typeForReportLink = reportLatest.getReports().get(0).getType();
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
+
+    try {
+      System.out.println("replaceRule() result:");
+      // begin-replace_rule
+      AdditionalTargetAttribute additionalTargetAttributeModel = new AdditionalTargetAttribute.Builder()
+        .name("location")
+        .operator("string_equals")
+        .value("us-south")
+        .build();
+      TargetPrototype targetPrototypeModel = new TargetPrototype.Builder()
+        .serviceName("cloud-object-storage")
+        .resourceKind("bucket")
+        .additionalTargetAttributes(java.util.Arrays.asList(additionalTargetAttributeModel))
+        .build();
+      RequiredConfigItemsRequiredConfigBase requiredConfigItemsModel = new RequiredConfigItemsRequiredConfigBase.Builder()
+        .property("hard_quota")
+        .operator("num_equals")
+        .value("${hard_quota}")
+        .build();
+      RequiredConfigAnd requiredConfigModel = new RequiredConfigAnd.Builder()
+        .description("The Cloud Object Storage rule.")
+        .and(java.util.Arrays.asList(requiredConfigItemsModel))
+        .build();
+      Parameter parameterModel = new Parameter.Builder()
+        .name("hard_quota")
+        .displayName("The Cloud Object Storage bucket quota.")
+        .description("The maximum bytes that are allocated to the Cloud Object Storage bucket.")
+        .type("numeric")
+        .build();
+      Import importModel = new Import.Builder()
+        .parameters(java.util.Arrays.asList(parameterModel))
+        .build();
+      ReplaceRuleOptions replaceRuleOptions = new ReplaceRuleOptions.Builder()
+        .ruleId(ruleIdLink)
+        .ifMatch(eTagLink)
+        .description("Example rule")
+        .target(targetPrototypeModel)
+        .requiredConfig(requiredConfigModel)
+        .version("1.0.1")
+        .xImport(importModel)
+        .labels(java.util.Arrays.asList())
+        .build();
+
+      Response<Rule> response = securityAndComplianceCenterApiService.replaceRule(replaceRuleOptions).execute();
+      Rule rule = response.getResult();
+
+      System.out.println(rule);
+      // end-replace_rule
+
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
+      eTagLink = response.getHeaders().values("ETag").get(0);
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
@@ -204,7 +488,7 @@ public class SecurityAndComplianceCenterApiExamples {
         .operator("string_equals")
         .value("us-east")
         .build();
-      Target targetModel = new Target.Builder()
+      TargetPrototype targetPrototypeModel = new TargetPrototype.Builder()
         .serviceName("cloud-object-storage")
         .resourceKind("bucket")
         .additionalTargetAttributes(java.util.Arrays.asList(additionalTargetAttributeModel))
@@ -214,7 +498,7 @@ public class SecurityAndComplianceCenterApiExamples {
         .operator("num_equals")
         .value("${hard_quota}")
         .build();
-      RequiredConfigRequiredConfigAnd requiredConfigModel = new RequiredConfigRequiredConfigAnd.Builder()
+      RequiredConfigAnd requiredConfigModel = new RequiredConfigAnd.Builder()
         .description("The Cloud Object Storage rule.")
         .and(java.util.Arrays.asList(requiredConfigItemsModel))
         .build();
@@ -229,7 +513,7 @@ public class SecurityAndComplianceCenterApiExamples {
         .build();
       CreateRuleOptions createRuleOptions = new CreateRuleOptions.Builder()
         .description("Example rule")
-        .target(targetModel)
+        .target(targetPrototypeModel)
         .requiredConfig(requiredConfigModel)
         .version("1.0.0")
         .xImport(importModel)
@@ -242,7 +526,32 @@ public class SecurityAndComplianceCenterApiExamples {
       System.out.println(rule);
       // end-create_rule
 
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
+      eTagLink = response.getHeaders().values("ETag").get(0);
       ruleIdLink = rule.getId();
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
+
+    try {
+      System.out.println("getSettings() result:");
+      // begin-get_settings
+      GetSettingsOptions getSettingsOptions = new GetSettingsOptions.Builder()
+        .xCorrelationId(xCorrelationIdLink)
+        .build();
+
+      Response<Settings> response = securityAndComplianceCenterApiService.getSettings(getSettingsOptions).execute();
+      Settings settings = response.getResult();
+
+      System.out.println(settings);
+      // end-get_settings
+
+      eventNotificationsCrnForUpdateSettingsLink = settings.eventNotifications().instanceCrn();
+      objectStorageCrnForUpdateSettingsLink = settings.objectStorage().instanceCrn();
+      objectStorageBucketForUpdateSettingsLink = settings.objectStorage().bucket();
+      objectStorageLocationForUpdateSettingsLink = settings.objectStorage().bucketLocation();
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
@@ -268,30 +577,6 @@ public class SecurityAndComplianceCenterApiExamples {
     }
 
     try {
-      System.out.println("getLatestReports() result:");
-      // begin-get_latest_reports
-      GetLatestReportsOptions getLatestReportsOptions = new GetLatestReportsOptions.Builder()
-        .sort("profile_name")
-        .build();
-
-      Response<ReportLatest> response = securityAndComplianceCenterApiService.getLatestReports(getLatestReportsOptions).execute();
-      ReportLatest reportLatest = response.getResult();
-
-      System.out.println(reportLatest);
-      // end-get_latest_reports
-
-      accountIdForReportLink = reportLatest.getReports().get(0).getAccount().getId();
-      reportIdForReportLink = reportLatest.getReports().get(0).getId();
-      attachmentIdForReportLink = reportLatest.getReports().get(0).getAttachment().getId();
-      groupIdForReportLink = reportLatest.getReports().get(0).getGroupId();
-      profileIdForReportLink = reportLatest.getReports().get(0).getProfile().getId();
-      typeForReportLink = reportLatest.getReports().get(0).getType();
-    } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
-    }
-
-    try {
       System.out.println("updateSettings() result:");
       // begin-update_settings
       EventNotifications eventNotificationsModel = new EventNotifications.Builder()
@@ -307,7 +592,7 @@ public class SecurityAndComplianceCenterApiExamples {
       UpdateSettingsOptions updateSettingsOptions = new UpdateSettingsOptions.Builder()
         .eventNotifications(eventNotificationsModel)
         .objectStorage(objectStorageModel)
-        .xCorrelationId("1a2b3c4d-5e6f-4a7b-8c9d-e0f1a2b3c4d5")
+        .xCorrelationId(xCorrelationIdLink)
         .build();
 
       Response<Settings> response = securityAndComplianceCenterApiService.updateSettings(updateSettingsOptions).execute();
@@ -324,7 +609,7 @@ public class SecurityAndComplianceCenterApiExamples {
       System.out.println("postTestEvent() result:");
       // begin-post_test_event
       PostTestEventOptions postTestEventOptions = new PostTestEventOptions.Builder()
-        .xCorrelationId("1a2b3c4d-5e6f-4a7b-8c9d-e0f1a2b3c4d5")
+        .xCorrelationId(xCorrelationIdLink)
         .build();
 
       Response<TestEvent> response = securityAndComplianceCenterApiService.postTestEvent(postTestEventOptions).execute();
@@ -355,6 +640,7 @@ public class SecurityAndComplianceCenterApiExamples {
       ControlSpecifications controlSpecificationsModel = new ControlSpecifications.Builder()
         .controlSpecificationId("5c7d6f88-a92f-4734-9b49-bd22b0900184")
         .componentId("iam-identity")
+        .componentName("IAM Identity Service")
         .environment("ibm-cloud")
         .controlSpecificationDescription("IBM cloud")
         .assessments(java.util.Arrays.asList(implementationModel))
@@ -454,6 +740,7 @@ public class SecurityAndComplianceCenterApiExamples {
         .controlSpecificationId("5c7d6f88-a92f-4734-9b49-bd22b0900184")
         .responsibility("user")
         .componentId("iam-identity")
+        .componentName("IAM Identity Service")
         .environment("ibm-cloud")
         .controlSpecificationDescription("IBM cloud")
         .assessments(java.util.Arrays.asList(implementationModel))
@@ -554,7 +841,7 @@ public class SecurityAndComplianceCenterApiExamples {
       System.out.println("getProfile() result:");
       // begin-get_profile
       GetProfileOptions getProfileOptions = new GetProfileOptions.Builder()
-        .profilesId(profileIdLink)
+        .profileId(profileIdLink)
         .build();
 
       Response<Profile> response = securityAndComplianceCenterApiService.getProfile(getProfileOptions).execute();
@@ -583,7 +870,7 @@ public class SecurityAndComplianceCenterApiExamples {
         .parameterType("numeric")
         .build();
       ReplaceProfileOptions replaceProfileOptions = new ReplaceProfileOptions.Builder()
-        .profilesId(profileIdLink)
+        .profileId(profileIdLink)
         .profileName("test_profile1")
         .profileDescription("test_description1")
         .profileType("custom")
@@ -613,60 +900,6 @@ public class SecurityAndComplianceCenterApiExamples {
 
       System.out.println(rulesPageBase);
       // end-list_rules
-    } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
-    }
-
-    try {
-      System.out.println("replaceRule() result:");
-      // begin-replace_rule
-      AdditionalTargetAttribute additionalTargetAttributeModel = new AdditionalTargetAttribute.Builder()
-        .name("location")
-        .operator("string_equals")
-        .value("us-south")
-        .build();
-      Target targetModel = new Target.Builder()
-        .serviceName("cloud-object-storage")
-        .serviceDisplayName("Cloud Object Storage")
-        .resourceKind("bucket")
-        .additionalTargetAttributes(java.util.Arrays.asList(additionalTargetAttributeModel))
-        .build();
-      RequiredConfigItemsRequiredConfigBase requiredConfigItemsModel = new RequiredConfigItemsRequiredConfigBase.Builder()
-        .property("hard_quota")
-        .operator("num_equals")
-        .value("${hard_quota}")
-        .build();
-      RequiredConfigRequiredConfigAnd requiredConfigModel = new RequiredConfigRequiredConfigAnd.Builder()
-        .description("The Cloud Object Storage rule.")
-        .and(java.util.Arrays.asList(requiredConfigItemsModel))
-        .build();
-      Parameter parameterModel = new Parameter.Builder()
-        .name("hard_quota")
-        .displayName("The Cloud Object Storage bucket quota.")
-        .description("The maximum bytes that are allocated to the Cloud Object Storage bucket.")
-        .type("numeric")
-        .build();
-      Import importModel = new Import.Builder()
-        .parameters(java.util.Arrays.asList(parameterModel))
-        .build();
-      ReplaceRuleOptions replaceRuleOptions = new ReplaceRuleOptions.Builder()
-        .ruleId(ruleIdLink)
-        .ifMatch(eTagLink)
-        .description("Example rule")
-        .target(targetModel)
-        .requiredConfig(requiredConfigModel)
-        .type("user_defined")
-        .version("1.0.1")
-        .xImport(importModel)
-        .labels(java.util.Arrays.asList())
-        .build();
-
-      Response<Rule> response = securityAndComplianceCenterApiService.replaceRule(replaceRuleOptions).execute();
-      Rule rule = response.getResult();
-
-      System.out.println(rule);
-      // end-replace_rule
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
@@ -709,7 +942,7 @@ public class SecurityAndComplianceCenterApiExamples {
         .attachmentParameters(java.util.Arrays.asList(attachmentParameterPrototypeModel))
         .build();
       CreateAttachmentOptions createAttachmentOptions = new CreateAttachmentOptions.Builder()
-        .profilesId(profileIdLink)
+        .profileId(profileIdLink)
         .attachments(java.util.Arrays.asList(attachmentsPrototypeModel))
         .build();
 
@@ -729,7 +962,7 @@ public class SecurityAndComplianceCenterApiExamples {
       System.out.println("listAttachments() result:");
       // begin-list_attachments
       ListAttachmentsOptions listAttachmentsOptions = new ListAttachmentsOptions.Builder()
-        .profilesId(profileIdLink)
+        .profileId(profileIdLink)
         .xCorrelationId("testString")
         .xRequestId("testString")
         .limit(Long.valueOf("10"))
@@ -754,7 +987,7 @@ public class SecurityAndComplianceCenterApiExamples {
       // begin-get_profile_attachment
       GetProfileAttachmentOptions getProfileAttachmentOptions = new GetProfileAttachmentOptions.Builder()
         .attachmentId(attachmentIdLink)
-        .profilesId(profileIdLink)
+        .profileId(profileIdLink)
         .build();
 
       Response<AttachmentItem> response = securityAndComplianceCenterApiService.getProfileAttachment(getProfileAttachmentOptions).execute();
@@ -796,7 +1029,7 @@ public class SecurityAndComplianceCenterApiExamples {
         .build();
       ReplaceProfileAttachmentOptions replaceProfileAttachmentOptions = new ReplaceProfileAttachmentOptions.Builder()
         .attachmentId(attachmentIdLink)
-        .profilesId(profileIdLink)
+        .profileId(profileIdLink)
         .scope(java.util.Arrays.asList(multiCloudScopeModel))
         .status("enabled")
         .schedule("every_30_days")
@@ -857,208 +1090,94 @@ public class SecurityAndComplianceCenterApiExamples {
     }
 
     try {
-      System.out.println("listReports() result:");
-      // begin-list_reports
-      ListReportsOptions listReportsOptions = new ListReportsOptions.Builder()
-        .xCorrelationId("testString")
-        .xRequestId("testString")
-        .attachmentId(attachmentIdForReportLink)
-        .groupId(groupIdForReportLink)
-        .profileId(profileIdForReportLink)
-        .type(typeForReportLink)
-        .limit(Long.valueOf("10"))
-        .sort("profile_name")
+      System.out.println("listProviderTypeInstances() result:");
+      // begin-list_provider_type_instances
+      ListProviderTypeInstancesOptions listProviderTypeInstancesOptions = new ListProviderTypeInstancesOptions.Builder()
+        .providerTypeId(providerTypeIdLink)
         .build();
 
-      ReportsPager pager = new ReportsPager(securityAndComplianceCenterApiService, listReportsOptions);
-      List<Report> allResults = new ArrayList<>();
-      while (pager.hasNext()) {
-        List<Report> nextPage = pager.getNext();
-        allResults.addAll(nextPage);
-      }
+      Response<ProviderTypeInstancesResponse> response = securityAndComplianceCenterApiService.listProviderTypeInstances(listProviderTypeInstancesOptions).execute();
+      ProviderTypeInstancesResponse providerTypeInstancesResponse = response.getResult();
 
-      System.out.println(GsonSingleton.getGson().toJson(allResults));
-      // end-list_reports
+      System.out.println(providerTypeInstancesResponse);
+      // end-list_provider_type_instances
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
     try {
-      System.out.println("getReport() result:");
-      // begin-get_report
-      GetReportOptions getReportOptions = new GetReportOptions.Builder()
-        .reportId(reportIdForReportLink)
+      System.out.println("createProviderTypeInstance() result:");
+      // begin-create_provider_type_instance
+      CreateProviderTypeInstanceOptions createProviderTypeInstanceOptions = new CreateProviderTypeInstanceOptions.Builder()
+        .providerTypeId(providerTypeIdLink)
+        .name("workload-protection-instance-1")
+        .attributes(new java.util.HashMap<String, Object>())
         .build();
 
-      Response<Report> response = securityAndComplianceCenterApiService.getReport(getReportOptions).execute();
-      Report report = response.getResult();
+      Response<ProviderTypeInstanceItem> response = securityAndComplianceCenterApiService.createProviderTypeInstance(createProviderTypeInstanceOptions).execute();
+      ProviderTypeInstanceItem providerTypeInstanceItem = response.getResult();
 
-      System.out.println(report);
-      // end-get_report
+      System.out.println(providerTypeInstanceItem);
+      // end-create_provider_type_instance
+
+      providerTypeInstanceIdLink = providerTypeInstanceItem.getId();
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
     try {
-      System.out.println("getReportSummary() result:");
-      // begin-get_report_summary
-      GetReportSummaryOptions getReportSummaryOptions = new GetReportSummaryOptions.Builder()
-        .reportId(reportIdForReportLink)
+      System.out.println("getProviderTypeInstance() result:");
+      // begin-get_provider_type_instance
+      GetProviderTypeInstanceOptions getProviderTypeInstanceOptions = new GetProviderTypeInstanceOptions.Builder()
+        .providerTypeId(providerTypeIdLink)
+        .providerTypeInstanceId(providerTypeInstanceIdLink)
         .build();
 
-      Response<ReportSummary> response = securityAndComplianceCenterApiService.getReportSummary(getReportSummaryOptions).execute();
-      ReportSummary reportSummary = response.getResult();
+      Response<ProviderTypeInstanceItem> response = securityAndComplianceCenterApiService.getProviderTypeInstance(getProviderTypeInstanceOptions).execute();
+      ProviderTypeInstanceItem providerTypeInstanceItem = response.getResult();
 
-      System.out.println(reportSummary);
-      // end-get_report_summary
+      System.out.println(providerTypeInstanceItem);
+      // end-get_provider_type_instance
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
     try {
-      System.out.println("getReportEvaluation() result:");
-      // begin-get_report_evaluation
-      GetReportEvaluationOptions getReportEvaluationOptions = new GetReportEvaluationOptions.Builder()
-        .reportId(reportIdForReportLink)
+      System.out.println("updateProviderTypeInstance() result:");
+      // begin-update_provider_type_instance
+      UpdateProviderTypeInstanceRequestProviderTypeInstancePrototypeForPatchingName updateProviderTypeInstanceRequestModel = new UpdateProviderTypeInstanceRequestProviderTypeInstancePrototypeForPatchingName.Builder()
+        .name("workload-protection-instance-1")
+        .build();
+      UpdateProviderTypeInstanceOptions updateProviderTypeInstanceOptions = new UpdateProviderTypeInstanceOptions.Builder()
+        .providerTypeId(providerTypeIdLink)
+        .providerTypeInstanceId(providerTypeInstanceIdLink)
+        .updateProviderTypeInstanceRequest(updateProviderTypeInstanceRequestModel)
         .build();
 
-      Response<InputStream> response = securityAndComplianceCenterApiService.getReportEvaluation(getReportEvaluationOptions).execute();
-      InputStream inputStream = response.getResult();
+      Response<ProviderTypeInstanceItem> response = securityAndComplianceCenterApiService.updateProviderTypeInstance(updateProviderTypeInstanceOptions).execute();
+      ProviderTypeInstanceItem providerTypeInstanceItem = response.getResult();
 
-      System.out.println(inputStream);
-      // end-get_report_evaluation
+      System.out.println(providerTypeInstanceItem);
+      // end-update_provider_type_instance
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
     try {
-      System.out.println("getReportControls() result:");
-      // begin-get_report_controls
-      GetReportControlsOptions getReportControlsOptions = new GetReportControlsOptions.Builder()
-        .reportId(reportIdForReportLink)
-        .status("compliant")
+      System.out.println("getProviderTypesInstances() result:");
+      // begin-get_provider_types_instances
+      GetProviderTypesInstancesOptions getProviderTypesInstancesOptions = new GetProviderTypesInstancesOptions.Builder()
         .build();
 
-      Response<ReportControls> response = securityAndComplianceCenterApiService.getReportControls(getReportControlsOptions).execute();
-      ReportControls reportControls = response.getResult();
+      Response<ProviderTypesInstancesResponse> response = securityAndComplianceCenterApiService.getProviderTypesInstances(getProviderTypesInstancesOptions).execute();
+      ProviderTypesInstancesResponse providerTypesInstancesResponse = response.getResult();
 
-      System.out.println(reportControls);
-      // end-get_report_controls
-    } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
-    }
-
-    try {
-      System.out.println("getReportRule() result:");
-      // begin-get_report_rule
-      GetReportRuleOptions getReportRuleOptions = new GetReportRuleOptions.Builder()
-        .reportId(reportIdForReportLink)
-        .ruleId("rule-8d444f8c-fd1d-48de-bcaa-f43732568761")
-        .build();
-
-      Response<RuleInfo> response = securityAndComplianceCenterApiService.getReportRule(getReportRuleOptions).execute();
-      RuleInfo ruleInfo = response.getResult();
-
-      System.out.println(ruleInfo);
-      // end-get_report_rule
-    } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
-    }
-
-    try {
-      System.out.println("listReportEvaluations() result:");
-      // begin-list_report_evaluations
-      ListReportEvaluationsOptions listReportEvaluationsOptions = new ListReportEvaluationsOptions.Builder()
-        .reportId(reportIdForReportLink)
-        .xCorrelationId("testString")
-        .xRequestId("testString")
-        .assessmentId("testString")
-        .componentId("testString")
-        .targetId("testString")
-        .targetName("testString")
-        .status("failure")
-        .limit(Long.valueOf("10"))
-        .build();
-
-      ReportEvaluationsPager pager = new ReportEvaluationsPager(securityAndComplianceCenterApiService, listReportEvaluationsOptions);
-      List<Evaluation> allResults = new ArrayList<>();
-      while (pager.hasNext()) {
-        List<Evaluation> nextPage = pager.getNext();
-        allResults.addAll(nextPage);
-      }
-
-      System.out.println(GsonSingleton.getGson().toJson(allResults));
-      // end-list_report_evaluations
-    } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
-    }
-
-    try {
-      System.out.println("listReportResources() result:");
-      // begin-list_report_resources
-      ListReportResourcesOptions listReportResourcesOptions = new ListReportResourcesOptions.Builder()
-        .reportId(reportIdForReportLink)
-        .xCorrelationId("testString")
-        .xRequestId("testString")
-        .id("testString")
-        .resourceName("testString")
-        .accountId(accountIdForReportLink)
-        .componentId("testString")
-        .status("compliant")
-        .sort("account_id")
-        .limit(Long.valueOf("10"))
-        .build();
-
-      ReportResourcesPager pager = new ReportResourcesPager(securityAndComplianceCenterApiService, listReportResourcesOptions);
-      List<Resource> allResults = new ArrayList<>();
-      while (pager.hasNext()) {
-        List<Resource> nextPage = pager.getNext();
-        allResults.addAll(nextPage);
-      }
-
-      System.out.println(GsonSingleton.getGson().toJson(allResults));
-      // end-list_report_resources
-    } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
-    }
-
-    try {
-      System.out.println("getReportTags() result:");
-      // begin-get_report_tags
-      GetReportTagsOptions getReportTagsOptions = new GetReportTagsOptions.Builder()
-        .reportId(reportIdForReportLink)
-        .build();
-
-      Response<ReportTags> response = securityAndComplianceCenterApiService.getReportTags(getReportTagsOptions).execute();
-      ReportTags reportTags = response.getResult();
-
-      System.out.println(reportTags);
-      // end-get_report_tags
-    } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
-    }
-
-    try {
-      System.out.println("getReportViolationsDrift() result:");
-      // begin-get_report_violations_drift
-      GetReportViolationsDriftOptions getReportViolationsDriftOptions = new GetReportViolationsDriftOptions.Builder()
-        .reportId(reportIdForReportLink)
-        .build();
-
-      Response<ReportViolationsDrift> response = securityAndComplianceCenterApiService.getReportViolationsDrift(getReportViolationsDriftOptions).execute();
-      ReportViolationsDrift reportViolationsDrift = response.getResult();
-
-      System.out.println(reportViolationsDrift);
-      // end-get_report_violations_drift
+      System.out.println(providerTypesInstancesResponse);
+      // end-get_provider_types_instances
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
@@ -1100,98 +1219,10 @@ public class SecurityAndComplianceCenterApiExamples {
     }
 
     try {
-      System.out.println("listProviderTypeInstances() result:");
-      // begin-list_provider_type_instances
-      ListProviderTypeInstancesOptions listProviderTypeInstancesOptions = new ListProviderTypeInstancesOptions.Builder()
-        .providerTypeId(providerTypeIdLink)
-        .build();
-
-      Response<ProviderTypeInstancesResponse> response = securityAndComplianceCenterApiService.listProviderTypeInstances(listProviderTypeInstancesOptions).execute();
-      ProviderTypeInstancesResponse providerTypeInstancesResponse = response.getResult();
-
-      System.out.println(providerTypeInstancesResponse);
-      // end-list_provider_type_instances
-    } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
-    }
-
-    try {
-      System.out.println("createProviderTypeInstance() result:");
-      // begin-create_provider_type_instance
-      CreateProviderTypeInstanceOptions createProviderTypeInstanceOptions = new CreateProviderTypeInstanceOptions.Builder()
-        .providerTypeId(providerTypeIdLink)
-        .build();
-
-      Response<ProviderTypeInstanceItem> response = securityAndComplianceCenterApiService.createProviderTypeInstance(createProviderTypeInstanceOptions).execute();
-      ProviderTypeInstanceItem providerTypeInstanceItem = response.getResult();
-
-      System.out.println(providerTypeInstanceItem);
-      // end-create_provider_type_instance
-
-      providerTypeInstanceIdLink = providerTypeInstanceItem.getId();
-    } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
-    }
-
-    try {
-      System.out.println("getProviderTypeInstance() result:");
-      // begin-get_provider_type_instance
-      GetProviderTypeInstanceOptions getProviderTypeInstanceOptions = new GetProviderTypeInstanceOptions.Builder()
-        .providerTypeId(providerTypeIdLink)
-        .providerTypeInstanceId(providerTypeInstanceIdLink)
-        .build();
-
-      Response<ProviderTypeInstanceItem> response = securityAndComplianceCenterApiService.getProviderTypeInstance(getProviderTypeInstanceOptions).execute();
-      ProviderTypeInstanceItem providerTypeInstanceItem = response.getResult();
-
-      System.out.println(providerTypeInstanceItem);
-      // end-get_provider_type_instance
-    } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
-    }
-
-    try {
-      System.out.println("updateProviderTypeInstance() result:");
-      // begin-update_provider_type_instance
-      UpdateProviderTypeInstanceOptions updateProviderTypeInstanceOptions = new UpdateProviderTypeInstanceOptions.Builder()
-        .providerTypeId(providerTypeIdLink)
-        .providerTypeInstanceId(providerTypeInstanceIdLink)
-        .build();
-
-      Response<ProviderTypeInstanceItem> response = securityAndComplianceCenterApiService.updateProviderTypeInstance(updateProviderTypeInstanceOptions).execute();
-      ProviderTypeInstanceItem providerTypeInstanceItem = response.getResult();
-
-      System.out.println(providerTypeInstanceItem);
-      // end-update_provider_type_instance
-    } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
-    }
-
-    try {
-      System.out.println("getProviderTypesInstances() result:");
-      // begin-get_provider_types_instances
-      GetProviderTypesInstancesOptions getProviderTypesInstancesOptions = new GetProviderTypesInstancesOptions.Builder()
-        .build();
-
-      Response<ProviderTypesInstancesResponse> response = securityAndComplianceCenterApiService.getProviderTypesInstances(getProviderTypesInstancesOptions).execute();
-      ProviderTypesInstancesResponse providerTypesInstancesResponse = response.getResult();
-
-      System.out.println(providerTypesInstancesResponse);
-      // end-get_provider_types_instances
-    } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
-    }
-
-    try {
       System.out.println("deleteCustomProfile() result:");
       // begin-delete_custom_profile
       DeleteCustomProfileOptions deleteCustomProfileOptions = new DeleteCustomProfileOptions.Builder()
-        .profilesId(profileIdLink)
+        .profileId(profileIdLink)
         .build();
 
       Response<Profile> response = securityAndComplianceCenterApiService.deleteCustomProfile(deleteCustomProfileOptions).execute();
@@ -1240,7 +1271,7 @@ public class SecurityAndComplianceCenterApiExamples {
       // begin-delete_profile_attachment
       DeleteProfileAttachmentOptions deleteProfileAttachmentOptions = new DeleteProfileAttachmentOptions.Builder()
         .attachmentId(attachmentIdLink)
-        .profilesId(profileIdLink)
+        .profileId(profileIdLink)
         .build();
 
       Response<AttachmentItem> response = securityAndComplianceCenterApiService.deleteProfileAttachment(deleteProfileAttachmentOptions).execute();

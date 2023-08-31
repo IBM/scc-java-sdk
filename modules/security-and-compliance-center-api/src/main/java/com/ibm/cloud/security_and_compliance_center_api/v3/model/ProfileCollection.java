@@ -18,7 +18,7 @@ import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * The response body to get all profiles that are linked to your account.
+ * The response body to list all profiles that are linked to your account.
  */
 public class ProfileCollection extends GenericModel {
 

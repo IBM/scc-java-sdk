@@ -56,7 +56,7 @@ public class ReplaceProfileOptionsTest {
     assertEquals(defaultParametersPrototypeModel.parameterType(), "string");
 
     ReplaceProfileOptions replaceProfileOptionsModel = new ReplaceProfileOptions.Builder()
-      .profilesId("testString")
+      .profileId("testString")
       .profileName("testString")
       .profileDescription("testString")
       .profileType("predefined")
@@ -65,7 +65,6 @@ public class ReplaceProfileOptionsTest {
       .xCorrelationId("testString")
       .xRequestId("testString")
       .build();
-    assertEquals(replaceProfileOptionsModel.profilesId(), "testString");
     assertEquals(replaceProfileOptionsModel.profileName(), "testString");
     assertEquals(replaceProfileOptionsModel.profileDescription(), "testString");
     assertEquals(replaceProfileOptionsModel.profileType(), "predefined");

@@ -18,9 +18,10 @@ import com.ibm.cloud.security_and_compliance_center_api.v3.model.AdditionalTarge
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.CreateRuleOptions;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Import;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Parameter;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigItemsRequiredConfigOr;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigRequiredConfigAnd;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.Target;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigAnd;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigBase;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigItemsRequiredConfigOrDepth1;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.TargetPrototype;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -46,23 +47,34 @@ public class CreateRuleOptionsTest {
     assertEquals(additionalTargetAttributeModel.operator(), "string_equals");
     assertEquals(additionalTargetAttributeModel.value(), "testString");
 
-    Target targetModel = new Target.Builder()
+    TargetPrototype targetPrototypeModel = new TargetPrototype.Builder()
       .serviceName("testString")
-      .serviceDisplayName("testString")
       .resourceKind("testString")
       .additionalTargetAttributes(java.util.Arrays.asList(additionalTargetAttributeModel))
       .build();
-    assertEquals(targetModel.serviceName(), "testString");
-    assertEquals(targetModel.serviceDisplayName(), "testString");
-    assertEquals(targetModel.resourceKind(), "testString");
-    assertEquals(targetModel.additionalTargetAttributes(), java.util.Arrays.asList(additionalTargetAttributeModel));
+    assertEquals(targetPrototypeModel.serviceName(), "testString");
+    assertEquals(targetPrototypeModel.resourceKind(), "testString");
+    assertEquals(targetPrototypeModel.additionalTargetAttributes(), java.util.Arrays.asList(additionalTargetAttributeModel));
 
-    RequiredConfigItemsRequiredConfigOr requiredConfigItemsModel = new RequiredConfigItemsRequiredConfigOr.Builder()
+    RequiredConfigBase requiredConfigBaseModel = new RequiredConfigBase.Builder()
       .description("testString")
+      .property("testString")
+      .operator("string_equals")
+      .value("testString")
+      .build();
+    assertEquals(requiredConfigBaseModel.description(), "testString");
+    assertEquals(requiredConfigBaseModel.property(), "testString");
+    assertEquals(requiredConfigBaseModel.operator(), "string_equals");
+    assertEquals(requiredConfigBaseModel.value(), "testString");
+
+    RequiredConfigItemsRequiredConfigOrDepth1 requiredConfigItemsModel = new RequiredConfigItemsRequiredConfigOrDepth1.Builder()
+      .description("testString")
+      .or(java.util.Arrays.asList(requiredConfigBaseModel))
       .build();
     assertEquals(requiredConfigItemsModel.description(), "testString");
+    assertEquals(requiredConfigItemsModel.or(), java.util.Arrays.asList(requiredConfigBaseModel));
 
-    RequiredConfigRequiredConfigAnd requiredConfigModel = new RequiredConfigRequiredConfigAnd.Builder()
+    RequiredConfigAnd requiredConfigModel = new RequiredConfigAnd.Builder()
       .description("testString")
       .and(java.util.Arrays.asList(requiredConfigItemsModel))
       .build();
@@ -87,9 +99,8 @@ public class CreateRuleOptionsTest {
 
     CreateRuleOptions createRuleOptionsModel = new CreateRuleOptions.Builder()
       .description("testString")
-      .target(targetModel)
+      .target(targetPrototypeModel)
       .requiredConfig(requiredConfigModel)
-      .type("user_defined")
       .version("testString")
       .xImport(importModel)
       .labels(java.util.Arrays.asList("testString"))
@@ -97,9 +108,8 @@ public class CreateRuleOptionsTest {
       .xRequestId("testString")
       .build();
     assertEquals(createRuleOptionsModel.description(), "testString");
-    assertEquals(createRuleOptionsModel.target(), targetModel);
+    assertEquals(createRuleOptionsModel.target(), targetPrototypeModel);
     assertEquals(createRuleOptionsModel.requiredConfig(), requiredConfigModel);
-    assertEquals(createRuleOptionsModel.type(), "user_defined");
     assertEquals(createRuleOptionsModel.version(), "testString");
     assertEquals(createRuleOptionsModel.xImport(), importModel);
     assertEquals(createRuleOptionsModel.labels(), java.util.Arrays.asList("testString"));

@@ -111,6 +111,7 @@ import com.ibm.cloud.security_and_compliance_center_api.v3.model.ProfileItem;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ProfilesPager;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Property;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.PropertyItem;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.ProviderTypeInstanceAttributes;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ProviderTypeInstanceItem;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ProviderTypeInstancesResponse;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ProviderTypeItem;
@@ -132,13 +133,14 @@ import com.ibm.cloud.security_and_compliance_center_api.v3.model.ReportViolation
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ReportViolationsDrift;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ReportsPager;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfig;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigAnd;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigBase;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigItems;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigItemsRequiredConfigAnd;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigItemsRequiredConfigAndDepth1;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigItemsRequiredConfigBase;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigItemsRequiredConfigOr;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigRequiredConfigAnd;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigItemsRequiredConfigOrDepth1;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigOr;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigRequiredConfigBase;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigRequiredConfigOr;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Resource;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ResourcePage;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ResourceSummary;
@@ -152,8 +154,12 @@ import com.ibm.cloud.security_and_compliance_center_api.v3.model.Settings;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Tags;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Target;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.TargetInfo;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.TargetPrototype;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.TestEvent;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpdateProviderTypeInstanceOptions;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpdateProviderTypeInstanceRequest;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpdateProviderTypeInstanceRequestProviderTypeInstancePrototypeForPatchingAttributes;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpdateProviderTypeInstanceRequestProviderTypeInstancePrototypeForPatchingName;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpdateSettingsOptions;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
 import com.ibm.cloud.security_and_compliance_center_api.test.SdkIntegrationTestBase;
@@ -194,6 +200,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
   String reportIdForReportLink = null;
   String ruleIdLink = null;
   String typeForReportLink = null;
+  String xCorrelationIdLink = null;
 
   /**
    * This method provides our config filename to the base class.
@@ -229,7 +236,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
   public void testGetSettings() throws Exception {
     try {
       GetSettingsOptions getSettingsOptions = new GetSettingsOptions.Builder()
-        .xCorrelationId("1a2b3c4d-5e6f-4a7b-8c9d-e0f1a2b3c4d5")
+        .xCorrelationId(xCorrelationIdLink)
         .xRequestId("testString")
         .build();
 
@@ -246,6 +253,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       objectStorageCrnForUpdateSettingsLink = settingsResult.objectStorage().instanceCrn();
       objectStorageBucketForUpdateSettingsLink = settingsResult.objectStorage().bucket();
       objectStorageLocationForUpdateSettingsLink = settingsResult.objectStorage().bucketLocation();
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
     } catch (ServiceResponseException e) {
         fail(String.format("Service returned status code %d: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
@@ -261,9 +269,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .value("us-east")
         .build();
 
-      Target targetModel = new Target.Builder()
+      TargetPrototype targetPrototypeModel = new TargetPrototype.Builder()
         .serviceName("cloud-object-storage")
-        .serviceDisplayName("testString")
         .resourceKind("bucket")
         .additionalTargetAttributes(java.util.Arrays.asList(additionalTargetAttributeModel))
         .build();
@@ -275,7 +282,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .value("${hard_quota}")
         .build();
 
-      RequiredConfigRequiredConfigAnd requiredConfigModel = new RequiredConfigRequiredConfigAnd.Builder()
+      RequiredConfigAnd requiredConfigModel = new RequiredConfigAnd.Builder()
         .description("The Cloud Object Storage rule.")
         .and(java.util.Arrays.asList(requiredConfigItemsModel))
         .build();
@@ -293,13 +300,12 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
 
       CreateRuleOptions createRuleOptions = new CreateRuleOptions.Builder()
         .description("Example rule")
-        .target(targetModel)
+        .target(targetPrototypeModel)
         .requiredConfig(requiredConfigModel)
-        .type("user_defined")
         .version("1.0.0")
         .xImport(importModel)
         .labels(java.util.Arrays.asList())
-        .xCorrelationId("testString")
+        .xCorrelationId(xCorrelationIdLink)
         .xRequestId("testString")
         .build();
 
@@ -310,8 +316,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       assertEquals(response.getStatusCode(), 201);
 
       Rule ruleResult = response.getResult();
-
       assertNotNull(ruleResult);
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
       ruleIdLink = ruleResult.getId();
     } catch (ServiceResponseException e) {
         fail(String.format("Service returned status code %d: %s%nError details: %s",
@@ -324,7 +330,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
     try {
       GetRuleOptions getRuleOptions = new GetRuleOptions.Builder()
         .ruleId(ruleIdLink)
-        .xCorrelationId("testString")
+        .xCorrelationId(xCorrelationIdLink)
         .xRequestId("testString")
         .build();
 
@@ -344,11 +350,11 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
     }
   }
 
-  @Test(dependsOnMethods = { "testCreateRule" })
+  @Test(dependsOnMethods = { "testGetRule" })
   public void testGetLatestReports() throws Exception {
     try {
       GetLatestReportsOptions getLatestReportsOptions = new GetLatestReportsOptions.Builder()
-        .xCorrelationId("testString")
+        .xCorrelationId(xCorrelationIdLink)
         .xRequestId("testString")
         .sort("profile_name")
         .build();
@@ -362,6 +368,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       ReportLatest reportLatestResult = response.getResult();
 
       assertNotNull(reportLatestResult);
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
       accountIdForReportLink = reportLatestResult.getReports().get(0).getAccount().getId();
       reportIdForReportLink = reportLatestResult.getReports().get(0).getId();
       attachmentIdForReportLink = reportLatestResult.getReports().get(0).getAttachment().getId();
@@ -396,7 +403,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       UpdateSettingsOptions updateSettingsOptions = new UpdateSettingsOptions.Builder()
         .eventNotifications(eventNotificationsModel)
         .objectStorage(objectStorageModel)
-        .xCorrelationId("1a2b3c4d-5e6f-4a7b-8c9d-e0f1a2b3c4d5")
+        .xCorrelationId(xCorrelationIdLink)
         .xRequestId("testString")
         .build();
 
@@ -408,35 +415,35 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
 
       Settings settingsResult = response.getResult();
 
-      //assertNotNull(settingsResult);
+      assertNull(settingsResult);
     } catch (ServiceResponseException e) {
         fail(String.format("Service returned status code %d: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 
-  // @Test(dependsOnMethods = { "testUpdateSettings" })
-  // public void testPostTestEvent() throws Exception {
-  //   try {
-  //     PostTestEventOptions postTestEventOptions = new PostTestEventOptions.Builder()
-  //       .xCorrelationId("1a2b3c4d-5e6f-4a7b-8c9d-e0f1a2b3c4d5")
-  //       .xRequestId("testString")
-  //       .build();
+  /*@Test(dependsOnMethods = { "testUpdateSettings" })
+  public void testPostTestEvent() throws Exception {
+    try {
+      PostTestEventOptions postTestEventOptions = new PostTestEventOptions.Builder()
+        .xCorrelationId(xCorrelationIdLink)
+        .xRequestId("testString")
+        .build();
 
-  //     // Invoke operation
-  //     Response<TestEvent> response = service.postTestEvent(postTestEventOptions).execute();
-  //     // Validate response
-  //     assertNotNull(response);
-  //     assertEquals(response.getStatusCode(), 202);
+      // Invoke operation
+      Response<TestEvent> response = service.postTestEvent(postTestEventOptions).execute();
+      // Validate response
+      assertNotNull(response);
+      assertEquals(response.getStatusCode(), 202);
 
-  //     TestEvent testEventResult = response.getResult();
+      TestEvent testEventResult = response.getResult();
 
-  //     assertNotNull(testEventResult);
-  //   } catch (ServiceResponseException e) {
-  //       fail(String.format("Service returned status code %d: %s%nError details: %s",
-  //         e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
-  //   }
-  // }
+      assertNotNull(testEventResult);
+    } catch (ServiceResponseException e) {
+        fail(String.format("Service returned status code %d: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+    }
+  }*/
 
   @Test(dependsOnMethods = { "testUpdateSettings" })
   public void testCreateCustomControlLibrary() throws Exception {
@@ -453,7 +460,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .assessmentMethod("ibm-cloud-rule")
         .assessmentType("automated")
         .assessmentDescription("Check that there is an Activity Tracker event route defined to collect global events generated by IBM Cloud services")
-        .parameterCount(Long.valueOf("38"))
+        .parameterCount(Long.valueOf("26"))
         .parameters(java.util.Arrays.asList(parameterInfoModel))
         .build();
 
@@ -461,10 +468,10 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .controlSpecificationId("5c7d6f88-a92f-4734-9b49-bd22b0900184")
         .responsibility("user")
         .componentId("iam-identity")
-        .componenetName("testString")
+        .componentName("IAM Identity Service")
         .environment("ibm-cloud")
         .controlSpecificationDescription("IBM cloud")
-        .assessmentsCount(Long.valueOf("38"))
+        .assessmentsCount(Long.valueOf("26"))
         .assessments(java.util.Arrays.asList(implementationModel))
         .build();
 
@@ -493,7 +500,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .controls(java.util.Arrays.asList(controlsInControlLibModel))
         .controlLibraryVersion("1.0.0")
         .latest(true)
-        .controlsCount(Long.valueOf("38"))
+        .controlsCount(Long.valueOf("26"))
         .xCorrelationId("testString")
         .xRequestId("testString")
         .build();
@@ -523,7 +530,6 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .limit(Long.valueOf("1"))
         .controlLibraryType("custom")
         .build();
-
 
       // Invoke operation
       Response<ControlLibraryCollection> response = service.listControlLibraries(listControlLibrariesOptions).execute();
@@ -613,7 +619,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .assessmentMethod("ibm-cloud-rule")
         .assessmentType("automated")
         .assessmentDescription("Check that there is an Activity Tracker event route defined to collect global events generated by IBM Cloud services")
-        .parameterCount(Long.valueOf("38"))
+        .parameterCount(Long.valueOf("26"))
         .parameters(java.util.Arrays.asList(parameterInfoModel))
         .build();
 
@@ -621,10 +627,10 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .controlSpecificationId("5c7d6f88-a92f-4734-9b49-bd22b0900184")
         .responsibility("user")
         .componentId("iam-identity")
-        .componenetName("testString")
+        .componentName("IAM Identity Service")
         .environment("ibm-cloud")
         .controlSpecificationDescription("IBM cloud")
-        .assessmentsCount(Long.valueOf("38"))
+        .assessmentsCount(Long.valueOf("26"))
         .assessments(java.util.Arrays.asList(implementationModel))
         .build();
 
@@ -660,8 +666,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .updatedBy("testString")
         .latest(true)
         .hierarchyEnabled(true)
-        .controlsCount(Long.valueOf("38"))
-        .controlParentsCount(Long.valueOf("38"))
+        .controlsCount(Long.valueOf("26"))
+        .controlParentsCount(Long.valueOf("26"))
         .controls(java.util.Arrays.asList(controlsInControlLibModel))
         .xCorrelationId("testString")
         .xRequestId("testString")
@@ -788,7 +794,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
   public void testGetProfile() throws Exception {
     try {
       GetProfileOptions getProfileOptions = new GetProfileOptions.Builder()
-        .profilesId(profileIdLink)
+      .profileId(profileIdLink)
         .xCorrelationId("testString")
         .xRequestId("testString")
         .build();
@@ -826,7 +832,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .build();
 
       ReplaceProfileOptions replaceProfileOptions = new ReplaceProfileOptions.Builder()
-        .profilesId(profileIdLink)
+        .profileId(profileIdLink)
         .profileName("test_profile1")
         .profileDescription("test_description1")
         .profileType("custom")
@@ -855,7 +861,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
   public void testListRules() throws Exception {
     try {
       ListRulesOptions listRulesOptions = new ListRulesOptions.Builder()
-        .xCorrelationId("testString")
+        .xCorrelationId(xCorrelationIdLink)
         .xRequestId("testString")
         .type("system_defined")
         .search("testString")
@@ -886,9 +892,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .value("us-south")
         .build();
 
-      Target targetModel = new Target.Builder()
+      TargetPrototype targetPrototypeModel = new TargetPrototype.Builder()
         .serviceName("cloud-object-storage")
-        .serviceDisplayName("Cloud Object Storage")
         .resourceKind("bucket")
         .additionalTargetAttributes(java.util.Arrays.asList(additionalTargetAttributeModel))
         .build();
@@ -900,7 +905,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .value("${hard_quota}")
         .build();
 
-      RequiredConfigRequiredConfigAnd requiredConfigModel = new RequiredConfigRequiredConfigAnd.Builder()
+      RequiredConfigAnd requiredConfigModel = new RequiredConfigAnd.Builder()
         .description("The Cloud Object Storage rule.")
         .and(java.util.Arrays.asList(requiredConfigItemsModel))
         .build();
@@ -920,13 +925,12 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .ruleId(ruleIdLink)
         .ifMatch(eTagLink)
         .description("Example rule")
-        .target(targetModel)
+        .target(targetPrototypeModel)
         .requiredConfig(requiredConfigModel)
-        .type("user_defined")
         .version("1.0.1")
         .xImport(importModel)
         .labels(java.util.Arrays.asList())
-        .xCorrelationId("testString")
+        .xCorrelationId(xCorrelationIdLink)
         .xRequestId("testString")
         .build();
 
@@ -949,9 +953,9 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
   public void testCreateAttachment() throws Exception {
     try {
       PropertyItem propertyScopeId = new PropertyItem.Builder()
-      .name("scope_id")
-      .value(config.get("ACCOUNTID"))
-      .build();  
+        .name("scope_id")
+        .value(config.get("ACCOUNTID"))
+        .build();
 
       PropertyItem propertyScopeType = new PropertyItem.Builder()
       .name("scope_type")
@@ -995,7 +999,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .build();
 
       CreateAttachmentOptions createAttachmentOptions = new CreateAttachmentOptions.Builder()
-        .profilesId(profileIdLink)
+        .profileId(profileIdLink)
         .attachments(java.util.Arrays.asList(attachmentsPrototypeModel))
         .xCorrelationId("testString")
         .xRequestId("testString")
@@ -1021,7 +1025,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
   public void testListAttachments() throws Exception {
     try {
       ListAttachmentsOptions listAttachmentsOptions = new ListAttachmentsOptions.Builder()
-        .profilesId(profileIdLink)
+        .profileId(profileIdLink)
         .xCorrelationId("testString")
         .xRequestId("testString")
         .limit(Long.valueOf("1"))
@@ -1046,7 +1050,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
   public void testListAttachmentsWithPager() throws Exception {
     try {
       ListAttachmentsOptions options = new ListAttachmentsOptions.Builder()
-        .profilesId(profileIdLink)
+        .profileId(profileIdLink)
         .xCorrelationId("testString")
         .xRequestId("testString")
         .limit(Long.valueOf("10"))
@@ -1081,7 +1085,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
     try {
       GetProfileAttachmentOptions getProfileAttachmentOptions = new GetProfileAttachmentOptions.Builder()
         .attachmentId(attachmentIdLink)
-        .profilesId(profileIdLink)
+        .profileId(profileIdLink)
         .xCorrelationId("testString")
         .xRequestId("testString")
         .build();
@@ -1105,14 +1109,14 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
   public void testReplaceProfileAttachment() throws Exception {
     try {
       PropertyItem propertyScopeId = new PropertyItem.Builder()
-      .name("scope_id")
+        .name("scope_id")
       .value(config.get("ACCOUNTID"))
       .build();  
 
       PropertyItem propertyScopeType = new PropertyItem.Builder()
       .name("scope_type")
       .value("account")
-      .build();
+        .build();
 
       MultiCloudScope multiCloudScopeModel = new MultiCloudScope.Builder()
         .environment("ibm-cloud")
@@ -1146,7 +1150,6 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
 
       ReplaceProfileAttachmentOptions replaceProfileAttachmentOptions = new ReplaceProfileAttachmentOptions.Builder()
         .attachmentId(attachmentIdLink)
-        .profilesId(profileIdLink)
         .id("testString")
         .profileId(profileIdLink)
         .accountId(config.get("ACCOUNTID"))
@@ -1230,7 +1233,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
 
       assertNotNull(attachmentCollectionResult);
     } catch (ServiceResponseException e) {
-      fail(String.format("Service returned status code %d: %s%nError details: %s",
+        fail(String.format("Service returned status code %d: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
@@ -1268,7 +1271,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
   public void testListReports() throws Exception {
     try {
       ListReportsOptions listReportsOptions = new ListReportsOptions.Builder()
-        .xCorrelationId("testString")
+        .xCorrelationId(xCorrelationIdLink)
         .xRequestId("testString")
         .attachmentId(attachmentIdForReportLink)
         .groupId(groupIdForReportLink)
@@ -1287,6 +1290,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       ReportPage reportPageResult = response.getResult();
 
       assertNotNull(reportPageResult);
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
     } catch (ServiceResponseException e) {
         fail(String.format("Service returned status code %d: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
@@ -1297,7 +1301,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
   public void testListReportsWithPager() throws Exception {
     try {
       ListReportsOptions options = new ListReportsOptions.Builder()
-        .xCorrelationId("testString")
+        .xCorrelationId(xCorrelationIdLink)
         .xRequestId("testString")
         .attachmentId(attachmentIdForReportLink)
         .groupId(groupIdForReportLink)
@@ -1331,12 +1335,13 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
     }
   }
 
+
   @Test(dependsOnMethods = { "testListReports" })
   public void testGetReport() throws Exception {
     try {
       GetReportOptions getReportOptions = new GetReportOptions.Builder()
         .reportId(reportIdForReportLink)
-        .xCorrelationId("testString")
+        .xCorrelationId(xCorrelationIdLink)
         .xRequestId("testString")
         .build();
 
@@ -1349,6 +1354,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       Report reportResult = response.getResult();
 
       assertNotNull(reportResult);
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
     } catch (ServiceResponseException e) {
         fail(String.format("Service returned status code %d: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
@@ -1360,7 +1366,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
     try {
       GetReportSummaryOptions getReportSummaryOptions = new GetReportSummaryOptions.Builder()
         .reportId(reportIdForReportLink)
-        .xCorrelationId("testString")
+        .xCorrelationId(xCorrelationIdLink)
         .xRequestId("testString")
         .build();
 
@@ -1373,6 +1379,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       ReportSummary reportSummaryResult = response.getResult();
 
       assertNotNull(reportSummaryResult);
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
     } catch (ServiceResponseException e) {
         fail(String.format("Service returned status code %d: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
@@ -1384,7 +1391,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
     try {
       GetReportEvaluationOptions getReportEvaluationOptions = new GetReportEvaluationOptions.Builder()
         .reportId(reportIdForReportLink)
-        .xCorrelationId("testString")
+        .xCorrelationId(xCorrelationIdLink)
         .xRequestId("testString")
         .excludeSummary(true)
         .build();
@@ -1398,18 +1405,19 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       InputStream inputStreamResult = response.getResult();
 
       assertNotNull(inputStreamResult);
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
     } catch (ServiceResponseException e) {
         fail(String.format("Service returned status code %d: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 
-  @Test(dependsOnMethods = { "testGetReportEvaluation" })
+  @Test(dependsOnMethods = { "testGetReportSummary" })
   public void testGetReportControls() throws Exception {
     try {
       GetReportControlsOptions getReportControlsOptions = new GetReportControlsOptions.Builder()
         .reportId(reportIdForReportLink)
-        .xCorrelationId("testString")
+        .xCorrelationId(xCorrelationIdLink)
         .xRequestId("testString")
         .controlId("testString")
         .controlName("testString")
@@ -1428,6 +1436,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       ReportControls reportControlsResult = response.getResult();
 
       assertNotNull(reportControlsResult);
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
     } catch (ServiceResponseException e) {
         fail(String.format("Service returned status code %d: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
@@ -1439,11 +1448,13 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
     try {
       ListReportEvaluationsOptions listReportEvaluationsOptions = new ListReportEvaluationsOptions.Builder()
         .reportId(reportIdForReportLink)
-        .xCorrelationId("testString")
+        .xCorrelationId(xCorrelationIdLink)
         .xRequestId("testString")
         .assessmentId("testString")
+        .assessmentMethod("testString")
         .componentId("testString")
         .targetId("testString")
+        .targetEnv("testString")
         .targetName("testString")
         .status("failure")
         .limit(Long.valueOf("1"))
@@ -1458,6 +1469,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       EvaluationPage evaluationPageResult = response.getResult();
 
       assertNotNull(evaluationPageResult);
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
     } catch (ServiceResponseException e) {
         fail(String.format("Service returned status code %d: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
@@ -1469,8 +1481,14 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
     try {
       ListReportEvaluationsOptions options = new ListReportEvaluationsOptions.Builder()
         .reportId(reportIdForReportLink)
-        .xCorrelationId("testString")
+        .xCorrelationId(xCorrelationIdLink)
         .xRequestId("testString")
+        .assessmentId("testString")
+        .assessmentMethod("testString")
+        .componentId("testString")
+        .targetId("testString")
+        .targetEnv("testString")
+        .targetName("testString")
         .status("failure")
         .limit(Long.valueOf("10"))
         .build();
@@ -1496,12 +1514,13 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
     }
   }
 
-  @Test(dependsOnMethods = { "testListReportEvaluationsWithPager" })
+
+  @Test(dependsOnMethods = { "testListReportEvaluations" })
   public void testListReportResources() throws Exception {
     try {
       ListReportResourcesOptions listReportResourcesOptions = new ListReportResourcesOptions.Builder()
         .reportId(reportIdForReportLink)
-        .xCorrelationId("testString")
+        .xCorrelationId(xCorrelationIdLink)
         .xRequestId("testString")
         .id("testString")
         .resourceName("testString")
@@ -1521,6 +1540,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       ResourcePage resourcePageResult = response.getResult();
 
       assertNotNull(resourcePageResult);
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
     } catch (ServiceResponseException e) {
         fail(String.format("Service returned status code %d: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
@@ -1532,9 +1552,12 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
     try {
       ListReportResourcesOptions options = new ListReportResourcesOptions.Builder()
         .reportId(reportIdForReportLink)
-        .xCorrelationId("testString")
+        .xCorrelationId(xCorrelationIdLink)
         .xRequestId("testString")
+        .id("testString")
+        .resourceName("testString")
         .accountId(accountIdForReportLink)
+        .componentId("testString")
         .status("compliant")
         .sort("account_id")
         .limit(Long.valueOf("10"))
@@ -1566,7 +1589,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
     try {
       GetReportTagsOptions getReportTagsOptions = new GetReportTagsOptions.Builder()
         .reportId(reportIdForReportLink)
-        .xCorrelationId("testString")
+        .xCorrelationId(xCorrelationIdLink)
         .xRequestId("testString")
         .build();
 
@@ -1579,6 +1602,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       ReportTags reportTagsResult = response.getResult();
 
       assertNotNull(reportTagsResult);
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
     } catch (ServiceResponseException e) {
         fail(String.format("Service returned status code %d: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
@@ -1590,7 +1614,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
     try {
       GetReportViolationsDriftOptions getReportViolationsDriftOptions = new GetReportViolationsDriftOptions.Builder()
         .reportId(reportIdForReportLink)
-        .xCorrelationId("testString")
+        .xCorrelationId(xCorrelationIdLink)
         .xRequestId("testString")
         .scanTimeDuration(Long.valueOf("0"))
         .build();
@@ -1604,6 +1628,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       ReportViolationsDrift reportViolationsDriftResult = response.getResult();
 
       assertNotNull(reportViolationsDriftResult);
+      xCorrelationIdLink = response.getHeaders().values("X-Correlation-ID").get(0);
     } catch (ServiceResponseException e) {
         fail(String.format("Service returned status code %d: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
@@ -1627,8 +1652,6 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       ProviderTypesCollection providerTypesCollectionResult = response.getResult();
 
       assertNotNull(providerTypesCollectionResult);
-      providerTypeIdLink = providerTypesCollectionResult.getProviderTypes().get(0).getId();
-
       for(ProviderTypeItem providerTypeItem: providerTypesCollectionResult.getProviderTypes()){
         if(providerTypeItem.getName().equals("workload-protection")){
           providerTypeIdLink = providerTypeItem.getId();
@@ -1745,11 +1768,14 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
   @Test(dependsOnMethods = { "testGetProviderTypeInstance" })
   public void testUpdateProviderTypeInstance() throws Exception {
     try {
+      UpdateProviderTypeInstanceRequestProviderTypeInstancePrototypeForPatchingName updateProviderTypeInstanceRequestModel = new UpdateProviderTypeInstanceRequestProviderTypeInstancePrototypeForPatchingName.Builder()
+        .name("workload-protection-instance-1")
+        .build();
+
       UpdateProviderTypeInstanceOptions updateProviderTypeInstanceOptions = new UpdateProviderTypeInstanceOptions.Builder()
         .providerTypeId(providerTypeIdLink)
         .providerTypeInstanceId(providerTypeInstanceIdLink)
-        .name("workload-protection-instance-1")
-        .attributes(java.util.Collections.singletonMap("wp_crn", "crn:v1:staging:public:sysdig-secure:us-south:a/ff88f007f9ff4622aac4fbc0eda36255:0df4004c-fb74-483b-97be-dd9bd35af4d8::"))
+        .updateProviderTypeInstanceRequest(updateProviderTypeInstanceRequestModel)
         .xCorrelationId("testString")
         .xRequestId("testString")
         .build();
@@ -1797,7 +1823,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
     try {
       DeleteProfileAttachmentOptions deleteProfileAttachmentOptions = new DeleteProfileAttachmentOptions.Builder()
         .attachmentId(attachmentIdLink)
-        .profilesId(profileIdLink)
+        .profileId(profileIdLink)
         .xCorrelationId("testString")
         .xRequestId("testString")
         .build();
@@ -1816,13 +1842,12 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
-
-
+  
   @Test(dependsOnMethods = { "testDeleteProfileAttachment" })
   public void testDeleteCustomProfile() throws Exception {
     try {
       DeleteCustomProfileOptions deleteCustomProfileOptions = new DeleteCustomProfileOptions.Builder()
-        .profilesId(profileIdLink)
+       .profileId(profileIdLink)
         .xCorrelationId("testString")
         .xRequestId("testString")
         .build();
@@ -1871,7 +1896,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
     try {
       DeleteRuleOptions deleteRuleOptions = new DeleteRuleOptions.Builder()
         .ruleId(ruleIdLink)
-        .xCorrelationId("testString")
+        .xCorrelationId(xCorrelationIdLink)
         .xRequestId("testString")
         .build();
 
@@ -1886,8 +1911,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
     }
   }
 
-  
-  @Test(dependsOnMethods = { "testDeleteProfileAttachment" })
+  @Test(dependsOnMethods = { "testDeleteRule" })
   public void testDeleteProviderTypeInstance() throws Exception {
     try {
       DeleteProviderTypeInstanceOptions deleteProviderTypeInstanceOptions = new DeleteProviderTypeInstanceOptions.Builder()

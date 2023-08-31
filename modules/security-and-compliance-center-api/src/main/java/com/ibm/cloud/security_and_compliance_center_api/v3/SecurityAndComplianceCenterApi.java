@@ -209,10 +209,10 @@ public class SecurityAndComplianceCenterApi extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (getSettingsOptions.xCorrelationId() != null) {
-      builder.header("X-Correlation-Id", getSettingsOptions.xCorrelationId());
+      builder.header("X-Correlation-ID", getSettingsOptions.xCorrelationId());
     }
     if (getSettingsOptions.xRequestId() != null) {
-      builder.header("X-Request-Id", getSettingsOptions.xRequestId());
+      builder.header("X-Request-ID", getSettingsOptions.xRequestId());
     }
     ResponseConverter<Settings> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<Settings>() { }.getType());
@@ -248,10 +248,10 @@ public class SecurityAndComplianceCenterApi extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (updateSettingsOptions.xCorrelationId() != null) {
-      builder.header("X-Correlation-Id", updateSettingsOptions.xCorrelationId());
+      builder.header("X-Correlation-ID", updateSettingsOptions.xCorrelationId());
     }
     if (updateSettingsOptions.xRequestId() != null) {
-      builder.header("X-Request-Id", updateSettingsOptions.xRequestId());
+      builder.header("X-Request-ID", updateSettingsOptions.xRequestId());
     }
     final JsonObject contentJson = new JsonObject();
     if (updateSettingsOptions.eventNotifications() != null) {
@@ -298,10 +298,10 @@ public class SecurityAndComplianceCenterApi extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (postTestEventOptions.xCorrelationId() != null) {
-      builder.header("X-Correlation-Id", postTestEventOptions.xCorrelationId());
+      builder.header("X-Correlation-ID", postTestEventOptions.xCorrelationId());
     }
     if (postTestEventOptions.xRequestId() != null) {
-      builder.header("X-Request-Id", postTestEventOptions.xRequestId());
+      builder.header("X-Request-ID", postTestEventOptions.xRequestId());
     }
     ResponseConverter<TestEvent> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<TestEvent>() { }.getType());
@@ -322,7 +322,7 @@ public class SecurityAndComplianceCenterApi extends BaseService {
   }
 
   /**
-   * Get control libraries.
+   * List control libraries.
    *
    * Retrieve all of the control libraries that are available in your account, including predefined, and custom
    * libraries.
@@ -332,7 +332,8 @@ public class SecurityAndComplianceCenterApi extends BaseService {
    * Each control has several specifications  and assessments that are mapped to it. A specification is a defined
    * requirement that is specific to a component. An assessment, or several,  are mapped to each specification with a
    * detailed evaluation that is done to check whether the specification is compliant. For more information, see
-   * [Creating custom libraries](/docs/security-compliance?topic=security-compliance-custom-library).
+   * [Creating custom
+   * libraries](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-custom-library).
    *
    * @param listControlLibrariesOptions the {@link ListControlLibrariesOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link ControlLibraryCollection}
@@ -368,7 +369,7 @@ public class SecurityAndComplianceCenterApi extends BaseService {
   }
 
   /**
-   * Get control libraries.
+   * List control libraries.
    *
    * Retrieve all of the control libraries that are available in your account, including predefined, and custom
    * libraries.
@@ -378,7 +379,8 @@ public class SecurityAndComplianceCenterApi extends BaseService {
    * Each control has several specifications  and assessments that are mapped to it. A specification is a defined
    * requirement that is specific to a component. An assessment, or several,  are mapped to each specification with a
    * detailed evaluation that is done to check whether the specification is compliant. For more information, see
-   * [Creating custom libraries](/docs/security-compliance?topic=security-compliance-custom-library).
+   * [Creating custom
+   * libraries](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-custom-library).
    *
    * @return a {@link ServiceCall} with a result of type {@link ControlLibraryCollection}
    */
@@ -396,7 +398,8 @@ public class SecurityAndComplianceCenterApi extends BaseService {
    * Each control has several specifications  and assessments that are mapped to it. A specification is a defined
    * requirement that is specific to a component. An assessment, or several,  are mapped to each specification with a
    * detailed evaluation that is done to check whether the specification is compliant. For more information, see
-   * [Creating custom libraries](/docs/security-compliance?topic=security-compliance-custom-library).
+   * [Creating custom
+   * libraries](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-custom-library).
    *
    * @param createCustomControlLibraryOptions the {@link CreateCustomControlLibraryOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link ControlLibrary}
@@ -447,7 +450,8 @@ public class SecurityAndComplianceCenterApi extends BaseService {
    *
    * With Security and Compliance Center, you can manage a custom control library  that is specific to your
    * organization's needs. Each control has several specifications  and assessments that are mapped to it.  For more
-   * information, see [Creating custom libraries](/docs/security-compliance?topic=security-compliance-custom-library).
+   * information, see [Creating custom
+   * libraries](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-custom-library).
    *
    * @param deleteCustomControlLibraryOptions the {@link DeleteCustomControlLibraryOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link ControlLibraryDelete}
@@ -484,7 +488,8 @@ public class SecurityAndComplianceCenterApi extends BaseService {
    * Each control has several specifications  and assessments that are mapped to it. A specification is a defined
    * requirement that is specific to a component. An assessment, or several,  are mapped to each specification with a
    * detailed evaluation that is done to check whether the specification is compliant. For more information, see
-   * [Creating custom libraries](/docs/security-compliance?topic=security-compliance-custom-library).
+   * [Creating custom
+   * libraries](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-custom-library).
    *
    * @param getControlLibraryOptions the {@link GetControlLibraryOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link ControlLibrary}
@@ -520,7 +525,7 @@ public class SecurityAndComplianceCenterApi extends BaseService {
    * With Security and Compliance Center, you can create and update a custom control library that is specific to your
    * organization's needs.  You define the controls and specifications before you map previously created assessments.
    * Each control has several specifications  and assessments that are mapped to it. For more information, see [Creating
-   * custom libraries](/docs/security-compliance?topic=security-compliance-custom-library).
+   * custom libraries](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-custom-library).
    *
    * @param replaceCustomControlLibraryOptions the {@link ReplaceCustomControlLibraryOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link ControlLibrary}
@@ -598,7 +603,7 @@ public class SecurityAndComplianceCenterApi extends BaseService {
   }
 
   /**
-   * Get all profiles.
+   * List profiles.
    *
    * View all of the predefined and custom profiles that are available in your account.
    *
@@ -636,7 +641,7 @@ public class SecurityAndComplianceCenterApi extends BaseService {
   }
 
   /**
-   * Get all profiles.
+   * List profiles.
    *
    * View all of the predefined and custom profiles that are available in your account.
    *
@@ -651,7 +656,7 @@ public class SecurityAndComplianceCenterApi extends BaseService {
    *
    * Create a custom profile that is specific to your usecase, by using an existing library as a starting point.  For
    * more information, see [Building custom
-   * profiles](https://test.cloud.ibm.com/docs/security-compliance?topic=security-compliance-build-custom-profiles&amp;interface=api).
+   * profiles](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-build-custom-profiles&amp;interface=api).
    *
    * @param createProfileOptions the {@link CreateProfileOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link Profile}
@@ -688,7 +693,7 @@ public class SecurityAndComplianceCenterApi extends BaseService {
    *
    * Delete a custom profile by providing the profile ID.  You can find the ID in the Security and Compliance Center UI.
    * For more information about managing your custom profiles, see [Building custom
-   * profiles](https://test.cloud.ibm.com/docs/security-compliance?topic=security-compliance-build-custom-profiles&amp;interface=api).
+   * profiles](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-build-custom-profiles&amp;interface=api).
    *
    * @param deleteCustomProfileOptions the {@link DeleteCustomProfileOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link Profile}
@@ -697,8 +702,8 @@ public class SecurityAndComplianceCenterApi extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(deleteCustomProfileOptions,
       "deleteCustomProfileOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("profiles_id", deleteCustomProfileOptions.profilesId());
-    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/profiles/{profiles_id}", pathParamsMap));
+    pathParamsMap.put("profile_id", deleteCustomProfileOptions.profileId());
+    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/profiles/{profile_id}", pathParamsMap));
     Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("security_and_compliance_center_api", "v3", "deleteCustomProfile");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
@@ -720,7 +725,7 @@ public class SecurityAndComplianceCenterApi extends BaseService {
    *
    * View the details of a profile by providing the profile ID.  You can find the profile ID in the Security and
    * Compliance Center UI. For more information, see [Building custom
-   * profiles](https://test.cloud.ibm.com/docs/security-compliance?topic=security-compliance-build-custom-profiles&amp;interface=api).
+   * profiles](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-build-custom-profiles&amp;interface=api).
    *
    * @param getProfileOptions the {@link GetProfileOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link Profile}
@@ -729,8 +734,8 @@ public class SecurityAndComplianceCenterApi extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(getProfileOptions,
       "getProfileOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("profiles_id", getProfileOptions.profilesId());
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/profiles/{profiles_id}", pathParamsMap));
+    pathParamsMap.put("profile_id", getProfileOptions.profileId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/profiles/{profile_id}", pathParamsMap));
     Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("security_and_compliance_center_api", "v3", "getProfile");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
@@ -753,7 +758,7 @@ public class SecurityAndComplianceCenterApi extends BaseService {
    * Update the details of a custom profile. With Security and Compliance Center, you can manage  a profile that is
    * specific to your usecase, by using an existing library as a starting point.  For more information, see [Building
    * custom
-   * profiles](https://test.cloud.ibm.com/docs/security-compliance?topic=security-compliance-build-custom-profiles&amp;interface=api).
+   * profiles](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-build-custom-profiles&amp;interface=api).
    *
    * @param replaceProfileOptions the {@link ReplaceProfileOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link Profile}
@@ -762,8 +767,8 @@ public class SecurityAndComplianceCenterApi extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(replaceProfileOptions,
       "replaceProfileOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("profiles_id", replaceProfileOptions.profilesId());
-    RequestBuilder builder = RequestBuilder.put(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/profiles/{profiles_id}", pathParamsMap));
+    pathParamsMap.put("profile_id", replaceProfileOptions.profileId());
+    RequestBuilder builder = RequestBuilder.put(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/profiles/{profile_id}", pathParamsMap));
     Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("security_and_compliance_center_api", "v3", "replaceProfile");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
@@ -808,10 +813,10 @@ public class SecurityAndComplianceCenterApi extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (listRulesOptions.xCorrelationId() != null) {
-      builder.header("X-Correlation-Id", listRulesOptions.xCorrelationId());
+      builder.header("X-Correlation-ID", listRulesOptions.xCorrelationId());
     }
     if (listRulesOptions.xRequestId() != null) {
-      builder.header("X-Request-Id", listRulesOptions.xRequestId());
+      builder.header("X-Request-ID", listRulesOptions.xRequestId());
     }
     if (listRulesOptions.type() != null) {
       builder.query("type", String.valueOf(listRulesOptions.type()));
@@ -860,18 +865,15 @@ public class SecurityAndComplianceCenterApi extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (createRuleOptions.xCorrelationId() != null) {
-      builder.header("X-Correlation-Id", createRuleOptions.xCorrelationId());
+      builder.header("X-Correlation-ID", createRuleOptions.xCorrelationId());
     }
     if (createRuleOptions.xRequestId() != null) {
-      builder.header("X-Request-Id", createRuleOptions.xRequestId());
+      builder.header("X-Request-ID", createRuleOptions.xRequestId());
     }
     final JsonObject contentJson = new JsonObject();
     contentJson.addProperty("description", createRuleOptions.description());
     contentJson.add("target", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createRuleOptions.target()));
     contentJson.add("required_config", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createRuleOptions.requiredConfig()));
-    if (createRuleOptions.type() != null) {
-      contentJson.addProperty("type", createRuleOptions.type());
-    }
     if (createRuleOptions.version() != null) {
       contentJson.addProperty("version", createRuleOptions.version());
     }
@@ -907,10 +909,10 @@ public class SecurityAndComplianceCenterApi extends BaseService {
       builder.header(header.getKey(), header.getValue());
     }
     if (deleteRuleOptions.xCorrelationId() != null) {
-      builder.header("X-Correlation-Id", deleteRuleOptions.xCorrelationId());
+      builder.header("X-Correlation-ID", deleteRuleOptions.xCorrelationId());
     }
     if (deleteRuleOptions.xRequestId() != null) {
-      builder.header("X-Request-Id", deleteRuleOptions.xRequestId());
+      builder.header("X-Request-ID", deleteRuleOptions.xRequestId());
     }
     ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
     return createServiceCall(builder.build(), responseConverter);
@@ -937,10 +939,10 @@ public class SecurityAndComplianceCenterApi extends BaseService {
     }
     builder.header("Accept", "application/json");
     if (getRuleOptions.xCorrelationId() != null) {
-      builder.header("X-Correlation-Id", getRuleOptions.xCorrelationId());
+      builder.header("X-Correlation-ID", getRuleOptions.xCorrelationId());
     }
     if (getRuleOptions.xRequestId() != null) {
-      builder.header("X-Request-Id", getRuleOptions.xRequestId());
+      builder.header("X-Request-ID", getRuleOptions.xRequestId());
     }
     ResponseConverter<Rule> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<Rule>() { }.getType());
@@ -970,18 +972,15 @@ public class SecurityAndComplianceCenterApi extends BaseService {
     builder.header("Accept", "application/json");
     builder.header("If-Match", replaceRuleOptions.ifMatch());
     if (replaceRuleOptions.xCorrelationId() != null) {
-      builder.header("X-Correlation-Id", replaceRuleOptions.xCorrelationId());
+      builder.header("X-Correlation-ID", replaceRuleOptions.xCorrelationId());
     }
     if (replaceRuleOptions.xRequestId() != null) {
-      builder.header("X-Request-Id", replaceRuleOptions.xRequestId());
+      builder.header("X-Request-ID", replaceRuleOptions.xRequestId());
     }
     final JsonObject contentJson = new JsonObject();
     contentJson.addProperty("description", replaceRuleOptions.description());
     contentJson.add("target", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceRuleOptions.target()));
     contentJson.add("required_config", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceRuleOptions.requiredConfig()));
-    if (replaceRuleOptions.type() != null) {
-      contentJson.addProperty("type", replaceRuleOptions.type());
-    }
     if (replaceRuleOptions.version() != null) {
       contentJson.addProperty("version", replaceRuleOptions.version());
     }
@@ -998,12 +997,12 @@ public class SecurityAndComplianceCenterApi extends BaseService {
   }
 
   /**
-   * Get all attachments linked to a specific profile.
+   * List attachments to a profile.
    *
    * View all of the attachments that are linked to a specific profile.  An attachment is the association between the
    * set of resources that you want to evaluate  and a profile that contains the specific controls that you want to use.
    * For more information, see [Running an evaluation for IBM
-   * Cloud](https://test.cloud.ibm.com/docs/security-compliance?topic=security-compliance-scan-resources).
+   * Cloud](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-scan-resources).
    *
    * @param listAttachmentsOptions the {@link ListAttachmentsOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link AttachmentCollection}
@@ -1012,8 +1011,8 @@ public class SecurityAndComplianceCenterApi extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(listAttachmentsOptions,
       "listAttachmentsOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("profiles_id", listAttachmentsOptions.profilesId());
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/profiles/{profiles_id}/attachments", pathParamsMap));
+    pathParamsMap.put("profile_id", listAttachmentsOptions.profileId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/profiles/{profile_id}/attachments", pathParamsMap));
     Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("security_and_compliance_center_api", "v3", "listAttachments");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
@@ -1041,7 +1040,7 @@ public class SecurityAndComplianceCenterApi extends BaseService {
    *
    * Create an attachment to link to a profile to schedule evaluations  of your resources on a recurring schedule, or
    * on-demand. For more information, see [Running an evaluation for IBM
-   * Cloud](https://test.cloud.ibm.com/docs/security-compliance?topic=security-compliance-scan-resources).
+   * Cloud](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-scan-resources).
    *
    * @param createAttachmentOptions the {@link CreateAttachmentOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link AttachmentPrototype}
@@ -1050,8 +1049,8 @@ public class SecurityAndComplianceCenterApi extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(createAttachmentOptions,
       "createAttachmentOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("profiles_id", createAttachmentOptions.profilesId());
-    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/profiles/{profiles_id}/attachments", pathParamsMap));
+    pathParamsMap.put("profile_id", createAttachmentOptions.profileId());
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/profiles/{profile_id}/attachments", pathParamsMap));
     Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("security_and_compliance_center_api", "v3", "createAttachment");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
@@ -1079,7 +1078,7 @@ public class SecurityAndComplianceCenterApi extends BaseService {
    *
    * Delete an attachment. Alternatively, if you think that you might need  this configuration in the future, you can
    * pause an attachment to stop being charged. For more information, see [Running an evaluation for IBM
-   * Cloud](https://test.cloud.ibm.com/docs/security-compliance?topic=security-compliance-scan-resources).
+   * Cloud](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-scan-resources).
    *
    * @param deleteProfileAttachmentOptions the {@link DeleteProfileAttachmentOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link AttachmentItem}
@@ -1089,8 +1088,8 @@ public class SecurityAndComplianceCenterApi extends BaseService {
       "deleteProfileAttachmentOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
     pathParamsMap.put("attachment_id", deleteProfileAttachmentOptions.attachmentId());
-    pathParamsMap.put("profiles_id", deleteProfileAttachmentOptions.profilesId());
-    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/profiles/{profiles_id}/attachments/{attachment_id}", pathParamsMap));
+    pathParamsMap.put("profile_id", deleteProfileAttachmentOptions.profileId());
+    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/profiles/{profile_id}/attachments/{attachment_id}", pathParamsMap));
     Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("security_and_compliance_center_api", "v3", "deleteProfileAttachment");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
@@ -1112,7 +1111,7 @@ public class SecurityAndComplianceCenterApi extends BaseService {
    *
    * View the details of an attachment a profile by providing the attachment ID.  You can find this value in the
    * Security and Compliance Center UI. For more information, see [Running an evaluation for IBM
-   * Cloud](https://test.cloud.ibm.com/docs/security-compliance?topic=security-compliance-scan-resources).
+   * Cloud](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-scan-resources).
    *
    * @param getProfileAttachmentOptions the {@link GetProfileAttachmentOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link AttachmentItem}
@@ -1122,8 +1121,8 @@ public class SecurityAndComplianceCenterApi extends BaseService {
       "getProfileAttachmentOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
     pathParamsMap.put("attachment_id", getProfileAttachmentOptions.attachmentId());
-    pathParamsMap.put("profiles_id", getProfileAttachmentOptions.profilesId());
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/profiles/{profiles_id}/attachments/{attachment_id}", pathParamsMap));
+    pathParamsMap.put("profile_id", getProfileAttachmentOptions.profileId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/profiles/{profile_id}/attachments/{attachment_id}", pathParamsMap));
     Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("security_and_compliance_center_api", "v3", "getProfileAttachment");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
@@ -1145,7 +1144,7 @@ public class SecurityAndComplianceCenterApi extends BaseService {
    *
    * Update an attachment that is linked to a profile to evaluate your resources  on a recurring schedule, or on-demand.
    * For more information, see [Running an evaluation for IBM
-   * Cloud](https://test.cloud.ibm.com/docs/security-compliance?topic=security-compliance-scan-resources).
+   * Cloud](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-scan-resources).
    *
    * @param replaceProfileAttachmentOptions the {@link ReplaceProfileAttachmentOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link AttachmentItem}
@@ -1155,8 +1154,8 @@ public class SecurityAndComplianceCenterApi extends BaseService {
       "replaceProfileAttachmentOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
     pathParamsMap.put("attachment_id", replaceProfileAttachmentOptions.attachmentId());
-    pathParamsMap.put("profiles_id", replaceProfileAttachmentOptions.profilesId());
-    RequestBuilder builder = RequestBuilder.put(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/profiles/{profiles_id}/attachments/{attachment_id}", pathParamsMap));
+    pathParamsMap.put("profile_id", replaceProfileAttachmentOptions.profileId());
+    RequestBuilder builder = RequestBuilder.put(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/profiles/{profile_id}/attachments/{attachment_id}", pathParamsMap));
     Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("security_and_compliance_center_api", "v3", "replaceProfileAttachment");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
@@ -1258,12 +1257,12 @@ public class SecurityAndComplianceCenterApi extends BaseService {
   }
 
   /**
-   * Get all attachments in an instance.
+   * List attachments.
    *
    * View all of the attachments that are linked to an account. An attachment is the association between the set of
    * resources that you want to evaluate  and a profile that contains the specific controls that you want to use. For
    * more information, see [Running an evaluation for IBM
-   * Cloud](https://test.cloud.ibm.com/docs/security-compliance?topic=security-compliance-scan-resources).
+   * Cloud](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-scan-resources).
    *
    * @param listAttachmentsAccountOptions the {@link ListAttachmentsAccountOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link AttachmentCollection}
@@ -1296,12 +1295,12 @@ public class SecurityAndComplianceCenterApi extends BaseService {
   }
 
   /**
-   * Get all attachments in an instance.
+   * List attachments.
    *
    * View all of the attachments that are linked to an account. An attachment is the association between the set of
    * resources that you want to evaluate  and a profile that contains the specific controls that you want to use. For
    * more information, see [Running an evaluation for IBM
-   * Cloud](https://test.cloud.ibm.com/docs/security-compliance?topic=security-compliance-scan-resources).
+   * Cloud](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-scan-resources).
    *
    * @return a {@link ServiceCall} with a result of type {@link AttachmentCollection}
    */
@@ -1310,7 +1309,7 @@ public class SecurityAndComplianceCenterApi extends BaseService {
   }
 
   /**
-   * Get the latest reports.
+   * List latest reports.
    *
    * Retrieve the latest reports, which are grouped by profile ID, scope ID, and attachment ID. For more information,
    * see [Viewing results](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-results).
@@ -1343,7 +1342,7 @@ public class SecurityAndComplianceCenterApi extends BaseService {
   }
 
   /**
-   * Get the latest reports.
+   * List latest reports.
    *
    * Retrieve the latest reports, which are grouped by profile ID, scope ID, and attachment ID. For more information,
    * see [Viewing results](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-results).
@@ -1622,11 +1621,17 @@ public class SecurityAndComplianceCenterApi extends BaseService {
     if (listReportEvaluationsOptions.assessmentId() != null) {
       builder.query("assessment_id", String.valueOf(listReportEvaluationsOptions.assessmentId()));
     }
+    if (listReportEvaluationsOptions.assessmentMethod() != null) {
+      builder.query("assessment_method", String.valueOf(listReportEvaluationsOptions.assessmentMethod()));
+    }
     if (listReportEvaluationsOptions.componentId() != null) {
       builder.query("component_id", String.valueOf(listReportEvaluationsOptions.componentId()));
     }
     if (listReportEvaluationsOptions.targetId() != null) {
       builder.query("target_id", String.valueOf(listReportEvaluationsOptions.targetId()));
+    }
+    if (listReportEvaluationsOptions.targetEnv() != null) {
+      builder.query("target_env", String.valueOf(listReportEvaluationsOptions.targetEnv()));
     }
     if (listReportEvaluationsOptions.targetName() != null) {
       builder.query("target_name", String.valueOf(listReportEvaluationsOptions.targetName()));
@@ -1701,7 +1706,7 @@ public class SecurityAndComplianceCenterApi extends BaseService {
   }
 
   /**
-   * Get report tags.
+   * List report tags.
    *
    * Retrieve a list of tags for the specified report. For more information, see [Viewing
    * results](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-results).
@@ -1766,7 +1771,211 @@ public class SecurityAndComplianceCenterApi extends BaseService {
   }
 
   /**
-   * List all provider types.
+   * List provider type instances.
+   *
+   * Retrieve all instances of a provider type. For more information about integrations, see [Connecting Workload
+   * Protection](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-setup-workload-protection).
+   *
+   * @param listProviderTypeInstancesOptions the {@link ListProviderTypeInstancesOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link ProviderTypeInstancesResponse}
+   */
+  public ServiceCall<ProviderTypeInstancesResponse> listProviderTypeInstances(ListProviderTypeInstancesOptions listProviderTypeInstancesOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(listProviderTypeInstancesOptions,
+      "listProviderTypeInstancesOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("provider_type_id", listProviderTypeInstancesOptions.providerTypeId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/provider_types/{provider_type_id}/provider_type_instances", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("security_and_compliance_center_api", "v3", "listProviderTypeInstances");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    if (listProviderTypeInstancesOptions.xCorrelationId() != null) {
+      builder.header("X-Correlation-ID", listProviderTypeInstancesOptions.xCorrelationId());
+    }
+    if (listProviderTypeInstancesOptions.xRequestId() != null) {
+      builder.header("X-Request-ID", listProviderTypeInstancesOptions.xRequestId());
+    }
+    ResponseConverter<ProviderTypeInstancesResponse> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ProviderTypeInstancesResponse>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Create a provider type instance.
+   *
+   * Create an instance of a provider type. For more information about integrations, see [Connecting Workload
+   * Protection](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-setup-workload-protection).
+   *
+   * @param createProviderTypeInstanceOptions the {@link CreateProviderTypeInstanceOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link ProviderTypeInstanceItem}
+   */
+  public ServiceCall<ProviderTypeInstanceItem> createProviderTypeInstance(CreateProviderTypeInstanceOptions createProviderTypeInstanceOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(createProviderTypeInstanceOptions,
+      "createProviderTypeInstanceOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("provider_type_id", createProviderTypeInstanceOptions.providerTypeId());
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/provider_types/{provider_type_id}/provider_type_instances", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("security_and_compliance_center_api", "v3", "createProviderTypeInstance");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    if (createProviderTypeInstanceOptions.xCorrelationId() != null) {
+      builder.header("X-Correlation-ID", createProviderTypeInstanceOptions.xCorrelationId());
+    }
+    if (createProviderTypeInstanceOptions.xRequestId() != null) {
+      builder.header("X-Request-ID", createProviderTypeInstanceOptions.xRequestId());
+    }
+    final JsonObject contentJson = new JsonObject();
+    contentJson.addProperty("name", createProviderTypeInstanceOptions.name());
+    contentJson.add("attributes", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createProviderTypeInstanceOptions.attributes()));
+    builder.bodyJson(contentJson);
+    ResponseConverter<ProviderTypeInstanceItem> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ProviderTypeInstanceItem>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Delete a provider type instance.
+   *
+   * Remove a provider type instance. For more information about integrations, see [Connecting Workload
+   * Protection](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-setup-workload-protection).
+   *
+   * @param deleteProviderTypeInstanceOptions the {@link DeleteProviderTypeInstanceOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a void result
+   */
+  public ServiceCall<Void> deleteProviderTypeInstance(DeleteProviderTypeInstanceOptions deleteProviderTypeInstanceOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(deleteProviderTypeInstanceOptions,
+      "deleteProviderTypeInstanceOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("provider_type_id", deleteProviderTypeInstanceOptions.providerTypeId());
+    pathParamsMap.put("provider_type_instance_id", deleteProviderTypeInstanceOptions.providerTypeInstanceId());
+    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/provider_types/{provider_type_id}/provider_type_instances/{provider_type_instance_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("security_and_compliance_center_api", "v3", "deleteProviderTypeInstance");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    if (deleteProviderTypeInstanceOptions.xCorrelationId() != null) {
+      builder.header("X-Correlation-ID", deleteProviderTypeInstanceOptions.xCorrelationId());
+    }
+    if (deleteProviderTypeInstanceOptions.xRequestId() != null) {
+      builder.header("X-Request-ID", deleteProviderTypeInstanceOptions.xRequestId());
+    }
+    ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Get a provider type instance.
+   *
+   * Retrieve a provider type instance by specifying the provider type ID, and Security and Compliance Center instance
+   * ID. For more information about integrations, see [Connecting Workload
+   * Protection](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-setup-workload-protection).
+   *
+   * @param getProviderTypeInstanceOptions the {@link GetProviderTypeInstanceOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link ProviderTypeInstanceItem}
+   */
+  public ServiceCall<ProviderTypeInstanceItem> getProviderTypeInstance(GetProviderTypeInstanceOptions getProviderTypeInstanceOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getProviderTypeInstanceOptions,
+      "getProviderTypeInstanceOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("provider_type_id", getProviderTypeInstanceOptions.providerTypeId());
+    pathParamsMap.put("provider_type_instance_id", getProviderTypeInstanceOptions.providerTypeInstanceId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/provider_types/{provider_type_id}/provider_type_instances/{provider_type_instance_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("security_and_compliance_center_api", "v3", "getProviderTypeInstance");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    if (getProviderTypeInstanceOptions.xCorrelationId() != null) {
+      builder.header("X-Correlation-ID", getProviderTypeInstanceOptions.xCorrelationId());
+    }
+    if (getProviderTypeInstanceOptions.xRequestId() != null) {
+      builder.header("X-Request-ID", getProviderTypeInstanceOptions.xRequestId());
+    }
+    ResponseConverter<ProviderTypeInstanceItem> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ProviderTypeInstanceItem>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Update a provider type instance.
+   *
+   * Update a provider type instance. For more information about integrations, see [Connecting Workload
+   * Protection](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-setup-workload-protection).
+   *
+   * @param updateProviderTypeInstanceOptions the {@link UpdateProviderTypeInstanceOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link ProviderTypeInstanceItem}
+   */
+  public ServiceCall<ProviderTypeInstanceItem> updateProviderTypeInstance(UpdateProviderTypeInstanceOptions updateProviderTypeInstanceOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(updateProviderTypeInstanceOptions,
+      "updateProviderTypeInstanceOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("provider_type_id", updateProviderTypeInstanceOptions.providerTypeId());
+    pathParamsMap.put("provider_type_instance_id", updateProviderTypeInstanceOptions.providerTypeInstanceId());
+    RequestBuilder builder = RequestBuilder.patch(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/provider_types/{provider_type_id}/provider_type_instances/{provider_type_instance_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("security_and_compliance_center_api", "v3", "updateProviderTypeInstance");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    if (updateProviderTypeInstanceOptions.xCorrelationId() != null) {
+      builder.header("X-Correlation-ID", updateProviderTypeInstanceOptions.xCorrelationId());
+    }
+    if (updateProviderTypeInstanceOptions.xRequestId() != null) {
+      builder.header("X-Request-ID", updateProviderTypeInstanceOptions.xRequestId());
+    }
+    builder.bodyContent(com.ibm.cloud.sdk.core.util.GsonSingleton.getGsonWithoutPrettyPrinting().toJson(updateProviderTypeInstanceOptions.updateProviderTypeInstanceRequest()), "application/json");
+    ResponseConverter<ProviderTypeInstanceItem> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ProviderTypeInstanceItem>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * List instances of provider types.
+   *
+   * Get a list of all provider types' instances. For more information about integrations, see [Connecting Workload
+   * Protection](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-setup-workload-protection).
+   *
+   * @param getProviderTypesInstancesOptions the {@link GetProviderTypesInstancesOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link ProviderTypesInstancesResponse}
+   */
+  public ServiceCall<ProviderTypesInstancesResponse> getProviderTypesInstances(GetProviderTypesInstancesOptions getProviderTypesInstancesOptions) {
+    if (getProviderTypesInstancesOptions == null) {
+      getProviderTypesInstancesOptions = new GetProviderTypesInstancesOptions.Builder().build();
+    }
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/provider_types_instances"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("security_and_compliance_center_api", "v3", "getProviderTypesInstances");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    if (getProviderTypesInstancesOptions.xCorrelationId() != null) {
+      builder.header("X-Correlation-ID", getProviderTypesInstancesOptions.xCorrelationId());
+    }
+    if (getProviderTypesInstancesOptions.xRequestId() != null) {
+      builder.header("X-Request-ID", getProviderTypesInstancesOptions.xRequestId());
+    }
+    ResponseConverter<ProviderTypesInstancesResponse> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ProviderTypesInstancesResponse>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * List instances of provider types.
+   *
+   * Get a list of all provider types' instances. For more information about integrations, see [Connecting Workload
+   * Protection](https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-setup-workload-protection).
+   *
+   * @return a {@link ServiceCall} with a result of type {@link ProviderTypesInstancesResponse}
+   */
+  public ServiceCall<ProviderTypesInstancesResponse> getProviderTypesInstances() {
+    return getProviderTypesInstances(null);
+  }
+
+  /**
+   * List provider types.
    *
    * List all the registered provider types. For more information about connecting Workload Protection with the Security
    * and Compliance Center, see [Connecting Workload
@@ -1797,7 +2006,7 @@ public class SecurityAndComplianceCenterApi extends BaseService {
   }
 
   /**
-   * List all provider types.
+   * List provider types.
    *
    * List all the registered provider types. For more information about connecting Workload Protection with the Security
    * and Compliance Center, see [Connecting Workload
@@ -1838,217 +2047,6 @@ public class SecurityAndComplianceCenterApi extends BaseService {
     ResponseConverter<ProviderTypeItem> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ProviderTypeItem>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
-  }
-
-  /**
-   * List all provider type instances.
-   *
-   * Retrieve all instances of provider type. For more information about integrations, see [Connecting Workload
-   * Protection](https://test.cloud.ibm.com/docs/security-compliance?topic=security-compliance-setup-workload-protection).
-   *
-   * @param listProviderTypeInstancesOptions the {@link ListProviderTypeInstancesOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link ProviderTypeInstancesResponse}
-   */
-  public ServiceCall<ProviderTypeInstancesResponse> listProviderTypeInstances(ListProviderTypeInstancesOptions listProviderTypeInstancesOptions) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(listProviderTypeInstancesOptions,
-      "listProviderTypeInstancesOptions cannot be null");
-    Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("provider_type_id", listProviderTypeInstancesOptions.providerTypeId());
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/provider_types/{provider_type_id}/provider_type_instances", pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("security_and_compliance_center_api", "v3", "listProviderTypeInstances");
-    for (Entry<String, String> header : sdkHeaders.entrySet()) {
-      builder.header(header.getKey(), header.getValue());
-    }
-    builder.header("Accept", "application/json");
-    if (listProviderTypeInstancesOptions.xCorrelationId() != null) {
-      builder.header("X-Correlation-ID", listProviderTypeInstancesOptions.xCorrelationId());
-    }
-    if (listProviderTypeInstancesOptions.xRequestId() != null) {
-      builder.header("X-Request-ID", listProviderTypeInstancesOptions.xRequestId());
-    }
-    ResponseConverter<ProviderTypeInstancesResponse> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ProviderTypeInstancesResponse>() { }.getType());
-    return createServiceCall(builder.build(), responseConverter);
-  }
-
-  /**
-   * Create a provider type instance.
-   *
-   * Create an instance of a provider type. For more information about integrations, see [Connecting Workload
-   * Protection](https://test.cloud.ibm.com/docs/security-compliance?topic=security-compliance-setup-workload-protection).
-   *
-   * @param createProviderTypeInstanceOptions the {@link CreateProviderTypeInstanceOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link ProviderTypeInstanceItem}
-   */
-  public ServiceCall<ProviderTypeInstanceItem> createProviderTypeInstance(CreateProviderTypeInstanceOptions createProviderTypeInstanceOptions) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(createProviderTypeInstanceOptions,
-      "createProviderTypeInstanceOptions cannot be null");
-    Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("provider_type_id", createProviderTypeInstanceOptions.providerTypeId());
-    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/provider_types/{provider_type_id}/provider_type_instances", pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("security_and_compliance_center_api", "v3", "createProviderTypeInstance");
-    for (Entry<String, String> header : sdkHeaders.entrySet()) {
-      builder.header(header.getKey(), header.getValue());
-    }
-    builder.header("Accept", "application/json");
-    if (createProviderTypeInstanceOptions.xCorrelationId() != null) {
-      builder.header("X-Correlation-ID", createProviderTypeInstanceOptions.xCorrelationId());
-    }
-    if (createProviderTypeInstanceOptions.xRequestId() != null) {
-      builder.header("X-Request-ID", createProviderTypeInstanceOptions.xRequestId());
-    }
-    final JsonObject contentJson = new JsonObject();
-    if (createProviderTypeInstanceOptions.name() != null) {
-      contentJson.addProperty("name", createProviderTypeInstanceOptions.name());
-    }
-    if (createProviderTypeInstanceOptions.attributes() != null) {
-      contentJson.add("attributes", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createProviderTypeInstanceOptions.attributes()));
-    }
-    builder.bodyJson(contentJson);
-    ResponseConverter<ProviderTypeInstanceItem> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ProviderTypeInstanceItem>() { }.getType());
-    return createServiceCall(builder.build(), responseConverter);
-  }
-
-  /**
-   * Remove a specific instance of a provider type.
-   *
-   * Remove a specific instance of a provider type.
-   *
-   * @param deleteProviderTypeInstanceOptions the {@link DeleteProviderTypeInstanceOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a void result
-   */
-  public ServiceCall<Void> deleteProviderTypeInstance(DeleteProviderTypeInstanceOptions deleteProviderTypeInstanceOptions) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(deleteProviderTypeInstanceOptions,
-      "deleteProviderTypeInstanceOptions cannot be null");
-    Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("provider_type_id", deleteProviderTypeInstanceOptions.providerTypeId());
-    pathParamsMap.put("provider_type_instance_id", deleteProviderTypeInstanceOptions.providerTypeInstanceId());
-    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/provider_types/{provider_type_id}/provider_type_instances/{provider_type_instance_id}", pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("security_and_compliance_center_api", "v3", "deleteProviderTypeInstance");
-    for (Entry<String, String> header : sdkHeaders.entrySet()) {
-      builder.header(header.getKey(), header.getValue());
-    }
-    if (deleteProviderTypeInstanceOptions.xCorrelationId() != null) {
-      builder.header("X-Correlation-ID", deleteProviderTypeInstanceOptions.xCorrelationId());
-    }
-    if (deleteProviderTypeInstanceOptions.xRequestId() != null) {
-      builder.header("X-Request-ID", deleteProviderTypeInstanceOptions.xRequestId());
-    }
-    ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
-    return createServiceCall(builder.build(), responseConverter);
-  }
-
-  /**
-   * List a provider type instance.
-   *
-   * Retrieve a provider type instance by specifying the provider type ID, and Security and Compliance Center instance
-   * ID. For more information about integrations, see [Connecting Workload
-   * Protection](https://test.cloud.ibm.com/docs/security-compliance?topic=security-compliance-setup-workload-protection).
-   *
-   * @param getProviderTypeInstanceOptions the {@link GetProviderTypeInstanceOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link ProviderTypeInstanceItem}
-   */
-  public ServiceCall<ProviderTypeInstanceItem> getProviderTypeInstance(GetProviderTypeInstanceOptions getProviderTypeInstanceOptions) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(getProviderTypeInstanceOptions,
-      "getProviderTypeInstanceOptions cannot be null");
-    Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("provider_type_id", getProviderTypeInstanceOptions.providerTypeId());
-    pathParamsMap.put("provider_type_instance_id", getProviderTypeInstanceOptions.providerTypeInstanceId());
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/provider_types/{provider_type_id}/provider_type_instances/{provider_type_instance_id}", pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("security_and_compliance_center_api", "v3", "getProviderTypeInstance");
-    for (Entry<String, String> header : sdkHeaders.entrySet()) {
-      builder.header(header.getKey(), header.getValue());
-    }
-    builder.header("Accept", "application/json");
-    if (getProviderTypeInstanceOptions.xCorrelationId() != null) {
-      builder.header("X-Correlation-ID", getProviderTypeInstanceOptions.xCorrelationId());
-    }
-    if (getProviderTypeInstanceOptions.xRequestId() != null) {
-      builder.header("X-Request-ID", getProviderTypeInstanceOptions.xRequestId());
-    }
-    ResponseConverter<ProviderTypeInstanceItem> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ProviderTypeInstanceItem>() { }.getType());
-    return createServiceCall(builder.build(), responseConverter);
-  }
-
-  /**
-   * Patch a specific instance of a provider type.
-   *
-   * Patch a specific instance of a provider type.
-   *
-   * @param updateProviderTypeInstanceOptions the {@link UpdateProviderTypeInstanceOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link ProviderTypeInstanceItem}
-   */
-  public ServiceCall<ProviderTypeInstanceItem> updateProviderTypeInstance(UpdateProviderTypeInstanceOptions updateProviderTypeInstanceOptions) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(updateProviderTypeInstanceOptions,
-      "updateProviderTypeInstanceOptions cannot be null");
-    Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("provider_type_id", updateProviderTypeInstanceOptions.providerTypeId());
-    pathParamsMap.put("provider_type_instance_id", updateProviderTypeInstanceOptions.providerTypeInstanceId());
-    RequestBuilder builder = RequestBuilder.patch(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/provider_types/{provider_type_id}/provider_type_instances/{provider_type_instance_id}", pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("security_and_compliance_center_api", "v3", "updateProviderTypeInstance");
-    for (Entry<String, String> header : sdkHeaders.entrySet()) {
-      builder.header(header.getKey(), header.getValue());
-    }
-    builder.header("Accept", "application/json");
-    if (updateProviderTypeInstanceOptions.xCorrelationId() != null) {
-      builder.header("X-Correlation-ID", updateProviderTypeInstanceOptions.xCorrelationId());
-    }
-    if (updateProviderTypeInstanceOptions.xRequestId() != null) {
-      builder.header("X-Request-ID", updateProviderTypeInstanceOptions.xRequestId());
-    }
-    final JsonObject contentJson = new JsonObject();
-    if (updateProviderTypeInstanceOptions.name() != null) {
-      contentJson.addProperty("name", updateProviderTypeInstanceOptions.name());
-    }
-    if (updateProviderTypeInstanceOptions.attributes() != null) {
-      contentJson.add("attributes", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateProviderTypeInstanceOptions.attributes()));
-    }
-    builder.bodyJson(contentJson);
-    ResponseConverter<ProviderTypeInstanceItem> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ProviderTypeInstanceItem>() { }.getType());
-    return createServiceCall(builder.build(), responseConverter);
-  }
-
-  /**
-   * Get a list of instances for all provider types.
-   *
-   * Get a list of instances for all provider types.
-   *
-   * @param getProviderTypesInstancesOptions the {@link GetProviderTypesInstancesOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link ProviderTypesInstancesResponse}
-   */
-  public ServiceCall<ProviderTypesInstancesResponse> getProviderTypesInstances(GetProviderTypesInstancesOptions getProviderTypesInstancesOptions) {
-    if (getProviderTypesInstancesOptions == null) {
-      getProviderTypesInstancesOptions = new GetProviderTypesInstancesOptions.Builder().build();
-    }
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/provider_types_instances"));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("security_and_compliance_center_api", "v3", "getProviderTypesInstances");
-    for (Entry<String, String> header : sdkHeaders.entrySet()) {
-      builder.header(header.getKey(), header.getValue());
-    }
-    builder.header("Accept", "application/json");
-    if (getProviderTypesInstancesOptions.xCorrelationId() != null) {
-      builder.header("X-Correlation-ID", getProviderTypesInstancesOptions.xCorrelationId());
-    }
-    if (getProviderTypesInstancesOptions.xRequestId() != null) {
-      builder.header("X-Request-ID", getProviderTypesInstancesOptions.xRequestId());
-    }
-    ResponseConverter<ProviderTypesInstancesResponse> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ProviderTypesInstancesResponse>() { }.getType());
-    return createServiceCall(builder.build(), responseConverter);
-  }
-
-  /**
-   * Get a list of instances for all provider types.
-   *
-   * Get a list of instances for all provider types.
-   *
-   * @return a {@link ServiceCall} with a result of type {@link ProviderTypesInstancesResponse}
-   */
-  public ServiceCall<ProviderTypesInstancesResponse> getProviderTypesInstances() {
-    return getProviderTypesInstances(null);
   }
 
 }

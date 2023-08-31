@@ -14,7 +14,7 @@
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigItemsRequiredConfigOr;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpdateProviderTypeInstanceRequest;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -23,23 +23,16 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 /**
- * Unit test class for the RequiredConfigItemsRequiredConfigOr model.
+ * Unit test class for the UpdateProviderTypeInstanceRequest model.
  */
-public class RequiredConfigItemsRequiredConfigOrTest {
+public class UpdateProviderTypeInstanceRequestTest {
   final HashMap<String, InputStream> mockStreamMap = TestUtilities.createMockStreamMap();
   final List<FileWithMetadata> mockListFileWithMetadata = TestUtilities.creatMockListFileWithMetadata();
 
+  // TODO: Add tests for models that are abstract
   @Test
-  public void testRequiredConfigItemsRequiredConfigOr() throws Throwable {
-    RequiredConfigItemsRequiredConfigOr requiredConfigItemsRequiredConfigOrModel = new RequiredConfigItemsRequiredConfigOr.Builder()
-      .description("testString")
-      .build();
-    assertEquals(requiredConfigItemsRequiredConfigOrModel.description(), "testString");
-
-    String json = TestUtilities.serialize(requiredConfigItemsRequiredConfigOrModel);
-
-    RequiredConfigItemsRequiredConfigOr requiredConfigItemsRequiredConfigOrModelNew = TestUtilities.deserialize(json, RequiredConfigItemsRequiredConfigOr.class);
-    assertTrue(requiredConfigItemsRequiredConfigOrModelNew instanceof RequiredConfigItemsRequiredConfigOr);
-    assertEquals(requiredConfigItemsRequiredConfigOrModelNew.description(), "testString");
+  public void testUpdateProviderTypeInstanceRequest() throws Throwable {
+    UpdateProviderTypeInstanceRequest updateProviderTypeInstanceRequestModel = new UpdateProviderTypeInstanceRequest();
+    assertNotNull(updateProviderTypeInstanceRequestModel);
   }
 }

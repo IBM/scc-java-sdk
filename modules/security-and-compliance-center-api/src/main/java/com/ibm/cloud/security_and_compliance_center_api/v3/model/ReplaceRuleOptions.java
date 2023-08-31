@@ -22,22 +22,11 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class ReplaceRuleOptions extends GenericModel {
 
-  /**
-   * The rule type (user_defined or system_defined).
-   */
-  public interface Type {
-    /** user_defined. */
-    String USER_DEFINED = "user_defined";
-    /** system_defined. */
-    String SYSTEM_DEFINED = "system_defined";
-  }
-
   protected String ruleId;
   protected String ifMatch;
   protected String description;
-  protected Target target;
+  protected TargetPrototype target;
   protected RequiredConfig requiredConfig;
-  protected String type;
   protected String version;
   protected Import xImport;
   protected List<String> labels;
@@ -51,9 +40,8 @@ public class ReplaceRuleOptions extends GenericModel {
     private String ruleId;
     private String ifMatch;
     private String description;
-    private Target target;
+    private TargetPrototype target;
     private RequiredConfig requiredConfig;
-    private String type;
     private String version;
     private Import xImport;
     private List<String> labels;
@@ -71,7 +59,6 @@ public class ReplaceRuleOptions extends GenericModel {
       this.description = replaceRuleOptions.description;
       this.target = replaceRuleOptions.target;
       this.requiredConfig = replaceRuleOptions.requiredConfig;
-      this.type = replaceRuleOptions.type;
       this.version = replaceRuleOptions.version;
       this.xImport = replaceRuleOptions.xImport;
       this.labels = replaceRuleOptions.labels;
@@ -94,7 +81,7 @@ public class ReplaceRuleOptions extends GenericModel {
      * @param target the target
      * @param requiredConfig the requiredConfig
      */
-    public Builder(String ruleId, String ifMatch, String description, Target target, RequiredConfig requiredConfig) {
+    public Builder(String ruleId, String ifMatch, String description, TargetPrototype target, RequiredConfig requiredConfig) {
       this.ruleId = ruleId;
       this.ifMatch = ifMatch;
       this.description = description;
@@ -166,7 +153,7 @@ public class ReplaceRuleOptions extends GenericModel {
      * @param target the target
      * @return the ReplaceRuleOptions builder
      */
-    public Builder target(Target target) {
+    public Builder target(TargetPrototype target) {
       this.target = target;
       return this;
     }
@@ -179,17 +166,6 @@ public class ReplaceRuleOptions extends GenericModel {
      */
     public Builder requiredConfig(RequiredConfig requiredConfig) {
       this.requiredConfig = requiredConfig;
-      return this;
-    }
-
-    /**
-     * Set the type.
-     *
-     * @param type the type
-     * @return the ReplaceRuleOptions builder
-     */
-    public Builder type(String type) {
-      this.type = type;
       return this;
     }
 
@@ -268,7 +244,6 @@ public class ReplaceRuleOptions extends GenericModel {
     description = builder.description;
     target = builder.target;
     requiredConfig = builder.requiredConfig;
-    type = builder.type;
     version = builder.version;
     xImport = builder.xImport;
     labels = builder.labels;
@@ -329,7 +304,7 @@ public class ReplaceRuleOptions extends GenericModel {
    *
    * @return the target
    */
-  public Target target() {
+  public TargetPrototype target() {
     return target;
   }
 
@@ -342,17 +317,6 @@ public class ReplaceRuleOptions extends GenericModel {
    */
   public RequiredConfig requiredConfig() {
     return requiredConfig;
-  }
-
-  /**
-   * Gets the type.
-   *
-   * The rule type (user_defined or system_defined).
-   *
-   * @return the type
-   */
-  public String type() {
-    return type;
   }
 
   /**

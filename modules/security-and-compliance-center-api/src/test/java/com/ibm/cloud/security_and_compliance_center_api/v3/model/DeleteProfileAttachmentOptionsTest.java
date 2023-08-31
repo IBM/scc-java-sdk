@@ -33,12 +33,12 @@ public class DeleteProfileAttachmentOptionsTest {
   public void testDeleteProfileAttachmentOptions() throws Throwable {
     DeleteProfileAttachmentOptions deleteProfileAttachmentOptionsModel = new DeleteProfileAttachmentOptions.Builder()
       .attachmentId("testString")
-      .profilesId("testString")
+      .profileId("testString")
       .xCorrelationId("testString")
       .xRequestId("testString")
       .build();
     assertEquals(deleteProfileAttachmentOptionsModel.attachmentId(), "testString");
-    assertEquals(deleteProfileAttachmentOptionsModel.profilesId(), "testString");
+    assertEquals(deleteProfileAttachmentOptionsModel.profileId(), "testString");
     assertEquals(deleteProfileAttachmentOptionsModel.xCorrelationId(), "testString");
     assertEquals(deleteProfileAttachmentOptionsModel.xRequestId(), "testString");
   }

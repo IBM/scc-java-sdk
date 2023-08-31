@@ -111,6 +111,7 @@ import com.ibm.cloud.security_and_compliance_center_api.v3.model.ProfileItem;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ProfilesPager;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Property;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.PropertyItem;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.ProviderTypeInstanceAttributes;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ProviderTypeInstanceItem;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ProviderTypeInstancesResponse;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ProviderTypeItem;
@@ -132,13 +133,14 @@ import com.ibm.cloud.security_and_compliance_center_api.v3.model.ReportViolation
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ReportViolationsDrift;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ReportsPager;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfig;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigAnd;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigBase;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigItems;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigItemsRequiredConfigAnd;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigItemsRequiredConfigAndDepth1;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigItemsRequiredConfigBase;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigItemsRequiredConfigOr;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigRequiredConfigAnd;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigItemsRequiredConfigOrDepth1;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigOr;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigRequiredConfigBase;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigRequiredConfigOr;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Resource;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ResourcePage;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ResourceSummary;
@@ -152,8 +154,12 @@ import com.ibm.cloud.security_and_compliance_center_api.v3.model.Settings;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Tags;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Target;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.TargetInfo;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.TargetPrototype;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.TestEvent;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpdateProviderTypeInstanceOptions;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpdateProviderTypeInstanceRequest;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpdateProviderTypeInstanceRequestProviderTypeInstancePrototypeForPatchingAttributes;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpdateProviderTypeInstanceRequestProviderTypeInstancePrototypeForPatchingName;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpdateSettingsOptions;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
 import java.io.IOException;
@@ -209,7 +215,7 @@ public class SecurityAndComplianceCenterApiTest {
   @Test
   public void testGetSettingsWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"event_notifications\": {\"instance_crn\": \"crn:v1:staging:public:cloud-object-storage:global:a/ff88f007f9ff4622aac4fbc0eda36255:7199ae60-a214-4dd8-9bf7-ce571de49d01::\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"source_id\": \"crn:v1:staging:public:event-notifications:us-south:a/ff88f007f9ff4622aac4fbc0eda36255:b8b07245-0bbe-4478-b11c-0dce523105fd::\", \"source_description\": \"This source is used for integration with IBM Cloud Security and Compliance Center.\", \"source_name\": \"compliance\"}, \"object_storage\": {\"instance_crn\": \"instanceCrn\", \"bucket\": \"bucket\", \"bucket_location\": \"bucketLocation\", \"bucket_endpoint\": \"bucketEndpoint\", \"updated_on\": \"2019-01-01T12:00:00.000Z\"}}";
+    String mockResponseBody = "{\"event_notifications\": {\"instance_crn\": \"crn:v1:bluemix:public:cloud-object-storage:global:a/ff88f007f9ff4622aac4fbc0eda36255:7199ae60-a214-4dd8-9bf7-ce571de49d01::\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"source_id\": \"crn:v1:bluemix:public:event-notifications:us-south:a/ff88f007f9ff4622aac4fbc0eda36255:b8b07245-0bbe-4478-b11c-0dce523105fd::\", \"source_description\": \"This source is used for integration with IBM Cloud Security and Compliance Center.\", \"source_name\": \"compliance\"}, \"object_storage\": {\"instance_crn\": \"instanceCrn\", \"bucket\": \"bucket\", \"bucket_location\": \"bucketLocation\", \"bucket_endpoint\": \"bucketEndpoint\", \"updated_on\": \"2019-01-01T12:00:00.000Z\"}}";
     String getSettingsPath = "/settings";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -254,7 +260,7 @@ public class SecurityAndComplianceCenterApiTest {
   @Test
   public void testUpdateSettingsWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"event_notifications\": {\"instance_crn\": \"crn:v1:staging:public:cloud-object-storage:global:a/ff88f007f9ff4622aac4fbc0eda36255:7199ae60-a214-4dd8-9bf7-ce571de49d01::\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"source_id\": \"crn:v1:staging:public:event-notifications:us-south:a/ff88f007f9ff4622aac4fbc0eda36255:b8b07245-0bbe-4478-b11c-0dce523105fd::\", \"source_description\": \"This source is used for integration with IBM Cloud Security and Compliance Center.\", \"source_name\": \"compliance\"}, \"object_storage\": {\"instance_crn\": \"instanceCrn\", \"bucket\": \"bucket\", \"bucket_location\": \"bucketLocation\", \"bucket_endpoint\": \"bucketEndpoint\", \"updated_on\": \"2019-01-01T12:00:00.000Z\"}}";
+    String mockResponseBody = "{\"event_notifications\": {\"instance_crn\": \"crn:v1:bluemix:public:cloud-object-storage:global:a/ff88f007f9ff4622aac4fbc0eda36255:7199ae60-a214-4dd8-9bf7-ce571de49d01::\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"source_id\": \"crn:v1:bluemix:public:event-notifications:us-south:a/ff88f007f9ff4622aac4fbc0eda36255:b8b07245-0bbe-4478-b11c-0dce523105fd::\", \"source_description\": \"This source is used for integration with IBM Cloud Security and Compliance Center.\", \"source_name\": \"compliance\"}, \"object_storage\": {\"instance_crn\": \"instanceCrn\", \"bucket\": \"bucket\", \"bucket_location\": \"bucketLocation\", \"bucket_endpoint\": \"bucketEndpoint\", \"updated_on\": \"2019-01-01T12:00:00.000Z\"}}";
     String updateSettingsPath = "/settings";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -263,16 +269,16 @@ public class SecurityAndComplianceCenterApiTest {
 
     // Construct an instance of the EventNotifications model
     EventNotifications eventNotificationsModel = new EventNotifications.Builder()
-      .instanceCrn("crn:v1:staging:public:event-notifications:us-south:a/ff88f007f9ff4622aac4fbc0eda36255:7199ae60-a214-4dd8-9bf7-ce571de49d01::")
+      .instanceCrn("crn:v1:bluemix:public:event-notifications:us-south:a/ff88f007f9ff4622aac4fbc0eda36255:7199ae60-a214-4dd8-9bf7-ce571de49d01::")
       .updatedOn(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
-      .sourceId("crn:v1:staging:public:event-notifications:us-south:a/ff88f007f9ff4622aac4fbc0eda36255:b8b07245-0bbe-4478-b11c-0dce523105fd::")
+      .sourceId("crn:v1:bluemix:public:event-notifications:us-south:a/ff88f007f9ff4622aac4fbc0eda36255:b8b07245-0bbe-4478-b11c-0dce523105fd::")
       .sourceDescription("This source is used for integration with IBM Cloud Security and Compliance Center.")
       .sourceName("compliance")
       .build();
 
     // Construct an instance of the ObjectStorage model
     ObjectStorage objectStorageModel = new ObjectStorage.Builder()
-      .instanceCrn("crn:v1:staging:public:cloud-object-storage:global:a/ff88f007f9ff4622aac4fbc0eda36255:7199ae60-a214-4dd8-9bf7-ce571de49d01::")
+      .instanceCrn("crn:v1:bluemix:public:cloud-object-storage:global:a/ff88f007f9ff4622aac4fbc0eda36255:7199ae60-a214-4dd8-9bf7-ce571de49d01::")
       .bucket("px-scan-results")
       .bucketLocation("us-south")
       .bucketEndpoint("testString")
@@ -483,7 +489,7 @@ public class SecurityAndComplianceCenterApiTest {
   @Test
   public void testCreateCustomControlLibraryWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"account_id\": \"130003ea8bfa43c5aacea07a86da3000\", \"control_library_name\": \"controlLibraryName\", \"control_library_description\": \"controlLibraryDescription\", \"control_library_type\": \"predefined\", \"version_group_label\": \"e0923045-f00d-44de-b49b-6f1f0e8033cc\", \"control_library_version\": \"controlLibraryVersion\", \"created_on\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"latest\": true, \"hierarchy_enabled\": true, \"controls_count\": 13, \"control_parents_count\": 19, \"controls\": [{\"control_name\": \"controlName\", \"control_id\": \"1fa45e17-9322-4e6c-bbd6-1c51db08e790\", \"control_description\": \"controlDescription\", \"control_category\": \"controlCategory\", \"control_parent\": \"controlParent\", \"control_tags\": [\"controlTags\"], \"control_specifications\": [{\"control_specification_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"responsibility\": \"user\", \"component_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"componenet_name\": \"componenetName\", \"environment\": \"environment\", \"control_specification_description\": \"controlSpecificationDescription\", \"assessments_count\": 16, \"assessments\": [{\"assessment_id\": \"assessmentId\", \"assessment_method\": \"assessmentMethod\", \"assessment_type\": \"assessmentType\", \"assessment_description\": \"assessmentDescription\", \"parameter_count\": 14, \"parameters\": [{\"parameter_name\": \"location\", \"parameter_display_name\": \"Location\", \"parameter_type\": \"string\", \"parameter_value\": \"anyValue\"}]}]}], \"control_docs\": {\"control_docs_id\": \"controlDocsId\", \"control_docs_type\": \"controlDocsType\"}, \"control_requirement\": true, \"status\": \"enabled\"}]}";
+    String mockResponseBody = "{\"id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"account_id\": \"130003ea8bfa43c5aacea07a86da3000\", \"control_library_name\": \"controlLibraryName\", \"control_library_description\": \"controlLibraryDescription\", \"control_library_type\": \"predefined\", \"version_group_label\": \"e0923045-f00d-44de-b49b-6f1f0e8033cc\", \"control_library_version\": \"controlLibraryVersion\", \"created_on\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"latest\": true, \"hierarchy_enabled\": true, \"controls_count\": 13, \"control_parents_count\": 19, \"controls\": [{\"control_name\": \"controlName\", \"control_id\": \"1fa45e17-9322-4e6c-bbd6-1c51db08e790\", \"control_description\": \"controlDescription\", \"control_category\": \"controlCategory\", \"control_parent\": \"controlParent\", \"control_tags\": [\"controlTags\"], \"control_specifications\": [{\"control_specification_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"responsibility\": \"user\", \"component_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"component_name\": \"componentName\", \"environment\": \"environment\", \"control_specification_description\": \"controlSpecificationDescription\", \"assessments_count\": 16, \"assessments\": [{\"assessment_id\": \"assessmentId\", \"assessment_method\": \"assessmentMethod\", \"assessment_type\": \"assessmentType\", \"assessment_description\": \"assessmentDescription\", \"parameter_count\": 14, \"parameters\": [{\"parameter_name\": \"location\", \"parameter_display_name\": \"Location\", \"parameter_type\": \"string\", \"parameter_value\": \"anyValue\"}]}]}], \"control_docs\": {\"control_docs_id\": \"controlDocsId\", \"control_docs_type\": \"controlDocsType\"}, \"control_requirement\": true, \"status\": \"enabled\"}]}";
     String createCustomControlLibraryPath = "/control_libraries";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -513,7 +519,7 @@ public class SecurityAndComplianceCenterApiTest {
       .controlSpecificationId("5c7d6f88-a92f-4734-9b49-bd22b0900184")
       .responsibility("user")
       .componentId("iam-identity")
-      .componenetName("testString")
+      .componentName("IAM Identity Service")
       .environment("ibm-cloud")
       .controlSpecificationDescription("IBM cloud")
       .assessmentsCount(Long.valueOf("26"))
@@ -646,7 +652,7 @@ public class SecurityAndComplianceCenterApiTest {
   @Test
   public void testGetControlLibraryWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"account_id\": \"130003ea8bfa43c5aacea07a86da3000\", \"control_library_name\": \"controlLibraryName\", \"control_library_description\": \"controlLibraryDescription\", \"control_library_type\": \"predefined\", \"version_group_label\": \"e0923045-f00d-44de-b49b-6f1f0e8033cc\", \"control_library_version\": \"controlLibraryVersion\", \"created_on\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"latest\": true, \"hierarchy_enabled\": true, \"controls_count\": 13, \"control_parents_count\": 19, \"controls\": [{\"control_name\": \"controlName\", \"control_id\": \"1fa45e17-9322-4e6c-bbd6-1c51db08e790\", \"control_description\": \"controlDescription\", \"control_category\": \"controlCategory\", \"control_parent\": \"controlParent\", \"control_tags\": [\"controlTags\"], \"control_specifications\": [{\"control_specification_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"responsibility\": \"user\", \"component_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"componenet_name\": \"componenetName\", \"environment\": \"environment\", \"control_specification_description\": \"controlSpecificationDescription\", \"assessments_count\": 16, \"assessments\": [{\"assessment_id\": \"assessmentId\", \"assessment_method\": \"assessmentMethod\", \"assessment_type\": \"assessmentType\", \"assessment_description\": \"assessmentDescription\", \"parameter_count\": 14, \"parameters\": [{\"parameter_name\": \"location\", \"parameter_display_name\": \"Location\", \"parameter_type\": \"string\", \"parameter_value\": \"anyValue\"}]}]}], \"control_docs\": {\"control_docs_id\": \"controlDocsId\", \"control_docs_type\": \"controlDocsType\"}, \"control_requirement\": true, \"status\": \"enabled\"}]}";
+    String mockResponseBody = "{\"id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"account_id\": \"130003ea8bfa43c5aacea07a86da3000\", \"control_library_name\": \"controlLibraryName\", \"control_library_description\": \"controlLibraryDescription\", \"control_library_type\": \"predefined\", \"version_group_label\": \"e0923045-f00d-44de-b49b-6f1f0e8033cc\", \"control_library_version\": \"controlLibraryVersion\", \"created_on\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"latest\": true, \"hierarchy_enabled\": true, \"controls_count\": 13, \"control_parents_count\": 19, \"controls\": [{\"control_name\": \"controlName\", \"control_id\": \"1fa45e17-9322-4e6c-bbd6-1c51db08e790\", \"control_description\": \"controlDescription\", \"control_category\": \"controlCategory\", \"control_parent\": \"controlParent\", \"control_tags\": [\"controlTags\"], \"control_specifications\": [{\"control_specification_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"responsibility\": \"user\", \"component_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"component_name\": \"componentName\", \"environment\": \"environment\", \"control_specification_description\": \"controlSpecificationDescription\", \"assessments_count\": 16, \"assessments\": [{\"assessment_id\": \"assessmentId\", \"assessment_method\": \"assessmentMethod\", \"assessment_type\": \"assessmentType\", \"assessment_description\": \"assessmentDescription\", \"parameter_count\": 14, \"parameters\": [{\"parameter_name\": \"location\", \"parameter_display_name\": \"Location\", \"parameter_type\": \"string\", \"parameter_value\": \"anyValue\"}]}]}], \"control_docs\": {\"control_docs_id\": \"controlDocsId\", \"control_docs_type\": \"controlDocsType\"}, \"control_requirement\": true, \"status\": \"enabled\"}]}";
     String getControlLibraryPath = "/control_libraries/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -699,7 +705,7 @@ public class SecurityAndComplianceCenterApiTest {
   @Test
   public void testReplaceCustomControlLibraryWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"account_id\": \"130003ea8bfa43c5aacea07a86da3000\", \"control_library_name\": \"controlLibraryName\", \"control_library_description\": \"controlLibraryDescription\", \"control_library_type\": \"predefined\", \"version_group_label\": \"e0923045-f00d-44de-b49b-6f1f0e8033cc\", \"control_library_version\": \"controlLibraryVersion\", \"created_on\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"latest\": true, \"hierarchy_enabled\": true, \"controls_count\": 13, \"control_parents_count\": 19, \"controls\": [{\"control_name\": \"controlName\", \"control_id\": \"1fa45e17-9322-4e6c-bbd6-1c51db08e790\", \"control_description\": \"controlDescription\", \"control_category\": \"controlCategory\", \"control_parent\": \"controlParent\", \"control_tags\": [\"controlTags\"], \"control_specifications\": [{\"control_specification_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"responsibility\": \"user\", \"component_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"componenet_name\": \"componenetName\", \"environment\": \"environment\", \"control_specification_description\": \"controlSpecificationDescription\", \"assessments_count\": 16, \"assessments\": [{\"assessment_id\": \"assessmentId\", \"assessment_method\": \"assessmentMethod\", \"assessment_type\": \"assessmentType\", \"assessment_description\": \"assessmentDescription\", \"parameter_count\": 14, \"parameters\": [{\"parameter_name\": \"location\", \"parameter_display_name\": \"Location\", \"parameter_type\": \"string\", \"parameter_value\": \"anyValue\"}]}]}], \"control_docs\": {\"control_docs_id\": \"controlDocsId\", \"control_docs_type\": \"controlDocsType\"}, \"control_requirement\": true, \"status\": \"enabled\"}]}";
+    String mockResponseBody = "{\"id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"account_id\": \"130003ea8bfa43c5aacea07a86da3000\", \"control_library_name\": \"controlLibraryName\", \"control_library_description\": \"controlLibraryDescription\", \"control_library_type\": \"predefined\", \"version_group_label\": \"e0923045-f00d-44de-b49b-6f1f0e8033cc\", \"control_library_version\": \"controlLibraryVersion\", \"created_on\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"latest\": true, \"hierarchy_enabled\": true, \"controls_count\": 13, \"control_parents_count\": 19, \"controls\": [{\"control_name\": \"controlName\", \"control_id\": \"1fa45e17-9322-4e6c-bbd6-1c51db08e790\", \"control_description\": \"controlDescription\", \"control_category\": \"controlCategory\", \"control_parent\": \"controlParent\", \"control_tags\": [\"controlTags\"], \"control_specifications\": [{\"control_specification_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"responsibility\": \"user\", \"component_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"component_name\": \"componentName\", \"environment\": \"environment\", \"control_specification_description\": \"controlSpecificationDescription\", \"assessments_count\": 16, \"assessments\": [{\"assessment_id\": \"assessmentId\", \"assessment_method\": \"assessmentMethod\", \"assessment_type\": \"assessmentType\", \"assessment_description\": \"assessmentDescription\", \"parameter_count\": 14, \"parameters\": [{\"parameter_name\": \"location\", \"parameter_display_name\": \"Location\", \"parameter_type\": \"string\", \"parameter_value\": \"anyValue\"}]}]}], \"control_docs\": {\"control_docs_id\": \"controlDocsId\", \"control_docs_type\": \"controlDocsType\"}, \"control_requirement\": true, \"status\": \"enabled\"}]}";
     String replaceCustomControlLibraryPath = "/control_libraries/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -729,7 +735,7 @@ public class SecurityAndComplianceCenterApiTest {
       .controlSpecificationId("5c7d6f88-a92f-4734-9b49-bd22b0900184")
       .responsibility("user")
       .componentId("iam-identity")
-      .componenetName("testString")
+      .componentName("IAM Identity Service")
       .environment("ibm-cloud")
       .controlSpecificationDescription("IBM cloud")
       .assessmentsCount(Long.valueOf("26"))
@@ -937,7 +943,7 @@ public class SecurityAndComplianceCenterApiTest {
   @Test
   public void testCreateProfileWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"id\": \"id\", \"profile_name\": \"profileName\", \"profile_description\": \"profileDescription\", \"profile_type\": \"predefined\", \"profile_version\": \"profileVersion\", \"version_group_label\": \"e0923045-f00d-44de-b49b-6f1f0e8033cc\", \"instance_id\": \"instanceId\", \"latest\": true, \"hierarchy_enabled\": true, \"created_by\": \"createdBy\", \"created_on\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"controls_count\": 13, \"control_parents_count\": 19, \"attachments_count\": 16, \"controls\": [{\"control_library_id\": \"e98a56ff-dc24-41d4-9875-1e188e2da6cd\", \"control_id\": \"5C453578-E9A1-421E-AD0F-C6AFCDD67CCF\", \"control_library_version\": \"controlLibraryVersion\", \"control_name\": \"controlName\", \"control_description\": \"controlDescription\", \"control_category\": \"controlCategory\", \"control_parent\": \"controlParent\", \"control_requirement\": true, \"control_docs\": {\"control_docs_id\": \"controlDocsId\", \"control_docs_type\": \"controlDocsType\"}, \"control_specifications_count\": 26, \"control_specifications\": [{\"control_specification_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"responsibility\": \"user\", \"component_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"componenet_name\": \"componenetName\", \"environment\": \"environment\", \"control_specification_description\": \"controlSpecificationDescription\", \"assessments_count\": 16, \"assessments\": [{\"assessment_id\": \"assessmentId\", \"assessment_method\": \"assessmentMethod\", \"assessment_type\": \"assessmentType\", \"assessment_description\": \"assessmentDescription\", \"parameter_count\": 14, \"parameters\": [{\"parameter_name\": \"location\", \"parameter_display_name\": \"Location\", \"parameter_type\": \"string\", \"parameter_value\": \"anyValue\"}]}]}]}], \"default_parameters\": [{\"assessment_type\": \"assessmentType\", \"assessment_id\": \"assessmentId\", \"parameter_name\": \"parameterName\", \"parameter_default_value\": \"parameterDefaultValue\", \"parameter_display_name\": \"parameterDisplayName\", \"parameter_type\": \"string\"}]}";
+    String mockResponseBody = "{\"id\": \"id\", \"profile_name\": \"profileName\", \"profile_description\": \"profileDescription\", \"profile_type\": \"predefined\", \"profile_version\": \"profileVersion\", \"version_group_label\": \"e0923045-f00d-44de-b49b-6f1f0e8033cc\", \"instance_id\": \"instanceId\", \"latest\": true, \"hierarchy_enabled\": true, \"created_by\": \"createdBy\", \"created_on\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"controls_count\": 13, \"control_parents_count\": 19, \"attachments_count\": 16, \"controls\": [{\"control_library_id\": \"e98a56ff-dc24-41d4-9875-1e188e2da6cd\", \"control_id\": \"5C453578-E9A1-421E-AD0F-C6AFCDD67CCF\", \"control_library_version\": \"controlLibraryVersion\", \"control_name\": \"controlName\", \"control_description\": \"controlDescription\", \"control_category\": \"controlCategory\", \"control_parent\": \"controlParent\", \"control_requirement\": true, \"control_docs\": {\"control_docs_id\": \"controlDocsId\", \"control_docs_type\": \"controlDocsType\"}, \"control_specifications_count\": 26, \"control_specifications\": [{\"control_specification_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"responsibility\": \"user\", \"component_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"component_name\": \"componentName\", \"environment\": \"environment\", \"control_specification_description\": \"controlSpecificationDescription\", \"assessments_count\": 16, \"assessments\": [{\"assessment_id\": \"assessmentId\", \"assessment_method\": \"assessmentMethod\", \"assessment_type\": \"assessmentType\", \"assessment_description\": \"assessmentDescription\", \"parameter_count\": 14, \"parameters\": [{\"parameter_name\": \"location\", \"parameter_display_name\": \"Location\", \"parameter_type\": \"string\", \"parameter_value\": \"anyValue\"}]}]}]}], \"default_parameters\": [{\"assessment_type\": \"assessmentType\", \"assessment_id\": \"assessmentId\", \"parameter_name\": \"parameterName\", \"parameter_default_value\": \"parameterDefaultValue\", \"parameter_display_name\": \"parameterDisplayName\", \"parameter_type\": \"string\"}]}";
     String createProfilePath = "/profiles";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -1010,7 +1016,7 @@ public class SecurityAndComplianceCenterApiTest {
   @Test
   public void testDeleteCustomProfileWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"id\": \"id\", \"profile_name\": \"profileName\", \"profile_description\": \"profileDescription\", \"profile_type\": \"predefined\", \"profile_version\": \"profileVersion\", \"version_group_label\": \"e0923045-f00d-44de-b49b-6f1f0e8033cc\", \"instance_id\": \"instanceId\", \"latest\": true, \"hierarchy_enabled\": true, \"created_by\": \"createdBy\", \"created_on\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"controls_count\": 13, \"control_parents_count\": 19, \"attachments_count\": 16, \"controls\": [{\"control_library_id\": \"e98a56ff-dc24-41d4-9875-1e188e2da6cd\", \"control_id\": \"5C453578-E9A1-421E-AD0F-C6AFCDD67CCF\", \"control_library_version\": \"controlLibraryVersion\", \"control_name\": \"controlName\", \"control_description\": \"controlDescription\", \"control_category\": \"controlCategory\", \"control_parent\": \"controlParent\", \"control_requirement\": true, \"control_docs\": {\"control_docs_id\": \"controlDocsId\", \"control_docs_type\": \"controlDocsType\"}, \"control_specifications_count\": 26, \"control_specifications\": [{\"control_specification_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"responsibility\": \"user\", \"component_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"componenet_name\": \"componenetName\", \"environment\": \"environment\", \"control_specification_description\": \"controlSpecificationDescription\", \"assessments_count\": 16, \"assessments\": [{\"assessment_id\": \"assessmentId\", \"assessment_method\": \"assessmentMethod\", \"assessment_type\": \"assessmentType\", \"assessment_description\": \"assessmentDescription\", \"parameter_count\": 14, \"parameters\": [{\"parameter_name\": \"location\", \"parameter_display_name\": \"Location\", \"parameter_type\": \"string\", \"parameter_value\": \"anyValue\"}]}]}]}], \"default_parameters\": [{\"assessment_type\": \"assessmentType\", \"assessment_id\": \"assessmentId\", \"parameter_name\": \"parameterName\", \"parameter_default_value\": \"parameterDefaultValue\", \"parameter_display_name\": \"parameterDisplayName\", \"parameter_type\": \"string\"}]}";
+    String mockResponseBody = "{\"id\": \"id\", \"profile_name\": \"profileName\", \"profile_description\": \"profileDescription\", \"profile_type\": \"predefined\", \"profile_version\": \"profileVersion\", \"version_group_label\": \"e0923045-f00d-44de-b49b-6f1f0e8033cc\", \"instance_id\": \"instanceId\", \"latest\": true, \"hierarchy_enabled\": true, \"created_by\": \"createdBy\", \"created_on\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"controls_count\": 13, \"control_parents_count\": 19, \"attachments_count\": 16, \"controls\": [{\"control_library_id\": \"e98a56ff-dc24-41d4-9875-1e188e2da6cd\", \"control_id\": \"5C453578-E9A1-421E-AD0F-C6AFCDD67CCF\", \"control_library_version\": \"controlLibraryVersion\", \"control_name\": \"controlName\", \"control_description\": \"controlDescription\", \"control_category\": \"controlCategory\", \"control_parent\": \"controlParent\", \"control_requirement\": true, \"control_docs\": {\"control_docs_id\": \"controlDocsId\", \"control_docs_type\": \"controlDocsType\"}, \"control_specifications_count\": 26, \"control_specifications\": [{\"control_specification_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"responsibility\": \"user\", \"component_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"component_name\": \"componentName\", \"environment\": \"environment\", \"control_specification_description\": \"controlSpecificationDescription\", \"assessments_count\": 16, \"assessments\": [{\"assessment_id\": \"assessmentId\", \"assessment_method\": \"assessmentMethod\", \"assessment_type\": \"assessmentType\", \"assessment_description\": \"assessmentDescription\", \"parameter_count\": 14, \"parameters\": [{\"parameter_name\": \"location\", \"parameter_display_name\": \"Location\", \"parameter_type\": \"string\", \"parameter_value\": \"anyValue\"}]}]}]}], \"default_parameters\": [{\"assessment_type\": \"assessmentType\", \"assessment_id\": \"assessmentId\", \"parameter_name\": \"parameterName\", \"parameter_default_value\": \"parameterDefaultValue\", \"parameter_display_name\": \"parameterDisplayName\", \"parameter_type\": \"string\"}]}";
     String deleteCustomProfilePath = "/profiles/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -1019,7 +1025,7 @@ public class SecurityAndComplianceCenterApiTest {
 
     // Construct an instance of the DeleteCustomProfileOptions model
     DeleteCustomProfileOptions deleteCustomProfileOptionsModel = new DeleteCustomProfileOptions.Builder()
-      .profilesId("testString")
+      .profileId("testString")
       .xCorrelationId("testString")
       .xRequestId("testString")
       .build();
@@ -1063,7 +1069,7 @@ public class SecurityAndComplianceCenterApiTest {
   @Test
   public void testGetProfileWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"id\": \"id\", \"profile_name\": \"profileName\", \"profile_description\": \"profileDescription\", \"profile_type\": \"predefined\", \"profile_version\": \"profileVersion\", \"version_group_label\": \"e0923045-f00d-44de-b49b-6f1f0e8033cc\", \"instance_id\": \"instanceId\", \"latest\": true, \"hierarchy_enabled\": true, \"created_by\": \"createdBy\", \"created_on\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"controls_count\": 13, \"control_parents_count\": 19, \"attachments_count\": 16, \"controls\": [{\"control_library_id\": \"e98a56ff-dc24-41d4-9875-1e188e2da6cd\", \"control_id\": \"5C453578-E9A1-421E-AD0F-C6AFCDD67CCF\", \"control_library_version\": \"controlLibraryVersion\", \"control_name\": \"controlName\", \"control_description\": \"controlDescription\", \"control_category\": \"controlCategory\", \"control_parent\": \"controlParent\", \"control_requirement\": true, \"control_docs\": {\"control_docs_id\": \"controlDocsId\", \"control_docs_type\": \"controlDocsType\"}, \"control_specifications_count\": 26, \"control_specifications\": [{\"control_specification_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"responsibility\": \"user\", \"component_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"componenet_name\": \"componenetName\", \"environment\": \"environment\", \"control_specification_description\": \"controlSpecificationDescription\", \"assessments_count\": 16, \"assessments\": [{\"assessment_id\": \"assessmentId\", \"assessment_method\": \"assessmentMethod\", \"assessment_type\": \"assessmentType\", \"assessment_description\": \"assessmentDescription\", \"parameter_count\": 14, \"parameters\": [{\"parameter_name\": \"location\", \"parameter_display_name\": \"Location\", \"parameter_type\": \"string\", \"parameter_value\": \"anyValue\"}]}]}]}], \"default_parameters\": [{\"assessment_type\": \"assessmentType\", \"assessment_id\": \"assessmentId\", \"parameter_name\": \"parameterName\", \"parameter_default_value\": \"parameterDefaultValue\", \"parameter_display_name\": \"parameterDisplayName\", \"parameter_type\": \"string\"}]}";
+    String mockResponseBody = "{\"id\": \"id\", \"profile_name\": \"profileName\", \"profile_description\": \"profileDescription\", \"profile_type\": \"predefined\", \"profile_version\": \"profileVersion\", \"version_group_label\": \"e0923045-f00d-44de-b49b-6f1f0e8033cc\", \"instance_id\": \"instanceId\", \"latest\": true, \"hierarchy_enabled\": true, \"created_by\": \"createdBy\", \"created_on\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"controls_count\": 13, \"control_parents_count\": 19, \"attachments_count\": 16, \"controls\": [{\"control_library_id\": \"e98a56ff-dc24-41d4-9875-1e188e2da6cd\", \"control_id\": \"5C453578-E9A1-421E-AD0F-C6AFCDD67CCF\", \"control_library_version\": \"controlLibraryVersion\", \"control_name\": \"controlName\", \"control_description\": \"controlDescription\", \"control_category\": \"controlCategory\", \"control_parent\": \"controlParent\", \"control_requirement\": true, \"control_docs\": {\"control_docs_id\": \"controlDocsId\", \"control_docs_type\": \"controlDocsType\"}, \"control_specifications_count\": 26, \"control_specifications\": [{\"control_specification_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"responsibility\": \"user\", \"component_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"component_name\": \"componentName\", \"environment\": \"environment\", \"control_specification_description\": \"controlSpecificationDescription\", \"assessments_count\": 16, \"assessments\": [{\"assessment_id\": \"assessmentId\", \"assessment_method\": \"assessmentMethod\", \"assessment_type\": \"assessmentType\", \"assessment_description\": \"assessmentDescription\", \"parameter_count\": 14, \"parameters\": [{\"parameter_name\": \"location\", \"parameter_display_name\": \"Location\", \"parameter_type\": \"string\", \"parameter_value\": \"anyValue\"}]}]}]}], \"default_parameters\": [{\"assessment_type\": \"assessmentType\", \"assessment_id\": \"assessmentId\", \"parameter_name\": \"parameterName\", \"parameter_default_value\": \"parameterDefaultValue\", \"parameter_display_name\": \"parameterDisplayName\", \"parameter_type\": \"string\"}]}";
     String getProfilePath = "/profiles/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -1072,7 +1078,7 @@ public class SecurityAndComplianceCenterApiTest {
 
     // Construct an instance of the GetProfileOptions model
     GetProfileOptions getProfileOptionsModel = new GetProfileOptions.Builder()
-      .profilesId("testString")
+      .profileId("testString")
       .xCorrelationId("testString")
       .xRequestId("testString")
       .build();
@@ -1116,7 +1122,7 @@ public class SecurityAndComplianceCenterApiTest {
   @Test
   public void testReplaceProfileWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"id\": \"id\", \"profile_name\": \"profileName\", \"profile_description\": \"profileDescription\", \"profile_type\": \"predefined\", \"profile_version\": \"profileVersion\", \"version_group_label\": \"e0923045-f00d-44de-b49b-6f1f0e8033cc\", \"instance_id\": \"instanceId\", \"latest\": true, \"hierarchy_enabled\": true, \"created_by\": \"createdBy\", \"created_on\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"controls_count\": 13, \"control_parents_count\": 19, \"attachments_count\": 16, \"controls\": [{\"control_library_id\": \"e98a56ff-dc24-41d4-9875-1e188e2da6cd\", \"control_id\": \"5C453578-E9A1-421E-AD0F-C6AFCDD67CCF\", \"control_library_version\": \"controlLibraryVersion\", \"control_name\": \"controlName\", \"control_description\": \"controlDescription\", \"control_category\": \"controlCategory\", \"control_parent\": \"controlParent\", \"control_requirement\": true, \"control_docs\": {\"control_docs_id\": \"controlDocsId\", \"control_docs_type\": \"controlDocsType\"}, \"control_specifications_count\": 26, \"control_specifications\": [{\"control_specification_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"responsibility\": \"user\", \"component_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"componenet_name\": \"componenetName\", \"environment\": \"environment\", \"control_specification_description\": \"controlSpecificationDescription\", \"assessments_count\": 16, \"assessments\": [{\"assessment_id\": \"assessmentId\", \"assessment_method\": \"assessmentMethod\", \"assessment_type\": \"assessmentType\", \"assessment_description\": \"assessmentDescription\", \"parameter_count\": 14, \"parameters\": [{\"parameter_name\": \"location\", \"parameter_display_name\": \"Location\", \"parameter_type\": \"string\", \"parameter_value\": \"anyValue\"}]}]}]}], \"default_parameters\": [{\"assessment_type\": \"assessmentType\", \"assessment_id\": \"assessmentId\", \"parameter_name\": \"parameterName\", \"parameter_default_value\": \"parameterDefaultValue\", \"parameter_display_name\": \"parameterDisplayName\", \"parameter_type\": \"string\"}]}";
+    String mockResponseBody = "{\"id\": \"id\", \"profile_name\": \"profileName\", \"profile_description\": \"profileDescription\", \"profile_type\": \"predefined\", \"profile_version\": \"profileVersion\", \"version_group_label\": \"e0923045-f00d-44de-b49b-6f1f0e8033cc\", \"instance_id\": \"instanceId\", \"latest\": true, \"hierarchy_enabled\": true, \"created_by\": \"createdBy\", \"created_on\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"controls_count\": 13, \"control_parents_count\": 19, \"attachments_count\": 16, \"controls\": [{\"control_library_id\": \"e98a56ff-dc24-41d4-9875-1e188e2da6cd\", \"control_id\": \"5C453578-E9A1-421E-AD0F-C6AFCDD67CCF\", \"control_library_version\": \"controlLibraryVersion\", \"control_name\": \"controlName\", \"control_description\": \"controlDescription\", \"control_category\": \"controlCategory\", \"control_parent\": \"controlParent\", \"control_requirement\": true, \"control_docs\": {\"control_docs_id\": \"controlDocsId\", \"control_docs_type\": \"controlDocsType\"}, \"control_specifications_count\": 26, \"control_specifications\": [{\"control_specification_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"responsibility\": \"user\", \"component_id\": \"f3517159-889e-4781-819a-89d89b747c85\", \"component_name\": \"componentName\", \"environment\": \"environment\", \"control_specification_description\": \"controlSpecificationDescription\", \"assessments_count\": 16, \"assessments\": [{\"assessment_id\": \"assessmentId\", \"assessment_method\": \"assessmentMethod\", \"assessment_type\": \"assessmentType\", \"assessment_description\": \"assessmentDescription\", \"parameter_count\": 14, \"parameters\": [{\"parameter_name\": \"location\", \"parameter_display_name\": \"Location\", \"parameter_type\": \"string\", \"parameter_value\": \"anyValue\"}]}]}]}], \"default_parameters\": [{\"assessment_type\": \"assessmentType\", \"assessment_id\": \"assessmentId\", \"parameter_name\": \"parameterName\", \"parameter_default_value\": \"parameterDefaultValue\", \"parameter_display_name\": \"parameterDisplayName\", \"parameter_type\": \"string\"}]}";
     String replaceProfilePath = "/profiles/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -1141,7 +1147,7 @@ public class SecurityAndComplianceCenterApiTest {
 
     // Construct an instance of the ReplaceProfileOptions model
     ReplaceProfileOptions replaceProfileOptionsModel = new ReplaceProfileOptions.Builder()
-      .profilesId("testString")
+      .profileId("testString")
       .profileName("test_profile1")
       .profileDescription("test_description1")
       .profileType("custom")
@@ -1190,7 +1196,7 @@ public class SecurityAndComplianceCenterApiTest {
   @Test
   public void testListRulesWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"limit\": 50, \"total_count\": 230, \"first\": {\"href\": \"href\"}, \"next\": {\"href\": \"href\", \"start\": \"start\"}, \"rules\": [{\"created_on\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"id\": \"id\", \"account_id\": \"accountId\", \"description\": \"description\", \"type\": \"user_defined\", \"version\": \"version\", \"import\": {\"parameters\": [{\"name\": \"name\", \"display_name\": \"displayName\", \"description\": \"description\", \"type\": \"string\"}]}, \"target\": {\"service_name\": \"serviceName\", \"service_display_name\": \"serviceDisplayName\", \"resource_kind\": \"resourceKind\", \"additional_target_attributes\": [{\"name\": \"name\", \"operator\": \"string_equals\", \"value\": \"value\"}]}, \"required_config\": {\"description\": \"description\", \"and\": [{\"description\": \"description\"}]}, \"labels\": [\"labels\"]}]}";
+    String mockResponseBody = "{\"limit\": 50, \"total_count\": 230, \"first\": {\"href\": \"href\"}, \"next\": {\"href\": \"href\", \"start\": \"start\"}, \"rules\": [{\"created_on\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"id\": \"id\", \"account_id\": \"accountId\", \"description\": \"description\", \"type\": \"user_defined\", \"version\": \"version\", \"import\": {\"parameters\": [{\"name\": \"name\", \"display_name\": \"displayName\", \"description\": \"description\", \"type\": \"string\"}]}, \"target\": {\"service_name\": \"serviceName\", \"service_display_name\": \"serviceDisplayName\", \"resource_kind\": \"resourceKind\", \"additional_target_attributes\": [{\"name\": \"name\", \"operator\": \"string_equals\", \"value\": \"value\"}]}, \"required_config\": {\"description\": \"description\", \"and\": [{\"description\": \"description\", \"or\": [{\"description\": \"description\", \"property\": \"property\", \"operator\": \"string_equals\", \"value\": \"anyValue\"}]}]}, \"labels\": [\"labels\"]}]}";
     String listRulesPath = "/rules";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -1241,7 +1247,7 @@ public class SecurityAndComplianceCenterApiTest {
   @Test
   public void testCreateRuleWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"created_on\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"id\": \"id\", \"account_id\": \"accountId\", \"description\": \"description\", \"type\": \"user_defined\", \"version\": \"version\", \"import\": {\"parameters\": [{\"name\": \"name\", \"display_name\": \"displayName\", \"description\": \"description\", \"type\": \"string\"}]}, \"target\": {\"service_name\": \"serviceName\", \"service_display_name\": \"serviceDisplayName\", \"resource_kind\": \"resourceKind\", \"additional_target_attributes\": [{\"name\": \"name\", \"operator\": \"string_equals\", \"value\": \"value\"}]}, \"required_config\": {\"description\": \"description\", \"and\": [{\"description\": \"description\"}]}, \"labels\": [\"labels\"]}";
+    String mockResponseBody = "{\"created_on\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"id\": \"id\", \"account_id\": \"accountId\", \"description\": \"description\", \"type\": \"user_defined\", \"version\": \"version\", \"import\": {\"parameters\": [{\"name\": \"name\", \"display_name\": \"displayName\", \"description\": \"description\", \"type\": \"string\"}]}, \"target\": {\"service_name\": \"serviceName\", \"service_display_name\": \"serviceDisplayName\", \"resource_kind\": \"resourceKind\", \"additional_target_attributes\": [{\"name\": \"name\", \"operator\": \"string_equals\", \"value\": \"value\"}]}, \"required_config\": {\"description\": \"description\", \"and\": [{\"description\": \"description\", \"or\": [{\"description\": \"description\", \"property\": \"property\", \"operator\": \"string_equals\", \"value\": \"anyValue\"}]}]}, \"labels\": [\"labels\"]}";
     String createRulePath = "/rules";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -1255,10 +1261,9 @@ public class SecurityAndComplianceCenterApiTest {
       .value("us-east")
       .build();
 
-    // Construct an instance of the Target model
-    Target targetModel = new Target.Builder()
+    // Construct an instance of the TargetPrototype model
+    TargetPrototype targetPrototypeModel = new TargetPrototype.Builder()
       .serviceName("cloud-object-storage")
-      .serviceDisplayName("testString")
       .resourceKind("bucket")
       .additionalTargetAttributes(java.util.Arrays.asList(additionalTargetAttributeModel))
       .build();
@@ -1271,8 +1276,8 @@ public class SecurityAndComplianceCenterApiTest {
       .value("${hard_quota}")
       .build();
 
-    // Construct an instance of the RequiredConfigRequiredConfigAnd model
-    RequiredConfigRequiredConfigAnd requiredConfigModel = new RequiredConfigRequiredConfigAnd.Builder()
+    // Construct an instance of the RequiredConfigAnd model
+    RequiredConfigAnd requiredConfigModel = new RequiredConfigAnd.Builder()
       .description("The Cloud Object Storage rule.")
       .and(java.util.Arrays.asList(requiredConfigItemsModel))
       .build();
@@ -1293,9 +1298,8 @@ public class SecurityAndComplianceCenterApiTest {
     // Construct an instance of the CreateRuleOptions model
     CreateRuleOptions createRuleOptionsModel = new CreateRuleOptions.Builder()
       .description("Example rule")
-      .target(targetModel)
+      .target(targetPrototypeModel)
       .requiredConfig(requiredConfigModel)
-      .type("user_defined")
       .version("1.0.0")
       .xImport(importModel)
       .labels(java.util.Arrays.asList())
@@ -1394,7 +1398,7 @@ public class SecurityAndComplianceCenterApiTest {
   @Test
   public void testGetRuleWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"created_on\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"id\": \"id\", \"account_id\": \"accountId\", \"description\": \"description\", \"type\": \"user_defined\", \"version\": \"version\", \"import\": {\"parameters\": [{\"name\": \"name\", \"display_name\": \"displayName\", \"description\": \"description\", \"type\": \"string\"}]}, \"target\": {\"service_name\": \"serviceName\", \"service_display_name\": \"serviceDisplayName\", \"resource_kind\": \"resourceKind\", \"additional_target_attributes\": [{\"name\": \"name\", \"operator\": \"string_equals\", \"value\": \"value\"}]}, \"required_config\": {\"description\": \"description\", \"and\": [{\"description\": \"description\"}]}, \"labels\": [\"labels\"]}";
+    String mockResponseBody = "{\"created_on\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"id\": \"id\", \"account_id\": \"accountId\", \"description\": \"description\", \"type\": \"user_defined\", \"version\": \"version\", \"import\": {\"parameters\": [{\"name\": \"name\", \"display_name\": \"displayName\", \"description\": \"description\", \"type\": \"string\"}]}, \"target\": {\"service_name\": \"serviceName\", \"service_display_name\": \"serviceDisplayName\", \"resource_kind\": \"resourceKind\", \"additional_target_attributes\": [{\"name\": \"name\", \"operator\": \"string_equals\", \"value\": \"value\"}]}, \"required_config\": {\"description\": \"description\", \"and\": [{\"description\": \"description\", \"or\": [{\"description\": \"description\", \"property\": \"property\", \"operator\": \"string_equals\", \"value\": \"anyValue\"}]}]}, \"labels\": [\"labels\"]}";
     String getRulePath = "/rules/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -1447,7 +1451,7 @@ public class SecurityAndComplianceCenterApiTest {
   @Test
   public void testReplaceRuleWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"created_on\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"id\": \"id\", \"account_id\": \"accountId\", \"description\": \"description\", \"type\": \"user_defined\", \"version\": \"version\", \"import\": {\"parameters\": [{\"name\": \"name\", \"display_name\": \"displayName\", \"description\": \"description\", \"type\": \"string\"}]}, \"target\": {\"service_name\": \"serviceName\", \"service_display_name\": \"serviceDisplayName\", \"resource_kind\": \"resourceKind\", \"additional_target_attributes\": [{\"name\": \"name\", \"operator\": \"string_equals\", \"value\": \"value\"}]}, \"required_config\": {\"description\": \"description\", \"and\": [{\"description\": \"description\"}]}, \"labels\": [\"labels\"]}";
+    String mockResponseBody = "{\"created_on\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_on\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"id\": \"id\", \"account_id\": \"accountId\", \"description\": \"description\", \"type\": \"user_defined\", \"version\": \"version\", \"import\": {\"parameters\": [{\"name\": \"name\", \"display_name\": \"displayName\", \"description\": \"description\", \"type\": \"string\"}]}, \"target\": {\"service_name\": \"serviceName\", \"service_display_name\": \"serviceDisplayName\", \"resource_kind\": \"resourceKind\", \"additional_target_attributes\": [{\"name\": \"name\", \"operator\": \"string_equals\", \"value\": \"value\"}]}, \"required_config\": {\"description\": \"description\", \"and\": [{\"description\": \"description\", \"or\": [{\"description\": \"description\", \"property\": \"property\", \"operator\": \"string_equals\", \"value\": \"anyValue\"}]}]}, \"labels\": [\"labels\"]}";
     String replaceRulePath = "/rules/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -1461,10 +1465,9 @@ public class SecurityAndComplianceCenterApiTest {
       .value("us-south")
       .build();
 
-    // Construct an instance of the Target model
-    Target targetModel = new Target.Builder()
+    // Construct an instance of the TargetPrototype model
+    TargetPrototype targetPrototypeModel = new TargetPrototype.Builder()
       .serviceName("cloud-object-storage")
-      .serviceDisplayName("Cloud Object Storage")
       .resourceKind("bucket")
       .additionalTargetAttributes(java.util.Arrays.asList(additionalTargetAttributeModel))
       .build();
@@ -1477,8 +1480,8 @@ public class SecurityAndComplianceCenterApiTest {
       .value("${hard_quota}")
       .build();
 
-    // Construct an instance of the RequiredConfigRequiredConfigAnd model
-    RequiredConfigRequiredConfigAnd requiredConfigModel = new RequiredConfigRequiredConfigAnd.Builder()
+    // Construct an instance of the RequiredConfigAnd model
+    RequiredConfigAnd requiredConfigModel = new RequiredConfigAnd.Builder()
       .description("The Cloud Object Storage rule.")
       .and(java.util.Arrays.asList(requiredConfigItemsModel))
       .build();
@@ -1501,9 +1504,8 @@ public class SecurityAndComplianceCenterApiTest {
       .ruleId("testString")
       .ifMatch("testString")
       .description("Example rule")
-      .target(targetModel)
+      .target(targetPrototypeModel)
       .requiredConfig(requiredConfigModel)
-      .type("user_defined")
       .version("1.0.1")
       .xImport(importModel)
       .labels(java.util.Arrays.asList())
@@ -1561,7 +1563,7 @@ public class SecurityAndComplianceCenterApiTest {
 
     // Construct an instance of the ListAttachmentsOptions model
     ListAttachmentsOptions listAttachmentsOptionsModel = new ListAttachmentsOptions.Builder()
-      .profilesId("testString")
+      .profileId("testString")
       .xCorrelationId("testString")
       .xRequestId("testString")
       .limit(Long.valueOf("10"))
@@ -1625,7 +1627,7 @@ public class SecurityAndComplianceCenterApiTest {
       .setBody("{\"message\": \"No more results available!\"}"));
 
     ListAttachmentsOptions listAttachmentsOptions = new ListAttachmentsOptions.Builder()
-      .profilesId("testString")
+      .profileId("testString")
       .xCorrelationId("testString")
       .xRequestId("testString")
       .limit(Long.valueOf("10"))
@@ -1661,7 +1663,7 @@ public class SecurityAndComplianceCenterApiTest {
       .setBody("{\"message\": \"No more results available!\"}"));
 
     ListAttachmentsOptions listAttachmentsOptions = new ListAttachmentsOptions.Builder()
-      .profilesId("testString")
+      .profileId("testString")
       .xCorrelationId("testString")
       .xRequestId("testString")
       .limit(Long.valueOf("10"))
@@ -1732,7 +1734,7 @@ public class SecurityAndComplianceCenterApiTest {
 
     // Construct an instance of the CreateAttachmentOptions model
     CreateAttachmentOptions createAttachmentOptionsModel = new CreateAttachmentOptions.Builder()
-      .profilesId("testString")
+      .profileId("testString")
       .attachments(java.util.Arrays.asList(attachmentsPrototypeModel))
       .profileId("testString")
       .xCorrelationId("testString")
@@ -1788,7 +1790,7 @@ public class SecurityAndComplianceCenterApiTest {
     // Construct an instance of the DeleteProfileAttachmentOptions model
     DeleteProfileAttachmentOptions deleteProfileAttachmentOptionsModel = new DeleteProfileAttachmentOptions.Builder()
       .attachmentId("testString")
-      .profilesId("testString")
+      .profileId("testString")
       .xCorrelationId("testString")
       .xRequestId("testString")
       .build();
@@ -1842,7 +1844,7 @@ public class SecurityAndComplianceCenterApiTest {
     // Construct an instance of the GetProfileAttachmentOptions model
     GetProfileAttachmentOptions getProfileAttachmentOptionsModel = new GetProfileAttachmentOptions.Builder()
       .attachmentId("testString")
-      .profilesId("testString")
+      .profileId("testString")
       .xCorrelationId("testString")
       .xRequestId("testString")
       .build();
@@ -1937,7 +1939,7 @@ public class SecurityAndComplianceCenterApiTest {
     // Construct an instance of the ReplaceProfileAttachmentOptions model
     ReplaceProfileAttachmentOptions replaceProfileAttachmentOptionsModel = new ReplaceProfileAttachmentOptions.Builder()
       .attachmentId("testString")
-      .profilesId("testString")
+      .profileId("testString")
       .id("testString")
       .profileId("testString")
       .accountId("testString")
@@ -2642,8 +2644,10 @@ public class SecurityAndComplianceCenterApiTest {
       .xCorrelationId("testString")
       .xRequestId("testString")
       .assessmentId("testString")
+      .assessmentMethod("testString")
       .componentId("testString")
       .targetId("testString")
+      .targetEnv("testString")
       .targetName("testString")
       .status("failure")
       .start("testString")
@@ -2667,8 +2671,10 @@ public class SecurityAndComplianceCenterApiTest {
     Map<String, String> query = TestUtilities.parseQueryString(request);
     assertNotNull(query);
     assertEquals(query.get("assessment_id"), "testString");
+    assertEquals(query.get("assessment_method"), "testString");
     assertEquals(query.get("component_id"), "testString");
     assertEquals(query.get("target_id"), "testString");
+    assertEquals(query.get("target_env"), "testString");
     assertEquals(query.get("target_name"), "testString");
     assertEquals(query.get("status"), "failure");
     assertEquals(query.get("start"), "testString");
@@ -2716,8 +2722,10 @@ public class SecurityAndComplianceCenterApiTest {
       .xCorrelationId("testString")
       .xRequestId("testString")
       .assessmentId("testString")
+      .assessmentMethod("testString")
       .componentId("testString")
       .targetId("testString")
+      .targetEnv("testString")
       .targetName("testString")
       .status("failure")
       .limit(Long.valueOf("10"))
@@ -2757,8 +2765,10 @@ public class SecurityAndComplianceCenterApiTest {
       .xCorrelationId("testString")
       .xRequestId("testString")
       .assessmentId("testString")
+      .assessmentMethod("testString")
       .componentId("testString")
       .targetId("testString")
+      .targetEnv("testString")
       .targetName("testString")
       .status("failure")
       .limit(Long.valueOf("10"))
@@ -3027,109 +3037,11 @@ public class SecurityAndComplianceCenterApiTest {
     securityAndComplianceCenterApiService.getReportViolationsDrift(null).execute();
   }
 
-  // Test the listProviderTypes operation with a valid options model parameter
-  @Test
-  public void testListProviderTypesWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"provider_types\": [{\"id\": \"7588190cce3c05ac8f7942ea597dafce\", \"type\": \"workload-protection\", \"name\": \"workload-protection\", \"description\": \"Security and Compliance Center Workload Protection helps you accelerate your Kubernetes and cloud adoption by addressing security and regulatory compliance. Easily identify vulnerabilities, check compliance, block threats and respond faster at every stage of the container and Kubernetes lifecycle.\", \"s2s_enabled\": true, \"instance_limit\": 1, \"mode\": \"PULL\", \"data_type\": \"com.sysdig.secure.results\", \"icon\": \"PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBkYXRhLW5hbWU9IkJ1aWxkIGljb24gaGVyZSIgdmlld0JveD0iMCAwIDMyIDMyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImEiIHgxPSItMjgxMS4xOTgiIHgyPSItMjgxNC4xOTgiIHkxPSI1NTcuNTE3IiB5Mj0iNTU3LjUxNyIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSgyODMxLjE5OCAtNTQyLjAxNykiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9Ii4xIiBzdG9wLW9wYWNpdHk9IjAiLz48c3RvcCBvZmZzZXQ9Ii44Ii8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgeGxpbms6aHJlZj0iI2EiIGlkPSJiIiB4MT0iLTgwNi4xOTgiIHgyPSItNzk5LjE5OCIgeTE9Ii0yNDE0LjQ4MSIgeTI9Ii0yNDE0LjQ4MSIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSg4MjUuMTk4IDI0MjguOTgxKSIvPjxsaW5lYXJHcmFkaWVudCB4bGluazpocmVmPSIjYSIgaWQ9ImMiIHgxPSItODEwLjE5OCIgeDI9Ii03OTguMTk4IiB5MT0iLTI0MTkuOTgxIiB5Mj0iLTI0MTkuOTgxIiBncmFkaWVudFRyYW5zZm9ybT0idHJhbnNsYXRlKDgzMi4xOTggMjQzMi45ODEpIi8+PGxpbmVhckdyYWRpZW50IGlkPSJlIiB4MT0iLTI1MTQiIHgyPSItMjQ4MiIgeTE9Ii0yNDgyIiB5Mj0iLTI1MTQiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgLTEgMjUxNCAtMjQ4MikiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9Ii4xIiBzdG9wLWNvbG9yPSIjMDhiZGJhIi8+PHN0b3Agb2Zmc2V0PSIuOSIgc3RvcC1jb2xvcj0iIzBmNjJmZSIvPjwvbGluZWFyR3JhZGllbnQ+PG1hc2sgaWQ9ImQiIHdpZHRoPSIyOS4wMTciIGhlaWdodD0iMjcuOTk2IiB4PSIxLjk4MyIgeT0iMiIgZGF0YS1uYW1lPSJtYXNrIiBtYXNrVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48ZyBmaWxsPSIjZmZmIj48cGF0aCBkPSJNMjkuOTc2IDE2YzAtMy43MzktMS40NTYtNy4yNTUtNC4xMDEtOS44OTlTMTkuNzE1IDIgMTUuOTc2IDIgOC43MjEgMy40NTYgNi4wNzcgNi4xMDFjLTUuNDU5IDUuNDU5LTUuNDU5IDE0LjM0IDAgMTkuNzk4QTE0LjA0NCAxNC4wNDQgMCAwIDAgMTYgMjkuOTk1di0yLjAwMWExMi4wNCAxMi4wNCAwIDAgMS04LjUwOS0zLjUxYy00LjY3OS00LjY3OS00LjY3OS0xMi4yOTIgMC0xNi45NzEgMi4yNjctMi4yNjcgNS4yOC0zLjUxNSA4LjQ4NS0zLjUxNXM2LjIxOSAxLjI0OCA4LjQ4NSAzLjUxNSAzLjUxNSA1LjI4IDMuNTE1IDguNDg1YzAgMS4zMDgtLjIxOCAyLjU4LS42MTggMy43ODZsMS44OTcuNjMyYy40NjctMS40MDguNzIyLTIuODkyLjcyMi00LjQxOFoiLz48cGF0aCBkPSJNMjQuNyAxMy42NzVhOC45NCA4Ljk0IDAgMCAwLTQuMTkzLTUuNDY1IDguOTQyIDguOTQyIDAgMCAwLTYuODMtLjg5OSA4Ljk3MSA4Ljk3MSAwIDAgMC01LjQ2MSA0LjE5NSA4Ljk4IDguOTggMCAwIDAtLjkwMyA2LjgyOGMxLjA3NyA0LjAxNiA0LjcyMiA2LjY2IDguNjk1IDYuNjYxdi0xLjk5OGMtMy4wOS0uMDAxLTUuOTI2LTIuMDU4LTYuNzYzLTUuMTgxYTcuMDEgNy4wMSAwIDAgMSA0Ljk1LTguNTc0IDYuOTU4IDYuOTU4IDAgMCAxIDUuMzEyLjY5OSA2Ljk1NCA2Ljk1NCAwIDAgMSAzLjI2MSA0LjI1Yy4zNTkgMS4zNDIuMjc1IDIuNzMyLS4xNTQgNC4wMTNsMS45MDkuNjM2YTguOTU5IDguOTU5IDAgMCAwIC4xNzYtNS4xNjdaIi8+PC9nPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xNCAxNmMwLTEuMTAzLjg5Ny0yIDItMnMyIC44OTcgMiAyYTIgMiAwIDAgMS0uMTExLjYzbDEuODg5LjYzYy4xMzMtLjM5OC4yMjItLjgxNy4yMjItMS4yNTlhNCA0IDAgMSAwLTQgNHYtMmMtMS4xMDMgMC0yLS44OTctMi0yWiIvPjxwYXRoIGZpbGw9InVybCgjYSkiIGQ9Ik0xNyAxNGgzdjNoLTN6IiB0cmFuc2Zvcm09InJvdGF0ZSgtOTAgMTguNSAxNS41KSIvPjxwYXRoIGZpbGw9InVybCgjYikiIGQ9Ik0xOSAxMmg3djVoLTd6IiB0cmFuc2Zvcm09InJvdGF0ZSg5MCAyMi41IDE0LjUpIi8+PHBhdGggZmlsbD0idXJsKCNjKSIgZD0iTTIyIDEwaDEydjZIMjJ6IiB0cmFuc2Zvcm09InJvdGF0ZSg5MCAyOCAxMykiLz48cGF0aCBkPSJNMjUgMTloNnY0aC02ek0yMCAxOGg1djVoLTV6TTE3IDE3aDN2NmgtM3oiLz48L21hc2s+PC9kZWZzPjxwYXRoIGZpbGw9IiMwMDFkNmMiIGQ9Im0yNSAzMS4wMDEtMi4xMzktMS4wMTNBNS4wMjIgNS4wMjIgMCAwIDEgMjAgMjUuNDY4VjE5aDEwdjYuNDY4YTUuMDIzIDUuMDIzIDAgMCAxLTIuODYxIDQuNTJMMjUgMzEuMDAxWm0tMy0xMHY0LjQ2OGMwIDEuMTUzLjY3NCAyLjIxOCAxLjcxNyAyLjcxMWwxLjI4My42MDcgMS4yODMtLjYwN0EzLjAxMiAzLjAxMiAwIDAgMCAyOCAyNS40Njl2LTQuNDY4aC02WiIgZGF0YS1uYW1lPSJ1dWlkLTU1ODMwNDRiLWZmMjQtNGUyNy05MDU0LTI0MDQzYWRkZmMwNiIvPjxnIG1hc2s9InVybCgjZCkiPjxwYXRoIGZpbGw9InVybCgjZSkiIGQ9Ik0wIDBoMzJ2MzJIMHoiIHRyYW5zZm9ybT0icm90YXRlKC05MCAxNiAxNikiLz48L2c+PC9zdmc+\", \"label\": {\"text\": \"1 per instance\", \"tip\": \"Only 1 per instance\"}, \"attributes\": {\"mapKey\": {\"type\": \"text\", \"display_name\": \"Workload Protection Instance CRN\"}}, \"created_at\": \"2023-07-24T13:14:18.884Z\", \"updated_at\": \"2023-07-24T13:14:18.884Z\"}]}";
-    String listProviderTypesPath = "/provider_types";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the ListProviderTypesOptions model
-    ListProviderTypesOptions listProviderTypesOptionsModel = new ListProviderTypesOptions.Builder()
-      .xCorrelationId("testString")
-      .xRequestId("testString")
-      .build();
-
-    // Invoke listProviderTypes() with a valid options model and verify the result
-    Response<ProviderTypesCollection> response = securityAndComplianceCenterApiService.listProviderTypes(listProviderTypesOptionsModel).execute();
-    assertNotNull(response);
-    ProviderTypesCollection responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "GET");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, listProviderTypesPath);
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the listProviderTypes operation with and without retries enabled
-  @Test
-  public void testListProviderTypesWRetries() throws Throwable {
-    securityAndComplianceCenterApiService.enableRetries(4, 30);
-    testListProviderTypesWOptions();
-
-    securityAndComplianceCenterApiService.disableRetries();
-    testListProviderTypesWOptions();
-  }
-
-  // Test the getProviderTypeById operation with a valid options model parameter
-  @Test
-  public void testGetProviderTypeByIdWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"id\": \"7588190cce3c05ac8f7942ea597dafce\", \"type\": \"workload-protection\", \"name\": \"workload-protection\", \"description\": \"Security and Compliance Center Workload Protection helps you accelerate your Kubernetes and cloud adoption by addressing security and regulatory compliance. Easily identify vulnerabilities, check compliance, block threats and respond faster at every stage of the container and Kubernetes lifecycle.\", \"s2s_enabled\": true, \"instance_limit\": 1, \"mode\": \"PULL\", \"data_type\": \"com.sysdig.secure.results\", \"icon\": \"PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBkYXRhLW5hbWU9IkJ1aWxkIGljb24gaGVyZSIgdmlld0JveD0iMCAwIDMyIDMyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImEiIHgxPSItMjgxMS4xOTgiIHgyPSItMjgxNC4xOTgiIHkxPSI1NTcuNTE3IiB5Mj0iNTU3LjUxNyIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSgyODMxLjE5OCAtNTQyLjAxNykiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9Ii4xIiBzdG9wLW9wYWNpdHk9IjAiLz48c3RvcCBvZmZzZXQ9Ii44Ii8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgeGxpbms6aHJlZj0iI2EiIGlkPSJiIiB4MT0iLTgwNi4xOTgiIHgyPSItNzk5LjE5OCIgeTE9Ii0yNDE0LjQ4MSIgeTI9Ii0yNDE0LjQ4MSIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSg4MjUuMTk4IDI0MjguOTgxKSIvPjxsaW5lYXJHcmFkaWVudCB4bGluazpocmVmPSIjYSIgaWQ9ImMiIHgxPSItODEwLjE5OCIgeDI9Ii03OTguMTk4IiB5MT0iLTI0MTkuOTgxIiB5Mj0iLTI0MTkuOTgxIiBncmFkaWVudFRyYW5zZm9ybT0idHJhbnNsYXRlKDgzMi4xOTggMjQzMi45ODEpIi8+PGxpbmVhckdyYWRpZW50IGlkPSJlIiB4MT0iLTI1MTQiIHgyPSItMjQ4MiIgeTE9Ii0yNDgyIiB5Mj0iLTI1MTQiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgLTEgMjUxNCAtMjQ4MikiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9Ii4xIiBzdG9wLWNvbG9yPSIjMDhiZGJhIi8+PHN0b3Agb2Zmc2V0PSIuOSIgc3RvcC1jb2xvcj0iIzBmNjJmZSIvPjwvbGluZWFyR3JhZGllbnQ+PG1hc2sgaWQ9ImQiIHdpZHRoPSIyOS4wMTciIGhlaWdodD0iMjcuOTk2IiB4PSIxLjk4MyIgeT0iMiIgZGF0YS1uYW1lPSJtYXNrIiBtYXNrVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48ZyBmaWxsPSIjZmZmIj48cGF0aCBkPSJNMjkuOTc2IDE2YzAtMy43MzktMS40NTYtNy4yNTUtNC4xMDEtOS44OTlTMTkuNzE1IDIgMTUuOTc2IDIgOC43MjEgMy40NTYgNi4wNzcgNi4xMDFjLTUuNDU5IDUuNDU5LTUuNDU5IDE0LjM0IDAgMTkuNzk4QTE0LjA0NCAxNC4wNDQgMCAwIDAgMTYgMjkuOTk1di0yLjAwMWExMi4wNCAxMi4wNCAwIDAgMS04LjUwOS0zLjUxYy00LjY3OS00LjY3OS00LjY3OS0xMi4yOTIgMC0xNi45NzEgMi4yNjctMi4yNjcgNS4yOC0zLjUxNSA4LjQ4NS0zLjUxNXM2LjIxOSAxLjI0OCA4LjQ4NSAzLjUxNSAzLjUxNSA1LjI4IDMuNTE1IDguNDg1YzAgMS4zMDgtLjIxOCAyLjU4LS42MTggMy43ODZsMS44OTcuNjMyYy40NjctMS40MDguNzIyLTIuODkyLjcyMi00LjQxOFoiLz48cGF0aCBkPSJNMjQuNyAxMy42NzVhOC45NCA4Ljk0IDAgMCAwLTQuMTkzLTUuNDY1IDguOTQyIDguOTQyIDAgMCAwLTYuODMtLjg5OSA4Ljk3MSA4Ljk3MSAwIDAgMC01LjQ2MSA0LjE5NSA4Ljk4IDguOTggMCAwIDAtLjkwMyA2LjgyOGMxLjA3NyA0LjAxNiA0LjcyMiA2LjY2IDguNjk1IDYuNjYxdi0xLjk5OGMtMy4wOS0uMDAxLTUuOTI2LTIuMDU4LTYuNzYzLTUuMTgxYTcuMDEgNy4wMSAwIDAgMSA0Ljk1LTguNTc0IDYuOTU4IDYuOTU4IDAgMCAxIDUuMzEyLjY5OSA2Ljk1NCA2Ljk1NCAwIDAgMSAzLjI2MSA0LjI1Yy4zNTkgMS4zNDIuMjc1IDIuNzMyLS4xNTQgNC4wMTNsMS45MDkuNjM2YTguOTU5IDguOTU5IDAgMCAwIC4xNzYtNS4xNjdaIi8+PC9nPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xNCAxNmMwLTEuMTAzLjg5Ny0yIDItMnMyIC44OTcgMiAyYTIgMiAwIDAgMS0uMTExLjYzbDEuODg5LjYzYy4xMzMtLjM5OC4yMjItLjgxNy4yMjItMS4yNTlhNCA0IDAgMSAwLTQgNHYtMmMtMS4xMDMgMC0yLS44OTctMi0yWiIvPjxwYXRoIGZpbGw9InVybCgjYSkiIGQ9Ik0xNyAxNGgzdjNoLTN6IiB0cmFuc2Zvcm09InJvdGF0ZSgtOTAgMTguNSAxNS41KSIvPjxwYXRoIGZpbGw9InVybCgjYikiIGQ9Ik0xOSAxMmg3djVoLTd6IiB0cmFuc2Zvcm09InJvdGF0ZSg5MCAyMi41IDE0LjUpIi8+PHBhdGggZmlsbD0idXJsKCNjKSIgZD0iTTIyIDEwaDEydjZIMjJ6IiB0cmFuc2Zvcm09InJvdGF0ZSg5MCAyOCAxMykiLz48cGF0aCBkPSJNMjUgMTloNnY0aC02ek0yMCAxOGg1djVoLTV6TTE3IDE3aDN2NmgtM3oiLz48L21hc2s+PC9kZWZzPjxwYXRoIGZpbGw9IiMwMDFkNmMiIGQ9Im0yNSAzMS4wMDEtMi4xMzktMS4wMTNBNS4wMjIgNS4wMjIgMCAwIDEgMjAgMjUuNDY4VjE5aDEwdjYuNDY4YTUuMDIzIDUuMDIzIDAgMCAxLTIuODYxIDQuNTJMMjUgMzEuMDAxWm0tMy0xMHY0LjQ2OGMwIDEuMTUzLjY3NCAyLjIxOCAxLjcxNyAyLjcxMWwxLjI4My42MDcgMS4yODMtLjYwN0EzLjAxMiAzLjAxMiAwIDAgMCAyOCAyNS40Njl2LTQuNDY4aC02WiIgZGF0YS1uYW1lPSJ1dWlkLTU1ODMwNDRiLWZmMjQtNGUyNy05MDU0LTI0MDQzYWRkZmMwNiIvPjxnIG1hc2s9InVybCgjZCkiPjxwYXRoIGZpbGw9InVybCgjZSkiIGQ9Ik0wIDBoMzJ2MzJIMHoiIHRyYW5zZm9ybT0icm90YXRlKC05MCAxNiAxNikiLz48L2c+PC9zdmc+\", \"label\": {\"text\": \"1 per instance\", \"tip\": \"Only 1 per instance\"}, \"attributes\": {\"mapKey\": {\"type\": \"text\", \"display_name\": \"Workload Protection Instance CRN\"}}, \"created_at\": \"2023-07-24T13:14:18.884Z\", \"updated_at\": \"2023-07-24T13:14:18.884Z\"}";
-    String getProviderTypeByIdPath = "/provider_types/testString";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the GetProviderTypeByIdOptions model
-    GetProviderTypeByIdOptions getProviderTypeByIdOptionsModel = new GetProviderTypeByIdOptions.Builder()
-      .providerTypeId("testString")
-      .xCorrelationId("testString")
-      .xRequestId("testString")
-      .build();
-
-    // Invoke getProviderTypeById() with a valid options model and verify the result
-    Response<ProviderTypeItem> response = securityAndComplianceCenterApiService.getProviderTypeById(getProviderTypeByIdOptionsModel).execute();
-    assertNotNull(response);
-    ProviderTypeItem responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "GET");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, getProviderTypeByIdPath);
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the getProviderTypeById operation with and without retries enabled
-  @Test
-  public void testGetProviderTypeByIdWRetries() throws Throwable {
-    securityAndComplianceCenterApiService.enableRetries(4, 30);
-    testGetProviderTypeByIdWOptions();
-
-    securityAndComplianceCenterApiService.disableRetries();
-    testGetProviderTypeByIdWOptions();
-  }
-
-  // Test the getProviderTypeById operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testGetProviderTypeByIdNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    securityAndComplianceCenterApiService.getProviderTypeById(null).execute();
-  }
-
   // Test the listProviderTypeInstances operation with a valid options model parameter
   @Test
   public void testListProviderTypeInstancesWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"provider_type_instances\": [{\"id\": \"7588190cce3c05ac8f7942ea597dafce\", \"type\": \"workload-protection\", \"name\": \"workload-protection-instance-1\", \"attributes\": {\"anyKey\": \"anyValue\"}, \"created_at\": \"2023-07-24T13:14:18.884Z\", \"updated_at\": \"2023-07-24T13:14:18.884Z\"}]}";
+    String mockResponseBody = "{\"provider_type_instances\": [{\"id\": \"7588190cce3c05ac8f7942ea597dafce\", \"type\": \"workload-protection\", \"name\": \"workload-protection-instance-1\", \"attributes\": {}, \"created_at\": \"2023-07-24T13:14:18.884Z\", \"updated_at\": \"2023-07-24T13:14:18.884Z\"}]}";
     String listProviderTypeInstancesPath = "/provider_types/testString/provider_type_instances";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -3182,7 +3094,7 @@ public class SecurityAndComplianceCenterApiTest {
   @Test
   public void testCreateProviderTypeInstanceWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"id\": \"7588190cce3c05ac8f7942ea597dafce\", \"type\": \"workload-protection\", \"name\": \"workload-protection-instance-1\", \"attributes\": {\"anyKey\": \"anyValue\"}, \"created_at\": \"2023-07-24T13:14:18.884Z\", \"updated_at\": \"2023-07-24T13:14:18.884Z\"}";
+    String mockResponseBody = "{\"id\": \"7588190cce3c05ac8f7942ea597dafce\", \"type\": \"workload-protection\", \"name\": \"workload-protection-instance-1\", \"attributes\": {}, \"created_at\": \"2023-07-24T13:14:18.884Z\", \"updated_at\": \"2023-07-24T13:14:18.884Z\"}";
     String createProviderTypeInstancePath = "/provider_types/testString/provider_type_instances";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -3290,7 +3202,7 @@ public class SecurityAndComplianceCenterApiTest {
   @Test
   public void testGetProviderTypeInstanceWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"id\": \"7588190cce3c05ac8f7942ea597dafce\", \"type\": \"workload-protection\", \"name\": \"workload-protection-instance-1\", \"attributes\": {\"anyKey\": \"anyValue\"}, \"created_at\": \"2023-07-24T13:14:18.884Z\", \"updated_at\": \"2023-07-24T13:14:18.884Z\"}";
+    String mockResponseBody = "{\"id\": \"7588190cce3c05ac8f7942ea597dafce\", \"type\": \"workload-protection\", \"name\": \"workload-protection-instance-1\", \"attributes\": {}, \"created_at\": \"2023-07-24T13:14:18.884Z\", \"updated_at\": \"2023-07-24T13:14:18.884Z\"}";
     String getProviderTypeInstancePath = "/provider_types/testString/provider_type_instances/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -3344,19 +3256,23 @@ public class SecurityAndComplianceCenterApiTest {
   @Test
   public void testUpdateProviderTypeInstanceWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"id\": \"7588190cce3c05ac8f7942ea597dafce\", \"type\": \"workload-protection\", \"name\": \"workload-protection-instance-1\", \"attributes\": {\"anyKey\": \"anyValue\"}, \"created_at\": \"2023-07-24T13:14:18.884Z\", \"updated_at\": \"2023-07-24T13:14:18.884Z\"}";
+    String mockResponseBody = "{\"id\": \"7588190cce3c05ac8f7942ea597dafce\", \"type\": \"workload-protection\", \"name\": \"workload-protection-instance-1\", \"attributes\": {}, \"created_at\": \"2023-07-24T13:14:18.884Z\", \"updated_at\": \"2023-07-24T13:14:18.884Z\"}";
     String updateProviderTypeInstancePath = "/provider_types/testString/provider_type_instances/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(200)
       .setBody(mockResponseBody));
 
+    // Construct an instance of the UpdateProviderTypeInstanceRequestProviderTypeInstancePrototypeForPatchingName model
+    UpdateProviderTypeInstanceRequestProviderTypeInstancePrototypeForPatchingName updateProviderTypeInstanceRequestModel = new UpdateProviderTypeInstanceRequestProviderTypeInstancePrototypeForPatchingName.Builder()
+      .name("workload-protection-instance-1")
+      .build();
+
     // Construct an instance of the UpdateProviderTypeInstanceOptions model
     UpdateProviderTypeInstanceOptions updateProviderTypeInstanceOptionsModel = new UpdateProviderTypeInstanceOptions.Builder()
       .providerTypeId("testString")
       .providerTypeInstanceId("testString")
-      .name("workload-protection-instance-1")
-      .attributes(java.util.Collections.singletonMap("anyKey", "anyValue"))
+      .updateProviderTypeInstanceRequest(updateProviderTypeInstanceRequestModel)
       .xCorrelationId("testString")
       .xRequestId("testString")
       .build();
@@ -3400,7 +3316,7 @@ public class SecurityAndComplianceCenterApiTest {
   @Test
   public void testGetProviderTypesInstancesWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"provider_types_instances\": [{\"id\": \"7588190cce3c05ac8f7942ea597dafce\", \"type\": \"workload-protection\", \"name\": \"workload-protection-instance-1\", \"attributes\": {\"anyKey\": \"anyValue\"}, \"created_at\": \"2023-07-24T13:14:18.884Z\", \"updated_at\": \"2023-07-24T13:14:18.884Z\"}]}";
+    String mockResponseBody = "{\"provider_types_instances\": [{\"id\": \"7588190cce3c05ac8f7942ea597dafce\", \"type\": \"workload-protection\", \"name\": \"workload-protection-instance-1\", \"attributes\": {}, \"created_at\": \"2023-07-24T13:14:18.884Z\", \"updated_at\": \"2023-07-24T13:14:18.884Z\"}]}";
     String getProviderTypesInstancesPath = "/provider_types_instances";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -3439,6 +3355,104 @@ public class SecurityAndComplianceCenterApiTest {
 
     securityAndComplianceCenterApiService.disableRetries();
     testGetProviderTypesInstancesWOptions();
+  }
+
+  // Test the listProviderTypes operation with a valid options model parameter
+  @Test
+  public void testListProviderTypesWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"provider_types\": [{\"id\": \"7588190cce3c05ac8f7942ea597dafce\", \"type\": \"workload-protection\", \"name\": \"workload-protection\", \"description\": \"Security and Compliance Center Workload Protection helps you accelerate your Kubernetes and cloud adoption by addressing security and regulatory compliance. Easily identify vulnerabilities, check compliance, block threats and respond faster at every stage of the container and Kubernetes lifecycle.\", \"s2s_enabled\": true, \"instance_limit\": 1, \"mode\": \"PULL\", \"data_type\": \"com.sysdig.secure.results\", \"icon\": \"PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBkYXRhLW5hbWU9IkJ1aWxkIGljb24gaGVyZSIgdmlld0JveD0iMCAwIDMyIDMyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImEiIHgxPSItMjgxMS4xOTgiIHgyPSItMjgxNC4xOTgiIHkxPSI1NTcuNTE3IiB5Mj0iNTU3LjUxNyIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSgyODMxLjE5OCAtNTQyLjAxNykiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9Ii4xIiBzdG9wLW9wYWNpdHk9IjAiLz48c3RvcCBvZmZzZXQ9Ii44Ii8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgeGxpbms6aHJlZj0iI2EiIGlkPSJiIiB4MT0iLTgwNi4xOTgiIHgyPSItNzk5LjE5OCIgeTE9Ii0yNDE0LjQ4MSIgeTI9Ii0yNDE0LjQ4MSIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSg4MjUuMTk4IDI0MjguOTgxKSIvPjxsaW5lYXJHcmFkaWVudCB4bGluazpocmVmPSIjYSIgaWQ9ImMiIHgxPSItODEwLjE5OCIgeDI9Ii03OTguMTk4IiB5MT0iLTI0MTkuOTgxIiB5Mj0iLTI0MTkuOTgxIiBncmFkaWVudFRyYW5zZm9ybT0idHJhbnNsYXRlKDgzMi4xOTggMjQzMi45ODEpIi8+PGxpbmVhckdyYWRpZW50IGlkPSJlIiB4MT0iLTI1MTQiIHgyPSItMjQ4MiIgeTE9Ii0yNDgyIiB5Mj0iLTI1MTQiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgLTEgMjUxNCAtMjQ4MikiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9Ii4xIiBzdG9wLWNvbG9yPSIjMDhiZGJhIi8+PHN0b3Agb2Zmc2V0PSIuOSIgc3RvcC1jb2xvcj0iIzBmNjJmZSIvPjwvbGluZWFyR3JhZGllbnQ+PG1hc2sgaWQ9ImQiIHdpZHRoPSIyOS4wMTciIGhlaWdodD0iMjcuOTk2IiB4PSIxLjk4MyIgeT0iMiIgZGF0YS1uYW1lPSJtYXNrIiBtYXNrVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48ZyBmaWxsPSIjZmZmIj48cGF0aCBkPSJNMjkuOTc2IDE2YzAtMy43MzktMS40NTYtNy4yNTUtNC4xMDEtOS44OTlTMTkuNzE1IDIgMTUuOTc2IDIgOC43MjEgMy40NTYgNi4wNzcgNi4xMDFjLTUuNDU5IDUuNDU5LTUuNDU5IDE0LjM0IDAgMTkuNzk4QTE0LjA0NCAxNC4wNDQgMCAwIDAgMTYgMjkuOTk1di0yLjAwMWExMi4wNCAxMi4wNCAwIDAgMS04LjUwOS0zLjUxYy00LjY3OS00LjY3OS00LjY3OS0xMi4yOTIgMC0xNi45NzEgMi4yNjctMi4yNjcgNS4yOC0zLjUxNSA4LjQ4NS0zLjUxNXM2LjIxOSAxLjI0OCA4LjQ4NSAzLjUxNSAzLjUxNSA1LjI4IDMuNTE1IDguNDg1YzAgMS4zMDgtLjIxOCAyLjU4LS42MTggMy43ODZsMS44OTcuNjMyYy40NjctMS40MDguNzIyLTIuODkyLjcyMi00LjQxOFoiLz48cGF0aCBkPSJNMjQuNyAxMy42NzVhOC45NCA4Ljk0IDAgMCAwLTQuMTkzLTUuNDY1IDguOTQyIDguOTQyIDAgMCAwLTYuODMtLjg5OSA4Ljk3MSA4Ljk3MSAwIDAgMC01LjQ2MSA0LjE5NSA4Ljk4IDguOTggMCAwIDAtLjkwMyA2LjgyOGMxLjA3NyA0LjAxNiA0LjcyMiA2LjY2IDguNjk1IDYuNjYxdi0xLjk5OGMtMy4wOS0uMDAxLTUuOTI2LTIuMDU4LTYuNzYzLTUuMTgxYTcuMDEgNy4wMSAwIDAgMSA0Ljk1LTguNTc0IDYuOTU4IDYuOTU4IDAgMCAxIDUuMzEyLjY5OSA2Ljk1NCA2Ljk1NCAwIDAgMSAzLjI2MSA0LjI1Yy4zNTkgMS4zNDIuMjc1IDIuNzMyLS4xNTQgNC4wMTNsMS45MDkuNjM2YTguOTU5IDguOTU5IDAgMCAwIC4xNzYtNS4xNjdaIi8+PC9nPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xNCAxNmMwLTEuMTAzLjg5Ny0yIDItMnMyIC44OTcgMiAyYTIgMiAwIDAgMS0uMTExLjYzbDEuODg5LjYzYy4xMzMtLjM5OC4yMjItLjgxNy4yMjItMS4yNTlhNCA0IDAgMSAwLTQgNHYtMmMtMS4xMDMgMC0yLS44OTctMi0yWiIvPjxwYXRoIGZpbGw9InVybCgjYSkiIGQ9Ik0xNyAxNGgzdjNoLTN6IiB0cmFuc2Zvcm09InJvdGF0ZSgtOTAgMTguNSAxNS41KSIvPjxwYXRoIGZpbGw9InVybCgjYikiIGQ9Ik0xOSAxMmg3djVoLTd6IiB0cmFuc2Zvcm09InJvdGF0ZSg5MCAyMi41IDE0LjUpIi8+PHBhdGggZmlsbD0idXJsKCNjKSIgZD0iTTIyIDEwaDEydjZIMjJ6IiB0cmFuc2Zvcm09InJvdGF0ZSg5MCAyOCAxMykiLz48cGF0aCBkPSJNMjUgMTloNnY0aC02ek0yMCAxOGg1djVoLTV6TTE3IDE3aDN2NmgtM3oiLz48L21hc2s+PC9kZWZzPjxwYXRoIGZpbGw9IiMwMDFkNmMiIGQ9Im0yNSAzMS4wMDEtMi4xMzktMS4wMTNBNS4wMjIgNS4wMjIgMCAwIDEgMjAgMjUuNDY4VjE5aDEwdjYuNDY4YTUuMDIzIDUuMDIzIDAgMCAxLTIuODYxIDQuNTJMMjUgMzEuMDAxWm0tMy0xMHY0LjQ2OGMwIDEuMTUzLjY3NCAyLjIxOCAxLjcxNyAyLjcxMWwxLjI4My42MDcgMS4yODMtLjYwN0EzLjAxMiAzLjAxMiAwIDAgMCAyOCAyNS40Njl2LTQuNDY4aC02WiIgZGF0YS1uYW1lPSJ1dWlkLTU1ODMwNDRiLWZmMjQtNGUyNy05MDU0LTI0MDQzYWRkZmMwNiIvPjxnIG1hc2s9InVybCgjZCkiPjxwYXRoIGZpbGw9InVybCgjZSkiIGQ9Ik0wIDBoMzJ2MzJIMHoiIHRyYW5zZm9ybT0icm90YXRlKC05MCAxNiAxNikiLz48L2c+PC9zdmc+\", \"label\": {\"text\": \"1 per instance\", \"tip\": \"Only 1 per instance\"}, \"attributes\": {\"mapKey\": {\"type\": \"text\", \"display_name\": \"Workload Protection Instance CRN\"}}, \"created_at\": \"2023-07-24T13:14:18.884Z\", \"updated_at\": \"2023-07-24T13:14:18.884Z\"}]}";
+    String listProviderTypesPath = "/provider_types";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the ListProviderTypesOptions model
+    ListProviderTypesOptions listProviderTypesOptionsModel = new ListProviderTypesOptions.Builder()
+      .xCorrelationId("testString")
+      .xRequestId("testString")
+      .build();
+
+    // Invoke listProviderTypes() with a valid options model and verify the result
+    Response<ProviderTypesCollection> response = securityAndComplianceCenterApiService.listProviderTypes(listProviderTypesOptionsModel).execute();
+    assertNotNull(response);
+    ProviderTypesCollection responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, listProviderTypesPath);
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the listProviderTypes operation with and without retries enabled
+  @Test
+  public void testListProviderTypesWRetries() throws Throwable {
+    securityAndComplianceCenterApiService.enableRetries(4, 30);
+    testListProviderTypesWOptions();
+
+    securityAndComplianceCenterApiService.disableRetries();
+    testListProviderTypesWOptions();
+  }
+
+  // Test the getProviderTypeById operation with a valid options model parameter
+  @Test
+  public void testGetProviderTypeByIdWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"id\": \"7588190cce3c05ac8f7942ea597dafce\", \"type\": \"workload-protection\", \"name\": \"workload-protection\", \"description\": \"Security and Compliance Center Workload Protection helps you accelerate your Kubernetes and cloud adoption by addressing security and regulatory compliance. Easily identify vulnerabilities, check compliance, block threats and respond faster at every stage of the container and Kubernetes lifecycle.\", \"s2s_enabled\": true, \"instance_limit\": 1, \"mode\": \"PULL\", \"data_type\": \"com.sysdig.secure.results\", \"icon\": \"PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBkYXRhLW5hbWU9IkJ1aWxkIGljb24gaGVyZSIgdmlld0JveD0iMCAwIDMyIDMyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImEiIHgxPSItMjgxMS4xOTgiIHgyPSItMjgxNC4xOTgiIHkxPSI1NTcuNTE3IiB5Mj0iNTU3LjUxNyIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSgyODMxLjE5OCAtNTQyLjAxNykiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9Ii4xIiBzdG9wLW9wYWNpdHk9IjAiLz48c3RvcCBvZmZzZXQ9Ii44Ii8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgeGxpbms6aHJlZj0iI2EiIGlkPSJiIiB4MT0iLTgwNi4xOTgiIHgyPSItNzk5LjE5OCIgeTE9Ii0yNDE0LjQ4MSIgeTI9Ii0yNDE0LjQ4MSIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSg4MjUuMTk4IDI0MjguOTgxKSIvPjxsaW5lYXJHcmFkaWVudCB4bGluazpocmVmPSIjYSIgaWQ9ImMiIHgxPSItODEwLjE5OCIgeDI9Ii03OTguMTk4IiB5MT0iLTI0MTkuOTgxIiB5Mj0iLTI0MTkuOTgxIiBncmFkaWVudFRyYW5zZm9ybT0idHJhbnNsYXRlKDgzMi4xOTggMjQzMi45ODEpIi8+PGxpbmVhckdyYWRpZW50IGlkPSJlIiB4MT0iLTI1MTQiIHgyPSItMjQ4MiIgeTE9Ii0yNDgyIiB5Mj0iLTI1MTQiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgLTEgMjUxNCAtMjQ4MikiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9Ii4xIiBzdG9wLWNvbG9yPSIjMDhiZGJhIi8+PHN0b3Agb2Zmc2V0PSIuOSIgc3RvcC1jb2xvcj0iIzBmNjJmZSIvPjwvbGluZWFyR3JhZGllbnQ+PG1hc2sgaWQ9ImQiIHdpZHRoPSIyOS4wMTciIGhlaWdodD0iMjcuOTk2IiB4PSIxLjk4MyIgeT0iMiIgZGF0YS1uYW1lPSJtYXNrIiBtYXNrVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48ZyBmaWxsPSIjZmZmIj48cGF0aCBkPSJNMjkuOTc2IDE2YzAtMy43MzktMS40NTYtNy4yNTUtNC4xMDEtOS44OTlTMTkuNzE1IDIgMTUuOTc2IDIgOC43MjEgMy40NTYgNi4wNzcgNi4xMDFjLTUuNDU5IDUuNDU5LTUuNDU5IDE0LjM0IDAgMTkuNzk4QTE0LjA0NCAxNC4wNDQgMCAwIDAgMTYgMjkuOTk1di0yLjAwMWExMi4wNCAxMi4wNCAwIDAgMS04LjUwOS0zLjUxYy00LjY3OS00LjY3OS00LjY3OS0xMi4yOTIgMC0xNi45NzEgMi4yNjctMi4yNjcgNS4yOC0zLjUxNSA4LjQ4NS0zLjUxNXM2LjIxOSAxLjI0OCA4LjQ4NSAzLjUxNSAzLjUxNSA1LjI4IDMuNTE1IDguNDg1YzAgMS4zMDgtLjIxOCAyLjU4LS42MTggMy43ODZsMS44OTcuNjMyYy40NjctMS40MDguNzIyLTIuODkyLjcyMi00LjQxOFoiLz48cGF0aCBkPSJNMjQuNyAxMy42NzVhOC45NCA4Ljk0IDAgMCAwLTQuMTkzLTUuNDY1IDguOTQyIDguOTQyIDAgMCAwLTYuODMtLjg5OSA4Ljk3MSA4Ljk3MSAwIDAgMC01LjQ2MSA0LjE5NSA4Ljk4IDguOTggMCAwIDAtLjkwMyA2LjgyOGMxLjA3NyA0LjAxNiA0LjcyMiA2LjY2IDguNjk1IDYuNjYxdi0xLjk5OGMtMy4wOS0uMDAxLTUuOTI2LTIuMDU4LTYuNzYzLTUuMTgxYTcuMDEgNy4wMSAwIDAgMSA0Ljk1LTguNTc0IDYuOTU4IDYuOTU4IDAgMCAxIDUuMzEyLjY5OSA2Ljk1NCA2Ljk1NCAwIDAgMSAzLjI2MSA0LjI1Yy4zNTkgMS4zNDIuMjc1IDIuNzMyLS4xNTQgNC4wMTNsMS45MDkuNjM2YTguOTU5IDguOTU5IDAgMCAwIC4xNzYtNS4xNjdaIi8+PC9nPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xNCAxNmMwLTEuMTAzLjg5Ny0yIDItMnMyIC44OTcgMiAyYTIgMiAwIDAgMS0uMTExLjYzbDEuODg5LjYzYy4xMzMtLjM5OC4yMjItLjgxNy4yMjItMS4yNTlhNCA0IDAgMSAwLTQgNHYtMmMtMS4xMDMgMC0yLS44OTctMi0yWiIvPjxwYXRoIGZpbGw9InVybCgjYSkiIGQ9Ik0xNyAxNGgzdjNoLTN6IiB0cmFuc2Zvcm09InJvdGF0ZSgtOTAgMTguNSAxNS41KSIvPjxwYXRoIGZpbGw9InVybCgjYikiIGQ9Ik0xOSAxMmg3djVoLTd6IiB0cmFuc2Zvcm09InJvdGF0ZSg5MCAyMi41IDE0LjUpIi8+PHBhdGggZmlsbD0idXJsKCNjKSIgZD0iTTIyIDEwaDEydjZIMjJ6IiB0cmFuc2Zvcm09InJvdGF0ZSg5MCAyOCAxMykiLz48cGF0aCBkPSJNMjUgMTloNnY0aC02ek0yMCAxOGg1djVoLTV6TTE3IDE3aDN2NmgtM3oiLz48L21hc2s+PC9kZWZzPjxwYXRoIGZpbGw9IiMwMDFkNmMiIGQ9Im0yNSAzMS4wMDEtMi4xMzktMS4wMTNBNS4wMjIgNS4wMjIgMCAwIDEgMjAgMjUuNDY4VjE5aDEwdjYuNDY4YTUuMDIzIDUuMDIzIDAgMCAxLTIuODYxIDQuNTJMMjUgMzEuMDAxWm0tMy0xMHY0LjQ2OGMwIDEuMTUzLjY3NCAyLjIxOCAxLjcxNyAyLjcxMWwxLjI4My42MDcgMS4yODMtLjYwN0EzLjAxMiAzLjAxMiAwIDAgMCAyOCAyNS40Njl2LTQuNDY4aC02WiIgZGF0YS1uYW1lPSJ1dWlkLTU1ODMwNDRiLWZmMjQtNGUyNy05MDU0LTI0MDQzYWRkZmMwNiIvPjxnIG1hc2s9InVybCgjZCkiPjxwYXRoIGZpbGw9InVybCgjZSkiIGQ9Ik0wIDBoMzJ2MzJIMHoiIHRyYW5zZm9ybT0icm90YXRlKC05MCAxNiAxNikiLz48L2c+PC9zdmc+\", \"label\": {\"text\": \"1 per instance\", \"tip\": \"Only 1 per instance\"}, \"attributes\": {\"mapKey\": {\"type\": \"text\", \"display_name\": \"Workload Protection Instance CRN\"}}, \"created_at\": \"2023-07-24T13:14:18.884Z\", \"updated_at\": \"2023-07-24T13:14:18.884Z\"}";
+    String getProviderTypeByIdPath = "/provider_types/testString";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the GetProviderTypeByIdOptions model
+    GetProviderTypeByIdOptions getProviderTypeByIdOptionsModel = new GetProviderTypeByIdOptions.Builder()
+      .providerTypeId("testString")
+      .xCorrelationId("testString")
+      .xRequestId("testString")
+      .build();
+
+    // Invoke getProviderTypeById() with a valid options model and verify the result
+    Response<ProviderTypeItem> response = securityAndComplianceCenterApiService.getProviderTypeById(getProviderTypeByIdOptionsModel).execute();
+    assertNotNull(response);
+    ProviderTypeItem responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, getProviderTypeByIdPath);
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the getProviderTypeById operation with and without retries enabled
+  @Test
+  public void testGetProviderTypeByIdWRetries() throws Throwable {
+    securityAndComplianceCenterApiService.enableRetries(4, 30);
+    testGetProviderTypeByIdWOptions();
+
+    securityAndComplianceCenterApiService.disableRetries();
+    testGetProviderTypeByIdWOptions();
+  }
+
+  // Test the getProviderTypeById operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetProviderTypeByIdNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    securityAndComplianceCenterApiService.getProviderTypeById(null).execute();
   }
 
   // Perform setup needed before each test method

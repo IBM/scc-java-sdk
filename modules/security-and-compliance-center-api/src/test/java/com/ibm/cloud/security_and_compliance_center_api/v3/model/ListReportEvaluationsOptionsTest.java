@@ -36,8 +36,10 @@ public class ListReportEvaluationsOptionsTest {
       .xCorrelationId("testString")
       .xRequestId("testString")
       .assessmentId("testString")
+      .assessmentMethod("testString")
       .componentId("testString")
       .targetId("testString")
+      .targetEnv("testString")
       .targetName("testString")
       .status("failure")
       .start("testString")
@@ -47,8 +49,10 @@ public class ListReportEvaluationsOptionsTest {
     assertEquals(listReportEvaluationsOptionsModel.xCorrelationId(), "testString");
     assertEquals(listReportEvaluationsOptionsModel.xRequestId(), "testString");
     assertEquals(listReportEvaluationsOptionsModel.assessmentId(), "testString");
+    assertEquals(listReportEvaluationsOptionsModel.assessmentMethod(), "testString");
     assertEquals(listReportEvaluationsOptionsModel.componentId(), "testString");
     assertEquals(listReportEvaluationsOptionsModel.targetId(), "testString");
+    assertEquals(listReportEvaluationsOptionsModel.targetEnv(), "testString");
     assertEquals(listReportEvaluationsOptionsModel.targetName(), "testString");
     assertEquals(listReportEvaluationsOptionsModel.status(), "failure");
     assertEquals(listReportEvaluationsOptionsModel.start(), "testString");

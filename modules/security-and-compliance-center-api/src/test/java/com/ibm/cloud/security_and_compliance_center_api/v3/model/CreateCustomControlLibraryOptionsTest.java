@@ -66,7 +66,7 @@ public class CreateCustomControlLibraryOptionsTest {
       .controlSpecificationId("f3517159-889e-4781-819a-89d89b747c85")
       .responsibility("user")
       .componentId("f3517159-889e-4781-819a-89d89b747c85")
-      .componenetName("testString")
+      .componentName("testString")
       .environment("testString")
       .controlSpecificationDescription("testString")
       .assessmentsCount(Long.valueOf("26"))
@@ -75,7 +75,7 @@ public class CreateCustomControlLibraryOptionsTest {
     assertEquals(controlSpecificationsModel.controlSpecificationId(), "f3517159-889e-4781-819a-89d89b747c85");
     assertEquals(controlSpecificationsModel.responsibility(), "user");
     assertEquals(controlSpecificationsModel.componentId(), "f3517159-889e-4781-819a-89d89b747c85");
-    assertEquals(controlSpecificationsModel.componenetName(), "testString");
+    assertEquals(controlSpecificationsModel.componentName(), "testString");
     assertEquals(controlSpecificationsModel.environment(), "testString");
     assertEquals(controlSpecificationsModel.controlSpecificationDescription(), "testString");
     assertEquals(controlSpecificationsModel.assessmentsCount(), Long.valueOf("26"));

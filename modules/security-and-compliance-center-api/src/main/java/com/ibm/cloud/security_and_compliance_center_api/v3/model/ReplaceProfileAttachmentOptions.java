@@ -46,9 +46,8 @@ public class ReplaceProfileAttachmentOptions extends GenericModel {
   }
 
   protected String attachmentId;
-  protected String profilesId;
-  protected String id;
   protected String profileId;
+  protected String id;
   protected String accountId;
   protected String instanceId;
   protected List<MultiCloudScope> scope;
@@ -72,9 +71,8 @@ public class ReplaceProfileAttachmentOptions extends GenericModel {
    */
   public static class Builder {
     private String attachmentId;
-    private String profilesId;
-    private String id;
     private String profileId;
+    private String id;
     private String accountId;
     private String instanceId;
     private List<MultiCloudScope> scope;
@@ -100,9 +98,8 @@ public class ReplaceProfileAttachmentOptions extends GenericModel {
      */
     private Builder(ReplaceProfileAttachmentOptions replaceProfileAttachmentOptions) {
       this.attachmentId = replaceProfileAttachmentOptions.attachmentId;
-      this.profilesId = replaceProfileAttachmentOptions.profilesId;
-      this.id = replaceProfileAttachmentOptions.id;
       this.profileId = replaceProfileAttachmentOptions.profileId;
+      this.id = replaceProfileAttachmentOptions.id;
       this.accountId = replaceProfileAttachmentOptions.accountId;
       this.instanceId = replaceProfileAttachmentOptions.instanceId;
       this.scope = replaceProfileAttachmentOptions.scope;
@@ -132,11 +129,11 @@ public class ReplaceProfileAttachmentOptions extends GenericModel {
      * Instantiates a new builder with required properties.
      *
      * @param attachmentId the attachmentId
-     * @param profilesId the profilesId
+     * @param profileId the profileId
      */
-    public Builder(String attachmentId, String profilesId) {
+    public Builder(String attachmentId, String profileId) {
       this.attachmentId = attachmentId;
-      this.profilesId = profilesId;
+      this.profileId = profileId;
     }
 
     /**
@@ -192,13 +189,13 @@ public class ReplaceProfileAttachmentOptions extends GenericModel {
     }
 
     /**
-     * Set the profilesId.
+     * Set the profileId.
      *
-     * @param profilesId the profilesId
+     * @param profileId the profileId
      * @return the ReplaceProfileAttachmentOptions builder
      */
-    public Builder profilesId(String profilesId) {
-      this.profilesId = profilesId;
+    public Builder profileId(String profileId) {
+      this.profileId = profileId;
       return this;
     }
 
@@ -210,17 +207,6 @@ public class ReplaceProfileAttachmentOptions extends GenericModel {
      */
     public Builder id(String id) {
       this.id = id;
-      return this;
-    }
-
-    /**
-     * Set the profileId.
-     *
-     * @param profileId the profileId
-     * @return the ReplaceProfileAttachmentOptions builder
-     */
-    public Builder profileId(String profileId) {
-      this.profileId = profileId;
       return this;
     }
 
@@ -446,10 +432,9 @@ public class ReplaceProfileAttachmentOptions extends GenericModel {
   protected ReplaceProfileAttachmentOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.attachmentId,
       "attachmentId cannot be empty");
-    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.profilesId,
-      "profilesId cannot be empty");
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.profileId,
+      "profileId cannot be empty");
     attachmentId = builder.attachmentId;
-    profilesId = builder.profilesId;
     id = builder.id;
     profileId = builder.profileId;
     accountId = builder.accountId;
@@ -492,14 +477,14 @@ public class ReplaceProfileAttachmentOptions extends GenericModel {
   }
 
   /**
-   * Gets the profilesId.
+   * Gets the profileId.
    *
    * The profile ID.
    *
-   * @return the profilesId
+   * @return the profileId
    */
-  public String profilesId() {
-    return profilesId;
+  public String profileId() {
+    return profileId;
   }
 
   /**
@@ -511,17 +496,6 @@ public class ReplaceProfileAttachmentOptions extends GenericModel {
    */
   public String id() {
     return id;
-  }
-
-  /**
-   * Gets the profileId.
-   *
-   * The ID of the profile that is specified in the attachment.
-   *
-   * @return the profileId
-   */
-  public String profileId() {
-    return profileId;
   }
 
   /**

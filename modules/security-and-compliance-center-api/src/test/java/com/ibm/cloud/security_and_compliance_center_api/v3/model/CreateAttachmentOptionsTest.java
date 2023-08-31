@@ -100,13 +100,11 @@ public class CreateAttachmentOptionsTest {
     assertEquals(attachmentsPrototypeModel.attachmentParameters(), java.util.Arrays.asList(attachmentParameterPrototypeModel));
 
     CreateAttachmentOptions createAttachmentOptionsModel = new CreateAttachmentOptions.Builder()
-      .profilesId("testString")
       .attachments(java.util.Arrays.asList(attachmentsPrototypeModel))
       .profileId("testString")
       .xCorrelationId("testString")
       .xRequestId("testString")
       .build();
-    assertEquals(createAttachmentOptionsModel.profilesId(), "testString");
     assertEquals(createAttachmentOptionsModel.attachments(), java.util.Arrays.asList(attachmentsPrototypeModel));
     assertEquals(createAttachmentOptionsModel.profileId(), "testString");
     assertEquals(createAttachmentOptionsModel.xCorrelationId(), "testString");

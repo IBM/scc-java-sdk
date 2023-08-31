@@ -12,7 +12,6 @@
  */
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
@@ -32,136 +31,7 @@ public class Target extends GenericModel {
   @SerializedName("additional_target_attributes")
   protected List<AdditionalTargetAttribute> additionalTargetAttributes;
 
-  /**
-   * Builder.
-   */
-  public static class Builder {
-    private String serviceName;
-    private String serviceDisplayName;
-    private String resourceKind;
-    private List<AdditionalTargetAttribute> additionalTargetAttributes;
-
-    /**
-     * Instantiates a new Builder from an existing Target instance.
-     *
-     * @param target the instance to initialize the Builder with
-     */
-    private Builder(Target target) {
-      this.serviceName = target.serviceName;
-      this.serviceDisplayName = target.serviceDisplayName;
-      this.resourceKind = target.resourceKind;
-      this.additionalTargetAttributes = target.additionalTargetAttributes;
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public Builder() {
-    }
-
-    /**
-     * Instantiates a new builder with required properties.
-     *
-     * @param serviceName the serviceName
-     * @param resourceKind the resourceKind
-     */
-    public Builder(String serviceName, String resourceKind) {
-      this.serviceName = serviceName;
-      this.resourceKind = resourceKind;
-    }
-
-    /**
-     * Builds a Target.
-     *
-     * @return the new Target instance
-     */
-    public Target build() {
-      return new Target(this);
-    }
-
-    /**
-     * Adds an additionalTargetAttributes to additionalTargetAttributes.
-     *
-     * @param additionalTargetAttributes the new additionalTargetAttributes
-     * @return the Target builder
-     */
-    public Builder addAdditionalTargetAttributes(AdditionalTargetAttribute additionalTargetAttributes) {
-      com.ibm.cloud.sdk.core.util.Validator.notNull(additionalTargetAttributes,
-        "additionalTargetAttributes cannot be null");
-      if (this.additionalTargetAttributes == null) {
-        this.additionalTargetAttributes = new ArrayList<AdditionalTargetAttribute>();
-      }
-      this.additionalTargetAttributes.add(additionalTargetAttributes);
-      return this;
-    }
-
-    /**
-     * Set the serviceName.
-     *
-     * @param serviceName the serviceName
-     * @return the Target builder
-     */
-    public Builder serviceName(String serviceName) {
-      this.serviceName = serviceName;
-      return this;
-    }
-
-    /**
-     * Set the serviceDisplayName.
-     *
-     * @param serviceDisplayName the serviceDisplayName
-     * @return the Target builder
-     */
-    public Builder serviceDisplayName(String serviceDisplayName) {
-      this.serviceDisplayName = serviceDisplayName;
-      return this;
-    }
-
-    /**
-     * Set the resourceKind.
-     *
-     * @param resourceKind the resourceKind
-     * @return the Target builder
-     */
-    public Builder resourceKind(String resourceKind) {
-      this.resourceKind = resourceKind;
-      return this;
-    }
-
-    /**
-     * Set the additionalTargetAttributes.
-     * Existing additionalTargetAttributes will be replaced.
-     *
-     * @param additionalTargetAttributes the additionalTargetAttributes
-     * @return the Target builder
-     */
-    public Builder additionalTargetAttributes(List<AdditionalTargetAttribute> additionalTargetAttributes) {
-      this.additionalTargetAttributes = additionalTargetAttributes;
-      return this;
-    }
-  }
-
   protected Target() { }
-
-  protected Target(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.serviceName,
-      "serviceName cannot be null");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.resourceKind,
-      "resourceKind cannot be null");
-    serviceName = builder.serviceName;
-    serviceDisplayName = builder.serviceDisplayName;
-    resourceKind = builder.resourceKind;
-    additionalTargetAttributes = builder.additionalTargetAttributes;
-  }
-
-  /**
-   * New builder.
-   *
-   * @return a Target builder
-   */
-  public Builder newBuilder() {
-    return new Builder(this);
-  }
 
   /**
    * Gets the serviceName.
@@ -170,7 +40,7 @@ public class Target extends GenericModel {
    *
    * @return the serviceName
    */
-  public String serviceName() {
+  public String getServiceName() {
     return serviceName;
   }
 
@@ -181,7 +51,7 @@ public class Target extends GenericModel {
    *
    * @return the serviceDisplayName
    */
-  public String serviceDisplayName() {
+  public String getServiceDisplayName() {
     return serviceDisplayName;
   }
 
@@ -192,18 +62,18 @@ public class Target extends GenericModel {
    *
    * @return the resourceKind
    */
-  public String resourceKind() {
+  public String getResourceKind() {
     return resourceKind;
   }
 
   /**
    * Gets the additionalTargetAttributes.
    *
-   * The list of targets supported properties.
+   * The additional target attributes used to filter to a subset of resources.
    *
    * @return the additionalTargetAttributes
    */
-  public List<AdditionalTargetAttribute> additionalTargetAttributes() {
+  public List<AdditionalTargetAttribute> getAdditionalTargetAttributes() {
     return additionalTargetAttributes;
   }
 }

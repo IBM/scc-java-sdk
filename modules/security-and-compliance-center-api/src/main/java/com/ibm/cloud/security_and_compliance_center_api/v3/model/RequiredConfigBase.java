@@ -12,19 +12,12 @@
  */
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
-import java.util.List;
-
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * RequiredConfigItems.
- *
- * Classes which extend this class:
- * - RequiredConfigItemsRequiredConfigOrDepth1
- * - RequiredConfigItemsRequiredConfigAndDepth1
- * - RequiredConfigItemsRequiredConfigBase
+ * The required configuration base object.
  */
-public class RequiredConfigItems extends GenericModel {
+public class RequiredConfigBase extends GenericModel {
 
   /**
    * The operator.
@@ -79,13 +72,123 @@ public class RequiredConfigItems extends GenericModel {
   }
 
   protected String description;
-  protected List<RequiredConfigBase> or;
-  protected List<RequiredConfigBase> and;
   protected String property;
   protected String operator;
   protected Object value;
 
-  protected RequiredConfigItems() { }
+  /**
+   * Builder.
+   */
+  public static class Builder {
+    private String description;
+    private String property;
+    private String operator;
+    private Object value;
+
+    /**
+     * Instantiates a new Builder from an existing RequiredConfigBase instance.
+     *
+     * @param requiredConfigBase the instance to initialize the Builder with
+     */
+    private Builder(RequiredConfigBase requiredConfigBase) {
+      this.description = requiredConfigBase.description;
+      this.property = requiredConfigBase.property;
+      this.operator = requiredConfigBase.operator;
+      this.value = requiredConfigBase.value;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public Builder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param property the property
+     * @param operator the operator
+     */
+    public Builder(String property, String operator) {
+      this.property = property;
+      this.operator = operator;
+    }
+
+    /**
+     * Builds a RequiredConfigBase.
+     *
+     * @return the new RequiredConfigBase instance
+     */
+    public RequiredConfigBase build() {
+      return new RequiredConfigBase(this);
+    }
+
+    /**
+     * Set the description.
+     *
+     * @param description the description
+     * @return the RequiredConfigBase builder
+     */
+    public Builder description(String description) {
+      this.description = description;
+      return this;
+    }
+
+    /**
+     * Set the property.
+     *
+     * @param property the property
+     * @return the RequiredConfigBase builder
+     */
+    public Builder property(String property) {
+      this.property = property;
+      return this;
+    }
+
+    /**
+     * Set the operator.
+     *
+     * @param operator the operator
+     * @return the RequiredConfigBase builder
+     */
+    public Builder operator(String operator) {
+      this.operator = operator;
+      return this;
+    }
+
+    /**
+     * Set the value.
+     *
+     * @param value the value
+     * @return the RequiredConfigBase builder
+     */
+    public Builder value(Object value) {
+      this.value = value;
+      return this;
+    }
+  }
+
+  protected RequiredConfigBase() { }
+
+  protected RequiredConfigBase(Builder builder) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.property,
+      "property cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.operator,
+      "operator cannot be null");
+    description = builder.description;
+    property = builder.property;
+    operator = builder.operator;
+    value = builder.value;
+  }
+
+  /**
+   * New builder.
+   *
+   * @return a RequiredConfigBase builder
+   */
+  public Builder newBuilder() {
+    return new Builder(this);
+  }
 
   /**
    * Gets the description.
@@ -96,28 +199,6 @@ public class RequiredConfigItems extends GenericModel {
    */
   public String description() {
     return description;
-  }
-
-  /**
-   * Gets the or.
-   *
-   * The `OR` required configurations.
-   *
-   * @return the or
-   */
-  public List<RequiredConfigBase> or() {
-    return or;
-  }
-
-  /**
-   * Gets the and.
-   *
-   * The `AND` required configurations.
-   *
-   * @return the and
-   */
-  public List<RequiredConfigBase> and() {
-    return and;
   }
 
   /**

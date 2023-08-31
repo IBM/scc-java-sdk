@@ -67,7 +67,7 @@ public class ControlLibraryTest {
       .controlSpecificationId("f3517159-889e-4781-819a-89d89b747c85")
       .responsibility("user")
       .componentId("f3517159-889e-4781-819a-89d89b747c85")
-      .componenetName("componenet_name")
+      .componentName("component_name")
       .environment("environment")
       .controlSpecificationDescription("control_specification_description")
       .assessmentsCount(Long.valueOf("1"))
@@ -76,7 +76,7 @@ public class ControlLibraryTest {
     assertEquals(controlSpecificationsModel.controlSpecificationId(), "f3517159-889e-4781-819a-89d89b747c85");
     assertEquals(controlSpecificationsModel.responsibility(), "user");
     assertEquals(controlSpecificationsModel.componentId(), "f3517159-889e-4781-819a-89d89b747c85");
-    assertEquals(controlSpecificationsModel.componenetName(), "componenet_name");
+    assertEquals(controlSpecificationsModel.componentName(), "component_name");
     assertEquals(controlSpecificationsModel.environment(), "environment");
     assertEquals(controlSpecificationsModel.controlSpecificationDescription(), "control_specification_description");
     assertEquals(controlSpecificationsModel.assessmentsCount(), Long.valueOf("1"));

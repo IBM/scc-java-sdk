@@ -35,15 +35,15 @@ public class SettingsTest {
   @Test
   public void testSettings() throws Throwable {
     EventNotifications eventNotificationsModel = new EventNotifications.Builder()
-      .instanceCrn("crn:v1:staging:public:cloud-object-storage:global:a/ff88f007f9ff4622aac4fbc0eda36255:7199ae60-a214-4dd8-9bf7-ce571de49d01::")
+      .instanceCrn("crn:v1:bluemix:public:cloud-object-storage:global:a/ff88f007f9ff4622aac4fbc0eda36255:7199ae60-a214-4dd8-9bf7-ce571de49d01::")
       .updatedOn(DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"))
-      .sourceId("crn:v1:staging:public:event-notifications:us-south:a/ff88f007f9ff4622aac4fbc0eda36255:b8b07245-0bbe-4478-b11c-0dce523105fd::")
+      .sourceId("crn:v1:bluemix:public:event-notifications:us-south:a/ff88f007f9ff4622aac4fbc0eda36255:b8b07245-0bbe-4478-b11c-0dce523105fd::")
       .sourceDescription("This source is used for integration with IBM Cloud Security and Compliance Center.")
       .sourceName("compliance")
       .build();
-    assertEquals(eventNotificationsModel.instanceCrn(), "crn:v1:staging:public:cloud-object-storage:global:a/ff88f007f9ff4622aac4fbc0eda36255:7199ae60-a214-4dd8-9bf7-ce571de49d01::");
+    assertEquals(eventNotificationsModel.instanceCrn(), "crn:v1:bluemix:public:cloud-object-storage:global:a/ff88f007f9ff4622aac4fbc0eda36255:7199ae60-a214-4dd8-9bf7-ce571de49d01::");
     assertEquals(eventNotificationsModel.updatedOn(), DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"));
-    assertEquals(eventNotificationsModel.sourceId(), "crn:v1:staging:public:event-notifications:us-south:a/ff88f007f9ff4622aac4fbc0eda36255:b8b07245-0bbe-4478-b11c-0dce523105fd::");
+    assertEquals(eventNotificationsModel.sourceId(), "crn:v1:bluemix:public:event-notifications:us-south:a/ff88f007f9ff4622aac4fbc0eda36255:b8b07245-0bbe-4478-b11c-0dce523105fd::");
     assertEquals(eventNotificationsModel.sourceDescription(), "This source is used for integration with IBM Cloud Security and Compliance Center.");
     assertEquals(eventNotificationsModel.sourceName(), "compliance");
 

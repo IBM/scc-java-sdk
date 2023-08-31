@@ -32,13 +32,13 @@ public class ListAttachmentsOptionsTest {
   @Test
   public void testListAttachmentsOptions() throws Throwable {
     ListAttachmentsOptions listAttachmentsOptionsModel = new ListAttachmentsOptions.Builder()
-      .profilesId("testString")
+      .profileId("testString")
       .xCorrelationId("testString")
       .xRequestId("testString")
       .limit(Long.valueOf("50"))
       .start("testString")
       .build();
-    assertEquals(listAttachmentsOptionsModel.profilesId(), "testString");
+    assertEquals(listAttachmentsOptionsModel.profileId(), "testString");
     assertEquals(listAttachmentsOptionsModel.xCorrelationId(), "testString");
     assertEquals(listAttachmentsOptionsModel.xRequestId(), "testString");
     assertEquals(listAttachmentsOptionsModel.limit(), Long.valueOf("50"));

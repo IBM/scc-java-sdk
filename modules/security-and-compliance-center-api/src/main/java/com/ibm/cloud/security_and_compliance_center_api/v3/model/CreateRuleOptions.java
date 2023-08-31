@@ -22,20 +22,9 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class CreateRuleOptions extends GenericModel {
 
-  /**
-   * The rule type (user_defined or system_defined).
-   */
-  public interface Type {
-    /** user_defined. */
-    String USER_DEFINED = "user_defined";
-    /** system_defined. */
-    String SYSTEM_DEFINED = "system_defined";
-  }
-
   protected String description;
-  protected Target target;
+  protected TargetPrototype target;
   protected RequiredConfig requiredConfig;
-  protected String type;
   protected String version;
   protected Import xImport;
   protected List<String> labels;
@@ -47,9 +36,8 @@ public class CreateRuleOptions extends GenericModel {
    */
   public static class Builder {
     private String description;
-    private Target target;
+    private TargetPrototype target;
     private RequiredConfig requiredConfig;
-    private String type;
     private String version;
     private Import xImport;
     private List<String> labels;
@@ -65,7 +53,6 @@ public class CreateRuleOptions extends GenericModel {
       this.description = createRuleOptions.description;
       this.target = createRuleOptions.target;
       this.requiredConfig = createRuleOptions.requiredConfig;
-      this.type = createRuleOptions.type;
       this.version = createRuleOptions.version;
       this.xImport = createRuleOptions.xImport;
       this.labels = createRuleOptions.labels;
@@ -86,7 +73,7 @@ public class CreateRuleOptions extends GenericModel {
      * @param target the target
      * @param requiredConfig the requiredConfig
      */
-    public Builder(String description, Target target, RequiredConfig requiredConfig) {
+    public Builder(String description, TargetPrototype target, RequiredConfig requiredConfig) {
       this.description = description;
       this.target = target;
       this.requiredConfig = requiredConfig;
@@ -134,7 +121,7 @@ public class CreateRuleOptions extends GenericModel {
      * @param target the target
      * @return the CreateRuleOptions builder
      */
-    public Builder target(Target target) {
+    public Builder target(TargetPrototype target) {
       this.target = target;
       return this;
     }
@@ -147,17 +134,6 @@ public class CreateRuleOptions extends GenericModel {
      */
     public Builder requiredConfig(RequiredConfig requiredConfig) {
       this.requiredConfig = requiredConfig;
-      return this;
-    }
-
-    /**
-     * Set the type.
-     *
-     * @param type the type
-     * @return the CreateRuleOptions builder
-     */
-    public Builder type(String type) {
-      this.type = type;
       return this;
     }
 
@@ -230,7 +206,6 @@ public class CreateRuleOptions extends GenericModel {
     description = builder.description;
     target = builder.target;
     requiredConfig = builder.requiredConfig;
-    type = builder.type;
     version = builder.version;
     xImport = builder.xImport;
     labels = builder.labels;
@@ -265,7 +240,7 @@ public class CreateRuleOptions extends GenericModel {
    *
    * @return the target
    */
-  public Target target() {
+  public TargetPrototype target() {
     return target;
   }
 
@@ -278,17 +253,6 @@ public class CreateRuleOptions extends GenericModel {
    */
   public RequiredConfig requiredConfig() {
     return requiredConfig;
-  }
-
-  /**
-   * Gets the type.
-   *
-   * The rule type (user_defined or system_defined).
-   *
-   * @return the type
-   */
-  public String type() {
-    return type;
   }
 
   /**

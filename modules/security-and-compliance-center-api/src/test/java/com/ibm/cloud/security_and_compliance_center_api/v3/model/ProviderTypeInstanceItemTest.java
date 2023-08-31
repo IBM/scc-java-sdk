@@ -14,6 +14,7 @@
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.ProviderTypeInstanceAttributes;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ProviderTypeInstanceItem;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
 import java.io.InputStream;

@@ -36,8 +36,8 @@ public class ControlSpecifications extends GenericModel {
   protected String responsibility;
   @SerializedName("component_id")
   protected String componentId;
-  @SerializedName("componenet_name")
-  protected String componenetName;
+  @SerializedName("component_name")
+  protected String componentName;
   protected String environment;
   @SerializedName("control_specification_description")
   protected String controlSpecificationDescription;
@@ -52,7 +52,7 @@ public class ControlSpecifications extends GenericModel {
     private String controlSpecificationId;
     private String responsibility;
     private String componentId;
-    private String componenetName;
+    private String componentName;
     private String environment;
     private String controlSpecificationDescription;
     private Long assessmentsCount;
@@ -67,7 +67,7 @@ public class ControlSpecifications extends GenericModel {
       this.controlSpecificationId = controlSpecifications.controlSpecificationId;
       this.responsibility = controlSpecifications.responsibility;
       this.componentId = controlSpecifications.componentId;
-      this.componenetName = controlSpecifications.componenetName;
+      this.componentName = controlSpecifications.componentName;
       this.environment = controlSpecifications.environment;
       this.controlSpecificationDescription = controlSpecifications.controlSpecificationDescription;
       this.assessmentsCount = controlSpecifications.assessmentsCount;
@@ -139,13 +139,13 @@ public class ControlSpecifications extends GenericModel {
     }
 
     /**
-     * Set the componenetName.
+     * Set the componentName.
      *
-     * @param componenetName the componenetName
+     * @param componentName the componentName
      * @return the ControlSpecifications builder
      */
-    public Builder componenetName(String componenetName) {
-      this.componenetName = componenetName;
+    public Builder componentName(String componentName) {
+      this.componentName = componentName;
       return this;
     }
 
@@ -201,7 +201,7 @@ public class ControlSpecifications extends GenericModel {
     controlSpecificationId = builder.controlSpecificationId;
     responsibility = builder.responsibility;
     componentId = builder.componentId;
-    componenetName = builder.componenetName;
+    componentName = builder.componentName;
     environment = builder.environment;
     controlSpecificationDescription = builder.controlSpecificationDescription;
     assessmentsCount = builder.assessmentsCount;
@@ -251,14 +251,14 @@ public class ControlSpecifications extends GenericModel {
   }
 
   /**
-   * Gets the componenetName.
+   * Gets the componentName.
    *
    * The component name.
    *
-   * @return the componenetName
+   * @return the componentName
    */
-  public String componenetName() {
-    return componenetName;
+  public String componentName() {
+    return componentName;
   }
 
   /**

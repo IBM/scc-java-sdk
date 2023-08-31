@@ -16,9 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * RequiredConfigRequiredConfigAnd.
+ * RequiredConfigAnd.
  */
-public class RequiredConfigRequiredConfigAnd extends RequiredConfig {
+public class RequiredConfigAnd extends RequiredConfig {
 
 
   /**
@@ -29,13 +29,13 @@ public class RequiredConfigRequiredConfigAnd extends RequiredConfig {
     private List<RequiredConfigItems> and;
 
     /**
-     * Instantiates a new Builder from an existing RequiredConfigRequiredConfigAnd instance.
+     * Instantiates a new Builder from an existing RequiredConfigAnd instance.
      *
-     * @param requiredConfigRequiredConfigAnd the instance to initialize the Builder with
+     * @param requiredConfigAnd the instance to initialize the Builder with
      */
-    public Builder(RequiredConfig requiredConfigRequiredConfigAnd) {
-      this.description = requiredConfigRequiredConfigAnd.description;
-      this.and = requiredConfigRequiredConfigAnd.and;
+    public Builder(RequiredConfig requiredConfigAnd) {
+      this.description = requiredConfigAnd.description;
+      this.and = requiredConfigAnd.and;
     }
 
     /**
@@ -45,19 +45,19 @@ public class RequiredConfigRequiredConfigAnd extends RequiredConfig {
     }
 
     /**
-     * Builds a RequiredConfigRequiredConfigAnd.
+     * Builds a RequiredConfigAnd.
      *
-     * @return the new RequiredConfigRequiredConfigAnd instance
+     * @return the new RequiredConfigAnd instance
      */
-    public RequiredConfigRequiredConfigAnd build() {
-      return new RequiredConfigRequiredConfigAnd(this);
+    public RequiredConfigAnd build() {
+      return new RequiredConfigAnd(this);
     }
 
     /**
      * Adds an and to and.
      *
      * @param and the new and
-     * @return the RequiredConfigRequiredConfigAnd builder
+     * @return the RequiredConfigAnd builder
      */
     public Builder addAnd(RequiredConfigItems and) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(and,
@@ -73,7 +73,7 @@ public class RequiredConfigRequiredConfigAnd extends RequiredConfig {
      * Set the description.
      *
      * @param description the description
-     * @return the RequiredConfigRequiredConfigAnd builder
+     * @return the RequiredConfigAnd builder
      */
     public Builder description(String description) {
       this.description = description;
@@ -85,7 +85,7 @@ public class RequiredConfigRequiredConfigAnd extends RequiredConfig {
      * Existing and will be replaced.
      *
      * @param and the and
-     * @return the RequiredConfigRequiredConfigAnd builder
+     * @return the RequiredConfigAnd builder
      */
     public Builder and(List<RequiredConfigItems> and) {
       this.and = and;
@@ -93,9 +93,9 @@ public class RequiredConfigRequiredConfigAnd extends RequiredConfig {
     }
   }
 
-  protected RequiredConfigRequiredConfigAnd() { }
+  protected RequiredConfigAnd() { }
 
-  protected RequiredConfigRequiredConfigAnd(Builder builder) {
+  protected RequiredConfigAnd(Builder builder) {
     description = builder.description;
     and = builder.and;
   }
@@ -103,7 +103,7 @@ public class RequiredConfigRequiredConfigAnd extends RequiredConfig {
   /**
    * New builder.
    *
-   * @return a RequiredConfigRequiredConfigAnd builder
+   * @return a RequiredConfigAnd builder
    */
   public Builder newBuilder() {
     return new Builder(this);
