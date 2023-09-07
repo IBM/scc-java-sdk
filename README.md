@@ -7,7 +7,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/com.ibm.cloud/scc.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.ibm.cloud%22%20AND%20a:%22scc%22)
 
 # IBM Cloud Security & Compliance Center Java SDK Version 3.0.0
-Java client library to interact with various [IBM Cloud Security & Compliance Center](https://cloud.ibm.com/docs?tab=api-docs&category=platform_services%2Csecurity).
+Java client library to interact with various [IBM Cloud Security & Compliance Center](https://cloud.ibm.com/apidocs/security-compliance?code=java).
 
 Disclaimer: this SDK is being released initially as a **pre-release** version.
 Changes might occur which impact applications that use this SDK.
@@ -46,7 +46,7 @@ The IBM Cloud Security & Compliance Center Java SDK allows developers to program
 
 Service Name | Imported Class Name
 --- | ---
-[ConfigurationGovernanceApi](https://cloud.ibm.com/apidocs/security-compliance/config) | ConfigurationGovernanceApi:3.0.0
+[Security and Compliance Center](https://cloud.ibm.com/apidocs/security-compliance) | SecurityAndComplianceCenterApi:3.0.0
 
 ## Prerequisites
 
