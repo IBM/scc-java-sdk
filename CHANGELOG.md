@@ -1,3 +1,22 @@
+# [4.0.0](https://github.com/IBM/scc-java-sdk/compare/3.0.0...4.0.0) (2023-09-15)
+
+
+### Features
+
+* SCC V2 Java SDK ([#54](https://github.com/IBM/scc-java-sdk/issues/54)) ([139f582](https://github.com/IBM/scc-java-sdk/commit/139f582b8bd48d34134a14603b17302632c790a6))
+
+
+### Performance Improvements
+
+* **SCC:** Releasing SCC v2 Java SDK ([de59ab2](https://github.com/IBM/scc-java-sdk/commit/de59ab2e0eb6de65ce9329fb58d0a073de5e6114))
+
+
+### BREAKING CHANGES
+
+* **SCC:** SCC v2 Java SDK
+
+Signed-off-by: Gaurav Goswami <gouravgoswami48@gmail.com>
+
 # [3.0.0](https://github.com/IBM/scc-java-sdk/compare/2.0.1...3.0.0) (2022-08-05)
 
 
