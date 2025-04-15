@@ -32,8 +32,8 @@ public class LastScanTest {
   @Test
   public void testLastScan() throws Throwable {
     LastScan lastScanModel = new LastScan();
-    assertNull(lastScanModel.getId());
-    assertNull(lastScanModel.getStatus());
-    assertNull(lastScanModel.getTime());
+    assertNull(lastScanModel.id());
+    assertNull(lastScanModel.status());
+    assertNull(lastScanModel.time());
   }
 }
