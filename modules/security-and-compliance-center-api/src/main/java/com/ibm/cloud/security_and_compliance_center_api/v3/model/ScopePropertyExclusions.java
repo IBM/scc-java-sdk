@@ -19,7 +19,9 @@ import java.util.List;
 /**
  * Any exclusions or resources that should not be part of the scope. Has to be the same type as the one specified.
  */
-public class ScopePropertyExclusions extends ScopeProperty {
+public class ScopePropertyExclusions {
+  private String name;
+  private List<ScopePropertyExclusionItem> value;
 
   /**
    * The key that denotes the user is declaring the exclusions.
@@ -28,7 +30,6 @@ public class ScopePropertyExclusions extends ScopeProperty {
     /** exclusions. */
     String EXCLUSIONS = "exclusions";
   }
-
 
   /**
    * Builder.
@@ -42,7 +43,7 @@ public class ScopePropertyExclusions extends ScopeProperty {
      *
      * @param scopePropertyExclusions the instance to initialize the Builder with
      */
-    public Builder(ScopeProperty scopePropertyExclusions) {
+    public Builder(ScopePropertyExclusions scopePropertyExclusions) {
       this.name = scopePropertyExclusions.name;
       this.value = scopePropertyExclusions.value;
     }
@@ -81,7 +82,7 @@ public class ScopePropertyExclusions extends ScopeProperty {
      */
     public Builder addValue(ScopePropertyExclusionItem value) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(value,
-        "value cannot be null");
+              "value cannot be null");
       if (this.value == null) {
         this.value = new ArrayList<ScopePropertyExclusionItem>();
       }
@@ -117,9 +118,9 @@ public class ScopePropertyExclusions extends ScopeProperty {
 
   protected ScopePropertyExclusions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.name,
-      "name cannot be null");
+            "name cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.value,
-      "value cannot be null");
+            "value cannot be null");
     name = builder.name;
     value = builder.value;
   }
@@ -132,5 +133,20 @@ public class ScopePropertyExclusions extends ScopeProperty {
   public Builder newBuilder() {
     return new Builder(this);
   }
-}
 
+  /**
+   * Gets the name.
+   * @return ScopePropertyExclusions name
+   */
+  public String name() {
+    return name;
+  }
+
+  /**
+   * Gets the value.
+   * @return List of ScopePropertyExclusions
+   */
+  public List<ScopePropertyExclusionItem> value() {
+    return value;
+  }
+}
