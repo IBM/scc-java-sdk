@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -14,7 +14,6 @@
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
-import com.ibm.cloud.sdk.core.util.DateUtils;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ObjectStorage;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
 import java.io.InputStream;
@@ -32,27 +31,11 @@ public class ObjectStorageTest {
 
   @Test
   public void testObjectStorage() throws Throwable {
-    ObjectStorage objectStorageModel = new ObjectStorage.Builder()
-      .instanceCrn("testString")
-      .bucket("testString")
-      .bucketLocation("testString")
-      .bucketEndpoint("testString")
-      .updatedOn(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
-      .build();
-    assertEquals(objectStorageModel.instanceCrn(), "testString");
-    assertEquals(objectStorageModel.bucket(), "testString");
-    assertEquals(objectStorageModel.bucketLocation(), "testString");
-    assertEquals(objectStorageModel.bucketEndpoint(), "testString");
-    assertEquals(objectStorageModel.updatedOn(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
-
-    String json = TestUtilities.serialize(objectStorageModel);
-
-    ObjectStorage objectStorageModelNew = TestUtilities.deserialize(json, ObjectStorage.class);
-    assertTrue(objectStorageModelNew instanceof ObjectStorage);
-    assertEquals(objectStorageModelNew.instanceCrn(), "testString");
-    assertEquals(objectStorageModelNew.bucket(), "testString");
-    assertEquals(objectStorageModelNew.bucketLocation(), "testString");
-    assertEquals(objectStorageModelNew.bucketEndpoint(), "testString");
-    assertEquals(objectStorageModelNew.updatedOn(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
+    ObjectStorage objectStorageModel = new ObjectStorage();
+    assertNull(objectStorageModel.getInstanceCrn());
+    assertNull(objectStorageModel.getBucket());
+    assertNull(objectStorageModel.getBucketLocation());
+    assertNull(objectStorageModel.getBucketEndpoint());
+    assertNull(objectStorageModel.getUpdatedOn());
   }
 }

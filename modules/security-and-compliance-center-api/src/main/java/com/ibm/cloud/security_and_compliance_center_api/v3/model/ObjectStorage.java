@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import java.util.Date;
@@ -32,118 +33,7 @@ public class ObjectStorage extends GenericModel {
   @SerializedName("updated_on")
   protected Date updatedOn;
 
-  /**
-   * Builder.
-   */
-  public static class Builder {
-    private String instanceCrn;
-    private String bucket;
-    private String bucketLocation;
-    private String bucketEndpoint;
-    private Date updatedOn;
-
-    /**
-     * Instantiates a new Builder from an existing ObjectStorage instance.
-     *
-     * @param objectStorage the instance to initialize the Builder with
-     */
-    private Builder(ObjectStorage objectStorage) {
-      this.instanceCrn = objectStorage.instanceCrn;
-      this.bucket = objectStorage.bucket;
-      this.bucketLocation = objectStorage.bucketLocation;
-      this.bucketEndpoint = objectStorage.bucketEndpoint;
-      this.updatedOn = objectStorage.updatedOn;
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public Builder() {
-    }
-
-    /**
-     * Builds a ObjectStorage.
-     *
-     * @return the new ObjectStorage instance
-     */
-    public ObjectStorage build() {
-      return new ObjectStorage(this);
-    }
-
-    /**
-     * Set the instanceCrn.
-     *
-     * @param instanceCrn the instanceCrn
-     * @return the ObjectStorage builder
-     */
-    public Builder instanceCrn(String instanceCrn) {
-      this.instanceCrn = instanceCrn;
-      return this;
-    }
-
-    /**
-     * Set the bucket.
-     *
-     * @param bucket the bucket
-     * @return the ObjectStorage builder
-     */
-    public Builder bucket(String bucket) {
-      this.bucket = bucket;
-      return this;
-    }
-
-    /**
-     * Set the bucketLocation.
-     *
-     * @param bucketLocation the bucketLocation
-     * @return the ObjectStorage builder
-     */
-    public Builder bucketLocation(String bucketLocation) {
-      this.bucketLocation = bucketLocation;
-      return this;
-    }
-
-    /**
-     * Set the bucketEndpoint.
-     *
-     * @param bucketEndpoint the bucketEndpoint
-     * @return the ObjectStorage builder
-     */
-    public Builder bucketEndpoint(String bucketEndpoint) {
-      this.bucketEndpoint = bucketEndpoint;
-      return this;
-    }
-
-    /**
-     * Set the updatedOn.
-     *
-     * @param updatedOn the updatedOn
-     * @return the ObjectStorage builder
-     */
-    public Builder updatedOn(Date updatedOn) {
-      this.updatedOn = updatedOn;
-      return this;
-    }
-  }
-
   protected ObjectStorage() { }
-
-  protected ObjectStorage(Builder builder) {
-    instanceCrn = builder.instanceCrn;
-    bucket = builder.bucket;
-    bucketLocation = builder.bucketLocation;
-    bucketEndpoint = builder.bucketEndpoint;
-    updatedOn = builder.updatedOn;
-  }
-
-  /**
-   * New builder.
-   *
-   * @return a ObjectStorage builder
-   */
-  public Builder newBuilder() {
-    return new Builder(this);
-  }
 
   /**
    * Gets the instanceCrn.
@@ -152,7 +42,7 @@ public class ObjectStorage extends GenericModel {
    *
    * @return the instanceCrn
    */
-  public String instanceCrn() {
+  public String getInstanceCrn() {
     return instanceCrn;
   }
 
@@ -163,7 +53,7 @@ public class ObjectStorage extends GenericModel {
    *
    * @return the bucket
    */
-  public String bucket() {
+  public String getBucket() {
     return bucket;
   }
 
@@ -174,7 +64,7 @@ public class ObjectStorage extends GenericModel {
    *
    * @return the bucketLocation
    */
-  public String bucketLocation() {
+  public String getBucketLocation() {
     return bucketLocation;
   }
 
@@ -185,7 +75,7 @@ public class ObjectStorage extends GenericModel {
    *
    * @return the bucketEndpoint
    */
-  public String bucketEndpoint() {
+  public String getBucketEndpoint() {
     return bucketEndpoint;
   }
 
@@ -196,7 +86,7 @@ public class ObjectStorage extends GenericModel {
    *
    * @return the updatedOn
    */
-  public Date updatedOn() {
+  public Date getUpdatedOn() {
     return updatedOn;
   }
 }

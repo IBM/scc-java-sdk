@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -15,7 +15,6 @@ package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpdateProviderTypeInstanceOptions;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpdateProviderTypeInstanceRequestProviderTypeInstancePrototypeForPatchingName;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -32,23 +31,18 @@ public class UpdateProviderTypeInstanceOptionsTest {
 
   @Test
   public void testUpdateProviderTypeInstanceOptions() throws Throwable {
-    UpdateProviderTypeInstanceRequestProviderTypeInstancePrototypeForPatchingName updateProviderTypeInstanceRequestModel = new UpdateProviderTypeInstanceRequestProviderTypeInstancePrototypeForPatchingName.Builder()
-      .name("workload-protection-instance-1")
-      .build();
-    assertEquals(updateProviderTypeInstanceRequestModel.name(), "workload-protection-instance-1");
-
     UpdateProviderTypeInstanceOptions updateProviderTypeInstanceOptionsModel = new UpdateProviderTypeInstanceOptions.Builder()
-      .providerTypeId("testString")
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
+      .providerTypeId("3e25966275dccfa2c3a34786919c5af7")
       .providerTypeInstanceId("testString")
-      .updateProviderTypeInstanceRequest(updateProviderTypeInstanceRequestModel)
-      .xCorrelationId("testString")
-      .xRequestId("testString")
+      .name("workload-protection-instance-1")
+      .attributes(java.util.Collections.singletonMap("anyKey", "anyValue"))
       .build();
-    assertEquals(updateProviderTypeInstanceOptionsModel.providerTypeId(), "testString");
+    assertEquals(updateProviderTypeInstanceOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
+    assertEquals(updateProviderTypeInstanceOptionsModel.providerTypeId(), "3e25966275dccfa2c3a34786919c5af7");
     assertEquals(updateProviderTypeInstanceOptionsModel.providerTypeInstanceId(), "testString");
-    assertEquals(updateProviderTypeInstanceOptionsModel.updateProviderTypeInstanceRequest(), updateProviderTypeInstanceRequestModel);
-    assertEquals(updateProviderTypeInstanceOptionsModel.xCorrelationId(), "testString");
-    assertEquals(updateProviderTypeInstanceOptionsModel.xRequestId(), "testString");
+    assertEquals(updateProviderTypeInstanceOptionsModel.name(), "workload-protection-instance-1");
+    assertEquals(updateProviderTypeInstanceOptionsModel.attributes(), java.util.Collections.singletonMap("anyKey", "anyValue"));
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

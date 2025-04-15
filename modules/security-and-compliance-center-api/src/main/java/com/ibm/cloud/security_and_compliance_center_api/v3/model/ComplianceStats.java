@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.google.gson.annotations.SerializedName;
@@ -32,6 +33,8 @@ public class ComplianceStats extends GenericModel {
     String UNABLE_TO_PERFORM = "unable_to_perform";
     /** user_evaluation_required. */
     String USER_EVALUATION_REQUIRED = "user_evaluation_required";
+    /** not_applicable. */
+    String NOT_APPLICABLE = "not_applicable";
   }
 
   protected String status;
@@ -45,6 +48,8 @@ public class ComplianceStats extends GenericModel {
   protected Long unableToPerformCount;
   @SerializedName("user_evaluation_required_count")
   protected Long userEvaluationRequiredCount;
+  @SerializedName("not_applicable_count")
+  protected Long notApplicableCount;
 
   protected ComplianceStats() { }
 
@@ -112,6 +117,17 @@ public class ComplianceStats extends GenericModel {
    */
   public Long getUserEvaluationRequiredCount() {
     return userEvaluationRequiredCount;
+  }
+
+  /**
+   * Gets the notApplicableCount.
+   *
+   * The number of not applicable (with no evaluations) checks.
+   *
+   * @return the notApplicableCount
+   */
+  public Long getNotApplicableCount() {
+    return notApplicableCount;
   }
 }
 

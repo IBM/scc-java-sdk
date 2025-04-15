@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,9 +32,8 @@ public class ListReportResourcesOptionsTest {
   @Test
   public void testListReportResourcesOptions() throws Throwable {
     ListReportResourcesOptions listReportResourcesOptionsModel = new ListReportResourcesOptions.Builder()
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
       .reportId("testString")
-      .xCorrelationId("testString")
-      .xRequestId("testString")
       .id("testString")
       .resourceName("testString")
       .accountId("testString")
@@ -43,10 +42,11 @@ public class ListReportResourcesOptionsTest {
       .sort("account_id")
       .start("testString")
       .limit(Long.valueOf("50"))
+      .scopeId("testString")
+      .subscopeId("testString")
       .build();
+    assertEquals(listReportResourcesOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
     assertEquals(listReportResourcesOptionsModel.reportId(), "testString");
-    assertEquals(listReportResourcesOptionsModel.xCorrelationId(), "testString");
-    assertEquals(listReportResourcesOptionsModel.xRequestId(), "testString");
     assertEquals(listReportResourcesOptionsModel.id(), "testString");
     assertEquals(listReportResourcesOptionsModel.resourceName(), "testString");
     assertEquals(listReportResourcesOptionsModel.accountId(), "testString");
@@ -55,6 +55,8 @@ public class ListReportResourcesOptionsTest {
     assertEquals(listReportResourcesOptionsModel.sort(), "account_id");
     assertEquals(listReportResourcesOptionsModel.start(), "testString");
     assertEquals(listReportResourcesOptionsModel.limit(), Long.valueOf("50"));
+    assertEquals(listReportResourcesOptionsModel.scopeId(), "testString");
+    assertEquals(listReportResourcesOptionsModel.subscopeId(), "testString");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

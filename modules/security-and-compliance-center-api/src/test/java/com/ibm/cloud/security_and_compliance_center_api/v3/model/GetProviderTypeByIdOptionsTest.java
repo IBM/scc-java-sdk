@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,13 +32,11 @@ public class GetProviderTypeByIdOptionsTest {
   @Test
   public void testGetProviderTypeByIdOptions() throws Throwable {
     GetProviderTypeByIdOptions getProviderTypeByIdOptionsModel = new GetProviderTypeByIdOptions.Builder()
-      .providerTypeId("testString")
-      .xCorrelationId("testString")
-      .xRequestId("testString")
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
+      .providerTypeId("3e25966275dccfa2c3a34786919c5af7")
       .build();
-    assertEquals(getProviderTypeByIdOptionsModel.providerTypeId(), "testString");
-    assertEquals(getProviderTypeByIdOptionsModel.xCorrelationId(), "testString");
-    assertEquals(getProviderTypeByIdOptionsModel.xRequestId(), "testString");
+    assertEquals(getProviderTypeByIdOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
+    assertEquals(getProviderTypeByIdOptionsModel.providerTypeId(), "3e25966275dccfa2c3a34786919c5af7");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

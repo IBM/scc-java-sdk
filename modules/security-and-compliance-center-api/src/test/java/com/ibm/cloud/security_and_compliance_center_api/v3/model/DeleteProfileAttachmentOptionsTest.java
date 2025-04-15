@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,15 +32,15 @@ public class DeleteProfileAttachmentOptionsTest {
   @Test
   public void testDeleteProfileAttachmentOptions() throws Throwable {
     DeleteProfileAttachmentOptions deleteProfileAttachmentOptionsModel = new DeleteProfileAttachmentOptions.Builder()
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
+      .profileId("9c265b4a-4cdf-47f1-acd3-17b5808f7f3f")
       .attachmentId("testString")
-      .profileId("testString")
-      .xCorrelationId("testString")
-      .xRequestId("testString")
+      .accountId("testString")
       .build();
+    assertEquals(deleteProfileAttachmentOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
+    assertEquals(deleteProfileAttachmentOptionsModel.profileId(), "9c265b4a-4cdf-47f1-acd3-17b5808f7f3f");
     assertEquals(deleteProfileAttachmentOptionsModel.attachmentId(), "testString");
-    assertEquals(deleteProfileAttachmentOptionsModel.profileId(), "testString");
-    assertEquals(deleteProfileAttachmentOptionsModel.xCorrelationId(), "testString");
-    assertEquals(deleteProfileAttachmentOptionsModel.xRequestId(), "testString");
+    assertEquals(deleteProfileAttachmentOptionsModel.accountId(), "testString");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,10 +32,14 @@ public class ListProviderTypesOptionsTest {
   @Test
   public void testListProviderTypesOptions() throws Throwable {
     ListProviderTypesOptions listProviderTypesOptionsModel = new ListProviderTypesOptions.Builder()
-      .xCorrelationId("testString")
-      .xRequestId("testString")
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
       .build();
-    assertEquals(listProviderTypesOptionsModel.xCorrelationId(), "testString");
-    assertEquals(listProviderTypesOptionsModel.xRequestId(), "testString");
+    assertEquals(listProviderTypesOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
   }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testListProviderTypesOptionsError() throws Throwable {
+    new ListProviderTypesOptions.Builder().build();
+  }
+
 }

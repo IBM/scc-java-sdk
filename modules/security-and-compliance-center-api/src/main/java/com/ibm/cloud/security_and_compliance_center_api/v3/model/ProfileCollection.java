@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import java.util.List;
@@ -18,34 +19,23 @@ import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * The response body to list all profiles that are linked to your account.
+ * A list of Profiles.
  */
 public class ProfileCollection extends GenericModel {
 
+  protected Long limit;
   @SerializedName("total_count")
   protected Long totalCount;
-  protected Long limit;
-  protected PaginatedCollectionFirst first;
-  protected PaginatedCollectionNext next;
-  protected List<ProfileItem> profiles;
+  protected PageHRefFirst first;
+  protected PageHRefNext next;
+  protected List<Profile> profiles;
 
   protected ProfileCollection() { }
 
   /**
-   * Gets the totalCount.
-   *
-   * The number of profiles.
-   *
-   * @return the totalCount
-   */
-  public Long getTotalCount() {
-    return totalCount;
-  }
-
-  /**
    * Gets the limit.
    *
-   * The limit of profiles that can be created.
+   * The requested page limit.
    *
    * @return the limit
    */
@@ -54,35 +44,46 @@ public class ProfileCollection extends GenericModel {
   }
 
   /**
+   * Gets the totalCount.
+   *
+   * The total number of resources that are in the collection.
+   *
+   * @return the totalCount
+   */
+  public Long getTotalCount() {
+    return totalCount;
+  }
+
+  /**
    * Gets the first.
    *
-   * The reference to the first page of entries.
+   * A page reference.
    *
    * @return the first
    */
-  public PaginatedCollectionFirst getFirst() {
+  public PageHRefFirst getFirst() {
     return first;
   }
 
   /**
    * Gets the next.
    *
-   * The reference URL for the next few entries.
+   * A page reference.
    *
    * @return the next
    */
-  public PaginatedCollectionNext getNext() {
+  public PageHRefNext getNext() {
     return next;
   }
 
   /**
    * Gets the profiles.
    *
-   * The profiles.
+   * A list of profiles associated with the scope.
    *
    * @return the profiles
    */
-  public List<ProfileItem> getProfiles() {
+  public List<Profile> getProfiles() {
     return profiles;
   }
 }

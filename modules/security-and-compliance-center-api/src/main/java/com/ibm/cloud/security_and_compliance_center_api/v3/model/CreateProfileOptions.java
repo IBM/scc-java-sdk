@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import java.util.ArrayList;
@@ -22,35 +23,29 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class CreateProfileOptions extends GenericModel {
 
-  /**
-   * The profile type.
-   */
-  public interface ProfileType {
-    /** predefined. */
-    String PREDEFINED = "predefined";
-    /** custom. */
-    String CUSTOM = "custom";
-  }
-
+  protected String instanceId;
   protected String profileName;
-  protected String profileDescription;
-  protected String profileType;
+  protected String profileVersion;
   protected List<ProfileControlsPrototype> controls;
-  protected List<DefaultParametersPrototype> defaultParameters;
-  protected String xCorrelationId;
-  protected String xRequestId;
+  protected List<DefaultParameters> defaultParameters;
+  protected String profileDescription;
+  protected Boolean latest;
+  protected String versionGroupLabel;
+  protected String accountId;
 
   /**
    * Builder.
    */
   public static class Builder {
+    private String instanceId;
     private String profileName;
-    private String profileDescription;
-    private String profileType;
+    private String profileVersion;
     private List<ProfileControlsPrototype> controls;
-    private List<DefaultParametersPrototype> defaultParameters;
-    private String xCorrelationId;
-    private String xRequestId;
+    private List<DefaultParameters> defaultParameters;
+    private String profileDescription;
+    private Boolean latest;
+    private String versionGroupLabel;
+    private String accountId;
 
     /**
      * Instantiates a new Builder from an existing CreateProfileOptions instance.
@@ -58,13 +53,15 @@ public class CreateProfileOptions extends GenericModel {
      * @param createProfileOptions the instance to initialize the Builder with
      */
     private Builder(CreateProfileOptions createProfileOptions) {
+      this.instanceId = createProfileOptions.instanceId;
       this.profileName = createProfileOptions.profileName;
-      this.profileDescription = createProfileOptions.profileDescription;
-      this.profileType = createProfileOptions.profileType;
+      this.profileVersion = createProfileOptions.profileVersion;
       this.controls = createProfileOptions.controls;
       this.defaultParameters = createProfileOptions.defaultParameters;
-      this.xCorrelationId = createProfileOptions.xCorrelationId;
-      this.xRequestId = createProfileOptions.xRequestId;
+      this.profileDescription = createProfileOptions.profileDescription;
+      this.latest = createProfileOptions.latest;
+      this.versionGroupLabel = createProfileOptions.versionGroupLabel;
+      this.accountId = createProfileOptions.accountId;
     }
 
     /**
@@ -76,16 +73,16 @@ public class CreateProfileOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
+     * @param instanceId the instanceId
      * @param profileName the profileName
-     * @param profileDescription the profileDescription
-     * @param profileType the profileType
+     * @param profileVersion the profileVersion
      * @param controls the controls
      * @param defaultParameters the defaultParameters
      */
-    public Builder(String profileName, String profileDescription, String profileType, List<ProfileControlsPrototype> controls, List<DefaultParametersPrototype> defaultParameters) {
+    public Builder(String instanceId, String profileName, String profileVersion, List<ProfileControlsPrototype> controls, List<DefaultParameters> defaultParameters) {
+      this.instanceId = instanceId;
       this.profileName = profileName;
-      this.profileDescription = profileDescription;
-      this.profileType = profileType;
+      this.profileVersion = profileVersion;
       this.controls = controls;
       this.defaultParameters = defaultParameters;
     }
@@ -100,9 +97,9 @@ public class CreateProfileOptions extends GenericModel {
     }
 
     /**
-     * Adds an controls to controls.
+     * Adds a new element to controls.
      *
-     * @param controls the new controls
+     * @param controls the new element to be added
      * @return the CreateProfileOptions builder
      */
     public Builder addControls(ProfileControlsPrototype controls) {
@@ -116,18 +113,29 @@ public class CreateProfileOptions extends GenericModel {
     }
 
     /**
-     * Adds an defaultParameters to defaultParameters.
+     * Adds a new element to defaultParameters.
      *
-     * @param defaultParameters the new defaultParameters
+     * @param defaultParameters the new element to be added
      * @return the CreateProfileOptions builder
      */
-    public Builder addDefaultParameters(DefaultParametersPrototype defaultParameters) {
+    public Builder addDefaultParameters(DefaultParameters defaultParameters) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(defaultParameters,
         "defaultParameters cannot be null");
       if (this.defaultParameters == null) {
-        this.defaultParameters = new ArrayList<DefaultParametersPrototype>();
+        this.defaultParameters = new ArrayList<DefaultParameters>();
       }
       this.defaultParameters.add(defaultParameters);
+      return this;
+    }
+
+    /**
+     * Set the instanceId.
+     *
+     * @param instanceId the instanceId
+     * @return the CreateProfileOptions builder
+     */
+    public Builder instanceId(String instanceId) {
+      this.instanceId = instanceId;
       return this;
     }
 
@@ -143,24 +151,13 @@ public class CreateProfileOptions extends GenericModel {
     }
 
     /**
-     * Set the profileDescription.
+     * Set the profileVersion.
      *
-     * @param profileDescription the profileDescription
+     * @param profileVersion the profileVersion
      * @return the CreateProfileOptions builder
      */
-    public Builder profileDescription(String profileDescription) {
-      this.profileDescription = profileDescription;
-      return this;
-    }
-
-    /**
-     * Set the profileType.
-     *
-     * @param profileType the profileType
-     * @return the CreateProfileOptions builder
-     */
-    public Builder profileType(String profileType) {
-      this.profileType = profileType;
+    public Builder profileVersion(String profileVersion) {
+      this.profileVersion = profileVersion;
       return this;
     }
 
@@ -183,30 +180,52 @@ public class CreateProfileOptions extends GenericModel {
      * @param defaultParameters the defaultParameters
      * @return the CreateProfileOptions builder
      */
-    public Builder defaultParameters(List<DefaultParametersPrototype> defaultParameters) {
+    public Builder defaultParameters(List<DefaultParameters> defaultParameters) {
       this.defaultParameters = defaultParameters;
       return this;
     }
 
     /**
-     * Set the xCorrelationId.
+     * Set the profileDescription.
      *
-     * @param xCorrelationId the xCorrelationId
+     * @param profileDescription the profileDescription
      * @return the CreateProfileOptions builder
      */
-    public Builder xCorrelationId(String xCorrelationId) {
-      this.xCorrelationId = xCorrelationId;
+    public Builder profileDescription(String profileDescription) {
+      this.profileDescription = profileDescription;
       return this;
     }
 
     /**
-     * Set the xRequestId.
+     * Set the latest.
      *
-     * @param xRequestId the xRequestId
+     * @param latest the latest
      * @return the CreateProfileOptions builder
      */
-    public Builder xRequestId(String xRequestId) {
-      this.xRequestId = xRequestId;
+    public Builder latest(Boolean latest) {
+      this.latest = latest;
+      return this;
+    }
+
+    /**
+     * Set the versionGroupLabel.
+     *
+     * @param versionGroupLabel the versionGroupLabel
+     * @return the CreateProfileOptions builder
+     */
+    public Builder versionGroupLabel(String versionGroupLabel) {
+      this.versionGroupLabel = versionGroupLabel;
+      return this;
+    }
+
+    /**
+     * Set the accountId.
+     *
+     * @param accountId the accountId
+     * @return the CreateProfileOptions builder
+     */
+    public Builder accountId(String accountId) {
+      this.accountId = accountId;
       return this;
     }
   }
@@ -214,23 +233,25 @@ public class CreateProfileOptions extends GenericModel {
   protected CreateProfileOptions() { }
 
   protected CreateProfileOptions(Builder builder) {
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.instanceId,
+      "instanceId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.profileName,
       "profileName cannot be null");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.profileDescription,
-      "profileDescription cannot be null");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.profileType,
-      "profileType cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.profileVersion,
+      "profileVersion cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.controls,
       "controls cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.defaultParameters,
       "defaultParameters cannot be null");
+    instanceId = builder.instanceId;
     profileName = builder.profileName;
-    profileDescription = builder.profileDescription;
-    profileType = builder.profileType;
+    profileVersion = builder.profileVersion;
     controls = builder.controls;
     defaultParameters = builder.defaultParameters;
-    xCorrelationId = builder.xCorrelationId;
-    xRequestId = builder.xRequestId;
+    profileDescription = builder.profileDescription;
+    latest = builder.latest;
+    versionGroupLabel = builder.versionGroupLabel;
+    accountId = builder.accountId;
   }
 
   /**
@@ -240,6 +261,17 @@ public class CreateProfileOptions extends GenericModel {
    */
   public Builder newBuilder() {
     return new Builder(this);
+  }
+
+  /**
+   * Gets the instanceId.
+   *
+   * The ID of the Security and Compliance Center instance.
+   *
+   * @return the instanceId
+   */
+  public String instanceId() {
+    return instanceId;
   }
 
   /**
@@ -254,31 +286,20 @@ public class CreateProfileOptions extends GenericModel {
   }
 
   /**
-   * Gets the profileDescription.
+   * Gets the profileVersion.
    *
-   * The description of the profile.
+   * The version of the profile.
    *
-   * @return the profileDescription
+   * @return the profileVersion
    */
-  public String profileDescription() {
-    return profileDescription;
-  }
-
-  /**
-   * Gets the profileType.
-   *
-   * The profile type.
-   *
-   * @return the profileType
-   */
-  public String profileType() {
-    return profileType;
+  public String profileVersion() {
+    return profileVersion;
   }
 
   /**
    * Gets the controls.
    *
-   * The controls that are in the profile.
+   * List of controls associated with the profile.
    *
    * @return the controls
    */
@@ -289,38 +310,56 @@ public class CreateProfileOptions extends GenericModel {
   /**
    * Gets the defaultParameters.
    *
-   * The default parameters of the profile.
+   * The default values when using the profile.
    *
    * @return the defaultParameters
    */
-  public List<DefaultParametersPrototype> defaultParameters() {
+  public List<DefaultParameters> defaultParameters() {
     return defaultParameters;
   }
 
   /**
-   * Gets the xCorrelationId.
+   * Gets the profileDescription.
    *
-   * The supplied or generated value of this header is logged for a request, and repeated in a response header for the
-   * corresponding response. The same value is used for downstream requests, and retries of those requests. If a value
-   * of this header is not supplied in a request, the service generates a random (version 4) UUID.
+   * A description of what the profile should represent.
    *
-   * @return the xCorrelationId
+   * @return the profileDescription
    */
-  public String xCorrelationId() {
-    return xCorrelationId;
+  public String profileDescription() {
+    return profileDescription;
   }
 
   /**
-   * Gets the xRequestId.
+   * Gets the latest.
    *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is not used for downstream requests and retries of those requests. If a
-   * value of this header is not supplied in a request, the service generates a random (version 4) UUID.
+   * Determines if the profile is up to date with the latest revisions.
    *
-   * @return the xRequestId
+   * @return the latest
    */
-  public String xRequestId() {
-    return xRequestId;
+  public Boolean latest() {
+    return latest;
+  }
+
+  /**
+   * Gets the versionGroupLabel.
+   *
+   * The unique identifier of the revision.
+   *
+   * @return the versionGroupLabel
+   */
+  public String versionGroupLabel() {
+    return versionGroupLabel;
+  }
+
+  /**
+   * Gets the accountId.
+   *
+   * The user account ID.
+   *
+   * @return the accountId
+   */
+  public String accountId() {
+    return accountId;
   }
 }
 

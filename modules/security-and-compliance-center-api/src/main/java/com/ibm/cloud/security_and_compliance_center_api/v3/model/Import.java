@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import java.util.ArrayList;
@@ -22,13 +23,13 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class Import extends GenericModel {
 
-  protected List<Parameter> parameters;
+  protected List<RuleParameter> parameters;
 
   /**
    * Builder.
    */
   public static class Builder {
-    private List<Parameter> parameters;
+    private List<RuleParameter> parameters;
 
     /**
      * Instantiates a new Builder from an existing Import instance.
@@ -55,16 +56,16 @@ public class Import extends GenericModel {
     }
 
     /**
-     * Adds an parameters to parameters.
+     * Adds a new element to parameters.
      *
-     * @param parameters the new parameters
+     * @param parameters the new element to be added
      * @return the Import builder
      */
-    public Builder addParameters(Parameter parameters) {
+    public Builder addParameters(RuleParameter parameters) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(parameters,
         "parameters cannot be null");
       if (this.parameters == null) {
-        this.parameters = new ArrayList<Parameter>();
+        this.parameters = new ArrayList<RuleParameter>();
       }
       this.parameters.add(parameters);
       return this;
@@ -77,7 +78,7 @@ public class Import extends GenericModel {
      * @param parameters the parameters
      * @return the Import builder
      */
-    public Builder parameters(List<Parameter> parameters) {
+    public Builder parameters(List<RuleParameter> parameters) {
       this.parameters = parameters;
       return this;
     }
@@ -105,7 +106,7 @@ public class Import extends GenericModel {
    *
    * @return the parameters
    */
-  public List<Parameter> parameters() {
+  public List<RuleParameter> parameters() {
     return parameters;
   }
 }

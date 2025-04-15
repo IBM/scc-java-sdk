@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,9 +10,9 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,508 +20,226 @@ import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * The request payload of the control library.
+ * A Control Library.
  */
 public class ControlLibrary extends GenericModel {
 
   /**
-   * The control library type.
+   * Details that the control library is a user made(custom) or Security Compliance Center(predefined).
    */
   public interface ControlLibraryType {
-    /** predefined. */
-    String PREDEFINED = "predefined";
     /** custom. */
     String CUSTOM = "custom";
+    /** predefined. */
+    String PREDEFINED = "predefined";
   }
 
-  protected String id;
-  @SerializedName("account_id")
-  protected String accountId;
   @SerializedName("control_library_name")
   protected String controlLibraryName;
   @SerializedName("control_library_description")
   protected String controlLibraryDescription;
   @SerializedName("control_library_type")
   protected String controlLibraryType;
-  @SerializedName("version_group_label")
-  protected String versionGroupLabel;
   @SerializedName("control_library_version")
   protected String controlLibraryVersion;
-  @SerializedName("created_on")
-  protected Date createdOn;
+  protected List<Control> controls;
+  protected String id;
+  @SerializedName("account_id")
+  protected String accountId;
+  @SerializedName("version_group_label")
+  protected String versionGroupLabel;
+  protected Boolean latest;
   @SerializedName("created_by")
   protected String createdBy;
-  @SerializedName("updated_on")
-  protected Date updatedOn;
+  @SerializedName("created_on")
+  protected Date createdOn;
   @SerializedName("updated_by")
   protected String updatedBy;
-  protected Boolean latest;
+  @SerializedName("updated_on")
+  protected Date updatedOn;
   @SerializedName("hierarchy_enabled")
   protected Boolean hierarchyEnabled;
   @SerializedName("controls_count")
   protected Long controlsCount;
   @SerializedName("control_parents_count")
   protected Long controlParentsCount;
-  protected List<ControlsInControlLib> controls;
-
-  /**
-   * Builder.
-   */
-  public static class Builder {
-    private String id;
-    private String accountId;
-    private String controlLibraryName;
-    private String controlLibraryDescription;
-    private String controlLibraryType;
-    private String versionGroupLabel;
-    private String controlLibraryVersion;
-    private Date createdOn;
-    private String createdBy;
-    private Date updatedOn;
-    private String updatedBy;
-    private Boolean latest;
-    private Boolean hierarchyEnabled;
-    private Long controlsCount;
-    private Long controlParentsCount;
-    private List<ControlsInControlLib> controls;
-
-    /**
-     * Instantiates a new Builder from an existing ControlLibrary instance.
-     *
-     * @param controlLibrary the instance to initialize the Builder with
-     */
-    private Builder(ControlLibrary controlLibrary) {
-      this.id = controlLibrary.id;
-      this.accountId = controlLibrary.accountId;
-      this.controlLibraryName = controlLibrary.controlLibraryName;
-      this.controlLibraryDescription = controlLibrary.controlLibraryDescription;
-      this.controlLibraryType = controlLibrary.controlLibraryType;
-      this.versionGroupLabel = controlLibrary.versionGroupLabel;
-      this.controlLibraryVersion = controlLibrary.controlLibraryVersion;
-      this.createdOn = controlLibrary.createdOn;
-      this.createdBy = controlLibrary.createdBy;
-      this.updatedOn = controlLibrary.updatedOn;
-      this.updatedBy = controlLibrary.updatedBy;
-      this.latest = controlLibrary.latest;
-      this.hierarchyEnabled = controlLibrary.hierarchyEnabled;
-      this.controlsCount = controlLibrary.controlsCount;
-      this.controlParentsCount = controlLibrary.controlParentsCount;
-      this.controls = controlLibrary.controls;
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public Builder() {
-    }
-
-    /**
-     * Builds a ControlLibrary.
-     *
-     * @return the new ControlLibrary instance
-     */
-    public ControlLibrary build() {
-      return new ControlLibrary(this);
-    }
-
-    /**
-     * Adds an controls to controls.
-     *
-     * @param controls the new controls
-     * @return the ControlLibrary builder
-     */
-    public Builder addControls(ControlsInControlLib controls) {
-      com.ibm.cloud.sdk.core.util.Validator.notNull(controls,
-        "controls cannot be null");
-      if (this.controls == null) {
-        this.controls = new ArrayList<ControlsInControlLib>();
-      }
-      this.controls.add(controls);
-      return this;
-    }
-
-    /**
-     * Set the id.
-     *
-     * @param id the id
-     * @return the ControlLibrary builder
-     */
-    public Builder id(String id) {
-      this.id = id;
-      return this;
-    }
-
-    /**
-     * Set the accountId.
-     *
-     * @param accountId the accountId
-     * @return the ControlLibrary builder
-     */
-    public Builder accountId(String accountId) {
-      this.accountId = accountId;
-      return this;
-    }
-
-    /**
-     * Set the controlLibraryName.
-     *
-     * @param controlLibraryName the controlLibraryName
-     * @return the ControlLibrary builder
-     */
-    public Builder controlLibraryName(String controlLibraryName) {
-      this.controlLibraryName = controlLibraryName;
-      return this;
-    }
-
-    /**
-     * Set the controlLibraryDescription.
-     *
-     * @param controlLibraryDescription the controlLibraryDescription
-     * @return the ControlLibrary builder
-     */
-    public Builder controlLibraryDescription(String controlLibraryDescription) {
-      this.controlLibraryDescription = controlLibraryDescription;
-      return this;
-    }
-
-    /**
-     * Set the controlLibraryType.
-     *
-     * @param controlLibraryType the controlLibraryType
-     * @return the ControlLibrary builder
-     */
-    public Builder controlLibraryType(String controlLibraryType) {
-      this.controlLibraryType = controlLibraryType;
-      return this;
-    }
-
-    /**
-     * Set the versionGroupLabel.
-     *
-     * @param versionGroupLabel the versionGroupLabel
-     * @return the ControlLibrary builder
-     */
-    public Builder versionGroupLabel(String versionGroupLabel) {
-      this.versionGroupLabel = versionGroupLabel;
-      return this;
-    }
-
-    /**
-     * Set the controlLibraryVersion.
-     *
-     * @param controlLibraryVersion the controlLibraryVersion
-     * @return the ControlLibrary builder
-     */
-    public Builder controlLibraryVersion(String controlLibraryVersion) {
-      this.controlLibraryVersion = controlLibraryVersion;
-      return this;
-    }
-
-    /**
-     * Set the createdOn.
-     *
-     * @param createdOn the createdOn
-     * @return the ControlLibrary builder
-     */
-    public Builder createdOn(Date createdOn) {
-      this.createdOn = createdOn;
-      return this;
-    }
-
-    /**
-     * Set the createdBy.
-     *
-     * @param createdBy the createdBy
-     * @return the ControlLibrary builder
-     */
-    public Builder createdBy(String createdBy) {
-      this.createdBy = createdBy;
-      return this;
-    }
-
-    /**
-     * Set the updatedOn.
-     *
-     * @param updatedOn the updatedOn
-     * @return the ControlLibrary builder
-     */
-    public Builder updatedOn(Date updatedOn) {
-      this.updatedOn = updatedOn;
-      return this;
-    }
-
-    /**
-     * Set the updatedBy.
-     *
-     * @param updatedBy the updatedBy
-     * @return the ControlLibrary builder
-     */
-    public Builder updatedBy(String updatedBy) {
-      this.updatedBy = updatedBy;
-      return this;
-    }
-
-    /**
-     * Set the latest.
-     *
-     * @param latest the latest
-     * @return the ControlLibrary builder
-     */
-    public Builder latest(Boolean latest) {
-      this.latest = latest;
-      return this;
-    }
-
-    /**
-     * Set the hierarchyEnabled.
-     *
-     * @param hierarchyEnabled the hierarchyEnabled
-     * @return the ControlLibrary builder
-     */
-    public Builder hierarchyEnabled(Boolean hierarchyEnabled) {
-      this.hierarchyEnabled = hierarchyEnabled;
-      return this;
-    }
-
-    /**
-     * Set the controlsCount.
-     *
-     * @param controlsCount the controlsCount
-     * @return the ControlLibrary builder
-     */
-    public Builder controlsCount(long controlsCount) {
-      this.controlsCount = controlsCount;
-      return this;
-    }
-
-    /**
-     * Set the controlParentsCount.
-     *
-     * @param controlParentsCount the controlParentsCount
-     * @return the ControlLibrary builder
-     */
-    public Builder controlParentsCount(long controlParentsCount) {
-      this.controlParentsCount = controlParentsCount;
-      return this;
-    }
-
-    /**
-     * Set the controls.
-     * Existing controls will be replaced.
-     *
-     * @param controls the controls
-     * @return the ControlLibrary builder
-     */
-    public Builder controls(List<ControlsInControlLib> controls) {
-      this.controls = controls;
-      return this;
-    }
-  }
 
   protected ControlLibrary() { }
-
-  protected ControlLibrary(Builder builder) {
-    id = builder.id;
-    accountId = builder.accountId;
-    controlLibraryName = builder.controlLibraryName;
-    controlLibraryDescription = builder.controlLibraryDescription;
-    controlLibraryType = builder.controlLibraryType;
-    versionGroupLabel = builder.versionGroupLabel;
-    controlLibraryVersion = builder.controlLibraryVersion;
-    createdOn = builder.createdOn;
-    createdBy = builder.createdBy;
-    updatedOn = builder.updatedOn;
-    updatedBy = builder.updatedBy;
-    latest = builder.latest;
-    hierarchyEnabled = builder.hierarchyEnabled;
-    controlsCount = builder.controlsCount;
-    controlParentsCount = builder.controlParentsCount;
-    controls = builder.controls;
-  }
-
-  /**
-   * New builder.
-   *
-   * @return a ControlLibrary builder
-   */
-  public Builder newBuilder() {
-    return new Builder(this);
-  }
-
-  /**
-   * Gets the id.
-   *
-   * The control library ID.
-   *
-   * @return the id
-   */
-  public String id() {
-    return id;
-  }
-
-  /**
-   * Gets the accountId.
-   *
-   * The account ID.
-   *
-   * @return the accountId
-   */
-  public String accountId() {
-    return accountId;
-  }
 
   /**
    * Gets the controlLibraryName.
    *
-   * The control library name.
+   * The name of the control library.
    *
    * @return the controlLibraryName
    */
-  public String controlLibraryName() {
+  public String getControlLibraryName() {
     return controlLibraryName;
   }
 
   /**
    * Gets the controlLibraryDescription.
    *
-   * The control library description.
+   * Details of the control library.
    *
    * @return the controlLibraryDescription
    */
-  public String controlLibraryDescription() {
+  public String getControlLibraryDescription() {
     return controlLibraryDescription;
   }
 
   /**
    * Gets the controlLibraryType.
    *
-   * The control library type.
+   * Details that the control library is a user made(custom) or Security Compliance Center(predefined).
    *
    * @return the controlLibraryType
    */
-  public String controlLibraryType() {
+  public String getControlLibraryType() {
     return controlLibraryType;
-  }
-
-  /**
-   * Gets the versionGroupLabel.
-   *
-   * The version group label.
-   *
-   * @return the versionGroupLabel
-   */
-  public String versionGroupLabel() {
-    return versionGroupLabel;
   }
 
   /**
    * Gets the controlLibraryVersion.
    *
-   * The control library version.
+   * The revision number of the control library.
    *
    * @return the controlLibraryVersion
    */
-  public String controlLibraryVersion() {
+  public String getControlLibraryVersion() {
     return controlLibraryVersion;
   }
 
   /**
-   * Gets the createdOn.
+   * Gets the controls.
    *
-   * The date when the control library was created.
+   * The list of rules that the control library attempts to adhere to.
    *
-   * @return the createdOn
+   * @return the controls
    */
-  public Date createdOn() {
-    return createdOn;
+  public List<Control> getControls() {
+    return controls;
   }
 
   /**
-   * Gets the createdBy.
+   * Gets the id.
    *
-   * The user who created the control library.
+   * The ID of the control library.
    *
-   * @return the createdBy
+   * @return the id
    */
-  public String createdBy() {
-    return createdBy;
+  public String getId() {
+    return id;
   }
 
   /**
-   * Gets the updatedOn.
+   * Gets the accountId.
    *
-   * The date when the control library was updated.
+   * The ID of the account associated with the creation of the control library.
    *
-   * @return the updatedOn
+   * @return the accountId
    */
-  public Date updatedOn() {
-    return updatedOn;
+  public String getAccountId() {
+    return accountId;
   }
 
   /**
-   * Gets the updatedBy.
+   * Gets the versionGroupLabel.
    *
-   * The user who updated the control library.
+   * The ETag or version of the Control Library.
    *
-   * @return the updatedBy
+   * @return the versionGroupLabel
    */
-  public String updatedBy() {
-    return updatedBy;
+  public String getVersionGroupLabel() {
+    return versionGroupLabel;
   }
 
   /**
    * Gets the latest.
    *
-   * The latest version of the control library.
+   * Shows if the Control Library is the latest.
    *
    * @return the latest
    */
-  public Boolean latest() {
+  public Boolean isLatest() {
     return latest;
+  }
+
+  /**
+   * Gets the createdBy.
+   *
+   * The ID of the creator of the Control Library.
+   *
+   * @return the createdBy
+   */
+  public String getCreatedBy() {
+    return createdBy;
+  }
+
+  /**
+   * Gets the createdOn.
+   *
+   * The date-time of the creation.
+   *
+   * @return the createdOn
+   */
+  public Date getCreatedOn() {
+    return createdOn;
+  }
+
+  /**
+   * Gets the updatedBy.
+   *
+   * The ID of the user who made the last update.
+   *
+   * @return the updatedBy
+   */
+  public String getUpdatedBy() {
+    return updatedBy;
+  }
+
+  /**
+   * Gets the updatedOn.
+   *
+   * The date-time of the update.
+   *
+   * @return the updatedOn
+   */
+  public Date getUpdatedOn() {
+    return updatedOn;
   }
 
   /**
    * Gets the hierarchyEnabled.
    *
-   * The indication of whether hierarchy is enabled for the control library.
+   * Determines if the control library has any hierarchy.
    *
    * @return the hierarchyEnabled
    */
-  public Boolean hierarchyEnabled() {
+  public Boolean isHierarchyEnabled() {
     return hierarchyEnabled;
   }
 
   /**
    * Gets the controlsCount.
    *
-   * The number of controls.
+   * The count of controls tied to the control library.
    *
    * @return the controlsCount
    */
-  public Long controlsCount() {
+  public Long getControlsCount() {
     return controlsCount;
   }
 
   /**
    * Gets the controlParentsCount.
    *
-   * The number of parent controls in the control library.
+   * THe count of control parents in the control library.
    *
    * @return the controlParentsCount
    */
-  public Long controlParentsCount() {
+  public Long getControlParentsCount() {
     return controlParentsCount;
-  }
-
-  /**
-   * Gets the controls.
-   *
-   * The list of controls in a control library.
-   *
-   * @return the controls
-   */
-  public List<ControlsInControlLib> controls() {
-    return controls;
   }
 }
 

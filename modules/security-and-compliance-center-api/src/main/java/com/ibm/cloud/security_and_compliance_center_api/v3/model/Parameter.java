@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,50 +10,40 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * The rule import parameter.
+ * The details of a parameter used during an assessment.
  */
 public class Parameter extends GenericModel {
 
-  /**
-   * The property type.
-   */
-  public interface Type {
-    /** string. */
-    String STRING = "string";
-    /** numeric. */
-    String NUMERIC = "numeric";
-    /** general. */
-    String GENERAL = "general";
-    /** boolean. */
-    String X_BOOLEAN = "boolean";
-    /** string_list. */
-    String STRING_LIST = "string_list";
-    /** ip_list. */
-    String IP_LIST = "ip_list";
-    /** timestamp. */
-    String TIMESTAMP = "timestamp";
-  }
-
-  protected String name;
-  @SerializedName("display_name")
-  protected String displayName;
-  protected String description;
-  protected String type;
+  @SerializedName("assessment_type")
+  protected String assessmentType;
+  @SerializedName("assessment_id")
+  protected String assessmentId;
+  @SerializedName("parameter_name")
+  protected String parameterName;
+  @SerializedName("parameter_display_name")
+  protected String parameterDisplayName;
+  @SerializedName("parameter_type")
+  protected String parameterType;
+  @SerializedName("parameter_value")
+  protected Object parameterValue;
 
   /**
    * Builder.
    */
   public static class Builder {
-    private String name;
-    private String displayName;
-    private String description;
-    private String type;
+    private String assessmentType;
+    private String assessmentId;
+    private String parameterName;
+    private String parameterDisplayName;
+    private String parameterType;
+    private Object parameterValue;
 
     /**
      * Instantiates a new Builder from an existing Parameter instance.
@@ -61,10 +51,12 @@ public class Parameter extends GenericModel {
      * @param parameter the instance to initialize the Builder with
      */
     private Builder(Parameter parameter) {
-      this.name = parameter.name;
-      this.displayName = parameter.displayName;
-      this.description = parameter.description;
-      this.type = parameter.type;
+      this.assessmentType = parameter.assessmentType;
+      this.assessmentId = parameter.assessmentId;
+      this.parameterName = parameter.parameterName;
+      this.parameterDisplayName = parameter.parameterDisplayName;
+      this.parameterType = parameter.parameterType;
+      this.parameterValue = parameter.parameterValue;
     }
 
     /**
@@ -83,46 +75,68 @@ public class Parameter extends GenericModel {
     }
 
     /**
-     * Set the name.
+     * Set the assessmentType.
      *
-     * @param name the name
+     * @param assessmentType the assessmentType
      * @return the Parameter builder
      */
-    public Builder name(String name) {
-      this.name = name;
+    public Builder assessmentType(String assessmentType) {
+      this.assessmentType = assessmentType;
       return this;
     }
 
     /**
-     * Set the displayName.
+     * Set the assessmentId.
      *
-     * @param displayName the displayName
+     * @param assessmentId the assessmentId
      * @return the Parameter builder
      */
-    public Builder displayName(String displayName) {
-      this.displayName = displayName;
+    public Builder assessmentId(String assessmentId) {
+      this.assessmentId = assessmentId;
       return this;
     }
 
     /**
-     * Set the description.
+     * Set the parameterName.
      *
-     * @param description the description
+     * @param parameterName the parameterName
      * @return the Parameter builder
      */
-    public Builder description(String description) {
-      this.description = description;
+    public Builder parameterName(String parameterName) {
+      this.parameterName = parameterName;
       return this;
     }
 
     /**
-     * Set the type.
+     * Set the parameterDisplayName.
      *
-     * @param type the type
+     * @param parameterDisplayName the parameterDisplayName
      * @return the Parameter builder
      */
-    public Builder type(String type) {
-      this.type = type;
+    public Builder parameterDisplayName(String parameterDisplayName) {
+      this.parameterDisplayName = parameterDisplayName;
+      return this;
+    }
+
+    /**
+     * Set the parameterType.
+     *
+     * @param parameterType the parameterType
+     * @return the Parameter builder
+     */
+    public Builder parameterType(String parameterType) {
+      this.parameterType = parameterType;
+      return this;
+    }
+
+    /**
+     * Set the parameterValue.
+     *
+     * @param parameterValue the parameterValue
+     * @return the Parameter builder
+     */
+    public Builder parameterValue(Object parameterValue) {
+      this.parameterValue = parameterValue;
       return this;
     }
   }
@@ -130,10 +144,12 @@ public class Parameter extends GenericModel {
   protected Parameter() { }
 
   protected Parameter(Builder builder) {
-    name = builder.name;
-    displayName = builder.displayName;
-    description = builder.description;
-    type = builder.type;
+    assessmentType = builder.assessmentType;
+    assessmentId = builder.assessmentId;
+    parameterName = builder.parameterName;
+    parameterDisplayName = builder.parameterDisplayName;
+    parameterType = builder.parameterType;
+    parameterValue = builder.parameterValue;
   }
 
   /**
@@ -146,47 +162,69 @@ public class Parameter extends GenericModel {
   }
 
   /**
-   * Gets the name.
+   * Gets the assessmentType.
    *
-   * The import parameter name.
+   * The type of evaluation.
    *
-   * @return the name
+   * @return the assessmentType
    */
-  public String name() {
-    return name;
+  public String assessmentType() {
+    return assessmentType;
   }
 
   /**
-   * Gets the displayName.
+   * Gets the assessmentId.
    *
-   * The display name of the property.
+   * The ID of the assessment.
    *
-   * @return the displayName
+   * @return the assessmentId
    */
-  public String displayName() {
-    return displayName;
+  public String assessmentId() {
+    return assessmentId;
   }
 
   /**
-   * Gets the description.
+   * Gets the parameterName.
    *
-   * The propery description.
+   * The parameter name.
    *
-   * @return the description
+   * @return the parameterName
    */
-  public String description() {
-    return description;
+  public String parameterName() {
+    return parameterName;
   }
 
   /**
-   * Gets the type.
+   * Gets the parameterDisplayName.
    *
-   * The property type.
+   * The parameter display name.
    *
-   * @return the type
+   * @return the parameterDisplayName
    */
-  public String type() {
-    return type;
+  public String parameterDisplayName() {
+    return parameterDisplayName;
+  }
+
+  /**
+   * Gets the parameterType.
+   *
+   * The parameter type.
+   *
+   * @return the parameterType
+   */
+  public String parameterType() {
+    return parameterType;
+  }
+
+  /**
+   * Gets the parameterValue.
+   *
+   * The value can be of any type.
+   *
+   * @return the parameterValue
+   */
+  public Object parameterValue() {
+    return parameterValue;
   }
 }
 

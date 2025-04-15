@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -14,7 +14,10 @@
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.AdditionalTargetAttribute;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.Account;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.CredentialResponse;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.Resource;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.Tags;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Target;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
 import java.io.InputStream;
@@ -33,9 +36,14 @@ public class TargetTest {
   @Test
   public void testTarget() throws Throwable {
     Target targetModel = new Target();
-    assertNull(targetModel.getServiceName());
-    assertNull(targetModel.getServiceDisplayName());
-    assertNull(targetModel.getResourceKind());
-    assertNull(targetModel.getAdditionalTargetAttributes());
+    assertNull(targetModel.getId());
+    assertNull(targetModel.getAccountId());
+    assertNull(targetModel.getTrustedProfileId());
+    assertNull(targetModel.getName());
+    assertNull(targetModel.getCredentials());
+    assertNull(targetModel.getCreatedBy());
+    assertNull(targetModel.getCreatedOn());
+    assertNull(targetModel.getUpdatedBy());
+    assertNull(targetModel.getUpdatedOn());
   }
 }

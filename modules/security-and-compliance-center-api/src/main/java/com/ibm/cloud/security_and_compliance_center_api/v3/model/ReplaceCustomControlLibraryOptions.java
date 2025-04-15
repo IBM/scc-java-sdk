@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,10 +10,10 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -24,58 +24,34 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class ReplaceCustomControlLibraryOptions extends GenericModel {
 
   /**
-   * The control library type.
+   * Details that the control library is a user made(custom) or Security Compliance Center(predefined).
    */
   public interface ControlLibraryType {
-    /** predefined. */
-    String PREDEFINED = "predefined";
     /** custom. */
     String CUSTOM = "custom";
   }
 
-  protected String controlLibrariesId;
-  protected String id;
-  protected String accountId;
+  protected String instanceId;
+  protected String controlLibraryId;
   protected String controlLibraryName;
   protected String controlLibraryDescription;
   protected String controlLibraryType;
-  protected String versionGroupLabel;
   protected String controlLibraryVersion;
-  protected Date createdOn;
-  protected String createdBy;
-  protected Date updatedOn;
-  protected String updatedBy;
-  protected Boolean latest;
-  protected Boolean hierarchyEnabled;
-  protected Long controlsCount;
-  protected Long controlParentsCount;
-  protected List<ControlsInControlLib> controls;
-  protected String xCorrelationId;
-  protected String xRequestId;
+  protected List<ControlPrototype> controls;
+  protected String bssAccount;
 
   /**
    * Builder.
    */
   public static class Builder {
-    private String controlLibrariesId;
-    private String id;
-    private String accountId;
+    private String instanceId;
+    private String controlLibraryId;
     private String controlLibraryName;
     private String controlLibraryDescription;
     private String controlLibraryType;
-    private String versionGroupLabel;
     private String controlLibraryVersion;
-    private Date createdOn;
-    private String createdBy;
-    private Date updatedOn;
-    private String updatedBy;
-    private Boolean latest;
-    private Boolean hierarchyEnabled;
-    private Long controlsCount;
-    private Long controlParentsCount;
-    private List<ControlsInControlLib> controls;
-    private String xCorrelationId;
-    private String xRequestId;
+    private List<ControlPrototype> controls;
+    private String bssAccount;
 
     /**
      * Instantiates a new Builder from an existing ReplaceCustomControlLibraryOptions instance.
@@ -83,25 +59,14 @@ public class ReplaceCustomControlLibraryOptions extends GenericModel {
      * @param replaceCustomControlLibraryOptions the instance to initialize the Builder with
      */
     private Builder(ReplaceCustomControlLibraryOptions replaceCustomControlLibraryOptions) {
-      this.controlLibrariesId = replaceCustomControlLibraryOptions.controlLibrariesId;
-      this.id = replaceCustomControlLibraryOptions.id;
-      this.accountId = replaceCustomControlLibraryOptions.accountId;
+      this.instanceId = replaceCustomControlLibraryOptions.instanceId;
+      this.controlLibraryId = replaceCustomControlLibraryOptions.controlLibraryId;
       this.controlLibraryName = replaceCustomControlLibraryOptions.controlLibraryName;
       this.controlLibraryDescription = replaceCustomControlLibraryOptions.controlLibraryDescription;
       this.controlLibraryType = replaceCustomControlLibraryOptions.controlLibraryType;
-      this.versionGroupLabel = replaceCustomControlLibraryOptions.versionGroupLabel;
       this.controlLibraryVersion = replaceCustomControlLibraryOptions.controlLibraryVersion;
-      this.createdOn = replaceCustomControlLibraryOptions.createdOn;
-      this.createdBy = replaceCustomControlLibraryOptions.createdBy;
-      this.updatedOn = replaceCustomControlLibraryOptions.updatedOn;
-      this.updatedBy = replaceCustomControlLibraryOptions.updatedBy;
-      this.latest = replaceCustomControlLibraryOptions.latest;
-      this.hierarchyEnabled = replaceCustomControlLibraryOptions.hierarchyEnabled;
-      this.controlsCount = replaceCustomControlLibraryOptions.controlsCount;
-      this.controlParentsCount = replaceCustomControlLibraryOptions.controlParentsCount;
       this.controls = replaceCustomControlLibraryOptions.controls;
-      this.xCorrelationId = replaceCustomControlLibraryOptions.xCorrelationId;
-      this.xRequestId = replaceCustomControlLibraryOptions.xRequestId;
+      this.bssAccount = replaceCustomControlLibraryOptions.bssAccount;
     }
 
     /**
@@ -113,10 +78,22 @@ public class ReplaceCustomControlLibraryOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param controlLibrariesId the controlLibrariesId
+     * @param instanceId the instanceId
+     * @param controlLibraryId the controlLibraryId
+     * @param controlLibraryName the controlLibraryName
+     * @param controlLibraryDescription the controlLibraryDescription
+     * @param controlLibraryType the controlLibraryType
+     * @param controlLibraryVersion the controlLibraryVersion
+     * @param controls the controls
      */
-    public Builder(String controlLibrariesId) {
-      this.controlLibrariesId = controlLibrariesId;
+    public Builder(String instanceId, String controlLibraryId, String controlLibraryName, String controlLibraryDescription, String controlLibraryType, String controlLibraryVersion, List<ControlPrototype> controls) {
+      this.instanceId = instanceId;
+      this.controlLibraryId = controlLibraryId;
+      this.controlLibraryName = controlLibraryName;
+      this.controlLibraryDescription = controlLibraryDescription;
+      this.controlLibraryType = controlLibraryType;
+      this.controlLibraryVersion = controlLibraryVersion;
+      this.controls = controls;
     }
 
     /**
@@ -129,51 +106,40 @@ public class ReplaceCustomControlLibraryOptions extends GenericModel {
     }
 
     /**
-     * Adds an controls to controls.
+     * Adds a new element to controls.
      *
-     * @param controls the new controls
+     * @param controls the new element to be added
      * @return the ReplaceCustomControlLibraryOptions builder
      */
-    public Builder addControls(ControlsInControlLib controls) {
+    public Builder addControls(ControlPrototype controls) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(controls,
         "controls cannot be null");
       if (this.controls == null) {
-        this.controls = new ArrayList<ControlsInControlLib>();
+        this.controls = new ArrayList<ControlPrototype>();
       }
       this.controls.add(controls);
       return this;
     }
 
     /**
-     * Set the controlLibrariesId.
+     * Set the instanceId.
      *
-     * @param controlLibrariesId the controlLibrariesId
+     * @param instanceId the instanceId
      * @return the ReplaceCustomControlLibraryOptions builder
      */
-    public Builder controlLibrariesId(String controlLibrariesId) {
-      this.controlLibrariesId = controlLibrariesId;
+    public Builder instanceId(String instanceId) {
+      this.instanceId = instanceId;
       return this;
     }
 
     /**
-     * Set the id.
+     * Set the controlLibraryId.
      *
-     * @param id the id
+     * @param controlLibraryId the controlLibraryId
      * @return the ReplaceCustomControlLibraryOptions builder
      */
-    public Builder id(String id) {
-      this.id = id;
-      return this;
-    }
-
-    /**
-     * Set the accountId.
-     *
-     * @param accountId the accountId
-     * @return the ReplaceCustomControlLibraryOptions builder
-     */
-    public Builder accountId(String accountId) {
-      this.accountId = accountId;
+    public Builder controlLibraryId(String controlLibraryId) {
+      this.controlLibraryId = controlLibraryId;
       return this;
     }
 
@@ -211,17 +177,6 @@ public class ReplaceCustomControlLibraryOptions extends GenericModel {
     }
 
     /**
-     * Set the versionGroupLabel.
-     *
-     * @param versionGroupLabel the versionGroupLabel
-     * @return the ReplaceCustomControlLibraryOptions builder
-     */
-    public Builder versionGroupLabel(String versionGroupLabel) {
-      this.versionGroupLabel = versionGroupLabel;
-      return this;
-    }
-
-    /**
      * Set the controlLibraryVersion.
      *
      * @param controlLibraryVersion the controlLibraryVersion
@@ -233,150 +188,25 @@ public class ReplaceCustomControlLibraryOptions extends GenericModel {
     }
 
     /**
-     * Set the createdOn.
-     *
-     * @param createdOn the createdOn
-     * @return the ReplaceCustomControlLibraryOptions builder
-     */
-    public Builder createdOn(Date createdOn) {
-      this.createdOn = createdOn;
-      return this;
-    }
-
-    /**
-     * Set the createdBy.
-     *
-     * @param createdBy the createdBy
-     * @return the ReplaceCustomControlLibraryOptions builder
-     */
-    public Builder createdBy(String createdBy) {
-      this.createdBy = createdBy;
-      return this;
-    }
-
-    /**
-     * Set the updatedOn.
-     *
-     * @param updatedOn the updatedOn
-     * @return the ReplaceCustomControlLibraryOptions builder
-     */
-    public Builder updatedOn(Date updatedOn) {
-      this.updatedOn = updatedOn;
-      return this;
-    }
-
-    /**
-     * Set the updatedBy.
-     *
-     * @param updatedBy the updatedBy
-     * @return the ReplaceCustomControlLibraryOptions builder
-     */
-    public Builder updatedBy(String updatedBy) {
-      this.updatedBy = updatedBy;
-      return this;
-    }
-
-    /**
-     * Set the latest.
-     *
-     * @param latest the latest
-     * @return the ReplaceCustomControlLibraryOptions builder
-     */
-    public Builder latest(Boolean latest) {
-      this.latest = latest;
-      return this;
-    }
-
-    /**
-     * Set the hierarchyEnabled.
-     *
-     * @param hierarchyEnabled the hierarchyEnabled
-     * @return the ReplaceCustomControlLibraryOptions builder
-     */
-    public Builder hierarchyEnabled(Boolean hierarchyEnabled) {
-      this.hierarchyEnabled = hierarchyEnabled;
-      return this;
-    }
-
-    /**
-     * Set the controlsCount.
-     *
-     * @param controlsCount the controlsCount
-     * @return the ReplaceCustomControlLibraryOptions builder
-     */
-    public Builder controlsCount(long controlsCount) {
-      this.controlsCount = controlsCount;
-      return this;
-    }
-
-    /**
-     * Set the controlParentsCount.
-     *
-     * @param controlParentsCount the controlParentsCount
-     * @return the ReplaceCustomControlLibraryOptions builder
-     */
-    public Builder controlParentsCount(long controlParentsCount) {
-      this.controlParentsCount = controlParentsCount;
-      return this;
-    }
-
-    /**
      * Set the controls.
      * Existing controls will be replaced.
      *
      * @param controls the controls
      * @return the ReplaceCustomControlLibraryOptions builder
      */
-    public Builder controls(List<ControlsInControlLib> controls) {
+    public Builder controls(List<ControlPrototype> controls) {
       this.controls = controls;
       return this;
     }
 
     /**
-     * Set the xCorrelationId.
+     * Set the bssAccount.
      *
-     * @param xCorrelationId the xCorrelationId
+     * @param bssAccount the bssAccount
      * @return the ReplaceCustomControlLibraryOptions builder
      */
-    public Builder xCorrelationId(String xCorrelationId) {
-      this.xCorrelationId = xCorrelationId;
-      return this;
-    }
-
-    /**
-     * Set the xRequestId.
-     *
-     * @param xRequestId the xRequestId
-     * @return the ReplaceCustomControlLibraryOptions builder
-     */
-    public Builder xRequestId(String xRequestId) {
-      this.xRequestId = xRequestId;
-      return this;
-    }
-
-    /**
-     * Set the controlLibrary.
-     *
-     * @param controlLibrary the controlLibrary
-     * @return the ReplaceCustomControlLibraryOptions builder
-     */
-    public Builder controlLibrary(ControlLibrary controlLibrary) {
-      this.id = controlLibrary.id();
-      this.accountId = controlLibrary.accountId();
-      this.controlLibraryName = controlLibrary.controlLibraryName();
-      this.controlLibraryDescription = controlLibrary.controlLibraryDescription();
-      this.controlLibraryType = controlLibrary.controlLibraryType();
-      this.versionGroupLabel = controlLibrary.versionGroupLabel();
-      this.controlLibraryVersion = controlLibrary.controlLibraryVersion();
-      this.createdOn = controlLibrary.createdOn();
-      this.createdBy = controlLibrary.createdBy();
-      this.updatedOn = controlLibrary.updatedOn();
-      this.updatedBy = controlLibrary.updatedBy();
-      this.latest = controlLibrary.latest();
-      this.hierarchyEnabled = controlLibrary.hierarchyEnabled();
-      this.controlsCount = controlLibrary.controlsCount();
-      this.controlParentsCount = controlLibrary.controlParentsCount();
-      this.controls = controlLibrary.controls();
+    public Builder bssAccount(String bssAccount) {
+      this.bssAccount = bssAccount;
       return this;
     }
   }
@@ -384,27 +214,28 @@ public class ReplaceCustomControlLibraryOptions extends GenericModel {
   protected ReplaceCustomControlLibraryOptions() { }
 
   protected ReplaceCustomControlLibraryOptions(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.controlLibrariesId,
-      "controlLibrariesId cannot be empty");
-    controlLibrariesId = builder.controlLibrariesId;
-    id = builder.id;
-    accountId = builder.accountId;
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.instanceId,
+      "instanceId cannot be empty");
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.controlLibraryId,
+      "controlLibraryId cannot be empty");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.controlLibraryName,
+      "controlLibraryName cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.controlLibraryDescription,
+      "controlLibraryDescription cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.controlLibraryType,
+      "controlLibraryType cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.controlLibraryVersion,
+      "controlLibraryVersion cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.controls,
+      "controls cannot be null");
+    instanceId = builder.instanceId;
+    controlLibraryId = builder.controlLibraryId;
     controlLibraryName = builder.controlLibraryName;
     controlLibraryDescription = builder.controlLibraryDescription;
     controlLibraryType = builder.controlLibraryType;
-    versionGroupLabel = builder.versionGroupLabel;
     controlLibraryVersion = builder.controlLibraryVersion;
-    createdOn = builder.createdOn;
-    createdBy = builder.createdBy;
-    updatedOn = builder.updatedOn;
-    updatedBy = builder.updatedBy;
-    latest = builder.latest;
-    hierarchyEnabled = builder.hierarchyEnabled;
-    controlsCount = builder.controlsCount;
-    controlParentsCount = builder.controlParentsCount;
     controls = builder.controls;
-    xCorrelationId = builder.xCorrelationId;
-    xRequestId = builder.xRequestId;
+    bssAccount = builder.bssAccount;
   }
 
   /**
@@ -417,42 +248,31 @@ public class ReplaceCustomControlLibraryOptions extends GenericModel {
   }
 
   /**
-   * Gets the controlLibrariesId.
+   * Gets the instanceId.
    *
-   * The control library ID.
+   * The ID of the Security and Compliance Center instance.
    *
-   * @return the controlLibrariesId
+   * @return the instanceId
    */
-  public String controlLibrariesId() {
-    return controlLibrariesId;
+  public String instanceId() {
+    return instanceId;
   }
 
   /**
-   * Gets the id.
+   * Gets the controlLibraryId.
    *
    * The control library ID.
    *
-   * @return the id
+   * @return the controlLibraryId
    */
-  public String id() {
-    return id;
-  }
-
-  /**
-   * Gets the accountId.
-   *
-   * The account ID.
-   *
-   * @return the accountId
-   */
-  public String accountId() {
-    return accountId;
+  public String controlLibraryId() {
+    return controlLibraryId;
   }
 
   /**
    * Gets the controlLibraryName.
    *
-   * The control library name.
+   * The name of the control library.
    *
    * @return the controlLibraryName
    */
@@ -463,7 +283,7 @@ public class ReplaceCustomControlLibraryOptions extends GenericModel {
   /**
    * Gets the controlLibraryDescription.
    *
-   * The control library description.
+   * Details of the control library.
    *
    * @return the controlLibraryDescription
    */
@@ -474,7 +294,7 @@ public class ReplaceCustomControlLibraryOptions extends GenericModel {
   /**
    * Gets the controlLibraryType.
    *
-   * The control library type.
+   * Details that the control library is a user made(custom) or Security Compliance Center(predefined).
    *
    * @return the controlLibraryType
    */
@@ -483,20 +303,9 @@ public class ReplaceCustomControlLibraryOptions extends GenericModel {
   }
 
   /**
-   * Gets the versionGroupLabel.
-   *
-   * The version group label.
-   *
-   * @return the versionGroupLabel
-   */
-  public String versionGroupLabel() {
-    return versionGroupLabel;
-  }
-
-  /**
    * Gets the controlLibraryVersion.
    *
-   * The control library version.
+   * The revision number of the control library.
    *
    * @return the controlLibraryVersion
    */
@@ -505,128 +314,25 @@ public class ReplaceCustomControlLibraryOptions extends GenericModel {
   }
 
   /**
-   * Gets the createdOn.
-   *
-   * The date when the control library was created.
-   *
-   * @return the createdOn
-   */
-  public Date createdOn() {
-    return createdOn;
-  }
-
-  /**
-   * Gets the createdBy.
-   *
-   * The user who created the control library.
-   *
-   * @return the createdBy
-   */
-  public String createdBy() {
-    return createdBy;
-  }
-
-  /**
-   * Gets the updatedOn.
-   *
-   * The date when the control library was updated.
-   *
-   * @return the updatedOn
-   */
-  public Date updatedOn() {
-    return updatedOn;
-  }
-
-  /**
-   * Gets the updatedBy.
-   *
-   * The user who updated the control library.
-   *
-   * @return the updatedBy
-   */
-  public String updatedBy() {
-    return updatedBy;
-  }
-
-  /**
-   * Gets the latest.
-   *
-   * The latest version of the control library.
-   *
-   * @return the latest
-   */
-  public Boolean latest() {
-    return latest;
-  }
-
-  /**
-   * Gets the hierarchyEnabled.
-   *
-   * The indication of whether hierarchy is enabled for the control library.
-   *
-   * @return the hierarchyEnabled
-   */
-  public Boolean hierarchyEnabled() {
-    return hierarchyEnabled;
-  }
-
-  /**
-   * Gets the controlsCount.
-   *
-   * The number of controls.
-   *
-   * @return the controlsCount
-   */
-  public Long controlsCount() {
-    return controlsCount;
-  }
-
-  /**
-   * Gets the controlParentsCount.
-   *
-   * The number of parent controls in the control library.
-   *
-   * @return the controlParentsCount
-   */
-  public Long controlParentsCount() {
-    return controlParentsCount;
-  }
-
-  /**
    * Gets the controls.
    *
-   * The list of controls in a control library.
+   * The list of rules that the control library attempts to adhere to.
    *
    * @return the controls
    */
-  public List<ControlsInControlLib> controls() {
+  public List<ControlPrototype> controls() {
     return controls;
   }
 
   /**
-   * Gets the xCorrelationId.
+   * Gets the bssAccount.
    *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is used for downstream requests and retries of those requests. If a value of
-   * this header is not supplied in a request, the service generates a random (version 4) UUID.
+   * The account id tied to billing.
    *
-   * @return the xCorrelationId
+   * @return the bssAccount
    */
-  public String xCorrelationId() {
-    return xCorrelationId;
-  }
-
-  /**
-   * Gets the xRequestId.
-   *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is not used for downstream requests and retries of those requests. If a
-   * value of this header is not supplied in a request, the service generates a random (version 4) UUID.
-   *
-   * @return the xRequestId
-   */
-  public String xRequestId() {
-    return xRequestId;
+  public String bssAccount() {
+    return bssAccount;
   }
 }
 

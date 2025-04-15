@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,25 +32,27 @@ public class GetReportControlsOptionsTest {
   @Test
   public void testGetReportControlsOptions() throws Throwable {
     GetReportControlsOptions getReportControlsOptionsModel = new GetReportControlsOptions.Builder()
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
       .reportId("testString")
-      .xCorrelationId("testString")
-      .xRequestId("testString")
       .controlId("testString")
       .controlName("testString")
       .controlDescription("testString")
       .controlCategory("testString")
       .status("compliant")
       .sort("control_name")
+      .scopeId("testString")
+      .subscopeId("testString")
       .build();
+    assertEquals(getReportControlsOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
     assertEquals(getReportControlsOptionsModel.reportId(), "testString");
-    assertEquals(getReportControlsOptionsModel.xCorrelationId(), "testString");
-    assertEquals(getReportControlsOptionsModel.xRequestId(), "testString");
     assertEquals(getReportControlsOptionsModel.controlId(), "testString");
     assertEquals(getReportControlsOptionsModel.controlName(), "testString");
     assertEquals(getReportControlsOptionsModel.controlDescription(), "testString");
     assertEquals(getReportControlsOptionsModel.controlCategory(), "testString");
     assertEquals(getReportControlsOptionsModel.status(), "compliant");
     assertEquals(getReportControlsOptionsModel.sort(), "control_name");
+    assertEquals(getReportControlsOptionsModel.scopeId(), "testString");
+    assertEquals(getReportControlsOptionsModel.subscopeId(), "testString");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

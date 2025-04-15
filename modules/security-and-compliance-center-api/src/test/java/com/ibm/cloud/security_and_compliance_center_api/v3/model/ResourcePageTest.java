@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -15,9 +15,11 @@ package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Account;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.PageHRef;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.PageHRefFirst;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.PageHRefNext;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Resource;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ResourcePage;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.Tags;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -35,13 +37,12 @@ public class ResourcePageTest {
   @Test
   public void testResourcePage() throws Throwable {
     ResourcePage resourcePageModel = new ResourcePage();
-    assertNull(resourcePageModel.getTotalCount());
     assertNull(resourcePageModel.getLimit());
-    assertNull(resourcePageModel.getStart());
+    assertNull(resourcePageModel.getTotalCount());
     assertNull(resourcePageModel.getFirst());
     assertNull(resourcePageModel.getNext());
-    assertNull(resourcePageModel.getHomeAccountId());
     assertNull(resourcePageModel.getReportId());
+    assertNull(resourcePageModel.getHomeAccountId());
     assertNull(resourcePageModel.getResources());
   }
 }

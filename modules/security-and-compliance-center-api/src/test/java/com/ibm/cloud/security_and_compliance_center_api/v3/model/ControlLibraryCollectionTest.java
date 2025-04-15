@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -15,10 +15,15 @@ package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.sdk.core.util.DateUtils;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.Assessment;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.Control;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.ControlDoc;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.ControlLibrary;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ControlLibraryCollection;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.ControlLibraryItem;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.PaginatedCollectionFirst;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.PaginatedCollectionNext;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.ControlSpecification;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.PageHRefFirst;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.PageHRefNext;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.Parameter;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -36,8 +41,8 @@ public class ControlLibraryCollectionTest {
   @Test
   public void testControlLibraryCollection() throws Throwable {
     ControlLibraryCollection controlLibraryCollectionModel = new ControlLibraryCollection();
-    assertNull(controlLibraryCollectionModel.getTotalCount());
     assertNull(controlLibraryCollectionModel.getLimit());
+    assertNull(controlLibraryCollectionModel.getTotalCount());
     assertNull(controlLibraryCollectionModel.getFirst());
     assertNull(controlLibraryCollectionModel.getNext());
     assertNull(controlLibraryCollectionModel.getControlLibraries());

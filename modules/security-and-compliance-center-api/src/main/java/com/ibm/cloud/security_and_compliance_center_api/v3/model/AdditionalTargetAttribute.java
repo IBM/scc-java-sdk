@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -73,7 +74,7 @@ public class AdditionalTargetAttribute extends GenericModel {
 
   protected String name;
   protected String operator;
-  protected String value;
+  protected Object value;
 
   /**
    * Builder.
@@ -81,7 +82,7 @@ public class AdditionalTargetAttribute extends GenericModel {
   public static class Builder {
     private String name;
     private String operator;
-    private String value;
+    private Object value;
 
     /**
      * Instantiates a new Builder from an existing AdditionalTargetAttribute instance.
@@ -98,6 +99,15 @@ public class AdditionalTargetAttribute extends GenericModel {
      * Instantiates a new builder.
      */
     public Builder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param operator the operator
+     */
+    public Builder(String operator) {
+      this.operator = operator;
     }
 
     /**
@@ -137,7 +147,7 @@ public class AdditionalTargetAttribute extends GenericModel {
      * @param value the value
      * @return the AdditionalTargetAttribute builder
      */
-    public Builder value(String value) {
+    public Builder value(Object value) {
       this.value = value;
       return this;
     }
@@ -146,6 +156,8 @@ public class AdditionalTargetAttribute extends GenericModel {
   protected AdditionalTargetAttribute() { }
 
   protected AdditionalTargetAttribute(Builder builder) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.operator,
+      "operator cannot be null");
     name = builder.name;
     operator = builder.operator;
     value = builder.value;
@@ -185,11 +197,11 @@ public class AdditionalTargetAttribute extends GenericModel {
   /**
    * Gets the value.
    *
-   * The value.
+   * The value can be of any type.
    *
    * @return the value
    */
-  public String value() {
+  public Object value() {
     return value;
   }
 }

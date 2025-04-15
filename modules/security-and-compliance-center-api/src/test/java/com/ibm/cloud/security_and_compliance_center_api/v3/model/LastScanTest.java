@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -14,7 +14,6 @@
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
-import com.ibm.cloud.sdk.core.util.DateUtils;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.LastScan;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
 import java.io.InputStream;
@@ -32,21 +31,9 @@ public class LastScanTest {
 
   @Test
   public void testLastScan() throws Throwable {
-    LastScan lastScanModel = new LastScan.Builder()
-      .id("e8a39d25-0051-4328-8462-988ad321f49a")
-      .status("in_progress")
-      .time(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
-      .build();
-    assertEquals(lastScanModel.id(), "e8a39d25-0051-4328-8462-988ad321f49a");
-    assertEquals(lastScanModel.status(), "in_progress");
-    assertEquals(lastScanModel.time(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
-
-    String json = TestUtilities.serialize(lastScanModel);
-
-    LastScan lastScanModelNew = TestUtilities.deserialize(json, LastScan.class);
-    assertTrue(lastScanModelNew instanceof LastScan);
-    assertEquals(lastScanModelNew.id(), "e8a39d25-0051-4328-8462-988ad321f49a");
-    assertEquals(lastScanModelNew.status(), "in_progress");
-    assertEquals(lastScanModelNew.time(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
+    LastScan lastScanModel = new LastScan();
+    assertNull(lastScanModel.getId());
+    assertNull(lastScanModel.getStatus());
+    assertNull(lastScanModel.getTime());
   }
 }

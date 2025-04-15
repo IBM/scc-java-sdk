@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,16 +32,20 @@ public class ListProfilesOptionsTest {
   @Test
   public void testListProfilesOptions() throws Throwable {
     ListProfilesOptions listProfilesOptionsModel = new ListProfilesOptions.Builder()
-      .xCorrelationId("testString")
-      .xRequestId("testString")
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
+      .accountId("testString")
       .limit(Long.valueOf("50"))
-      .profileType("custom")
       .start("testString")
       .build();
-    assertEquals(listProfilesOptionsModel.xCorrelationId(), "testString");
-    assertEquals(listProfilesOptionsModel.xRequestId(), "testString");
+    assertEquals(listProfilesOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
+    assertEquals(listProfilesOptionsModel.accountId(), "testString");
     assertEquals(listProfilesOptionsModel.limit(), Long.valueOf("50"));
-    assertEquals(listProfilesOptionsModel.profileType(), "custom");
     assertEquals(listProfilesOptionsModel.start(), "testString");
   }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testListProfilesOptionsError() throws Throwable {
+    new ListProfilesOptions.Builder().build();
+  }
+
 }

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,9 +32,8 @@ public class ListReportEvaluationsOptionsTest {
   @Test
   public void testListReportEvaluationsOptions() throws Throwable {
     ListReportEvaluationsOptions listReportEvaluationsOptionsModel = new ListReportEvaluationsOptions.Builder()
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
       .reportId("testString")
-      .xCorrelationId("testString")
-      .xRequestId("testString")
       .assessmentId("testString")
       .assessmentMethod("testString")
       .componentId("testString")
@@ -44,10 +43,12 @@ public class ListReportEvaluationsOptionsTest {
       .status("failure")
       .start("testString")
       .limit(Long.valueOf("50"))
+      .sort("assessment_id")
+      .scopeId("testString")
+      .subscopeId("testString")
       .build();
+    assertEquals(listReportEvaluationsOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
     assertEquals(listReportEvaluationsOptionsModel.reportId(), "testString");
-    assertEquals(listReportEvaluationsOptionsModel.xCorrelationId(), "testString");
-    assertEquals(listReportEvaluationsOptionsModel.xRequestId(), "testString");
     assertEquals(listReportEvaluationsOptionsModel.assessmentId(), "testString");
     assertEquals(listReportEvaluationsOptionsModel.assessmentMethod(), "testString");
     assertEquals(listReportEvaluationsOptionsModel.componentId(), "testString");
@@ -57,6 +58,9 @@ public class ListReportEvaluationsOptionsTest {
     assertEquals(listReportEvaluationsOptionsModel.status(), "failure");
     assertEquals(listReportEvaluationsOptionsModel.start(), "testString");
     assertEquals(listReportEvaluationsOptionsModel.limit(), Long.valueOf("50"));
+    assertEquals(listReportEvaluationsOptionsModel.sort(), "assessment_id");
+    assertEquals(listReportEvaluationsOptionsModel.scopeId(), "testString");
+    assertEquals(listReportEvaluationsOptionsModel.subscopeId(), "testString");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

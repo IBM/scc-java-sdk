@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,7 +10,10 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
+
+import java.util.Map;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
@@ -19,21 +22,21 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class UpdateProviderTypeInstanceOptions extends GenericModel {
 
+  protected String instanceId;
   protected String providerTypeId;
   protected String providerTypeInstanceId;
-  protected UpdateProviderTypeInstanceRequest updateProviderTypeInstanceRequest;
-  protected String xCorrelationId;
-  protected String xRequestId;
+  protected String name;
+  protected Map<String, Object> attributes;
 
   /**
    * Builder.
    */
   public static class Builder {
+    private String instanceId;
     private String providerTypeId;
     private String providerTypeInstanceId;
-    private UpdateProviderTypeInstanceRequest updateProviderTypeInstanceRequest;
-    private String xCorrelationId;
-    private String xRequestId;
+    private String name;
+    private Map<String, Object> attributes;
 
     /**
      * Instantiates a new Builder from an existing UpdateProviderTypeInstanceOptions instance.
@@ -41,11 +44,11 @@ public class UpdateProviderTypeInstanceOptions extends GenericModel {
      * @param updateProviderTypeInstanceOptions the instance to initialize the Builder with
      */
     private Builder(UpdateProviderTypeInstanceOptions updateProviderTypeInstanceOptions) {
+      this.instanceId = updateProviderTypeInstanceOptions.instanceId;
       this.providerTypeId = updateProviderTypeInstanceOptions.providerTypeId;
       this.providerTypeInstanceId = updateProviderTypeInstanceOptions.providerTypeInstanceId;
-      this.updateProviderTypeInstanceRequest = updateProviderTypeInstanceOptions.updateProviderTypeInstanceRequest;
-      this.xCorrelationId = updateProviderTypeInstanceOptions.xCorrelationId;
-      this.xRequestId = updateProviderTypeInstanceOptions.xRequestId;
+      this.name = updateProviderTypeInstanceOptions.name;
+      this.attributes = updateProviderTypeInstanceOptions.attributes;
     }
 
     /**
@@ -57,14 +60,14 @@ public class UpdateProviderTypeInstanceOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
+     * @param instanceId the instanceId
      * @param providerTypeId the providerTypeId
      * @param providerTypeInstanceId the providerTypeInstanceId
-     * @param updateProviderTypeInstanceRequest the updateProviderTypeInstanceRequest
      */
-    public Builder(String providerTypeId, String providerTypeInstanceId, UpdateProviderTypeInstanceRequest updateProviderTypeInstanceRequest) {
+    public Builder(String instanceId, String providerTypeId, String providerTypeInstanceId) {
+      this.instanceId = instanceId;
       this.providerTypeId = providerTypeId;
       this.providerTypeInstanceId = providerTypeInstanceId;
-      this.updateProviderTypeInstanceRequest = updateProviderTypeInstanceRequest;
     }
 
     /**
@@ -74,6 +77,17 @@ public class UpdateProviderTypeInstanceOptions extends GenericModel {
      */
     public UpdateProviderTypeInstanceOptions build() {
       return new UpdateProviderTypeInstanceOptions(this);
+    }
+
+    /**
+     * Set the instanceId.
+     *
+     * @param instanceId the instanceId
+     * @return the UpdateProviderTypeInstanceOptions builder
+     */
+    public Builder instanceId(String instanceId) {
+      this.instanceId = instanceId;
+      return this;
     }
 
     /**
@@ -99,35 +113,24 @@ public class UpdateProviderTypeInstanceOptions extends GenericModel {
     }
 
     /**
-     * Set the updateProviderTypeInstanceRequest.
+     * Set the name.
      *
-     * @param updateProviderTypeInstanceRequest the updateProviderTypeInstanceRequest
+     * @param name the name
      * @return the UpdateProviderTypeInstanceOptions builder
      */
-    public Builder updateProviderTypeInstanceRequest(UpdateProviderTypeInstanceRequest updateProviderTypeInstanceRequest) {
-      this.updateProviderTypeInstanceRequest = updateProviderTypeInstanceRequest;
+    public Builder name(String name) {
+      this.name = name;
       return this;
     }
 
     /**
-     * Set the xCorrelationId.
+     * Set the attributes.
      *
-     * @param xCorrelationId the xCorrelationId
+     * @param attributes the attributes
      * @return the UpdateProviderTypeInstanceOptions builder
      */
-    public Builder xCorrelationId(String xCorrelationId) {
-      this.xCorrelationId = xCorrelationId;
-      return this;
-    }
-
-    /**
-     * Set the xRequestId.
-     *
-     * @param xRequestId the xRequestId
-     * @return the UpdateProviderTypeInstanceOptions builder
-     */
-    public Builder xRequestId(String xRequestId) {
-      this.xRequestId = xRequestId;
+    public Builder attributes(Map<String, Object> attributes) {
+      this.attributes = attributes;
       return this;
     }
   }
@@ -135,17 +138,17 @@ public class UpdateProviderTypeInstanceOptions extends GenericModel {
   protected UpdateProviderTypeInstanceOptions() { }
 
   protected UpdateProviderTypeInstanceOptions(Builder builder) {
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.instanceId,
+      "instanceId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.providerTypeId,
       "providerTypeId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.providerTypeInstanceId,
       "providerTypeInstanceId cannot be empty");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.updateProviderTypeInstanceRequest,
-      "updateProviderTypeInstanceRequest cannot be null");
+    instanceId = builder.instanceId;
     providerTypeId = builder.providerTypeId;
     providerTypeInstanceId = builder.providerTypeInstanceId;
-    updateProviderTypeInstanceRequest = builder.updateProviderTypeInstanceRequest;
-    xCorrelationId = builder.xCorrelationId;
-    xRequestId = builder.xRequestId;
+    name = builder.name;
+    attributes = builder.attributes;
   }
 
   /**
@@ -155,6 +158,17 @@ public class UpdateProviderTypeInstanceOptions extends GenericModel {
    */
   public Builder newBuilder() {
     return new Builder(this);
+  }
+
+  /**
+   * Gets the instanceId.
+   *
+   * The ID of the Security and Compliance Center instance.
+   *
+   * @return the instanceId
+   */
+  public String instanceId() {
+    return instanceId;
   }
 
   /**
@@ -180,40 +194,25 @@ public class UpdateProviderTypeInstanceOptions extends GenericModel {
   }
 
   /**
-   * Gets the updateProviderTypeInstanceRequest.
+   * Gets the name.
    *
-   * Provider type instance object to be patched.
+   * The provider type instance name.
    *
-   * @return the updateProviderTypeInstanceRequest
+   * @return the name
    */
-  public UpdateProviderTypeInstanceRequest updateProviderTypeInstanceRequest() {
-    return updateProviderTypeInstanceRequest;
+  public String name() {
+    return name;
   }
 
   /**
-   * Gets the xCorrelationId.
+   * Gets the attributes.
    *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is used for downstream requests and retries of those requests. If a value of
-   * this headers is not supplied in a request, the service generates a random (version 4) UUID.
+   * The attributes for connecting to the provider type instance.
    *
-   * @return the xCorrelationId
+   * @return the attributes
    */
-  public String xCorrelationId() {
-    return xCorrelationId;
-  }
-
-  /**
-   * Gets the xRequestId.
-   *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header  for the
-   * corresponding response.  The same value is not used for downstream requests and retries of those requests.  If a
-   * value of this headers is not supplied in a request, the service generates a random (version 4) UUID.
-   *
-   * @return the xRequestId
-   */
-  public String xRequestId() {
-    return xRequestId;
+  public Map<String, Object> attributes() {
+    return attributes;
   }
 }
 

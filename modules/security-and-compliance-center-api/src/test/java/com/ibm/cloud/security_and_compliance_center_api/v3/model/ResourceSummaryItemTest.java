@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -33,16 +33,18 @@ public class ResourceSummaryItemTest {
   @Test
   public void testResourceSummaryItem() throws Throwable {
     ResourceSummaryItem resourceSummaryItemModel = new ResourceSummaryItem();
-    assertNull(resourceSummaryItemModel.getName());
     assertNull(resourceSummaryItemModel.getId());
-    assertNull(resourceSummaryItemModel.getService());
-    assertNull(resourceSummaryItemModel.getTags());
+    assertNull(resourceSummaryItemModel.getName());
     assertNull(resourceSummaryItemModel.getAccount());
+    assertNull(resourceSummaryItemModel.getService());
+    assertNull(resourceSummaryItemModel.getServiceDisplayName());
+    assertNull(resourceSummaryItemModel.getTags());
     assertNull(resourceSummaryItemModel.getStatus());
     assertNull(resourceSummaryItemModel.getTotalCount());
     assertNull(resourceSummaryItemModel.getPassCount());
     assertNull(resourceSummaryItemModel.getFailureCount());
     assertNull(resourceSummaryItemModel.getErrorCount());
+    assertNull(resourceSummaryItemModel.getSkippedCount());
     assertNull(resourceSummaryItemModel.getCompletedCount());
   }
 }

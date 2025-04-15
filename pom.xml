@@ -1,31 +1,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>security-and-compliance-center-sdk</artifactId>
-
     <name>IBM Cloud Security and Compliance Center Service Java SDK</name>
-
     <description>Java Client Library to access the IBM Cloud Security and Compliance Center APIs</description>
-
     <url>https://github.com/IBM/security-and-compliance-center-api-java-sdk</url>
-
     <groupId>com.ibm.cloud</groupId>
     <version>4.0.0</version>
     <packaging>pom</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
         <sdk-core-version>9.17.4</sdk-core-version>
-
         <git-repository-name>security-and-compliance-center-java-sdk</git-repository-name>
-
         <testng-version>7.4.0</testng-version>
         <okhttp3-version>4.10.0</okhttp3-version>
-        <surefire-version>4.0.0-M7</surefire-version>
-        <jacoco-plugin-version>0.8.8</jacoco-plugin-version>
-        <maven-deploy-plugin-version>4.0.0</maven-deploy-plugin-version>
+        <surefire-version>3.0.0-M7</surefire-version>
+        <jacoco-plugin-version>0.8.12</jacoco-plugin-version>
+        <maven-deploy-plugin-version>3.0.0</maven-deploy-plugin-version>
         <nexus-staging-plugin-version>1.6.13</nexus-staging-plugin-version>
         <maven-gpg-plugin-version>3.0.1</maven-gpg-plugin-version>
         <maven-source-plugin-version>3.2.1</maven-source-plugin-version>
@@ -35,10 +27,10 @@
         <maven-compiler-plugin-version>3.10.1</maven-compiler-plugin-version>
         <maven-site-plugin-version>3.12.1</maven-site-plugin-version>
         <maven-checkstyle-plugin-version>3.2.0</maven-checkstyle-plugin-version>
-        <checkstyle-version>8.41</checkstyle-version>
+        <checkstyle-version>8.4.1</checkstyle-version>
         <maven-reports-plugin-version>3.4.1</maven-reports-plugin-version>
-        <maven-failsafe-plugin-version>4.0.0-M7</maven-failsafe-plugin-version>
-        <maven-buildnumber-plugin-version>4.0.0</maven-buildnumber-plugin-version>
+        <maven-failsafe-plugin-version>3.0.0-M7</maven-failsafe-plugin-version>
+        <maven-buildnumber-plugin-version>3.0.0</maven-buildnumber-plugin-version>
         <slf4j-version>2.0.6</slf4j-version>
         <junit-version>4.13.2</junit-version>
     </properties>
@@ -61,17 +53,17 @@
     </organization>
 
     <scm>
-        <connection>scm:git:https://github.com/IBM/security-and-compliance-center-api-java-sdk</connection>
-        <developerConnection>scm:git:https://github.com/IBM/security-and-compliance-center-api-java-sdk</developerConnection>
-        <url>https://github.com/IBM/security-and-compliance-center-api-java-sdk/tree/master</url>
+        <connection>scm:git:https://github.com/IBM/scc-java-sdk</connection>
+        <developerConnection>scm:git:https://github.com/IBM/scc-java-sdk</developerConnection>
+        <url>https://github.com/IBM/scc-java-sdk/tree/main</url>
     </scm>
 
     <issueManagement>
         <system>Github</system>
-        <url>https://github.com/IBM/security-and-compliance-center-api-java-sdk/issues</url>
+        <url>https://github.com/IBM/scc-java-sdk/issues</url>
     </issueManagement>
 
-    <repositories></repositories>
+    <repositories/>
 
     <dependencyManagement>
         <dependencies>
@@ -231,11 +223,6 @@
                             </goals>
                         </execution>
                     </executions>
-                    <configuration>
-                        <systemPropertyVariables>
-                            <jacoco-agent.destfile>${project.build.directory}</jacoco-agent.destfile>
-                        </systemPropertyVariables>
-                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -268,7 +255,7 @@
                     <configuration>
                         <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
                         <shortRevisionLength>8</shortRevisionLength>
-                        <timestampFormat>{0,date,yyyyMMdd-HHmmss}</timestampFormat>
+                        <timestampFormat>{yyyy-MM-dd}</timestampFormat>
                         <attach>true</attach>
                         <addOutputDirectoryToResources>true</addOutputDirectoryToResources>
                         <doCheck>false</doCheck>
@@ -327,7 +314,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
-                    <aggregate>true</aggregate>
                     <show>public</show>
                     <doctitle>${project.name}, version ${project.version}</doctitle>
                     <footer>IBM Corporation</footer>
@@ -361,11 +347,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <systemPropertyVariables>
-                        <jacoco-agent.destfile>${project.build.directory}</jacoco-agent.destfile>
-                    </systemPropertyVariables>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -418,7 +399,7 @@
                 <artifactId>maven-project-info-reports-plugin</artifactId>
                 <version>${maven-reports-plugin-version}</version>
                 <reportSets>
-                    <reportSet></reportSet>
+                    <reportSet/>
                 </reportSets>
             </plugin>
         </plugins>
@@ -438,7 +419,7 @@
             <id>central</id>
 
             <!-- For this profile, we'll get dependencies from maven central -->
-            <repositories></repositories>
+            <repositories/>
             <distributionManagement>
                 <repository>
                     <!-- This is where the nexus staging plugin will publish artifacts -->

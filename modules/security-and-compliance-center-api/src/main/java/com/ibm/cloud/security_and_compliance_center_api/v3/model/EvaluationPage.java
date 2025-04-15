@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import java.util.List;
@@ -22,19 +23,29 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class EvaluationPage extends GenericModel {
 
+  protected Long limit;
   @SerializedName("total_count")
   protected Long totalCount;
-  protected Long limit;
-  protected String start;
-  protected PageHRef first;
-  protected PageHRef next;
-  @SerializedName("home_account_id")
-  protected String homeAccountId;
+  protected PageHRefFirst first;
+  protected PageHRefNext next;
   @SerializedName("report_id")
   protected String reportId;
+  @SerializedName("home_account_id")
+  protected String homeAccountId;
   protected List<Evaluation> evaluations;
 
   protected EvaluationPage() { }
+
+  /**
+   * Gets the limit.
+   *
+   * The requested page limit.
+   *
+   * @return the limit
+   */
+  public Long getLimit() {
+    return limit;
+  }
 
   /**
    * Gets the totalCount.
@@ -48,58 +59,25 @@ public class EvaluationPage extends GenericModel {
   }
 
   /**
-   * Gets the limit.
-   *
-   * The requested page limi.t.
-   *
-   * @return the limit
-   */
-  public Long getLimit() {
-    return limit;
-  }
-
-  /**
-   * Gets the start.
-   *
-   * The token of the next page, when it's present.
-   *
-   * @return the start
-   */
-  public String getStart() {
-    return start;
-  }
-
-  /**
    * Gets the first.
    *
-   * The page reference.
+   * A page reference.
    *
    * @return the first
    */
-  public PageHRef getFirst() {
+  public PageHRefFirst getFirst() {
     return first;
   }
 
   /**
    * Gets the next.
    *
-   * The page reference.
+   * A page reference.
    *
    * @return the next
    */
-  public PageHRef getNext() {
+  public PageHRefNext getNext() {
     return next;
-  }
-
-  /**
-   * Gets the homeAccountId.
-   *
-   * The ID of the home account.
-   *
-   * @return the homeAccountId
-   */
-  public String getHomeAccountId() {
-    return homeAccountId;
   }
 
   /**
@@ -111,6 +89,17 @@ public class EvaluationPage extends GenericModel {
    */
   public String getReportId() {
     return reportId;
+  }
+
+  /**
+   * Gets the homeAccountId.
+   *
+   * The ID of the home account.
+   *
+   * @return the homeAccountId
+   */
+  public String getHomeAccountId() {
+    return homeAccountId;
   }
 
   /**

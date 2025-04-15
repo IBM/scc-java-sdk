@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -31,9 +31,18 @@ public class TagsTest {
 
   @Test
   public void testTags() throws Throwable {
-    Tags tagsModel = new Tags();
-    assertNull(tagsModel.getUser());
-    assertNull(tagsModel.getAccess());
-    assertNull(tagsModel.getService());
+    Tags tagsModel = new Tags.Builder()
+      .user(java.util.Arrays.asList("testString"))
+      .access(java.util.Arrays.asList("testString"))
+      .service(java.util.Arrays.asList("testString"))
+      .build();
+    assertEquals(tagsModel.user(), java.util.Arrays.asList("testString"));
+    assertEquals(tagsModel.access(), java.util.Arrays.asList("testString"));
+    assertEquals(tagsModel.service(), java.util.Arrays.asList("testString"));
+
+    String json = TestUtilities.serialize(tagsModel);
+
+    Tags tagsModelNew = TestUtilities.deserialize(json, Tags.class);
+    assertTrue(tagsModelNew instanceof Tags);
   }
 }

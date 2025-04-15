@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -15,7 +15,7 @@ package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Import;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.Parameter;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.RuleParameter;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -32,21 +32,21 @@ public class ImportTest {
 
   @Test
   public void testImport() throws Throwable {
-    Parameter parameterModel = new Parameter.Builder()
-      .name("name")
-      .displayName("display_name")
-      .description("description")
+    RuleParameter ruleParameterModel = new RuleParameter.Builder()
+      .name("testString")
+      .displayName("testString")
+      .description("testString")
       .type("string")
       .build();
-    assertEquals(parameterModel.name(), "name");
-    assertEquals(parameterModel.displayName(), "display_name");
-    assertEquals(parameterModel.description(), "description");
-    assertEquals(parameterModel.type(), "string");
+    assertEquals(ruleParameterModel.name(), "testString");
+    assertEquals(ruleParameterModel.displayName(), "testString");
+    assertEquals(ruleParameterModel.description(), "testString");
+    assertEquals(ruleParameterModel.type(), "string");
 
     Import importModel = new Import.Builder()
-      .parameters(java.util.Arrays.asList(parameterModel))
+      .parameters(java.util.Arrays.asList(ruleParameterModel))
       .build();
-    assertEquals(importModel.parameters(), java.util.Arrays.asList(parameterModel));
+    assertEquals(importModel.parameters(), java.util.Arrays.asList(ruleParameterModel));
 
     String json = TestUtilities.serialize(importModel);
 
