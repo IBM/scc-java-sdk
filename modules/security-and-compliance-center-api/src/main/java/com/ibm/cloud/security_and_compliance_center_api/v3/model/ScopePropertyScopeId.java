@@ -17,7 +17,9 @@ package com.ibm.cloud.security_and_compliance_center_api.v3.model;
  * The value of the identifier that correlates to scope type. If ScopePropertyScopeType schema uses the value
  * enterprise.account_group, the value should be the identifier or ID of the account_group within the enterprise.
  */
-public class ScopePropertyScopeId extends ScopeProperty {
+public class ScopePropertyScopeId {
+  private String name;
+  private String value;
 
   /**
    * The key for the scope property.
@@ -40,7 +42,7 @@ public class ScopePropertyScopeId extends ScopeProperty {
      *
      * @param scopePropertyScopeId the instance to initialize the Builder with
      */
-    public Builder(ScopeProperty scopePropertyScopeId) {
+    public Builder(ScopePropertyScopeId scopePropertyScopeId) {
       this.name = scopePropertyScopeId.name;
       this.value = scopePropertyScopeId.value;
     }
@@ -98,9 +100,9 @@ public class ScopePropertyScopeId extends ScopeProperty {
 
   protected ScopePropertyScopeId(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.name,
-      "name cannot be null");
+            "name cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.value,
-      "value cannot be null");
+            "value cannot be null");
     name = builder.name;
     value = builder.value;
   }
@@ -113,5 +115,20 @@ public class ScopePropertyScopeId extends ScopeProperty {
   public Builder newBuilder() {
     return new Builder(this);
   }
-}
 
+  /**
+   * Gets the name.
+   * @return ScopePropertyScopeId name
+   */
+  public String name() {
+    return name;
+  }
+
+  /**
+   * Gets the value.
+   * @return List of ScopePropertyScopeId
+   */
+  public String value() {
+    return value;
+  }
+}
