@@ -86,9 +86,9 @@ public class AttachmentItemTest {
       .status("in_progress")
       .time(DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"))
       .build();
-    assertEquals(lastScanModel.id(), "e8a39d25-0051-4328-8462-988ad321f49a");
-    assertEquals(lastScanModel.status(), "in_progress");
-    assertEquals(lastScanModel.time(), DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"));
+    assertEquals(lastScanModel.id, "e8a39d25-0051-4328-8462-988ad321f49a");
+    assertEquals(lastScanModel.status, "in_progress");
+    assertEquals(lastScanModel.time, DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"));
 
     AttachmentItem attachmentItemModel = new AttachmentItem.Builder()
       .id("130003ea8bfa43c5aacea07a86da3000")
