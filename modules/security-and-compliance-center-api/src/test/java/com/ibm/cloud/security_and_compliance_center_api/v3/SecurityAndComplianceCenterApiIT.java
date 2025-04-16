@@ -2189,15 +2189,9 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       ListReportResourcesOptions options = new ListReportResourcesOptions.Builder()
         .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
         .reportId(reportIdForReportLink)
-        .id("testString")
-        .resourceName("testString")
         .accountId(accountIdForReportLink)
-        .componentId("testString")
         .status("compliant")
-        .sort("account_id")
         .limit(Long.valueOf("10"))
-        .scopeId("testString")
-        .subscopeId("testString")
         .build();
 
       // Test getNext().
@@ -2219,8 +2213,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       assertEquals(allItems.size(), allResults.size());
       System.out.println(String.format("Retrieved a total of %d item(s) with pagination.", allResults.size()));
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s%nError details: %s",
+        e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 
