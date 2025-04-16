@@ -18,7 +18,6 @@
 package com.ibm.cloud.security_and_compliance_center_api.v3;
 
 import com.google.gson.JsonObject;
-import com.ibm.cloud.common.SdkCommon;
 import com.ibm.cloud.sdk.core.http.RequestBuilder;
 import com.ibm.cloud.sdk.core.http.ResponseConverter;
 import com.ibm.cloud.sdk.core.http.ServiceCall;
@@ -26,6 +25,7 @@ import com.ibm.cloud.sdk.core.security.Authenticator;
 import com.ibm.cloud.sdk.core.security.ConfigBasedAuthenticatorFactory;
 import com.ibm.cloud.sdk.core.service.BaseService;
 import com.ibm.cloud.sdk.core.util.ResponseConverterUtils;
+import com.ibm.cloud.security_and_compliance_center_api.common.SdkCommon;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ComparePredefinedProfilesResponse;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.CompareProfilesOptions;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ControlLibrary;
