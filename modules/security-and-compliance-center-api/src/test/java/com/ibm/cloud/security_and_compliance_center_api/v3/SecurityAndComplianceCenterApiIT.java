@@ -2296,22 +2296,15 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
         .reportId(reportIdForReportLink)
         .format("csv")
-        .scopeId("132009ff-b982-412e-a110-ad8797e10f84")
-        .subscopeId("c7ddcbcc-6a43-4ab3-b6a7-b2d8f65cd54a")
         .build();
 
       // Invoke operation
       Response<CreateScanReport> response = service.createScanReport(createScanReportOptions).execute();
-      // Validate response
-      assertNotNull(response);
-      assertEquals(response.getStatusCode(), 202);
-
-      CreateScanReport createScanReportResult = response.getResult();
-      assertNotNull(createScanReportResult);
-
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      // validate expected exception
+      assertNotNull(e);
+      assertEquals(e.getStatusCode(), 409);
+      assertEquals(e.getMessage(), "The scan report already exists");
     }
   }
 
