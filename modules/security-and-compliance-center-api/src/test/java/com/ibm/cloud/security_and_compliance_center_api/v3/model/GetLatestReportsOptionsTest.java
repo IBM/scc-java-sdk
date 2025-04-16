@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,12 +32,16 @@ public class GetLatestReportsOptionsTest {
   @Test
   public void testGetLatestReportsOptions() throws Throwable {
     GetLatestReportsOptions getLatestReportsOptionsModel = new GetLatestReportsOptions.Builder()
-      .xCorrelationId("testString")
-      .xRequestId("testString")
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
       .sort("profile_name")
       .build();
-    assertEquals(getLatestReportsOptionsModel.xCorrelationId(), "testString");
-    assertEquals(getLatestReportsOptionsModel.xRequestId(), "testString");
+    assertEquals(getLatestReportsOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
     assertEquals(getLatestReportsOptionsModel.sort(), "profile_name");
   }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetLatestReportsOptionsError() throws Throwable {
+    new GetLatestReportsOptions.Builder().build();
+  }
+
 }

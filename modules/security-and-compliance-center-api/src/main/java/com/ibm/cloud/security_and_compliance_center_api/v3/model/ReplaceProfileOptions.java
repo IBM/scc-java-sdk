@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,9 +10,11 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -23,36 +25,60 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class ReplaceProfileOptions extends GenericModel {
 
   /**
-   * The profile type.
+   * The type of profile, either predefined or custom.
    */
-  public interface ProfileType {
-    /** predefined. */
-    String PREDEFINED = "predefined";
+  public interface NewProfileType {
     /** custom. */
     String CUSTOM = "custom";
+    /** predefined. */
+    String PREDEFINED = "predefined";
   }
 
+  protected String instanceId;
   protected String profileId;
-  protected String profileName;
-  protected String profileDescription;
-  protected String profileType;
-  protected List<ProfileControlsPrototype> controls;
-  protected List<DefaultParametersPrototype> defaultParameters;
-  protected String xCorrelationId;
-  protected String xRequestId;
+  protected String newProfileType;
+  protected List<ProfileControls> newControls;
+  protected List<DefaultParameters> newDefaultParameters;
+  protected String newId;
+  protected String newProfileName;
+  protected String newInstanceId;
+  protected Boolean newHierarchyEnabled;
+  protected String newProfileDescription;
+  protected String newProfileVersion;
+  protected String newVersionGroupLabel;
+  protected Boolean newLatest;
+  protected String newCreatedBy;
+  protected Date newCreatedOn;
+  protected String newUpdatedBy;
+  protected Date newUpdatedOn;
+  protected Long newControlsCount;
+  protected Long newAttachmentsCount;
+  protected String accountId;
 
   /**
    * Builder.
    */
   public static class Builder {
+    private String instanceId;
     private String profileId;
-    private String profileName;
-    private String profileDescription;
-    private String profileType;
-    private List<ProfileControlsPrototype> controls;
-    private List<DefaultParametersPrototype> defaultParameters;
-    private String xCorrelationId;
-    private String xRequestId;
+    private String newProfileType;
+    private List<ProfileControls> newControls;
+    private List<DefaultParameters> newDefaultParameters;
+    private String newId;
+    private String newProfileName;
+    private String newInstanceId;
+    private Boolean newHierarchyEnabled;
+    private String newProfileDescription;
+    private String newProfileVersion;
+    private String newVersionGroupLabel;
+    private Boolean newLatest;
+    private String newCreatedBy;
+    private Date newCreatedOn;
+    private String newUpdatedBy;
+    private Date newUpdatedOn;
+    private Long newControlsCount;
+    private Long newAttachmentsCount;
+    private String accountId;
 
     /**
      * Instantiates a new Builder from an existing ReplaceProfileOptions instance.
@@ -60,14 +86,26 @@ public class ReplaceProfileOptions extends GenericModel {
      * @param replaceProfileOptions the instance to initialize the Builder with
      */
     private Builder(ReplaceProfileOptions replaceProfileOptions) {
+      this.instanceId = replaceProfileOptions.instanceId;
       this.profileId = replaceProfileOptions.profileId;
-      this.profileName = replaceProfileOptions.profileName;
-      this.profileDescription = replaceProfileOptions.profileDescription;
-      this.profileType = replaceProfileOptions.profileType;
-      this.controls = replaceProfileOptions.controls;
-      this.defaultParameters = replaceProfileOptions.defaultParameters;
-      this.xCorrelationId = replaceProfileOptions.xCorrelationId;
-      this.xRequestId = replaceProfileOptions.xRequestId;
+      this.newProfileType = replaceProfileOptions.newProfileType;
+      this.newControls = replaceProfileOptions.newControls;
+      this.newDefaultParameters = replaceProfileOptions.newDefaultParameters;
+      this.newId = replaceProfileOptions.newId;
+      this.newProfileName = replaceProfileOptions.newProfileName;
+      this.newInstanceId = replaceProfileOptions.newInstanceId;
+      this.newHierarchyEnabled = replaceProfileOptions.newHierarchyEnabled;
+      this.newProfileDescription = replaceProfileOptions.newProfileDescription;
+      this.newProfileVersion = replaceProfileOptions.newProfileVersion;
+      this.newVersionGroupLabel = replaceProfileOptions.newVersionGroupLabel;
+      this.newLatest = replaceProfileOptions.newLatest;
+      this.newCreatedBy = replaceProfileOptions.newCreatedBy;
+      this.newCreatedOn = replaceProfileOptions.newCreatedOn;
+      this.newUpdatedBy = replaceProfileOptions.newUpdatedBy;
+      this.newUpdatedOn = replaceProfileOptions.newUpdatedOn;
+      this.newControlsCount = replaceProfileOptions.newControlsCount;
+      this.newAttachmentsCount = replaceProfileOptions.newAttachmentsCount;
+      this.accountId = replaceProfileOptions.accountId;
     }
 
     /**
@@ -79,20 +117,18 @@ public class ReplaceProfileOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
+     * @param instanceId the instanceId
      * @param profileId the profileId
-     * @param profileName the profileName
-     * @param profileDescription the profileDescription
-     * @param profileType the profileType
-     * @param controls the controls
-     * @param defaultParameters the defaultParameters
+     * @param newProfileType the newProfileType
+     * @param newControls the newControls
+     * @param newDefaultParameters the newDefaultParameters
      */
-    public Builder(String profileId, String profileName, String profileDescription, String profileType, List<ProfileControlsPrototype> controls, List<DefaultParametersPrototype> defaultParameters) {
+    public Builder(String instanceId, String profileId, String newProfileType, List<ProfileControls> newControls, List<DefaultParameters> newDefaultParameters) {
+      this.instanceId = instanceId;
       this.profileId = profileId;
-      this.profileName = profileName;
-      this.profileDescription = profileDescription;
-      this.profileType = profileType;
-      this.controls = controls;
-      this.defaultParameters = defaultParameters;
+      this.newProfileType = newProfileType;
+      this.newControls = newControls;
+      this.newDefaultParameters = newDefaultParameters;
     }
 
     /**
@@ -105,34 +141,45 @@ public class ReplaceProfileOptions extends GenericModel {
     }
 
     /**
-     * Adds an controls to controls.
+     * Adds a new element to newControls.
      *
-     * @param controls the new controls
+     * @param newControls the new element to be added
      * @return the ReplaceProfileOptions builder
      */
-    public Builder addControls(ProfileControlsPrototype controls) {
-      com.ibm.cloud.sdk.core.util.Validator.notNull(controls,
-        "controls cannot be null");
-      if (this.controls == null) {
-        this.controls = new ArrayList<ProfileControlsPrototype>();
+    public Builder addNewControls(ProfileControls newControls) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(newControls,
+        "newControls cannot be null");
+      if (this.newControls == null) {
+        this.newControls = new ArrayList<ProfileControls>();
       }
-      this.controls.add(controls);
+      this.newControls.add(newControls);
       return this;
     }
 
     /**
-     * Adds an defaultParameters to defaultParameters.
+     * Adds a new element to newDefaultParameters.
      *
-     * @param defaultParameters the new defaultParameters
+     * @param newDefaultParameters the new element to be added
      * @return the ReplaceProfileOptions builder
      */
-    public Builder addDefaultParameters(DefaultParametersPrototype defaultParameters) {
-      com.ibm.cloud.sdk.core.util.Validator.notNull(defaultParameters,
-        "defaultParameters cannot be null");
-      if (this.defaultParameters == null) {
-        this.defaultParameters = new ArrayList<DefaultParametersPrototype>();
+    public Builder addNewDefaultParameters(DefaultParameters newDefaultParameters) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(newDefaultParameters,
+        "newDefaultParameters cannot be null");
+      if (this.newDefaultParameters == null) {
+        this.newDefaultParameters = new ArrayList<DefaultParameters>();
       }
-      this.defaultParameters.add(defaultParameters);
+      this.newDefaultParameters.add(newDefaultParameters);
+      return this;
+    }
+
+    /**
+     * Set the instanceId.
+     *
+     * @param instanceId the instanceId
+     * @return the ReplaceProfileOptions builder
+     */
+    public Builder instanceId(String instanceId) {
+      this.instanceId = instanceId;
       return this;
     }
 
@@ -148,81 +195,229 @@ public class ReplaceProfileOptions extends GenericModel {
     }
 
     /**
-     * Set the profileName.
+     * Set the newProfileType.
      *
-     * @param profileName the profileName
+     * @param newProfileType the newProfileType
      * @return the ReplaceProfileOptions builder
      */
-    public Builder profileName(String profileName) {
-      this.profileName = profileName;
+    public Builder newProfileType(String newProfileType) {
+      this.newProfileType = newProfileType;
       return this;
     }
 
     /**
-     * Set the profileDescription.
+     * Set the newControls.
+     * Existing newControls will be replaced.
      *
-     * @param profileDescription the profileDescription
+     * @param newControls the newControls
      * @return the ReplaceProfileOptions builder
      */
-    public Builder profileDescription(String profileDescription) {
-      this.profileDescription = profileDescription;
+    public Builder newControls(List<ProfileControls> newControls) {
+      this.newControls = newControls;
       return this;
     }
 
     /**
-     * Set the profileType.
+     * Set the newDefaultParameters.
+     * Existing newDefaultParameters will be replaced.
      *
-     * @param profileType the profileType
+     * @param newDefaultParameters the newDefaultParameters
      * @return the ReplaceProfileOptions builder
      */
-    public Builder profileType(String profileType) {
-      this.profileType = profileType;
+    public Builder newDefaultParameters(List<DefaultParameters> newDefaultParameters) {
+      this.newDefaultParameters = newDefaultParameters;
       return this;
     }
 
     /**
-     * Set the controls.
-     * Existing controls will be replaced.
+     * Set the newId.
      *
-     * @param controls the controls
+     * @param newId the newId
      * @return the ReplaceProfileOptions builder
      */
-    public Builder controls(List<ProfileControlsPrototype> controls) {
-      this.controls = controls;
+    public Builder newId(String newId) {
+      this.newId = newId;
       return this;
     }
 
     /**
-     * Set the defaultParameters.
-     * Existing defaultParameters will be replaced.
+     * Set the newProfileName.
      *
-     * @param defaultParameters the defaultParameters
+     * @param newProfileName the newProfileName
      * @return the ReplaceProfileOptions builder
      */
-    public Builder defaultParameters(List<DefaultParametersPrototype> defaultParameters) {
-      this.defaultParameters = defaultParameters;
+    public Builder newProfileName(String newProfileName) {
+      this.newProfileName = newProfileName;
       return this;
     }
 
     /**
-     * Set the xCorrelationId.
+     * Set the newInstanceId.
      *
-     * @param xCorrelationId the xCorrelationId
+     * @param newInstanceId the newInstanceId
      * @return the ReplaceProfileOptions builder
      */
-    public Builder xCorrelationId(String xCorrelationId) {
-      this.xCorrelationId = xCorrelationId;
+    public Builder newInstanceId(String newInstanceId) {
+      this.newInstanceId = newInstanceId;
       return this;
     }
 
     /**
-     * Set the xRequestId.
+     * Set the newHierarchyEnabled.
      *
-     * @param xRequestId the xRequestId
+     * @param newHierarchyEnabled the newHierarchyEnabled
      * @return the ReplaceProfileOptions builder
      */
-    public Builder xRequestId(String xRequestId) {
-      this.xRequestId = xRequestId;
+    public Builder newHierarchyEnabled(Boolean newHierarchyEnabled) {
+      this.newHierarchyEnabled = newHierarchyEnabled;
+      return this;
+    }
+
+    /**
+     * Set the newProfileDescription.
+     *
+     * @param newProfileDescription the newProfileDescription
+     * @return the ReplaceProfileOptions builder
+     */
+    public Builder newProfileDescription(String newProfileDescription) {
+      this.newProfileDescription = newProfileDescription;
+      return this;
+    }
+
+    /**
+     * Set the newProfileVersion.
+     *
+     * @param newProfileVersion the newProfileVersion
+     * @return the ReplaceProfileOptions builder
+     */
+    public Builder newProfileVersion(String newProfileVersion) {
+      this.newProfileVersion = newProfileVersion;
+      return this;
+    }
+
+    /**
+     * Set the newVersionGroupLabel.
+     *
+     * @param newVersionGroupLabel the newVersionGroupLabel
+     * @return the ReplaceProfileOptions builder
+     */
+    public Builder newVersionGroupLabel(String newVersionGroupLabel) {
+      this.newVersionGroupLabel = newVersionGroupLabel;
+      return this;
+    }
+
+    /**
+     * Set the newLatest.
+     *
+     * @param newLatest the newLatest
+     * @return the ReplaceProfileOptions builder
+     */
+    public Builder newLatest(Boolean newLatest) {
+      this.newLatest = newLatest;
+      return this;
+    }
+
+    /**
+     * Set the newCreatedBy.
+     *
+     * @param newCreatedBy the newCreatedBy
+     * @return the ReplaceProfileOptions builder
+     */
+    public Builder newCreatedBy(String newCreatedBy) {
+      this.newCreatedBy = newCreatedBy;
+      return this;
+    }
+
+    /**
+     * Set the newCreatedOn.
+     *
+     * @param newCreatedOn the newCreatedOn
+     * @return the ReplaceProfileOptions builder
+     */
+    public Builder newCreatedOn(Date newCreatedOn) {
+      this.newCreatedOn = newCreatedOn;
+      return this;
+    }
+
+    /**
+     * Set the newUpdatedBy.
+     *
+     * @param newUpdatedBy the newUpdatedBy
+     * @return the ReplaceProfileOptions builder
+     */
+    public Builder newUpdatedBy(String newUpdatedBy) {
+      this.newUpdatedBy = newUpdatedBy;
+      return this;
+    }
+
+    /**
+     * Set the newUpdatedOn.
+     *
+     * @param newUpdatedOn the newUpdatedOn
+     * @return the ReplaceProfileOptions builder
+     */
+    public Builder newUpdatedOn(Date newUpdatedOn) {
+      this.newUpdatedOn = newUpdatedOn;
+      return this;
+    }
+
+    /**
+     * Set the newControlsCount.
+     *
+     * @param newControlsCount the newControlsCount
+     * @return the ReplaceProfileOptions builder
+     */
+    public Builder newControlsCount(long newControlsCount) {
+      this.newControlsCount = newControlsCount;
+      return this;
+    }
+
+    /**
+     * Set the newAttachmentsCount.
+     *
+     * @param newAttachmentsCount the newAttachmentsCount
+     * @return the ReplaceProfileOptions builder
+     */
+    public Builder newAttachmentsCount(long newAttachmentsCount) {
+      this.newAttachmentsCount = newAttachmentsCount;
+      return this;
+    }
+
+    /**
+     * Set the accountId.
+     *
+     * @param accountId the accountId
+     * @return the ReplaceProfileOptions builder
+     */
+    public Builder accountId(String accountId) {
+      this.accountId = accountId;
+      return this;
+    }
+
+    /**
+     * Set the profile.
+     *
+     * @param profile the profile
+     * @return the ReplaceProfileOptions builder
+     */
+    public Builder profile(Profile profile) {
+      this.newProfileType = profile.profileType();
+      this.newControls = profile.controls();
+      this.newDefaultParameters = profile.defaultParameters();
+      this.newId = profile.id();
+      this.newProfileName = profile.profileName();
+      this.newInstanceId = profile.instanceId();
+      this.newHierarchyEnabled = profile.hierarchyEnabled();
+      this.newProfileDescription = profile.profileDescription();
+      this.newProfileVersion = profile.profileVersion();
+      this.newVersionGroupLabel = profile.versionGroupLabel();
+      this.newLatest = profile.latest();
+      this.newCreatedBy = profile.createdBy();
+      this.newCreatedOn = profile.createdOn();
+      this.newUpdatedBy = profile.updatedBy();
+      this.newUpdatedOn = profile.updatedOn();
+      this.newControlsCount = profile.controlsCount();
+      this.newAttachmentsCount = profile.attachmentsCount();
       return this;
     }
   }
@@ -230,26 +425,36 @@ public class ReplaceProfileOptions extends GenericModel {
   protected ReplaceProfileOptions() { }
 
   protected ReplaceProfileOptions(Builder builder) {
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.instanceId,
+      "instanceId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.profileId,
       "profileId cannot be empty");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.profileName,
-      "profileName cannot be null");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.profileDescription,
-      "profileDescription cannot be null");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.profileType,
-      "profileType cannot be null");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.controls,
-      "controls cannot be null");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.defaultParameters,
-      "defaultParameters cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.newProfileType,
+      "newProfileType cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.newControls,
+      "newControls cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.newDefaultParameters,
+      "newDefaultParameters cannot be null");
+    instanceId = builder.instanceId;
     profileId = builder.profileId;
-    profileName = builder.profileName;
-    profileDescription = builder.profileDescription;
-    profileType = builder.profileType;
-    controls = builder.controls;
-    defaultParameters = builder.defaultParameters;
-    xCorrelationId = builder.xCorrelationId;
-    xRequestId = builder.xRequestId;
+    newProfileType = builder.newProfileType;
+    newControls = builder.newControls;
+    newDefaultParameters = builder.newDefaultParameters;
+    newId = builder.newId;
+    newProfileName = builder.newProfileName;
+    newInstanceId = builder.newInstanceId;
+    newHierarchyEnabled = builder.newHierarchyEnabled;
+    newProfileDescription = builder.newProfileDescription;
+    newProfileVersion = builder.newProfileVersion;
+    newVersionGroupLabel = builder.newVersionGroupLabel;
+    newLatest = builder.newLatest;
+    newCreatedBy = builder.newCreatedBy;
+    newCreatedOn = builder.newCreatedOn;
+    newUpdatedBy = builder.newUpdatedBy;
+    newUpdatedOn = builder.newUpdatedOn;
+    newControlsCount = builder.newControlsCount;
+    newAttachmentsCount = builder.newAttachmentsCount;
+    accountId = builder.accountId;
   }
 
   /**
@@ -259,6 +464,17 @@ public class ReplaceProfileOptions extends GenericModel {
    */
   public Builder newBuilder() {
     return new Builder(this);
+  }
+
+  /**
+   * Gets the instanceId.
+   *
+   * The ID of the Security and Compliance Center instance.
+   *
+   * @return the instanceId
+   */
+  public String instanceId() {
+    return instanceId;
   }
 
   /**
@@ -273,84 +489,201 @@ public class ReplaceProfileOptions extends GenericModel {
   }
 
   /**
-   * Gets the profileName.
+   * Gets the newProfileType.
    *
-   * The name of the profile.
+   * The type of profile, either predefined or custom.
    *
-   * @return the profileName
+   * @return the newProfileType
    */
-  public String profileName() {
-    return profileName;
+  public String newProfileType() {
+    return newProfileType;
   }
 
   /**
-   * Gets the profileDescription.
+   * Gets the newControls.
    *
-   * The description of the profile.
+   * The list of controls.
    *
-   * @return the profileDescription
+   * @return the newControls
    */
-  public String profileDescription() {
-    return profileDescription;
+  public List<ProfileControls> newControls() {
+    return newControls;
   }
 
   /**
-   * Gets the profileType.
-   *
-   * The profile type.
-   *
-   * @return the profileType
-   */
-  public String profileType() {
-    return profileType;
-  }
-
-  /**
-   * Gets the controls.
-   *
-   * The controls that are in the profile.
-   *
-   * @return the controls
-   */
-  public List<ProfileControlsPrototype> controls() {
-    return controls;
-  }
-
-  /**
-   * Gets the defaultParameters.
+   * Gets the newDefaultParameters.
    *
    * The default parameters of the profile.
    *
-   * @return the defaultParameters
+   * @return the newDefaultParameters
    */
-  public List<DefaultParametersPrototype> defaultParameters() {
-    return defaultParameters;
+  public List<DefaultParameters> newDefaultParameters() {
+    return newDefaultParameters;
   }
 
   /**
-   * Gets the xCorrelationId.
+   * Gets the newId.
    *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is used for downstream requests and retries of those requests. If a value of
-   * this header is not supplied in a request, the service generates a random (version 4) UUID.
+   * The ID of the profile.
    *
-   * @return the xCorrelationId
+   * @return the newId
    */
-  public String xCorrelationId() {
-    return xCorrelationId;
+  public String newId() {
+    return newId;
   }
 
   /**
-   * Gets the xRequestId.
+   * Gets the newProfileName.
    *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is not used for downstream requests and retries of those requests. If a
-   * value of this header is not supplied in a request, the service generates a random (version 4) UUID.
+   * The name of the profile.
    *
-   * @return the xRequestId
+   * @return the newProfileName
    */
-  public String xRequestId() {
-    return xRequestId;
+  public String newProfileName() {
+    return newProfileName;
+  }
+
+  /**
+   * Gets the newInstanceId.
+   *
+   * The ID of the Security and Compliance Center instance who owns the profile.
+   *
+   * @return the newInstanceId
+   */
+  public String newInstanceId() {
+    return newInstanceId;
+  }
+
+  /**
+   * Gets the newHierarchyEnabled.
+   *
+   * Determines if the profile can be set to a hierarchy.
+   *
+   * @return the newHierarchyEnabled
+   */
+  public Boolean newHierarchyEnabled() {
+    return newHierarchyEnabled;
+  }
+
+  /**
+   * Gets the newProfileDescription.
+   *
+   * A description of what the profile should represent.
+   *
+   * @return the newProfileDescription
+   */
+  public String newProfileDescription() {
+    return newProfileDescription;
+  }
+
+  /**
+   * Gets the newProfileVersion.
+   *
+   * The version of the profile.
+   *
+   * @return the newProfileVersion
+   */
+  public String newProfileVersion() {
+    return newProfileVersion;
+  }
+
+  /**
+   * Gets the newVersionGroupLabel.
+   *
+   * The unique identifier of the revision.
+   *
+   * @return the newVersionGroupLabel
+   */
+  public String newVersionGroupLabel() {
+    return newVersionGroupLabel;
+  }
+
+  /**
+   * Gets the newLatest.
+   *
+   * Determines if the profile is up to date with the latest revisions.
+   *
+   * @return the newLatest
+   */
+  public Boolean newLatest() {
+    return newLatest;
+  }
+
+  /**
+   * Gets the newCreatedBy.
+   *
+   * User who created the profile.
+   *
+   * @return the newCreatedBy
+   */
+  public String newCreatedBy() {
+    return newCreatedBy;
+  }
+
+  /**
+   * Gets the newCreatedOn.
+   *
+   * The date when the profile was created, in date-time format.
+   *
+   * @return the newCreatedOn
+   */
+  public Date newCreatedOn() {
+    return newCreatedOn;
+  }
+
+  /**
+   * Gets the newUpdatedBy.
+   *
+   * User who made the latest changes to the profile.
+   *
+   * @return the newUpdatedBy
+   */
+  public String newUpdatedBy() {
+    return newUpdatedBy;
+  }
+
+  /**
+   * Gets the newUpdatedOn.
+   *
+   * The date when the profile was last updated, in date-time format.
+   *
+   * @return the newUpdatedOn
+   */
+  public Date newUpdatedOn() {
+    return newUpdatedOn;
+  }
+
+  /**
+   * Gets the newControlsCount.
+   *
+   * The number of controls contained in the profile.
+   *
+   * @return the newControlsCount
+   */
+  public Long newControlsCount() {
+    return newControlsCount;
+  }
+
+  /**
+   * Gets the newAttachmentsCount.
+   *
+   * The number of attachments associated with the profile.
+   *
+   * @return the newAttachmentsCount
+   */
+  public Long newAttachmentsCount() {
+    return newAttachmentsCount;
+  }
+
+  /**
+   * Gets the accountId.
+   *
+   * The user account ID.
+   *
+   * @return the accountId
+   */
+  public String accountId() {
+    return accountId;
   }
 }
 

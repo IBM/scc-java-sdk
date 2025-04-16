@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -19,19 +20,17 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class UpdateSettingsOptions extends GenericModel {
 
-  protected EventNotifications eventNotifications;
-  protected ObjectStorage objectStorage;
-  protected String xCorrelationId;
-  protected String xRequestId;
+  protected String instanceId;
+  protected ObjectStoragePrototype objectStorage;
+  protected EventNotificationsPrototype eventNotifications;
 
   /**
    * Builder.
    */
   public static class Builder {
-    private EventNotifications eventNotifications;
-    private ObjectStorage objectStorage;
-    private String xCorrelationId;
-    private String xRequestId;
+    private String instanceId;
+    private ObjectStoragePrototype objectStorage;
+    private EventNotificationsPrototype eventNotifications;
 
     /**
      * Instantiates a new Builder from an existing UpdateSettingsOptions instance.
@@ -39,16 +38,24 @@ public class UpdateSettingsOptions extends GenericModel {
      * @param updateSettingsOptions the instance to initialize the Builder with
      */
     private Builder(UpdateSettingsOptions updateSettingsOptions) {
-      this.eventNotifications = updateSettingsOptions.eventNotifications;
+      this.instanceId = updateSettingsOptions.instanceId;
       this.objectStorage = updateSettingsOptions.objectStorage;
-      this.xCorrelationId = updateSettingsOptions.xCorrelationId;
-      this.xRequestId = updateSettingsOptions.xRequestId;
+      this.eventNotifications = updateSettingsOptions.eventNotifications;
     }
 
     /**
      * Instantiates a new builder.
      */
     public Builder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param instanceId the instanceId
+     */
+    public Builder(String instanceId) {
+      this.instanceId = instanceId;
     }
 
     /**
@@ -61,13 +68,13 @@ public class UpdateSettingsOptions extends GenericModel {
     }
 
     /**
-     * Set the eventNotifications.
+     * Set the instanceId.
      *
-     * @param eventNotifications the eventNotifications
+     * @param instanceId the instanceId
      * @return the UpdateSettingsOptions builder
      */
-    public Builder eventNotifications(EventNotifications eventNotifications) {
-      this.eventNotifications = eventNotifications;
+    public Builder instanceId(String instanceId) {
+      this.instanceId = instanceId;
       return this;
     }
 
@@ -77,42 +84,19 @@ public class UpdateSettingsOptions extends GenericModel {
      * @param objectStorage the objectStorage
      * @return the UpdateSettingsOptions builder
      */
-    public Builder objectStorage(ObjectStorage objectStorage) {
+    public Builder objectStorage(ObjectStoragePrototype objectStorage) {
       this.objectStorage = objectStorage;
       return this;
     }
 
     /**
-     * Set the xCorrelationId.
+     * Set the eventNotifications.
      *
-     * @param xCorrelationId the xCorrelationId
+     * @param eventNotifications the eventNotifications
      * @return the UpdateSettingsOptions builder
      */
-    public Builder xCorrelationId(String xCorrelationId) {
-      this.xCorrelationId = xCorrelationId;
-      return this;
-    }
-
-    /**
-     * Set the xRequestId.
-     *
-     * @param xRequestId the xRequestId
-     * @return the UpdateSettingsOptions builder
-     */
-    public Builder xRequestId(String xRequestId) {
-      this.xRequestId = xRequestId;
-      return this;
-    }
-
-    /**
-     * Set the settings.
-     *
-     * @param settings the settings
-     * @return the UpdateSettingsOptions builder
-     */
-    public Builder settings(Settings settings) {
-      this.eventNotifications = settings.eventNotifications();
-      this.objectStorage = settings.objectStorage();
+    public Builder eventNotifications(EventNotificationsPrototype eventNotifications) {
+      this.eventNotifications = eventNotifications;
       return this;
     }
   }
@@ -120,10 +104,11 @@ public class UpdateSettingsOptions extends GenericModel {
   protected UpdateSettingsOptions() { }
 
   protected UpdateSettingsOptions(Builder builder) {
-    eventNotifications = builder.eventNotifications;
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.instanceId,
+      "instanceId cannot be empty");
+    instanceId = builder.instanceId;
     objectStorage = builder.objectStorage;
-    xCorrelationId = builder.xCorrelationId;
-    xRequestId = builder.xRequestId;
+    eventNotifications = builder.eventNotifications;
   }
 
   /**
@@ -136,51 +121,36 @@ public class UpdateSettingsOptions extends GenericModel {
   }
 
   /**
-   * Gets the eventNotifications.
+   * Gets the instanceId.
    *
-   * The Event Notifications settings.
+   * The ID of the Security and Compliance Center instance.
    *
-   * @return the eventNotifications
+   * @return the instanceId
    */
-  public EventNotifications eventNotifications() {
-    return eventNotifications;
+  public String instanceId() {
+    return instanceId;
   }
 
   /**
    * Gets the objectStorage.
    *
-   * The Cloud Object Storage settings.
+   * The payload to connect a Cloud Object Storage instance to an Security and Compliance Center instance.
    *
    * @return the objectStorage
    */
-  public ObjectStorage objectStorage() {
+  public ObjectStoragePrototype objectStorage() {
     return objectStorage;
   }
 
   /**
-   * Gets the xCorrelationId.
+   * Gets the eventNotifications.
    *
-   * The supplied or generated value of this header is logged for a request, and repeated in a response header for the
-   * corresponding response. The same value is used for downstream requests and retries of those requests. If a value of
-   * this header is not supplied in a request, the service generates a random (version 4) UUID.
+   * The payload to connect an Event Notification instance with a Security and Compliance Center instance.
    *
-   * @return the xCorrelationId
+   * @return the eventNotifications
    */
-  public String xCorrelationId() {
-    return xCorrelationId;
-  }
-
-  /**
-   * Gets the xRequestId.
-   *
-   * The supplied or generated value of this header is logged for a request, and repeated in a response header  for the
-   * corresponding response.  The same value is not used for downstream requests and retries of those requests.  If a
-   * value of this header is not supplied in a request, the service generates a random (version 4) UUID.
-   *
-   * @return the xRequestId
-   */
-  public String xRequestId() {
-    return xRequestId;
+  public EventNotificationsPrototype eventNotifications() {
+    return eventNotifications;
   }
 }
 

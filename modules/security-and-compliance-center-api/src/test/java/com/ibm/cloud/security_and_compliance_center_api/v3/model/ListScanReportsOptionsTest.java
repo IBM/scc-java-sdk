@@ -1,0 +1,53 @@
+/*
+ * (C) Copyright IBM Corp. 2025.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ */
+
+package com.ibm.cloud.security_and_compliance_center_api.v3.model;
+
+import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.ListScanReportsOptions;
+import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
+import org.testng.annotations.Test;
+import static org.testng.Assert.*;
+
+/**
+ * Unit test class for the ListScanReportsOptions model.
+ */
+public class ListScanReportsOptionsTest {
+  final HashMap<String, InputStream> mockStreamMap = TestUtilities.createMockStreamMap();
+  final List<FileWithMetadata> mockListFileWithMetadata = TestUtilities.creatMockListFileWithMetadata();
+
+  @Test
+  public void testListScanReportsOptions() throws Throwable {
+    ListScanReportsOptions listScanReportsOptionsModel = new ListScanReportsOptions.Builder()
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
+      .reportId("testString")
+      .scopeId("testString")
+      .subscopeId("testString")
+      .sort("status")
+      .build();
+    assertEquals(listScanReportsOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
+    assertEquals(listScanReportsOptionsModel.reportId(), "testString");
+    assertEquals(listScanReportsOptionsModel.scopeId(), "testString");
+    assertEquals(listScanReportsOptionsModel.subscopeId(), "testString");
+    assertEquals(listScanReportsOptionsModel.sort(), "status");
+  }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testListScanReportsOptionsError() throws Throwable {
+    new ListScanReportsOptions.Builder().build();
+  }
+
+}

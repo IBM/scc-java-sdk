@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import java.util.ArrayList;
@@ -22,27 +23,25 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class CreateRuleOptions extends GenericModel {
 
+  protected String instanceId;
   protected String description;
-  protected TargetPrototype target;
+  protected RuleTargetPrototype target;
   protected RequiredConfig requiredConfig;
   protected String version;
   protected Import xImport;
   protected List<String> labels;
-  protected String xCorrelationId;
-  protected String xRequestId;
 
   /**
    * Builder.
    */
   public static class Builder {
+    private String instanceId;
     private String description;
-    private TargetPrototype target;
+    private RuleTargetPrototype target;
     private RequiredConfig requiredConfig;
     private String version;
     private Import xImport;
     private List<String> labels;
-    private String xCorrelationId;
-    private String xRequestId;
 
     /**
      * Instantiates a new Builder from an existing CreateRuleOptions instance.
@@ -50,14 +49,13 @@ public class CreateRuleOptions extends GenericModel {
      * @param createRuleOptions the instance to initialize the Builder with
      */
     private Builder(CreateRuleOptions createRuleOptions) {
+      this.instanceId = createRuleOptions.instanceId;
       this.description = createRuleOptions.description;
       this.target = createRuleOptions.target;
       this.requiredConfig = createRuleOptions.requiredConfig;
       this.version = createRuleOptions.version;
       this.xImport = createRuleOptions.xImport;
       this.labels = createRuleOptions.labels;
-      this.xCorrelationId = createRuleOptions.xCorrelationId;
-      this.xRequestId = createRuleOptions.xRequestId;
     }
 
     /**
@@ -69,11 +67,13 @@ public class CreateRuleOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
+     * @param instanceId the instanceId
      * @param description the description
      * @param target the target
      * @param requiredConfig the requiredConfig
      */
-    public Builder(String description, TargetPrototype target, RequiredConfig requiredConfig) {
+    public Builder(String instanceId, String description, RuleTargetPrototype target, RequiredConfig requiredConfig) {
+      this.instanceId = instanceId;
       this.description = description;
       this.target = target;
       this.requiredConfig = requiredConfig;
@@ -89,9 +89,9 @@ public class CreateRuleOptions extends GenericModel {
     }
 
     /**
-     * Adds an labels to labels.
+     * Adds a new element to labels.
      *
-     * @param labels the new labels
+     * @param labels the new element to be added
      * @return the CreateRuleOptions builder
      */
     public Builder addLabels(String labels) {
@@ -101,6 +101,17 @@ public class CreateRuleOptions extends GenericModel {
         this.labels = new ArrayList<String>();
       }
       this.labels.add(labels);
+      return this;
+    }
+
+    /**
+     * Set the instanceId.
+     *
+     * @param instanceId the instanceId
+     * @return the CreateRuleOptions builder
+     */
+    public Builder instanceId(String instanceId) {
+      this.instanceId = instanceId;
       return this;
     }
 
@@ -121,7 +132,7 @@ public class CreateRuleOptions extends GenericModel {
      * @param target the target
      * @return the CreateRuleOptions builder
      */
-    public Builder target(TargetPrototype target) {
+    public Builder target(RuleTargetPrototype target) {
       this.target = target;
       return this;
     }
@@ -170,47 +181,26 @@ public class CreateRuleOptions extends GenericModel {
       this.labels = labels;
       return this;
     }
-
-    /**
-     * Set the xCorrelationId.
-     *
-     * @param xCorrelationId the xCorrelationId
-     * @return the CreateRuleOptions builder
-     */
-    public Builder xCorrelationId(String xCorrelationId) {
-      this.xCorrelationId = xCorrelationId;
-      return this;
-    }
-
-    /**
-     * Set the xRequestId.
-     *
-     * @param xRequestId the xRequestId
-     * @return the CreateRuleOptions builder
-     */
-    public Builder xRequestId(String xRequestId) {
-      this.xRequestId = xRequestId;
-      return this;
-    }
   }
 
   protected CreateRuleOptions() { }
 
   protected CreateRuleOptions(Builder builder) {
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.instanceId,
+      "instanceId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.description,
       "description cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.target,
       "target cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.requiredConfig,
       "requiredConfig cannot be null");
+    instanceId = builder.instanceId;
     description = builder.description;
     target = builder.target;
     requiredConfig = builder.requiredConfig;
     version = builder.version;
     xImport = builder.xImport;
     labels = builder.labels;
-    xCorrelationId = builder.xCorrelationId;
-    xRequestId = builder.xRequestId;
   }
 
   /**
@@ -220,6 +210,17 @@ public class CreateRuleOptions extends GenericModel {
    */
   public Builder newBuilder() {
     return new Builder(this);
+  }
+
+  /**
+   * Gets the instanceId.
+   *
+   * The ID of the Security and Compliance Center instance.
+   *
+   * @return the instanceId
+   */
+  public String instanceId() {
+    return instanceId;
   }
 
   /**
@@ -240,14 +241,14 @@ public class CreateRuleOptions extends GenericModel {
    *
    * @return the target
    */
-  public TargetPrototype target() {
+  public RuleTargetPrototype target() {
     return target;
   }
 
   /**
    * Gets the requiredConfig.
    *
-   * The required configurations.
+   * The required configurations for a Rule.
    *
    * @return the requiredConfig
    */
@@ -286,32 +287,6 @@ public class CreateRuleOptions extends GenericModel {
    */
   public List<String> labels() {
     return labels;
-  }
-
-  /**
-   * Gets the xCorrelationId.
-   *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is used for downstream requests and retries of those requests. If a value of
-   * this header is not supplied in a request, the service generates a random (version 4) UUID.
-   *
-   * @return the xCorrelationId
-   */
-  public String xCorrelationId() {
-    return xCorrelationId;
-  }
-
-  /**
-   * Gets the xRequestId.
-   *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header  for the
-   * corresponding response.  The same value is not used for downstream requests and retries of those requests.  If a
-   * value of this header is not supplied in a request, the service generates a random (version 4) UUID.
-   *
-   * @return the xRequestId
-   */
-  public String xRequestId() {
-    return xRequestId;
   }
 }
 

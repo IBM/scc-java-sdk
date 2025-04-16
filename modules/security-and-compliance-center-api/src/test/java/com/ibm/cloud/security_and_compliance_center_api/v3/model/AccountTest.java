@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -31,9 +31,21 @@ public class AccountTest {
 
   @Test
   public void testAccount() throws Throwable {
-    Account accountModel = new Account();
-    assertNull(accountModel.getId());
-    assertNull(accountModel.getName());
-    assertNull(accountModel.getType());
+    Account accountModel = new Account.Builder()
+      .id("531fc3e28bfc43c5a2cea07786d93f5c")
+      .name("NIST")
+      .type("account_type")
+      .build();
+    assertEquals(accountModel.id(), "531fc3e28bfc43c5a2cea07786d93f5c");
+    assertEquals(accountModel.name(), "NIST");
+    assertEquals(accountModel.type(), "account_type");
+
+    String json = TestUtilities.serialize(accountModel);
+
+    Account accountModelNew = TestUtilities.deserialize(json, Account.class);
+    assertTrue(accountModelNew instanceof Account);
+    assertEquals(accountModelNew.id(), "531fc3e28bfc43c5a2cea07786d93f5c");
+    assertEquals(accountModelNew.name(), "NIST");
+    assertEquals(accountModelNew.type(), "account_type");
   }
 }

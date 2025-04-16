@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,10 +10,10 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -24,17 +24,7 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class ReplaceProfileAttachmentOptions extends GenericModel {
 
   /**
-   * The status of an attachment evaluation.
-   */
-  public interface Status {
-    /** enabled. */
-    String ENABLED = "enabled";
-    /** disabled. */
-    String DISABLED = "disabled";
-  }
-
-  /**
-   * The schedule of an attachment evaluation.
+   * Details how often a scan from a profile attachment is ran.
    */
   public interface Schedule {
     /** daily. */
@@ -45,51 +35,45 @@ public class ReplaceProfileAttachmentOptions extends GenericModel {
     String EVERY_30_DAYS = "every_30_days";
   }
 
-  protected String attachmentId;
-  protected String profileId;
-  protected String id;
-  protected String accountId;
+  /**
+   * Details the state of a profile attachment.
+   */
+  public interface Status {
+    /** enabled. */
+    String ENABLED = "enabled";
+    /** disabled. */
+    String DISABLED = "disabled";
+  }
+
   protected String instanceId;
-  protected List<MultiCloudScope> scope;
-  protected Date createdOn;
-  protected String createdBy;
-  protected Date updatedOn;
-  protected String updatedBy;
-  protected String status;
-  protected String schedule;
-  protected AttachmentsNotificationsPrototype notifications;
-  protected List<AttachmentParameterPrototype> attachmentParameters;
-  protected LastScan lastScan;
-  protected Date nextScanTime;
-  protected String name;
+  protected String profileId;
+  protected String attachmentId;
+  protected List<Parameter> attachmentParameters;
   protected String description;
-  protected String xCorrelationId;
-  protected String xRequestId;
+  protected String name;
+  protected AttachmentNotifications notifications;
+  protected String schedule;
+  protected List<MultiCloudScopePayload> scope;
+  protected String status;
+  protected DateRange dataSelectionRange;
+  protected String accountId;
 
   /**
    * Builder.
    */
   public static class Builder {
-    private String attachmentId;
-    private String profileId;
-    private String id;
-    private String accountId;
     private String instanceId;
-    private List<MultiCloudScope> scope;
-    private Date createdOn;
-    private String createdBy;
-    private Date updatedOn;
-    private String updatedBy;
-    private String status;
-    private String schedule;
-    private AttachmentsNotificationsPrototype notifications;
-    private List<AttachmentParameterPrototype> attachmentParameters;
-    private LastScan lastScan;
-    private Date nextScanTime;
-    private String name;
+    private String profileId;
+    private String attachmentId;
+    private List<Parameter> attachmentParameters;
     private String description;
-    private String xCorrelationId;
-    private String xRequestId;
+    private String name;
+    private AttachmentNotifications notifications;
+    private String schedule;
+    private List<MultiCloudScopePayload> scope;
+    private String status;
+    private DateRange dataSelectionRange;
+    private String accountId;
 
     /**
      * Instantiates a new Builder from an existing ReplaceProfileAttachmentOptions instance.
@@ -97,26 +81,18 @@ public class ReplaceProfileAttachmentOptions extends GenericModel {
      * @param replaceProfileAttachmentOptions the instance to initialize the Builder with
      */
     private Builder(ReplaceProfileAttachmentOptions replaceProfileAttachmentOptions) {
-      this.attachmentId = replaceProfileAttachmentOptions.attachmentId;
-      this.profileId = replaceProfileAttachmentOptions.profileId;
-      this.id = replaceProfileAttachmentOptions.id;
-      this.accountId = replaceProfileAttachmentOptions.accountId;
       this.instanceId = replaceProfileAttachmentOptions.instanceId;
-      this.scope = replaceProfileAttachmentOptions.scope;
-      this.createdOn = replaceProfileAttachmentOptions.createdOn;
-      this.createdBy = replaceProfileAttachmentOptions.createdBy;
-      this.updatedOn = replaceProfileAttachmentOptions.updatedOn;
-      this.updatedBy = replaceProfileAttachmentOptions.updatedBy;
-      this.status = replaceProfileAttachmentOptions.status;
-      this.schedule = replaceProfileAttachmentOptions.schedule;
-      this.notifications = replaceProfileAttachmentOptions.notifications;
+      this.profileId = replaceProfileAttachmentOptions.profileId;
+      this.attachmentId = replaceProfileAttachmentOptions.attachmentId;
       this.attachmentParameters = replaceProfileAttachmentOptions.attachmentParameters;
-      this.lastScan = replaceProfileAttachmentOptions.lastScan;
-      this.nextScanTime = replaceProfileAttachmentOptions.nextScanTime;
-      this.name = replaceProfileAttachmentOptions.name;
       this.description = replaceProfileAttachmentOptions.description;
-      this.xCorrelationId = replaceProfileAttachmentOptions.xCorrelationId;
-      this.xRequestId = replaceProfileAttachmentOptions.xRequestId;
+      this.name = replaceProfileAttachmentOptions.name;
+      this.notifications = replaceProfileAttachmentOptions.notifications;
+      this.schedule = replaceProfileAttachmentOptions.schedule;
+      this.scope = replaceProfileAttachmentOptions.scope;
+      this.status = replaceProfileAttachmentOptions.status;
+      this.dataSelectionRange = replaceProfileAttachmentOptions.dataSelectionRange;
+      this.accountId = replaceProfileAttachmentOptions.accountId;
     }
 
     /**
@@ -128,12 +104,28 @@ public class ReplaceProfileAttachmentOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param attachmentId the attachmentId
+     * @param instanceId the instanceId
      * @param profileId the profileId
+     * @param attachmentId the attachmentId
+     * @param attachmentParameters the attachmentParameters
+     * @param description the description
+     * @param name the name
+     * @param notifications the notifications
+     * @param schedule the schedule
+     * @param scope the scope
+     * @param status the status
      */
-    public Builder(String attachmentId, String profileId) {
-      this.attachmentId = attachmentId;
+    public Builder(String instanceId, String profileId, String attachmentId, List<Parameter> attachmentParameters, String description, String name, AttachmentNotifications notifications, String schedule, List<MultiCloudScopePayload> scope, String status) {
+      this.instanceId = instanceId;
       this.profileId = profileId;
+      this.attachmentId = attachmentId;
+      this.attachmentParameters = attachmentParameters;
+      this.description = description;
+      this.name = name;
+      this.notifications = notifications;
+      this.schedule = schedule;
+      this.scope = scope;
+      this.status = status;
     }
 
     /**
@@ -146,78 +138,34 @@ public class ReplaceProfileAttachmentOptions extends GenericModel {
     }
 
     /**
-     * Adds an scope to scope.
+     * Adds a new element to attachmentParameters.
      *
-     * @param scope the new scope
+     * @param attachmentParameters the new element to be added
      * @return the ReplaceProfileAttachmentOptions builder
      */
-    public Builder addScope(MultiCloudScope scope) {
-      com.ibm.cloud.sdk.core.util.Validator.notNull(scope,
-        "scope cannot be null");
-      if (this.scope == null) {
-        this.scope = new ArrayList<MultiCloudScope>();
-      }
-      this.scope.add(scope);
-      return this;
-    }
-
-    /**
-     * Adds an attachmentParameters to attachmentParameters.
-     *
-     * @param attachmentParameters the new attachmentParameters
-     * @return the ReplaceProfileAttachmentOptions builder
-     */
-    public Builder addAttachmentParameters(AttachmentParameterPrototype attachmentParameters) {
+    public Builder addAttachmentParameters(Parameter attachmentParameters) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(attachmentParameters,
         "attachmentParameters cannot be null");
       if (this.attachmentParameters == null) {
-        this.attachmentParameters = new ArrayList<AttachmentParameterPrototype>();
+        this.attachmentParameters = new ArrayList<Parameter>();
       }
       this.attachmentParameters.add(attachmentParameters);
       return this;
     }
 
     /**
-     * Set the attachmentId.
+     * Adds a new element to scope.
      *
-     * @param attachmentId the attachmentId
+     * @param scope the new element to be added
      * @return the ReplaceProfileAttachmentOptions builder
      */
-    public Builder attachmentId(String attachmentId) {
-      this.attachmentId = attachmentId;
-      return this;
-    }
-
-    /**
-     * Set the profileId.
-     *
-     * @param profileId the profileId
-     * @return the ReplaceProfileAttachmentOptions builder
-     */
-    public Builder profileId(String profileId) {
-      this.profileId = profileId;
-      return this;
-    }
-
-    /**
-     * Set the id.
-     *
-     * @param id the id
-     * @return the ReplaceProfileAttachmentOptions builder
-     */
-    public Builder id(String id) {
-      this.id = id;
-      return this;
-    }
-
-    /**
-     * Set the accountId.
-     *
-     * @param accountId the accountId
-     * @return the ReplaceProfileAttachmentOptions builder
-     */
-    public Builder accountId(String accountId) {
-      this.accountId = accountId;
+    public Builder addScope(MultiCloudScopePayload scope) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(scope,
+        "scope cannot be null");
+      if (this.scope == null) {
+        this.scope = new ArrayList<MultiCloudScopePayload>();
+      }
+      this.scope.add(scope);
       return this;
     }
 
@@ -233,91 +181,24 @@ public class ReplaceProfileAttachmentOptions extends GenericModel {
     }
 
     /**
-     * Set the scope.
-     * Existing scope will be replaced.
+     * Set the profileId.
      *
-     * @param scope the scope
+     * @param profileId the profileId
      * @return the ReplaceProfileAttachmentOptions builder
      */
-    public Builder scope(List<MultiCloudScope> scope) {
-      this.scope = scope;
+    public Builder profileId(String profileId) {
+      this.profileId = profileId;
       return this;
     }
 
     /**
-     * Set the createdOn.
+     * Set the attachmentId.
      *
-     * @param createdOn the createdOn
+     * @param attachmentId the attachmentId
      * @return the ReplaceProfileAttachmentOptions builder
      */
-    public Builder createdOn(Date createdOn) {
-      this.createdOn = createdOn;
-      return this;
-    }
-
-    /**
-     * Set the createdBy.
-     *
-     * @param createdBy the createdBy
-     * @return the ReplaceProfileAttachmentOptions builder
-     */
-    public Builder createdBy(String createdBy) {
-      this.createdBy = createdBy;
-      return this;
-    }
-
-    /**
-     * Set the updatedOn.
-     *
-     * @param updatedOn the updatedOn
-     * @return the ReplaceProfileAttachmentOptions builder
-     */
-    public Builder updatedOn(Date updatedOn) {
-      this.updatedOn = updatedOn;
-      return this;
-    }
-
-    /**
-     * Set the updatedBy.
-     *
-     * @param updatedBy the updatedBy
-     * @return the ReplaceProfileAttachmentOptions builder
-     */
-    public Builder updatedBy(String updatedBy) {
-      this.updatedBy = updatedBy;
-      return this;
-    }
-
-    /**
-     * Set the status.
-     *
-     * @param status the status
-     * @return the ReplaceProfileAttachmentOptions builder
-     */
-    public Builder status(String status) {
-      this.status = status;
-      return this;
-    }
-
-    /**
-     * Set the schedule.
-     *
-     * @param schedule the schedule
-     * @return the ReplaceProfileAttachmentOptions builder
-     */
-    public Builder schedule(String schedule) {
-      this.schedule = schedule;
-      return this;
-    }
-
-    /**
-     * Set the notifications.
-     *
-     * @param notifications the notifications
-     * @return the ReplaceProfileAttachmentOptions builder
-     */
-    public Builder notifications(AttachmentsNotificationsPrototype notifications) {
-      this.notifications = notifications;
+    public Builder attachmentId(String attachmentId) {
+      this.attachmentId = attachmentId;
       return this;
     }
 
@@ -328,41 +209,8 @@ public class ReplaceProfileAttachmentOptions extends GenericModel {
      * @param attachmentParameters the attachmentParameters
      * @return the ReplaceProfileAttachmentOptions builder
      */
-    public Builder attachmentParameters(List<AttachmentParameterPrototype> attachmentParameters) {
+    public Builder attachmentParameters(List<Parameter> attachmentParameters) {
       this.attachmentParameters = attachmentParameters;
-      return this;
-    }
-
-    /**
-     * Set the lastScan.
-     *
-     * @param lastScan the lastScan
-     * @return the ReplaceProfileAttachmentOptions builder
-     */
-    public Builder lastScan(LastScan lastScan) {
-      this.lastScan = lastScan;
-      return this;
-    }
-
-    /**
-     * Set the nextScanTime.
-     *
-     * @param nextScanTime the nextScanTime
-     * @return the ReplaceProfileAttachmentOptions builder
-     */
-    public Builder nextScanTime(Date nextScanTime) {
-      this.nextScanTime = nextScanTime;
-      return this;
-    }
-
-    /**
-     * Set the name.
-     *
-     * @param name the name
-     * @return the ReplaceProfileAttachmentOptions builder
-     */
-    public Builder name(String name) {
-      this.name = name;
       return this;
     }
 
@@ -378,51 +226,80 @@ public class ReplaceProfileAttachmentOptions extends GenericModel {
     }
 
     /**
-     * Set the xCorrelationId.
+     * Set the name.
      *
-     * @param xCorrelationId the xCorrelationId
+     * @param name the name
      * @return the ReplaceProfileAttachmentOptions builder
      */
-    public Builder xCorrelationId(String xCorrelationId) {
-      this.xCorrelationId = xCorrelationId;
+    public Builder name(String name) {
+      this.name = name;
       return this;
     }
 
     /**
-     * Set the xRequestId.
+     * Set the notifications.
      *
-     * @param xRequestId the xRequestId
+     * @param notifications the notifications
      * @return the ReplaceProfileAttachmentOptions builder
      */
-    public Builder xRequestId(String xRequestId) {
-      this.xRequestId = xRequestId;
+    public Builder notifications(AttachmentNotifications notifications) {
+      this.notifications = notifications;
       return this;
     }
 
     /**
-     * Set the attachmentItem.
+     * Set the schedule.
      *
-     * @param attachmentItem the attachmentItem
+     * @param schedule the schedule
      * @return the ReplaceProfileAttachmentOptions builder
      */
-    public Builder attachmentItem(AttachmentItem attachmentItem) {
-      this.id = attachmentItem.id();
-      this.profileId = attachmentItem.profileId();
-      this.accountId = attachmentItem.accountId();
-      this.instanceId = attachmentItem.instanceId();
-      this.scope = attachmentItem.scope();
-      this.createdOn = attachmentItem.createdOn();
-      this.createdBy = attachmentItem.createdBy();
-      this.updatedOn = attachmentItem.updatedOn();
-      this.updatedBy = attachmentItem.updatedBy();
-      this.status = attachmentItem.status();
-      this.schedule = attachmentItem.schedule();
-      this.notifications = attachmentItem.notifications();
-      this.attachmentParameters = attachmentItem.attachmentParameters();
-      this.lastScan = attachmentItem.lastScan();
-      this.nextScanTime = attachmentItem.nextScanTime();
-      this.name = attachmentItem.name();
-      this.description = attachmentItem.description();
+    public Builder schedule(String schedule) {
+      this.schedule = schedule;
+      return this;
+    }
+
+    /**
+     * Set the scope.
+     * Existing scope will be replaced.
+     *
+     * @param scope the scope
+     * @return the ReplaceProfileAttachmentOptions builder
+     */
+    public Builder scope(List<MultiCloudScopePayload> scope) {
+      this.scope = scope;
+      return this;
+    }
+
+    /**
+     * Set the status.
+     *
+     * @param status the status
+     * @return the ReplaceProfileAttachmentOptions builder
+     */
+    public Builder status(String status) {
+      this.status = status;
+      return this;
+    }
+
+    /**
+     * Set the dataSelectionRange.
+     *
+     * @param dataSelectionRange the dataSelectionRange
+     * @return the ReplaceProfileAttachmentOptions builder
+     */
+    public Builder dataSelectionRange(DateRange dataSelectionRange) {
+      this.dataSelectionRange = dataSelectionRange;
+      return this;
+    }
+
+    /**
+     * Set the accountId.
+     *
+     * @param accountId the accountId
+     * @return the ReplaceProfileAttachmentOptions builder
+     */
+    public Builder accountId(String accountId) {
+      this.accountId = accountId;
       return this;
     }
   }
@@ -430,30 +307,38 @@ public class ReplaceProfileAttachmentOptions extends GenericModel {
   protected ReplaceProfileAttachmentOptions() { }
 
   protected ReplaceProfileAttachmentOptions(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.attachmentId,
-      "attachmentId cannot be empty");
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.instanceId,
+      "instanceId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.profileId,
       "profileId cannot be empty");
-    attachmentId = builder.attachmentId;
-    id = builder.id;
-    profileId = builder.profileId;
-    accountId = builder.accountId;
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.attachmentId,
+      "attachmentId cannot be empty");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.attachmentParameters,
+      "attachmentParameters cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.description,
+      "description cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.name,
+      "name cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.notifications,
+      "notifications cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.schedule,
+      "schedule cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.scope,
+      "scope cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.status,
+      "status cannot be null");
     instanceId = builder.instanceId;
-    scope = builder.scope;
-    createdOn = builder.createdOn;
-    createdBy = builder.createdBy;
-    updatedOn = builder.updatedOn;
-    updatedBy = builder.updatedBy;
-    status = builder.status;
-    schedule = builder.schedule;
-    notifications = builder.notifications;
+    profileId = builder.profileId;
+    attachmentId = builder.attachmentId;
     attachmentParameters = builder.attachmentParameters;
-    lastScan = builder.lastScan;
-    nextScanTime = builder.nextScanTime;
-    name = builder.name;
     description = builder.description;
-    xCorrelationId = builder.xCorrelationId;
-    xRequestId = builder.xRequestId;
+    name = builder.name;
+    notifications = builder.notifications;
+    schedule = builder.schedule;
+    scope = builder.scope;
+    status = builder.status;
+    dataSelectionRange = builder.dataSelectionRange;
+    accountId = builder.accountId;
   }
 
   /**
@@ -466,14 +351,14 @@ public class ReplaceProfileAttachmentOptions extends GenericModel {
   }
 
   /**
-   * Gets the attachmentId.
+   * Gets the instanceId.
    *
-   * The attachment ID.
+   * The ID of the Security and Compliance Center instance.
    *
-   * @return the attachmentId
+   * @return the instanceId
    */
-  public String attachmentId() {
-    return attachmentId;
+  public String instanceId() {
+    return instanceId;
   }
 
   /**
@@ -488,174 +373,31 @@ public class ReplaceProfileAttachmentOptions extends GenericModel {
   }
 
   /**
-   * Gets the id.
+   * Gets the attachmentId.
    *
-   * The ID of the attachment.
+   * The attachment ID.
    *
-   * @return the id
+   * @return the attachmentId
    */
-  public String id() {
-    return id;
-  }
-
-  /**
-   * Gets the accountId.
-   *
-   * The account ID that is associated to the attachment.
-   *
-   * @return the accountId
-   */
-  public String accountId() {
-    return accountId;
-  }
-
-  /**
-   * Gets the instanceId.
-   *
-   * The instance ID of the account that is associated to the attachment.
-   *
-   * @return the instanceId
-   */
-  public String instanceId() {
-    return instanceId;
-  }
-
-  /**
-   * Gets the scope.
-   *
-   * The scope payload for the multi cloud feature.
-   *
-   * @return the scope
-   */
-  public List<MultiCloudScope> scope() {
-    return scope;
-  }
-
-  /**
-   * Gets the createdOn.
-   *
-   * The date when the attachment was created.
-   *
-   * @return the createdOn
-   */
-  public Date createdOn() {
-    return createdOn;
-  }
-
-  /**
-   * Gets the createdBy.
-   *
-   * The user who created the attachment.
-   *
-   * @return the createdBy
-   */
-  public String createdBy() {
-    return createdBy;
-  }
-
-  /**
-   * Gets the updatedOn.
-   *
-   * The date when the attachment was updated.
-   *
-   * @return the updatedOn
-   */
-  public Date updatedOn() {
-    return updatedOn;
-  }
-
-  /**
-   * Gets the updatedBy.
-   *
-   * The user who updated the attachment.
-   *
-   * @return the updatedBy
-   */
-  public String updatedBy() {
-    return updatedBy;
-  }
-
-  /**
-   * Gets the status.
-   *
-   * The status of an attachment evaluation.
-   *
-   * @return the status
-   */
-  public String status() {
-    return status;
-  }
-
-  /**
-   * Gets the schedule.
-   *
-   * The schedule of an attachment evaluation.
-   *
-   * @return the schedule
-   */
-  public String schedule() {
-    return schedule;
-  }
-
-  /**
-   * Gets the notifications.
-   *
-   * The request payload of the attachment notifications.
-   *
-   * @return the notifications
-   */
-  public AttachmentsNotificationsPrototype notifications() {
-    return notifications;
+  public String attachmentId() {
+    return attachmentId;
   }
 
   /**
    * Gets the attachmentParameters.
    *
-   * The profile parameters for the attachment.
+   * The parameters associated with the profile attachment.
    *
    * @return the attachmentParameters
    */
-  public List<AttachmentParameterPrototype> attachmentParameters() {
+  public List<Parameter> attachmentParameters() {
     return attachmentParameters;
-  }
-
-  /**
-   * Gets the lastScan.
-   *
-   * The details of the last scan of an attachment.
-   *
-   * @return the lastScan
-   */
-  public LastScan lastScan() {
-    return lastScan;
-  }
-
-  /**
-   * Gets the nextScanTime.
-   *
-   * The start time of the next scan.
-   *
-   * @return the nextScanTime
-   */
-  public Date nextScanTime() {
-    return nextScanTime;
-  }
-
-  /**
-   * Gets the name.
-   *
-   * The name of the attachment.
-   *
-   * @return the name
-   */
-  public String name() {
-    return name;
   }
 
   /**
    * Gets the description.
    *
-   * The description for the attachment.
+   * The details to describe the profile attachment.
    *
    * @return the description
    */
@@ -664,29 +406,80 @@ public class ReplaceProfileAttachmentOptions extends GenericModel {
   }
 
   /**
-   * Gets the xCorrelationId.
+   * Gets the name.
    *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is used for downstream requests and retries of those requests. If a value of
-   * this header is not supplied in a request, the service generates a random (version 4) UUID.
+   * The name of the Profile Attachment.
    *
-   * @return the xCorrelationId
+   * @return the name
    */
-  public String xCorrelationId() {
-    return xCorrelationId;
+  public String name() {
+    return name;
   }
 
   /**
-   * Gets the xRequestId.
+   * Gets the notifications.
    *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is not used for downstream requests and retries of those requests. If a
-   * value of this header is not supplied in a request, the service generates a random (version 4) UUID.
+   * The notification configuration of the attachment.
    *
-   * @return the xRequestId
+   * @return the notifications
    */
-  public String xRequestId() {
-    return xRequestId;
+  public AttachmentNotifications notifications() {
+    return notifications;
+  }
+
+  /**
+   * Gets the schedule.
+   *
+   * Details how often a scan from a profile attachment is ran.
+   *
+   * @return the schedule
+   */
+  public String schedule() {
+    return schedule;
+  }
+
+  /**
+   * Gets the scope.
+   *
+   * A list of scopes associated with a profile attachment.
+   *
+   * @return the scope
+   */
+  public List<MultiCloudScopePayload> scope() {
+    return scope;
+  }
+
+  /**
+   * Gets the status.
+   *
+   * Details the state of a profile attachment.
+   *
+   * @return the status
+   */
+  public String status() {
+    return status;
+  }
+
+  /**
+   * Gets the dataSelectionRange.
+   *
+   * Date range.
+   *
+   * @return the dataSelectionRange
+   */
+  public DateRange dataSelectionRange() {
+    return dataSelectionRange;
+  }
+
+  /**
+   * Gets the accountId.
+   *
+   * The user account ID.
+   *
+   * @return the accountId
+   */
+  public String accountId() {
+    return accountId;
   }
 }
 

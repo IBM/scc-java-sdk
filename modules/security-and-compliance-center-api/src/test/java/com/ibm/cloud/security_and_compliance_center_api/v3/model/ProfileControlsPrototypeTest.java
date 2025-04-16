@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,17 +32,17 @@ public class ProfileControlsPrototypeTest {
   @Test
   public void testProfileControlsPrototype() throws Throwable {
     ProfileControlsPrototype profileControlsPrototypeModel = new ProfileControlsPrototype.Builder()
-      .controlLibraryId("e98a56ff-dc24-41d4-9875-1e188e2da6cd")
-      .controlId("5C453578-E9A1-421E-AD0F-C6AFCDD67CCF")
+      .controlLibraryId("testString")
+      .controlId("testString")
       .build();
-    assertEquals(profileControlsPrototypeModel.controlLibraryId(), "e98a56ff-dc24-41d4-9875-1e188e2da6cd");
-    assertEquals(profileControlsPrototypeModel.controlId(), "5C453578-E9A1-421E-AD0F-C6AFCDD67CCF");
+    assertEquals(profileControlsPrototypeModel.controlLibraryId(), "testString");
+    assertEquals(profileControlsPrototypeModel.controlId(), "testString");
 
     String json = TestUtilities.serialize(profileControlsPrototypeModel);
 
     ProfileControlsPrototype profileControlsPrototypeModelNew = TestUtilities.deserialize(json, ProfileControlsPrototype.class);
     assertTrue(profileControlsPrototypeModelNew instanceof ProfileControlsPrototype);
-    assertEquals(profileControlsPrototypeModelNew.controlLibraryId(), "e98a56ff-dc24-41d4-9875-1e188e2da6cd");
-    assertEquals(profileControlsPrototypeModelNew.controlId(), "5C453578-E9A1-421E-AD0F-C6AFCDD67CCF");
+    assertEquals(profileControlsPrototypeModelNew.controlLibraryId(), "testString");
+    assertEquals(profileControlsPrototypeModelNew.controlId(), "testString");
   }
 }

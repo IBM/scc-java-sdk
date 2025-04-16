@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import java.util.List;
@@ -24,8 +25,8 @@ public class ReportViolationsDrift extends GenericModel {
 
   @SerializedName("home_account_id")
   protected String homeAccountId;
-  @SerializedName("report_id")
-  protected String reportId;
+  @SerializedName("report_group_id")
+  protected String reportGroupId;
   @SerializedName("data_points")
   protected List<ReportViolationDataPoint> dataPoints;
 
@@ -43,14 +44,14 @@ public class ReportViolationsDrift extends GenericModel {
   }
 
   /**
-   * Gets the reportId.
+   * Gets the reportGroupId.
    *
-   * The ID of the report.
+   * The ID of the report group.
    *
-   * @return the reportId
+   * @return the reportGroupId
    */
-  public String getReportId() {
-    return reportId;
+  public String getReportGroupId() {
+    return reportGroupId;
   }
 
   /**

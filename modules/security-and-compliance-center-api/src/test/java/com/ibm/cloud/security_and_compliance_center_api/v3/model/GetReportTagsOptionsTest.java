@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,13 +32,11 @@ public class GetReportTagsOptionsTest {
   @Test
   public void testGetReportTagsOptions() throws Throwable {
     GetReportTagsOptions getReportTagsOptionsModel = new GetReportTagsOptions.Builder()
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
       .reportId("testString")
-      .xCorrelationId("testString")
-      .xRequestId("testString")
       .build();
+    assertEquals(getReportTagsOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
     assertEquals(getReportTagsOptionsModel.reportId(), "testString");
-    assertEquals(getReportTagsOptionsModel.xCorrelationId(), "testString");
-    assertEquals(getReportTagsOptionsModel.xRequestId(), "testString");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -19,15 +20,13 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class ListProviderTypesOptions extends GenericModel {
 
-  protected String xCorrelationId;
-  protected String xRequestId;
+  protected String instanceId;
 
   /**
    * Builder.
    */
   public static class Builder {
-    private String xCorrelationId;
-    private String xRequestId;
+    private String instanceId;
 
     /**
      * Instantiates a new Builder from an existing ListProviderTypesOptions instance.
@@ -35,14 +34,22 @@ public class ListProviderTypesOptions extends GenericModel {
      * @param listProviderTypesOptions the instance to initialize the Builder with
      */
     private Builder(ListProviderTypesOptions listProviderTypesOptions) {
-      this.xCorrelationId = listProviderTypesOptions.xCorrelationId;
-      this.xRequestId = listProviderTypesOptions.xRequestId;
+      this.instanceId = listProviderTypesOptions.instanceId;
     }
 
     /**
      * Instantiates a new builder.
      */
     public Builder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param instanceId the instanceId
+     */
+    public Builder(String instanceId) {
+      this.instanceId = instanceId;
     }
 
     /**
@@ -55,24 +62,13 @@ public class ListProviderTypesOptions extends GenericModel {
     }
 
     /**
-     * Set the xCorrelationId.
+     * Set the instanceId.
      *
-     * @param xCorrelationId the xCorrelationId
+     * @param instanceId the instanceId
      * @return the ListProviderTypesOptions builder
      */
-    public Builder xCorrelationId(String xCorrelationId) {
-      this.xCorrelationId = xCorrelationId;
-      return this;
-    }
-
-    /**
-     * Set the xRequestId.
-     *
-     * @param xRequestId the xRequestId
-     * @return the ListProviderTypesOptions builder
-     */
-    public Builder xRequestId(String xRequestId) {
-      this.xRequestId = xRequestId;
+    public Builder instanceId(String instanceId) {
+      this.instanceId = instanceId;
       return this;
     }
   }
@@ -80,8 +76,9 @@ public class ListProviderTypesOptions extends GenericModel {
   protected ListProviderTypesOptions() { }
 
   protected ListProviderTypesOptions(Builder builder) {
-    xCorrelationId = builder.xCorrelationId;
-    xRequestId = builder.xRequestId;
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.instanceId,
+      "instanceId cannot be empty");
+    instanceId = builder.instanceId;
   }
 
   /**
@@ -94,29 +91,14 @@ public class ListProviderTypesOptions extends GenericModel {
   }
 
   /**
-   * Gets the xCorrelationId.
+   * Gets the instanceId.
    *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is used for downstream requests and retries of those requests. If a value of
-   * this headers is not supplied in a request, the service generates a random (version 4) UUID.
+   * The ID of the Security and Compliance Center instance.
    *
-   * @return the xCorrelationId
+   * @return the instanceId
    */
-  public String xCorrelationId() {
-    return xCorrelationId;
-  }
-
-  /**
-   * Gets the xRequestId.
-   *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header  for the
-   * corresponding response.  The same value is not used for downstream requests and retries of those requests.  If a
-   * value of this headers is not supplied in a request, the service generates a random (version 4) UUID.
-   *
-   * @return the xRequestId
-   */
-  public String xRequestId() {
-    return xRequestId;
+  public String instanceId() {
+    return instanceId;
   }
 }
 

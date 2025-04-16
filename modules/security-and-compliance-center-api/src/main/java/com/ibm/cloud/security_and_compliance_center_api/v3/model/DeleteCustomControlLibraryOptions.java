@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -19,17 +20,17 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class DeleteCustomControlLibraryOptions extends GenericModel {
 
-  protected String controlLibrariesId;
-  protected String xCorrelationId;
-  protected String xRequestId;
+  protected String instanceId;
+  protected String controlLibraryId;
+  protected String accountId;
 
   /**
    * Builder.
    */
   public static class Builder {
-    private String controlLibrariesId;
-    private String xCorrelationId;
-    private String xRequestId;
+    private String instanceId;
+    private String controlLibraryId;
+    private String accountId;
 
     /**
      * Instantiates a new Builder from an existing DeleteCustomControlLibraryOptions instance.
@@ -37,9 +38,9 @@ public class DeleteCustomControlLibraryOptions extends GenericModel {
      * @param deleteCustomControlLibraryOptions the instance to initialize the Builder with
      */
     private Builder(DeleteCustomControlLibraryOptions deleteCustomControlLibraryOptions) {
-      this.controlLibrariesId = deleteCustomControlLibraryOptions.controlLibrariesId;
-      this.xCorrelationId = deleteCustomControlLibraryOptions.xCorrelationId;
-      this.xRequestId = deleteCustomControlLibraryOptions.xRequestId;
+      this.instanceId = deleteCustomControlLibraryOptions.instanceId;
+      this.controlLibraryId = deleteCustomControlLibraryOptions.controlLibraryId;
+      this.accountId = deleteCustomControlLibraryOptions.accountId;
     }
 
     /**
@@ -51,10 +52,12 @@ public class DeleteCustomControlLibraryOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param controlLibrariesId the controlLibrariesId
+     * @param instanceId the instanceId
+     * @param controlLibraryId the controlLibraryId
      */
-    public Builder(String controlLibrariesId) {
-      this.controlLibrariesId = controlLibrariesId;
+    public Builder(String instanceId, String controlLibraryId) {
+      this.instanceId = instanceId;
+      this.controlLibraryId = controlLibraryId;
     }
 
     /**
@@ -67,35 +70,35 @@ public class DeleteCustomControlLibraryOptions extends GenericModel {
     }
 
     /**
-     * Set the controlLibrariesId.
+     * Set the instanceId.
      *
-     * @param controlLibrariesId the controlLibrariesId
+     * @param instanceId the instanceId
      * @return the DeleteCustomControlLibraryOptions builder
      */
-    public Builder controlLibrariesId(String controlLibrariesId) {
-      this.controlLibrariesId = controlLibrariesId;
+    public Builder instanceId(String instanceId) {
+      this.instanceId = instanceId;
       return this;
     }
 
     /**
-     * Set the xCorrelationId.
+     * Set the controlLibraryId.
      *
-     * @param xCorrelationId the xCorrelationId
+     * @param controlLibraryId the controlLibraryId
      * @return the DeleteCustomControlLibraryOptions builder
      */
-    public Builder xCorrelationId(String xCorrelationId) {
-      this.xCorrelationId = xCorrelationId;
+    public Builder controlLibraryId(String controlLibraryId) {
+      this.controlLibraryId = controlLibraryId;
       return this;
     }
 
     /**
-     * Set the xRequestId.
+     * Set the accountId.
      *
-     * @param xRequestId the xRequestId
+     * @param accountId the accountId
      * @return the DeleteCustomControlLibraryOptions builder
      */
-    public Builder xRequestId(String xRequestId) {
-      this.xRequestId = xRequestId;
+    public Builder accountId(String accountId) {
+      this.accountId = accountId;
       return this;
     }
   }
@@ -103,11 +106,13 @@ public class DeleteCustomControlLibraryOptions extends GenericModel {
   protected DeleteCustomControlLibraryOptions() { }
 
   protected DeleteCustomControlLibraryOptions(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.controlLibrariesId,
-      "controlLibrariesId cannot be empty");
-    controlLibrariesId = builder.controlLibrariesId;
-    xCorrelationId = builder.xCorrelationId;
-    xRequestId = builder.xRequestId;
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.instanceId,
+      "instanceId cannot be empty");
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.controlLibraryId,
+      "controlLibraryId cannot be empty");
+    instanceId = builder.instanceId;
+    controlLibraryId = builder.controlLibraryId;
+    accountId = builder.accountId;
   }
 
   /**
@@ -120,40 +125,36 @@ public class DeleteCustomControlLibraryOptions extends GenericModel {
   }
 
   /**
-   * Gets the controlLibrariesId.
+   * Gets the instanceId.
+   *
+   * The ID of the Security and Compliance Center instance.
+   *
+   * @return the instanceId
+   */
+  public String instanceId() {
+    return instanceId;
+  }
+
+  /**
+   * Gets the controlLibraryId.
    *
    * The control library ID.
    *
-   * @return the controlLibrariesId
+   * @return the controlLibraryId
    */
-  public String controlLibrariesId() {
-    return controlLibrariesId;
+  public String controlLibraryId() {
+    return controlLibraryId;
   }
 
   /**
-   * Gets the xCorrelationId.
+   * Gets the accountId.
    *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is used for downstream requests and retries of those requests. If a value of
-   * this header is not supplied in a request, the service generates a random (version 4) UUID.
+   * The user account ID.
    *
-   * @return the xCorrelationId
+   * @return the accountId
    */
-  public String xCorrelationId() {
-    return xCorrelationId;
-  }
-
-  /**
-   * Gets the xRequestId.
-   *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is not used for downstream requests and retries of those requests. If a
-   * value of this header is not supplied in a request, the service generates a random (version 4) UUID.
-   *
-   * @return the xRequestId
-   */
-  public String xRequestId() {
-    return xRequestId;
+  public String accountId() {
+    return accountId;
   }
 }
 

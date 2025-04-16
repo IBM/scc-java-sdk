@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -29,11 +30,26 @@ public class ListReportsOptions extends GenericModel {
     String SCHEDULED = "scheduled";
   }
 
-  protected String xCorrelationId;
-  protected String xRequestId;
-  protected String attachmentId;
+  /**
+   * This field sorts results by using a valid sort field.
+   */
+  public interface Sort {
+    /** profile_name. */
+    String PROFILE_NAME = "profile_name";
+    /** scope_id. */
+    String SCOPE_ID = "scope_id";
+    /** group_id. */
+    String GROUP_ID = "group_id";
+    /** created_on. */
+    String CREATED_ON = "created_on";
+    /** type. */
+    String TYPE = "type";
+  }
+
+  protected String instanceId;
+  protected String reportAttachmentId;
   protected String groupId;
-  protected String profileId;
+  protected String reportProfileId;
   protected String type;
   protected String start;
   protected Long limit;
@@ -43,11 +59,10 @@ public class ListReportsOptions extends GenericModel {
    * Builder.
    */
   public static class Builder {
-    private String xCorrelationId;
-    private String xRequestId;
-    private String attachmentId;
+    private String instanceId;
+    private String reportAttachmentId;
     private String groupId;
-    private String profileId;
+    private String reportProfileId;
     private String type;
     private String start;
     private Long limit;
@@ -59,11 +74,10 @@ public class ListReportsOptions extends GenericModel {
      * @param listReportsOptions the instance to initialize the Builder with
      */
     private Builder(ListReportsOptions listReportsOptions) {
-      this.xCorrelationId = listReportsOptions.xCorrelationId;
-      this.xRequestId = listReportsOptions.xRequestId;
-      this.attachmentId = listReportsOptions.attachmentId;
+      this.instanceId = listReportsOptions.instanceId;
+      this.reportAttachmentId = listReportsOptions.reportAttachmentId;
       this.groupId = listReportsOptions.groupId;
-      this.profileId = listReportsOptions.profileId;
+      this.reportProfileId = listReportsOptions.reportProfileId;
       this.type = listReportsOptions.type;
       this.start = listReportsOptions.start;
       this.limit = listReportsOptions.limit;
@@ -77,6 +91,15 @@ public class ListReportsOptions extends GenericModel {
     }
 
     /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param instanceId the instanceId
+     */
+    public Builder(String instanceId) {
+      this.instanceId = instanceId;
+    }
+
+    /**
      * Builds a ListReportsOptions.
      *
      * @return the new ListReportsOptions instance
@@ -86,35 +109,24 @@ public class ListReportsOptions extends GenericModel {
     }
 
     /**
-     * Set the xCorrelationId.
+     * Set the instanceId.
      *
-     * @param xCorrelationId the xCorrelationId
+     * @param instanceId the instanceId
      * @return the ListReportsOptions builder
      */
-    public Builder xCorrelationId(String xCorrelationId) {
-      this.xCorrelationId = xCorrelationId;
+    public Builder instanceId(String instanceId) {
+      this.instanceId = instanceId;
       return this;
     }
 
     /**
-     * Set the xRequestId.
+     * Set the reportAttachmentId.
      *
-     * @param xRequestId the xRequestId
+     * @param reportAttachmentId the reportAttachmentId
      * @return the ListReportsOptions builder
      */
-    public Builder xRequestId(String xRequestId) {
-      this.xRequestId = xRequestId;
-      return this;
-    }
-
-    /**
-     * Set the attachmentId.
-     *
-     * @param attachmentId the attachmentId
-     * @return the ListReportsOptions builder
-     */
-    public Builder attachmentId(String attachmentId) {
-      this.attachmentId = attachmentId;
+    public Builder reportAttachmentId(String reportAttachmentId) {
+      this.reportAttachmentId = reportAttachmentId;
       return this;
     }
 
@@ -130,13 +142,13 @@ public class ListReportsOptions extends GenericModel {
     }
 
     /**
-     * Set the profileId.
+     * Set the reportProfileId.
      *
-     * @param profileId the profileId
+     * @param reportProfileId the reportProfileId
      * @return the ListReportsOptions builder
      */
-    public Builder profileId(String profileId) {
-      this.profileId = profileId;
+    public Builder reportProfileId(String reportProfileId) {
+      this.reportProfileId = reportProfileId;
       return this;
     }
 
@@ -188,11 +200,12 @@ public class ListReportsOptions extends GenericModel {
   protected ListReportsOptions() { }
 
   protected ListReportsOptions(Builder builder) {
-    xCorrelationId = builder.xCorrelationId;
-    xRequestId = builder.xRequestId;
-    attachmentId = builder.attachmentId;
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.instanceId,
+      "instanceId cannot be empty");
+    instanceId = builder.instanceId;
+    reportAttachmentId = builder.reportAttachmentId;
     groupId = builder.groupId;
-    profileId = builder.profileId;
+    reportProfileId = builder.reportProfileId;
     type = builder.type;
     start = builder.start;
     limit = builder.limit;
@@ -209,40 +222,25 @@ public class ListReportsOptions extends GenericModel {
   }
 
   /**
-   * Gets the xCorrelationId.
+   * Gets the instanceId.
    *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is used for downstream requests and retries of those requests. If a value of
-   * this header is not supplied in a request, the service generates a random (version 4) UUID.
+   * The ID of the Security and Compliance Center instance.
    *
-   * @return the xCorrelationId
+   * @return the instanceId
    */
-  public String xCorrelationId() {
-    return xCorrelationId;
+  public String instanceId() {
+    return instanceId;
   }
 
   /**
-   * Gets the xRequestId.
-   *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header  for the
-   * corresponding response.  The same value is not used for downstream requests and retries of those requests.  If a
-   * value of this header is not supplied in a request, the service generates a random (version 4) UUID.
-   *
-   * @return the xRequestId
-   */
-  public String xRequestId() {
-    return xRequestId;
-  }
-
-  /**
-   * Gets the attachmentId.
+   * Gets the reportAttachmentId.
    *
    * The ID of the attachment.
    *
-   * @return the attachmentId
+   * @return the reportAttachmentId
    */
-  public String attachmentId() {
-    return attachmentId;
+  public String reportAttachmentId() {
+    return reportAttachmentId;
   }
 
   /**
@@ -257,14 +255,14 @@ public class ListReportsOptions extends GenericModel {
   }
 
   /**
-   * Gets the profileId.
+   * Gets the reportProfileId.
    *
    * The ID of the profile.
    *
-   * @return the profileId
+   * @return the reportProfileId
    */
-  public String profileId() {
-    return profileId;
+  public String reportProfileId() {
+    return reportProfileId;
   }
 
   /**
@@ -292,7 +290,7 @@ public class ListReportsOptions extends GenericModel {
   /**
    * Gets the limit.
    *
-   * The indication of many resources to return, unless the response is  the last page of resources.
+   * The indication of many resources to return, unless the response is the last page of resources.
    *
    * @return the limit
    */
@@ -303,8 +301,7 @@ public class ListReportsOptions extends GenericModel {
   /**
    * Gets the sort.
    *
-   * This field sorts results by using a valid sort field. To learn more, see
-   * [Sorting](https://cloud.ibm.com/docs/api-handbook?topic=api-handbook-sorting).
+   * This field sorts results by using a valid sort field.
    *
    * @return the sort
    */

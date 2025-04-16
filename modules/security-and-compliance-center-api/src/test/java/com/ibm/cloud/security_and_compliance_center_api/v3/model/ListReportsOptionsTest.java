@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,24 +32,28 @@ public class ListReportsOptionsTest {
   @Test
   public void testListReportsOptions() throws Throwable {
     ListReportsOptions listReportsOptionsModel = new ListReportsOptions.Builder()
-      .xCorrelationId("testString")
-      .xRequestId("testString")
-      .attachmentId("testString")
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
+      .reportAttachmentId("testString")
       .groupId("testString")
-      .profileId("testString")
+      .reportProfileId("testString")
       .type("scheduled")
       .start("testString")
       .limit(Long.valueOf("50"))
       .sort("profile_name")
       .build();
-    assertEquals(listReportsOptionsModel.xCorrelationId(), "testString");
-    assertEquals(listReportsOptionsModel.xRequestId(), "testString");
-    assertEquals(listReportsOptionsModel.attachmentId(), "testString");
+    assertEquals(listReportsOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
+    assertEquals(listReportsOptionsModel.reportAttachmentId(), "testString");
     assertEquals(listReportsOptionsModel.groupId(), "testString");
-    assertEquals(listReportsOptionsModel.profileId(), "testString");
+    assertEquals(listReportsOptionsModel.reportProfileId(), "testString");
     assertEquals(listReportsOptionsModel.type(), "scheduled");
     assertEquals(listReportsOptionsModel.start(), "testString");
     assertEquals(listReportsOptionsModel.limit(), Long.valueOf("50"));
     assertEquals(listReportsOptionsModel.sort(), "profile_name");
   }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testListReportsOptionsError() throws Throwable {
+    new ListReportsOptions.Builder().build();
+  }
+
 }

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -19,20 +20,18 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class ListProfilesOptions extends GenericModel {
 
-  protected String xCorrelationId;
-  protected String xRequestId;
+  protected String instanceId;
+  protected String accountId;
   protected Long limit;
-  protected String profileType;
   protected String start;
 
   /**
    * Builder.
    */
   public static class Builder {
-    private String xCorrelationId;
-    private String xRequestId;
+    private String instanceId;
+    private String accountId;
     private Long limit;
-    private String profileType;
     private String start;
 
     /**
@@ -41,10 +40,9 @@ public class ListProfilesOptions extends GenericModel {
      * @param listProfilesOptions the instance to initialize the Builder with
      */
     private Builder(ListProfilesOptions listProfilesOptions) {
-      this.xCorrelationId = listProfilesOptions.xCorrelationId;
-      this.xRequestId = listProfilesOptions.xRequestId;
+      this.instanceId = listProfilesOptions.instanceId;
+      this.accountId = listProfilesOptions.accountId;
       this.limit = listProfilesOptions.limit;
-      this.profileType = listProfilesOptions.profileType;
       this.start = listProfilesOptions.start;
     }
 
@@ -52,6 +50,15 @@ public class ListProfilesOptions extends GenericModel {
      * Instantiates a new builder.
      */
     public Builder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param instanceId the instanceId
+     */
+    public Builder(String instanceId) {
+      this.instanceId = instanceId;
     }
 
     /**
@@ -64,24 +71,24 @@ public class ListProfilesOptions extends GenericModel {
     }
 
     /**
-     * Set the xCorrelationId.
+     * Set the instanceId.
      *
-     * @param xCorrelationId the xCorrelationId
+     * @param instanceId the instanceId
      * @return the ListProfilesOptions builder
      */
-    public Builder xCorrelationId(String xCorrelationId) {
-      this.xCorrelationId = xCorrelationId;
+    public Builder instanceId(String instanceId) {
+      this.instanceId = instanceId;
       return this;
     }
 
     /**
-     * Set the xRequestId.
+     * Set the accountId.
      *
-     * @param xRequestId the xRequestId
+     * @param accountId the accountId
      * @return the ListProfilesOptions builder
      */
-    public Builder xRequestId(String xRequestId) {
-      this.xRequestId = xRequestId;
+    public Builder accountId(String accountId) {
+      this.accountId = accountId;
       return this;
     }
 
@@ -93,17 +100,6 @@ public class ListProfilesOptions extends GenericModel {
      */
     public Builder limit(long limit) {
       this.limit = limit;
-      return this;
-    }
-
-    /**
-     * Set the profileType.
-     *
-     * @param profileType the profileType
-     * @return the ListProfilesOptions builder
-     */
-    public Builder profileType(String profileType) {
-      this.profileType = profileType;
       return this;
     }
 
@@ -122,10 +118,11 @@ public class ListProfilesOptions extends GenericModel {
   protected ListProfilesOptions() { }
 
   protected ListProfilesOptions(Builder builder) {
-    xCorrelationId = builder.xCorrelationId;
-    xRequestId = builder.xRequestId;
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.instanceId,
+      "instanceId cannot be empty");
+    instanceId = builder.instanceId;
+    accountId = builder.accountId;
     limit = builder.limit;
-    profileType = builder.profileType;
     start = builder.start;
   }
 
@@ -139,29 +136,25 @@ public class ListProfilesOptions extends GenericModel {
   }
 
   /**
-   * Gets the xCorrelationId.
+   * Gets the instanceId.
    *
-   * The supplied or generated value of this header is logged for a request, and repeated in a response header for the
-   * corresponding response. The same value is used for downstream requests, and retries of those requests. If a value
-   * of this header is not supplied in a request, the service generates a random (version 4) UUID.
+   * The ID of the Security and Compliance Center instance.
    *
-   * @return the xCorrelationId
+   * @return the instanceId
    */
-  public String xCorrelationId() {
-    return xCorrelationId;
+  public String instanceId() {
+    return instanceId;
   }
 
   /**
-   * Gets the xRequestId.
+   * Gets the accountId.
    *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is not used for downstream requests and retries of those requests. If a
-   * value of this header is not supplied in a request, the service generates a random (version 4) UUID.
+   * The user account ID.
    *
-   * @return the xRequestId
+   * @return the accountId
    */
-  public String xRequestId() {
-    return xRequestId;
+  public String accountId() {
+    return accountId;
   }
 
   /**
@@ -173,17 +166,6 @@ public class ListProfilesOptions extends GenericModel {
    */
   public Long limit() {
     return limit;
-  }
-
-  /**
-   * Gets the profileType.
-   *
-   * The field that indicate how you want the resources to be filtered by.
-   *
-   * @return the profileType
-   */
-  public String profileType() {
-    return profileType;
   }
 
   /**

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import java.util.List;
@@ -34,17 +35,21 @@ public class ControlSpecificationWithStats extends GenericModel {
     String UNABLE_TO_PERFORM = "unable_to_perform";
     /** user_evaluation_required. */
     String USER_EVALUATION_REQUIRED = "user_evaluation_required";
+    /** not_applicable. */
+    String NOT_APPLICABLE = "not_applicable";
   }
 
   @SerializedName("control_specification_id")
   protected String controlSpecificationId;
-  @SerializedName("component_id")
-  protected String componentId;
   @SerializedName("control_specification_description")
   protected String controlSpecificationDescription;
+  @SerializedName("component_id")
+  protected String componentId;
+  @SerializedName("component_name")
+  protected String componentName;
   protected String environment;
   protected String responsibility;
-  protected List<Assessment> assessments;
+  protected List<AssessmentWithStats> assessments;
   protected String status;
   @SerializedName("total_count")
   protected Long totalCount;
@@ -56,6 +61,8 @@ public class ControlSpecificationWithStats extends GenericModel {
   protected Long unableToPerformCount;
   @SerializedName("user_evaluation_required_count")
   protected Long userEvaluationRequiredCount;
+  @SerializedName("not_applicable_count")
+  protected Long notApplicableCount;
 
   protected ControlSpecificationWithStats() { }
 
@@ -71,6 +78,17 @@ public class ControlSpecificationWithStats extends GenericModel {
   }
 
   /**
+   * Gets the controlSpecificationDescription.
+   *
+   * The component description.
+   *
+   * @return the controlSpecificationDescription
+   */
+  public String getControlSpecificationDescription() {
+    return controlSpecificationDescription;
+  }
+
+  /**
    * Gets the componentId.
    *
    * The component ID.
@@ -82,14 +100,14 @@ public class ControlSpecificationWithStats extends GenericModel {
   }
 
   /**
-   * Gets the controlSpecificationDescription.
+   * Gets the componentName.
    *
-   * The component description.
+   * The components name.
    *
-   * @return the controlSpecificationDescription
+   * @return the componentName
    */
-  public String getControlSpecificationDescription() {
-    return controlSpecificationDescription;
+  public String getComponentName() {
+    return componentName;
   }
 
   /**
@@ -121,7 +139,7 @@ public class ControlSpecificationWithStats extends GenericModel {
    *
    * @return the assessments
    */
-  public List<Assessment> getAssessments() {
+  public List<AssessmentWithStats> getAssessments() {
     return assessments;
   }
 
@@ -189,6 +207,17 @@ public class ControlSpecificationWithStats extends GenericModel {
    */
   public Long getUserEvaluationRequiredCount() {
     return userEvaluationRequiredCount;
+  }
+
+  /**
+   * Gets the notApplicableCount.
+   *
+   * The number of not applicable (with no evaluations) checks.
+   *
+   * @return the notApplicableCount
+   */
+  public Long getNotApplicableCount() {
+    return notApplicableCount;
   }
 }
 

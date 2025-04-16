@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -14,10 +14,11 @@
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.Assessment;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.AssessmentWithStats;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ControlSpecificationWithStats;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ControlWithStats;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.ParameterInfo;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.Parameter;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.Tags;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -35,19 +36,22 @@ public class ControlWithStatsTest {
   @Test
   public void testControlWithStats() throws Throwable {
     ControlWithStats controlWithStatsModel = new ControlWithStats();
+    assertNull(controlWithStatsModel.getReportId());
+    assertNull(controlWithStatsModel.getHomeAccountId());
     assertNull(controlWithStatsModel.getId());
     assertNull(controlWithStatsModel.getControlLibraryId());
     assertNull(controlWithStatsModel.getControlLibraryVersion());
     assertNull(controlWithStatsModel.getControlName());
     assertNull(controlWithStatsModel.getControlDescription());
     assertNull(controlWithStatsModel.getControlCategory());
-    assertNull(controlWithStatsModel.getControlPath());
     assertNull(controlWithStatsModel.getControlSpecifications());
+    assertNull(controlWithStatsModel.getResourceTags());
     assertNull(controlWithStatsModel.getStatus());
     assertNull(controlWithStatsModel.getTotalCount());
     assertNull(controlWithStatsModel.getCompliantCount());
     assertNull(controlWithStatsModel.getNotCompliantCount());
     assertNull(controlWithStatsModel.getUnableToPerformCount());
     assertNull(controlWithStatsModel.getUserEvaluationRequiredCount());
+    assertNull(controlWithStatsModel.getNotApplicableCount());
   }
 }

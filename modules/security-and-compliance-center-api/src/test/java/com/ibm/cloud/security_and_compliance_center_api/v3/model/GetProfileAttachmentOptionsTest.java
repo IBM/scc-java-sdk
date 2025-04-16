@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,15 +32,15 @@ public class GetProfileAttachmentOptionsTest {
   @Test
   public void testGetProfileAttachmentOptions() throws Throwable {
     GetProfileAttachmentOptions getProfileAttachmentOptionsModel = new GetProfileAttachmentOptions.Builder()
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
+      .profileId("9c265b4a-4cdf-47f1-acd3-17b5808f7f3f")
       .attachmentId("testString")
-      .profileId("testString")
-      .xCorrelationId("testString")
-      .xRequestId("testString")
+      .accountId("testString")
       .build();
+    assertEquals(getProfileAttachmentOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
+    assertEquals(getProfileAttachmentOptionsModel.profileId(), "9c265b4a-4cdf-47f1-acd3-17b5808f7f3f");
     assertEquals(getProfileAttachmentOptionsModel.attachmentId(), "testString");
-    assertEquals(getProfileAttachmentOptionsModel.profileId(), "testString");
-    assertEquals(getProfileAttachmentOptionsModel.xCorrelationId(), "testString");
-    assertEquals(getProfileAttachmentOptionsModel.xRequestId(), "testString");
+    assertEquals(getProfileAttachmentOptionsModel.accountId(), "testString");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

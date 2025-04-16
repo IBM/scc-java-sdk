@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.google.gson.annotations.SerializedName;
@@ -32,13 +33,17 @@ public class ResourceSummaryItem extends GenericModel {
     String UNABLE_TO_PERFORM = "unable_to_perform";
     /** user_evaluation_required. */
     String USER_EVALUATION_REQUIRED = "user_evaluation_required";
+    /** not_applicable. */
+    String NOT_APPLICABLE = "not_applicable";
   }
 
-  protected String name;
   protected String id;
-  protected String service;
-  protected Tags tags;
+  protected String name;
   protected String account;
+  protected String service;
+  @SerializedName("service_display_name")
+  protected String serviceDisplayName;
+  protected Tags tags;
   protected String status;
   @SerializedName("total_count")
   protected Long totalCount;
@@ -48,10 +53,23 @@ public class ResourceSummaryItem extends GenericModel {
   protected Long failureCount;
   @SerializedName("error_count")
   protected Long errorCount;
+  @SerializedName("skipped_count")
+  protected Long skippedCount;
   @SerializedName("completed_count")
   protected Long completedCount;
 
   protected ResourceSummaryItem() { }
+
+  /**
+   * Gets the id.
+   *
+   * The resource ID.
+   *
+   * @return the id
+   */
+  public String getId() {
+    return id;
+  }
 
   /**
    * Gets the name.
@@ -65,14 +83,14 @@ public class ResourceSummaryItem extends GenericModel {
   }
 
   /**
-   * Gets the id.
+   * Gets the account.
    *
-   * The resource ID.
+   * The account that owns the resource.
    *
-   * @return the id
+   * @return the account
    */
-  public String getId() {
-    return id;
+  public String getAccount() {
+    return account;
   }
 
   /**
@@ -87,6 +105,17 @@ public class ResourceSummaryItem extends GenericModel {
   }
 
   /**
+   * Gets the serviceDisplayName.
+   *
+   * The services display name that is managing the resource.
+   *
+   * @return the serviceDisplayName
+   */
+  public String getServiceDisplayName() {
+    return serviceDisplayName;
+  }
+
+  /**
    * Gets the tags.
    *
    * The collection of different types of tags.
@@ -95,17 +124,6 @@ public class ResourceSummaryItem extends GenericModel {
    */
   public Tags getTags() {
     return tags;
-  }
-
-  /**
-   * Gets the account.
-   *
-   * The account that owns the resource.
-   *
-   * @return the account
-   */
-  public String getAccount() {
-    return account;
   }
 
   /**
@@ -161,6 +179,17 @@ public class ResourceSummaryItem extends GenericModel {
    */
   public Long getErrorCount() {
     return errorCount;
+  }
+
+  /**
+   * Gets the skippedCount.
+   *
+   * The number of assessments with no corresponding evaluations.
+   *
+   * @return the skippedCount
+   */
+  public Long getSkippedCount() {
+    return skippedCount;
   }
 
   /**

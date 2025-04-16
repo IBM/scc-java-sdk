@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,13 +32,13 @@ public class GetControlLibraryOptionsTest {
   @Test
   public void testGetControlLibraryOptions() throws Throwable {
     GetControlLibraryOptions getControlLibraryOptionsModel = new GetControlLibraryOptions.Builder()
-      .controlLibrariesId("testString")
-      .xCorrelationId("testString")
-      .xRequestId("testString")
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
+      .controlLibraryId("testString")
+      .accountId("testString")
       .build();
-    assertEquals(getControlLibraryOptionsModel.controlLibrariesId(), "testString");
-    assertEquals(getControlLibraryOptionsModel.xCorrelationId(), "testString");
-    assertEquals(getControlLibraryOptionsModel.xRequestId(), "testString");
+    assertEquals(getControlLibraryOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
+    assertEquals(getControlLibraryOptionsModel.controlLibraryId(), "testString");
+    assertEquals(getControlLibraryOptionsModel.accountId(), "testString");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

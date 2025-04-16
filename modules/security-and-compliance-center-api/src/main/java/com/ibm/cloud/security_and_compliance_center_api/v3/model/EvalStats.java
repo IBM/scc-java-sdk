@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.google.gson.annotations.SerializedName;
@@ -32,6 +33,8 @@ public class EvalStats extends GenericModel {
     String UNABLE_TO_PERFORM = "unable_to_perform";
     /** user_evaluation_required. */
     String USER_EVALUATION_REQUIRED = "user_evaluation_required";
+    /** not_applicable. */
+    String NOT_APPLICABLE = "not_applicable";
   }
 
   protected String status;
@@ -43,6 +46,8 @@ public class EvalStats extends GenericModel {
   protected Long failureCount;
   @SerializedName("error_count")
   protected Long errorCount;
+  @SerializedName("skipped_count")
+  protected Long skippedCount;
   @SerializedName("completed_count")
   protected Long completedCount;
 
@@ -101,6 +106,17 @@ public class EvalStats extends GenericModel {
    */
   public Long getErrorCount() {
     return errorCount;
+  }
+
+  /**
+   * Gets the skippedCount.
+   *
+   * The number of assessments with no corresponding evaluations.
+   *
+   * @return the skippedCount
+   */
+  public Long getSkippedCount() {
+    return skippedCount;
   }
 
   /**

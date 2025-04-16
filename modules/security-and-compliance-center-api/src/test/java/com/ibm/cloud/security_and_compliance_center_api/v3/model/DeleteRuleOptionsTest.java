@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,13 +32,11 @@ public class DeleteRuleOptionsTest {
   @Test
   public void testDeleteRuleOptions() throws Throwable {
     DeleteRuleOptions deleteRuleOptionsModel = new DeleteRuleOptions.Builder()
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
       .ruleId("testString")
-      .xCorrelationId("testString")
-      .xRequestId("testString")
       .build();
+    assertEquals(deleteRuleOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
     assertEquals(deleteRuleOptionsModel.ruleId(), "testString");
-    assertEquals(deleteRuleOptionsModel.xCorrelationId(), "testString");
-    assertEquals(deleteRuleOptionsModel.xRequestId(), "testString");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
