@@ -18,6 +18,7 @@ import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.sdk.core.util.CredentialUtils;
 import com.ibm.cloud.sdk.core.util.DateUtils;
+import com.ibm.cloud.security_and_compliance_center_api.test.SdkIntegrationTestBase;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Account;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.AdditionalDetails;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.AdditionalProperty;
@@ -232,7 +233,6 @@ import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpdateSettingsO
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpdateSubscopeOptions;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpgradeAttachmentOptions;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
-import com.ibm.cloud.test.SdkIntegrationTestBase;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
