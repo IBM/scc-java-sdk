@@ -39,41 +39,41 @@ public class AttachmentItemTest {
   @Test
   public void testAttachmentItem() throws Throwable {
     PropertyItem propertyItemModel = new PropertyItem.Builder()
-      .name("name")
-      .value("value")
-      .build();
+            .name("name")
+            .value("value")
+            .build();
     assertEquals(propertyItemModel.name(), "name");
     assertEquals(propertyItemModel.value(), "value");
 
     MultiCloudScope multiCloudScopeModel = new MultiCloudScope.Builder()
-      .environment("environment")
-      .xProperties(java.util.Arrays.asList(propertyItemModel))
-      .build();
+            .environment("environment")
+            .xProperties(java.util.Arrays.asList(propertyItemModel))
+            .build();
     assertEquals(multiCloudScopeModel.environment(), "environment");
     assertEquals(multiCloudScopeModel.xProperties(), java.util.Arrays.asList(propertyItemModel));
 
     FailedControls failedControlsModel = new FailedControls.Builder()
-      .thresholdLimit(Long.valueOf("0"))
-      .failedControlIds(java.util.Arrays.asList("5C453578-E9A1-421E-AD0F-C6AFCDD67CCF", "5C453578-E9A1-421E-AD0F-C6AFCDD67CCF", "5C453578-E9A1-421E-AD0F-C6AFCDD67CCF", "5C453578-E9A1-421E-AD0F-C6AFCDD67CCF", "5C453578-E9A1-421E-AD0F-C6AFCDD67CCF"))
-      .build();
+            .thresholdLimit(Long.valueOf("0"))
+            .failedControlIds(java.util.Arrays.asList("5C453578-E9A1-421E-AD0F-C6AFCDD67CCF", "5C453578-E9A1-421E-AD0F-C6AFCDD67CCF", "5C453578-E9A1-421E-AD0F-C6AFCDD67CCF", "5C453578-E9A1-421E-AD0F-C6AFCDD67CCF", "5C453578-E9A1-421E-AD0F-C6AFCDD67CCF"))
+            .build();
     assertEquals(failedControlsModel.thresholdLimit(), Long.valueOf("0"));
     assertEquals(failedControlsModel.failedControlIds(), java.util.Arrays.asList("5C453578-E9A1-421E-AD0F-C6AFCDD67CCF", "5C453578-E9A1-421E-AD0F-C6AFCDD67CCF", "5C453578-E9A1-421E-AD0F-C6AFCDD67CCF", "5C453578-E9A1-421E-AD0F-C6AFCDD67CCF", "5C453578-E9A1-421E-AD0F-C6AFCDD67CCF"));
 
     AttachmentsNotificationsPrototype attachmentsNotificationsPrototypeModel = new AttachmentsNotificationsPrototype.Builder()
-      .enabled(true)
-      .controls(failedControlsModel)
-      .build();
+            .enabled(true)
+            .controls(failedControlsModel)
+            .build();
     assertEquals(attachmentsNotificationsPrototypeModel.enabled(), Boolean.valueOf(true));
     assertEquals(attachmentsNotificationsPrototypeModel.controls(), failedControlsModel);
 
     AttachmentParameterPrototype attachmentParameterPrototypeModel = new AttachmentParameterPrototype.Builder()
-      .assessmentType("assessment_type")
-      .assessmentId("assessment_id")
-      .parameterName("parameter_name")
-      .parameterValue("parameter_value")
-      .parameterDisplayName("parameter_display_name")
-      .parameterType("string")
-      .build();
+            .assessmentType("assessment_type")
+            .assessmentId("assessment_id")
+            .parameterName("parameter_name")
+            .parameterValue("parameter_value")
+            .parameterDisplayName("parameter_display_name")
+            .parameterType("string")
+            .build();
     assertEquals(attachmentParameterPrototypeModel.assessmentType(), "assessment_type");
     assertEquals(attachmentParameterPrototypeModel.assessmentId(), "assessment_id");
     assertEquals(attachmentParameterPrototypeModel.parameterName(), "parameter_name");
@@ -86,9 +86,9 @@ public class AttachmentItemTest {
       .status("in_progress")
       .time(DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"))
       .build();
-    assertEquals(lastScanModel.id(), "e8a39d25-0051-4328-8462-988ad321f49a");
-    assertEquals(lastScanModel.status(), "in_progress");
-    assertEquals(lastScanModel.time(), DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"));
+      assertEquals(lastScanModel.id(), "e8a39d25-0051-4328-8462-988ad321f49a");
+      assertEquals(lastScanModel.status(), "in_progress");
+      assertEquals(lastScanModel.time(), DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"));
 
     AttachmentItem attachmentItemModel = new AttachmentItem.Builder()
       .id("130003ea8bfa43c5aacea07a86da3000")
