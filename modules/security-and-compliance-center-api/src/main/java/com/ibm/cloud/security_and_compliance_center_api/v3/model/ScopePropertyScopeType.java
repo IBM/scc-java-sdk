@@ -16,7 +16,9 @@ package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 /**
  * Attribute that details what kind of type of scope.
  */
-public class ScopePropertyScopeType extends ScopeProperty {
+public class ScopePropertyScopeType {
+  private String name;
+  private String value;
 
   /**
    * key to say the attribute targets the scope type.
@@ -62,7 +64,7 @@ public class ScopePropertyScopeType extends ScopeProperty {
      *
      * @param scopePropertyScopeType the instance to initialize the Builder with
      */
-    public Builder(ScopeProperty scopePropertyScopeType) {
+    public Builder(ScopePropertyScopeType scopePropertyScopeType) {
       this.name = scopePropertyScopeType.name;
       this.value = scopePropertyScopeType.value;
     }
@@ -120,9 +122,9 @@ public class ScopePropertyScopeType extends ScopeProperty {
 
   protected ScopePropertyScopeType(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.name,
-      "name cannot be null");
+            "name cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.value,
-      "value cannot be null");
+            "value cannot be null");
     name = builder.name;
     value = builder.value;
   }
@@ -135,5 +137,20 @@ public class ScopePropertyScopeType extends ScopeProperty {
   public Builder newBuilder() {
     return new Builder(this);
   }
-}
 
+  /**
+   * Gets the name.
+   * @return ScopePropertyScopeType name
+   */
+  public String name() {
+    return name;
+  }
+
+  /**
+   * Gets the value.
+   * @return ScopePropertyScopeType value
+   */
+  public String value() {
+    return value;
+  }
+}
