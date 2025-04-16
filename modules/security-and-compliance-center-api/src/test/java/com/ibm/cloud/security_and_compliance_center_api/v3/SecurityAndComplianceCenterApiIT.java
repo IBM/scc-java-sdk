@@ -996,10 +996,25 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
   @Test(dependsOnMethods = { "testGetControlLibrary" })
   public void testCreateProfile() throws Exception {
     try {
+      List<ProfileControlsPrototype> profileControls = new ArrayList<>();
       ProfileControlsPrototype profileControlsPrototypeModel = new ProfileControlsPrototype.Builder()
+        .controlLibraryId("a046fb6b-aba5-4646-b190-a2c76241e7af")
+        .controlId("2ce21ba3-0548-49a3-88e2-1122632218f4")
+        .build();
+
+      ProfileControlsPrototype profileControlsPrototype2 = new ProfileControlsPrototype.Builder()
+        .controlLibraryId("a046fb6b-aba5-4646-b190-a2c76241e7af")
+        .controlId("bdc5fdab-6934-461c-8bb1-9af7ed8e8d33")
+        .build();
+
+      ProfileControlsPrototype profileControlsPrototype3 = new ProfileControlsPrototype.Builder()
         .controlLibraryId("a046fb6b-aba5-4646-b190-a2c76241e7af")
         .controlId("60dae3b5-6104-4b3e-bac7-26cc7b741aca")
         .build();
+
+      profileControls.add(profileControlsPrototypeModel);
+      profileControls.add(profileControlsPrototype2);
+      profileControls.add(profileControlsPrototype3);
 
       DefaultParameters defaultParametersModel = new DefaultParameters.Builder()
         .assessmentType("automated")
@@ -1014,7 +1029,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
         .profileName("Example Profile")
         .profileVersion("0.0.1")
-        .controls(java.util.Arrays.asList(profileControlsPrototypeModel))
+        .controls(profileControls)
         .defaultParameters(java.util.Arrays.asList(defaultParametersModel))
         .profileDescription("This profile is created as an example of the SDK gen")
         .latest(true)
@@ -1033,8 +1048,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
 
       profileIdLink = profileResult.id();
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s%nError details: %s",
+        e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 
