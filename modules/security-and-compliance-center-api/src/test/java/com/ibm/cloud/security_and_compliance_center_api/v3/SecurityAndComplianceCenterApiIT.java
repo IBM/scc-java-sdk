@@ -2104,18 +2104,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       ListReportEvaluationsOptions listReportEvaluationsOptions = new ListReportEvaluationsOptions.Builder()
         .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
         .reportId(reportIdForReportLink)
-        .assessmentId("testString")
-        .assessmentMethod("testString")
-        .componentId("testString")
-        .targetId("testString")
-        .targetEnv("testString")
-        .targetName("testString")
         .status("failure")
-        .start("testString")
         .limit(Long.valueOf("10"))
-        .sort("assessment_id")
-        .scopeId("testString")
-        .subscopeId("testString")
         .build();
 
       // Invoke operation
@@ -2128,8 +2118,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       assertNotNull(evaluationPageResult);
 
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s%nError details: %s",
+        e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 
