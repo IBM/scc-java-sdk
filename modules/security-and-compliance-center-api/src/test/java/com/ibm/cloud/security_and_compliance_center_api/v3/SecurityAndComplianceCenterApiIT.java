@@ -2270,8 +2270,6 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       ListScanReportsOptions listScanReportsOptions = new ListScanReportsOptions.Builder()
         .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
         .reportId(reportIdForReportLink)
-        .scopeId("testString")
-        .subscopeId("testString")
         .sort("status")
         .build();
 
@@ -2286,8 +2284,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
 
       scanIdForScanReportLink = scanReportCollectionResult.getScanReports().get(0).getId();
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s%nError details: %s",
+        e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 
