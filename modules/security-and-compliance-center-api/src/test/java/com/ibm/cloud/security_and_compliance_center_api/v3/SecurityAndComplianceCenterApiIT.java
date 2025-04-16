@@ -817,14 +817,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       ControlSpecificationPrototype controlSpecificationPrototypeModel = new ControlSpecificationPrototype.Builder()
         .componentId("apprapp")
         .environment("ibm-cloud")
-        .controlSpecificationId("testString")
         .controlSpecificationDescription("This field is used to describe a control specification")
         .assessments(java.util.Arrays.asList(assessmentPrototypeModel))
-        .build();
-
-      ControlDoc controlDocModel = new ControlDoc.Builder()
-        .controlDocsId("testString")
-        .controlDocsType("testString")
         .build();
 
       ControlPrototype controlPrototypeModel = new ControlPrototype.Builder()
@@ -832,9 +826,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .controlDescription("This is a description of a control")
         .controlCategory("test-control")
         .controlRequirement(true)
-        .controlParent("testString")
         .controlSpecifications(java.util.Arrays.asList(controlSpecificationPrototypeModel))
-        .controlDocs(controlDocModel)
         .status("disabled")
         .build();
 
@@ -859,8 +851,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
 
       controlLibraryIdLink = controlLibraryResult.getId();
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s%nError details: %s",
+        e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 
