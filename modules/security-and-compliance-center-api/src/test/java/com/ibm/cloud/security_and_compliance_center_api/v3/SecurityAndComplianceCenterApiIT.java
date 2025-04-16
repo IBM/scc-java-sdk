@@ -354,14 +354,18 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       Response<Settings> response = service.updateSettings(updateSettingsOptions).execute();
       // Validate response
       assertNotNull(response);
-      assertEquals(response.getStatusCode(), 200);
+      assertTrue(response.getStatusCode() == 200 || response.getStatusCode() == 204);
 
       Settings settingsResult = response.getResult();
-      assertNotNull(settingsResult);
+      if (response.getStatusCode() == 200) {
+        assertNotNull(settingsResult);
+      } else if (response.getStatusCode() == 204) {
+        assertNull(settingsResult);
+      }
 
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s%nError details: %s",
+        e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 
