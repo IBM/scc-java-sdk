@@ -1540,10 +1540,6 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
         .scopeId(scopeIdLink)
         .limit(Long.valueOf("10"))
-        .start("testString")
-        .name("testString")
-        .description("testString")
-        .environment("testString")
         .build();
 
       // Invoke operation
@@ -1556,8 +1552,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       assertNotNull(subScopeCollectionResult);
 
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s%nError details: %s",
+        e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 
