@@ -2247,9 +2247,6 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       GetReportViolationsDriftOptions getReportViolationsDriftOptions = new GetReportViolationsDriftOptions.Builder()
         .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
         .reportId(reportIdForReportLink)
-        .scanTimeDuration(Long.valueOf("0"))
-        .scopeId("testString")
-        .subscopeId("testString")
         .build();
 
       // Invoke operation
@@ -2262,8 +2259,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       assertNotNull(reportViolationsDriftResult);
 
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s%nError details: %s",
+        e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 
