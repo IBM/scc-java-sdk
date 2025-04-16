@@ -1490,16 +1490,25 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
   @Test(dependsOnMethods = { "testGetScope" })
   public void testCreateSubscope() throws Exception {
     try {
+      List<ScopeProperty> scopeProperties = new ArrayList<>();
       ScopePropertyScopeAny scopePropertyModel = new ScopePropertyScopeAny.Builder()
         .name("scope_id")
         .value("1f689f08ec9b47b885c2659c17029581")
         .build();
 
+      ScopePropertyScopeAny scopePropertyModel2 = new ScopePropertyScopeAny.Builder()
+        .name("scope_type")
+        .value("account.resource_group")
+        .build();
+
+      scopeProperties.add(scopePropertyModel);
+      scopeProperties.add(scopePropertyModel2);
+
       ScopePrototype scopePrototypeModel = new ScopePrototype.Builder()
-        .name("ibm subscope update")
+        .name("ibm subscope")
         .description("The subscope that is defined for IBM resources.")
         .environment("ibm-cloud")
-        .xProperties(java.util.Arrays.asList(scopePropertyModel))
+        .xProperties(scopeProperties)
         .build();
 
       CreateSubscopeOptions createSubscopeOptions = new CreateSubscopeOptions.Builder()
@@ -1519,8 +1528,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
 
       subScopeIdLink = subScopeResponseResult.getSubscopes().get(0).getId();
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s%nError details: %s",
+        e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 
