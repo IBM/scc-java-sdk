@@ -2056,14 +2056,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       GetReportControlsOptions getReportControlsOptions = new GetReportControlsOptions.Builder()
         .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
         .reportId(reportIdForReportLink)
-        .controlId("testString")
-        .controlName("testString")
-        .controlDescription("testString")
-        .controlCategory("testString")
         .status("compliant")
-        .sort("control_name")
-        .scopeId("testString")
-        .subscopeId("testString")
         .build();
 
       // Invoke operation
@@ -2076,8 +2069,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       assertNotNull(reportControlsResult);
 
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s%nError details: %s",
+        e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 
