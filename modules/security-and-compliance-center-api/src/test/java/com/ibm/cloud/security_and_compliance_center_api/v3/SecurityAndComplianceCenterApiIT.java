@@ -2390,8 +2390,6 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
         .limit(Long.valueOf("10"))
         .type("system_defined")
-        .search("testString")
-        .serviceName("testString")
         .sort("updated_on")
         .build();
 
@@ -2414,8 +2412,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       assertEquals(allItems.size(), allResults.size());
       System.out.println(String.format("Retrieved a total of %d item(s) with pagination.", allResults.size()));
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s%nError details: %s",
+        e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 
