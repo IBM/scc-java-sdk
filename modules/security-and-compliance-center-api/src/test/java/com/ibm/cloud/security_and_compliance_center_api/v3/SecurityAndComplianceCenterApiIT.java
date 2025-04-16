@@ -399,7 +399,6 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .limit(Long.valueOf("10"))
         .sort("created_on")
         .direction("desc")
-        .start("testString")
         .build();
 
       // Invoke operation
@@ -412,8 +411,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       assertNotNull(profileAttachmentCollectionResult);
 
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s%nError details: %s",
+        e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 
