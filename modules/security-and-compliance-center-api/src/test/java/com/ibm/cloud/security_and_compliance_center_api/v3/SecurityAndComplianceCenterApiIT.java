@@ -924,7 +924,6 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       ControlSpecificationPrototype controlSpecificationPrototypeModel = new ControlSpecificationPrototype.Builder()
         .componentId("apprapp")
         .environment("ibm-cloud")
-        .controlSpecificationId("testString")
         .controlSpecificationDescription("This field is used to describe a control specification")
         .assessments(java.util.Arrays.asList(assessmentPrototypeModel))
         .build();
@@ -939,21 +938,20 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .controlDescription("This is a description of a control")
         .controlCategory("test-control")
         .controlRequirement(true)
-        .controlParent("testString")
+        .controlParent("")
         .controlSpecifications(java.util.Arrays.asList(controlSpecificationPrototypeModel))
         .controlDocs(controlDocModel)
-        .status("disabled")
+        .status("enabled")
         .build();
 
       ReplaceCustomControlLibraryOptions replaceCustomControlLibraryOptions = new ReplaceCustomControlLibraryOptions.Builder()
         .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
         .controlLibraryId(controlLibraryIdLink)
-        .controlLibraryName("custom control library from SDK")
+        .controlLibraryName("custom control library update")
         .controlLibraryDescription("This is a custom control library made from the SDK test framework")
         .controlLibraryType("custom")
         .controlLibraryVersion("0.0.2")
         .controls(java.util.Arrays.asList(controlPrototypeModel))
-        .bssAccount("testString")
         .build();
 
       // Invoke operation
@@ -966,8 +964,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       assertNotNull(controlLibraryResult);
 
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s%nError details: %s",
+        e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 
