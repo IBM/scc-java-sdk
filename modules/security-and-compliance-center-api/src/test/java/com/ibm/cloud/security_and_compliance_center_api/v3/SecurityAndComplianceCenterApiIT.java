@@ -1413,9 +1413,6 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       ListScopesOptions options = new ListScopesOptions.Builder()
         .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
         .limit(Long.valueOf("10"))
-        .name("testString")
-        .description("testString")
-        .environment("testString")
         .build();
 
       // Test getNext().
@@ -1437,8 +1434,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       assertEquals(allItems.size(), allResults.size());
       System.out.println(String.format("Retrieved a total of %d item(s) with pagination.", allResults.size()));
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s%nError details: %s",
+        e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 
