@@ -1984,8 +1984,6 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       GetReportOptions getReportOptions = new GetReportOptions.Builder()
         .reportId(reportIdForReportLink)
         .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
-        .scopeId("testString")
-        .subscopeId("testString")
         .build();
 
       // Invoke operation
@@ -1998,8 +1996,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
       assertNotNull(reportResult);
 
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s%nError details: %s",
+        e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 
