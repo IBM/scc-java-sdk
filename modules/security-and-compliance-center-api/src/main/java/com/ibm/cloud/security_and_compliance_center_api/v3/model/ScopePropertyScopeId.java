@@ -17,7 +17,8 @@ package com.ibm.cloud.security_and_compliance_center_api.v3.model;
  * The value of the identifier that correlates to scope type. If ScopePropertyScopeType schema uses the value
  * enterprise.account_group, the value should be the identifier or ID of the account_group within the enterprise.
  */
-public class ScopePropertyScopeId extends ScopeProperty {
+public class ScopePropertyScopeId {
+  private String name;
   private String value;
 
   /**
@@ -113,5 +114,23 @@ public class ScopePropertyScopeId extends ScopeProperty {
    */
   public Builder newBuilder() {
     return new Builder(this);
+  }
+
+  /**
+   * Get the name.
+   *
+   * @return theScopePropertyScopeId name
+   */
+  public String name() {
+    return name;
+  }
+
+  /**
+   * Get the value.
+   *
+   * @return theScopePropertyScopeId value
+   */
+  public String value() {
+    return value;
   }
 }
