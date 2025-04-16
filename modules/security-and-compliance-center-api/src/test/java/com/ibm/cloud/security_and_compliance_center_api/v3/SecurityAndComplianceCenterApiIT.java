@@ -234,10 +234,8 @@ import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpdateSubscopeO
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpgradeAttachmentOptions;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -458,18 +456,65 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
   @Test(dependsOnMethods = { "testListInstanceAttachments" })
   public void testCreateProfileAttachment() throws Exception {
     try {
+      List<Parameter> parameters = new ArrayList<>();
       Parameter parameterModel = new Parameter.Builder()
-        .assessmentType("automated")
         .assessmentId("rule-e16fcfea-fe21-4d30-a721-423611481fea")
         .parameterName("tls_version")
         .parameterDisplayName("IBM Cloud Internet Services TLS version")
         .parameterType("string_list")
-        .parameterValue("[\"1.2\", \"1.3\"]")
+        .parameterValue("['1.2', '1.3']")
         .build();
+
+      Parameter parameterModel2 = new Parameter.Builder()
+        .assessmentId("rule-f9137be8-2490-4afb-8cd5-a201cb167eb2")
+        .parameterName("ssh_port")
+        .parameterDisplayName("Network ACL rule for allowed IPs to SSH port")
+        .parameterType("numeric")
+        .parameterValue("22")
+        .build();
+
+      Parameter parameterModel3 = new Parameter.Builder()
+        .assessmentId("rule-9653d2c7-6290-4128-a5a3-65487ba40370")
+        .parameterName("rdp_port")
+        .parameterDisplayName("Security group rule RDP allow port number")
+        .parameterType("numeric")
+        .parameterValue("22")
+        .build();
+
+      Parameter parameterModel4 = new Parameter.Builder()
+        .assessmentId("rule-7c5f6385-67e4-4edf-bec8-c722558b2dec")
+        .parameterName("ssh_port")
+        .parameterDisplayName("Security group rule SSH allow port number")
+        .parameterType("numeric")
+        .parameterValue("22")
+        .build();
+
+      Parameter parameterModel5 = new Parameter.Builder()
+        .assessmentId("rule-f1e80ee7-88d5-4bf2-b42f-c863bb24601c")
+        .parameterName("rdp_port")
+        .parameterDisplayName("Disallowed IPs for ingress to RDP port")
+        .parameterType("numeric")
+        .parameterValue("3389")
+        .build();
+
+      Parameter parameterModel6 = new Parameter.Builder()
+        .assessmentId("rule-96527f89-1867-4581-b923-1400e04661e0")
+        .parameterName("exclude_default_security_groups")
+        .parameterDisplayName("Exclude the default security groups")
+        .parameterType("string_list")
+        .parameterValue("['Default']")
+        .build();
+
+      parameters.add(parameterModel);
+      parameters.add(parameterModel2);
+      parameters.add(parameterModel3);
+      parameters.add(parameterModel4);
+      parameters.add(parameterModel5);
+      parameters.add(parameterModel6);
 
       AttachmentNotificationsControls attachmentNotificationsControlsModel = new AttachmentNotificationsControls.Builder()
         .thresholdLimit(Long.valueOf("15"))
-        .failedControlIds(java.util.Arrays.asList())
+        .failedControlIds(new ArrayList<>())
         .build();
 
       AttachmentNotifications attachmentNotificationsModel = new AttachmentNotifications.Builder()
@@ -481,13 +526,14 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .id("8baad3b5-2e69-4027-9967-efac19508e1c")
         .build();
 
+      Date endDate = new Date();
       DateRange dateRangeModel = new DateRange.Builder()
         .startDate(DateUtils.parseAsDateTime("2025-02-28T05:42:58.000Z"))
-        .endDate(DateUtils.parseAsDateTime("2025-02-28T05:42:58.000Z"))
+        .endDate(endDate)
         .build();
 
       ProfileAttachmentBase profileAttachmentBaseModel = new ProfileAttachmentBase.Builder()
-        .attachmentParameters(java.util.Arrays.asList(parameterModel))
+        .attachmentParameters(parameters)
         .description("This is a profile attachment targeting IBM CIS Foundation using a SDK")
         .name("Profile Attachment for IBM CIS Foundation SDK test")
         .notifications(attachmentNotificationsModel)
@@ -516,8 +562,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
 
       attachmentIdLink = profileAttachmentResponseResult.getAttachments().get(0).getId();
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s%nError details: %s",
+        e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 
