@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -18,8 +18,9 @@ import java.util.List;
 /**
  * RequiredConfigAnd.
  */
-public class RequiredConfigAnd extends RequiredConfig {
-
+public class RequiredConfigAnd {
+  private String description;
+  private List<RequiredConfigItems> and;
 
   /**
    * Builder.
@@ -33,7 +34,7 @@ public class RequiredConfigAnd extends RequiredConfig {
      *
      * @param requiredConfigAnd the instance to initialize the Builder with
      */
-    public Builder(RequiredConfig requiredConfigAnd) {
+    public Builder(RequiredConfigAnd requiredConfigAnd) {
       this.description = requiredConfigAnd.description;
       this.and = requiredConfigAnd.and;
     }
@@ -61,7 +62,7 @@ public class RequiredConfigAnd extends RequiredConfig {
      */
     public Builder addAnd(RequiredConfigItems and) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(and,
-        "and cannot be null");
+              "and cannot be null");
       if (this.and == null) {
         this.and = new ArrayList<RequiredConfigItems>();
       }
@@ -108,5 +109,24 @@ public class RequiredConfigAnd extends RequiredConfig {
   public Builder newBuilder() {
     return new Builder(this);
   }
-}
 
+  /**
+   * Gets the description.
+   * A list of required configurations where one item should evaluate to true.
+   *
+   * @return the and
+   */
+  public String description() {
+    return this.description;
+  }
+
+  /**
+   * Gets the and.
+   * A list of required configurations where one item should evaluate to true.
+   *
+   * @return the and.
+   */
+  public List<RequiredConfigItems> and() {
+    return this.and;
+  }
+}
