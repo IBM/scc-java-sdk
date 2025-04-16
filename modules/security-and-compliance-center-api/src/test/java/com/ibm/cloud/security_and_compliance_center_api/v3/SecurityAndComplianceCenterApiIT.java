@@ -1643,50 +1643,11 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
   @Test(dependsOnMethods = { "testUpdateSubscope" })
   public void testCreateTarget() throws Exception {
     try {
-      Account accountModel = new Account.Builder()
-        .id("531fc3e28bfc43c5a2cea07786d93f5c")
-        .name("NIST")
-        .type("account_type")
-        .build();
-
-      Tags tagsModel = new Tags.Builder()
-        .user(java.util.Arrays.asList("testString"))
-        .access(java.util.Arrays.asList("testString"))
-        .service(java.util.Arrays.asList("testString"))
-        .build();
-
-      Resource resourceModel = new Resource.Builder()
-        .reportId("30b434b3-cb08-4845-af10-7a8fc682b6a8")
-        .homeAccountId("2411ffdc16844b07b42521c3443f456d")
-        .id("crn:v1:bluemix:public:kms:us-south:a/5af747ca19a8a278b1b6e4eec20df507:03502a50-4ea9-463c-80e5-e27ed838cdb6::")
-        .resourceName("jeff's key")
-        .account(accountModel)
-        .componentId("cloud-object_storage")
-        .componentName("cloud-object_storage")
-        .environment("ibm cloud")
-        .tags(tagsModel)
-        .status("compliant")
-        .totalCount(Long.valueOf("140"))
-        .passCount(Long.valueOf("123"))
-        .failureCount(Long.valueOf("12"))
-        .errorCount(Long.valueOf("5"))
-        .skippedCount(Long.valueOf("7"))
-        .completedCount(Long.valueOf("135"))
-        .serviceName("pm-20")
-        .instanceCrn("testString")
-        .build();
-
-      Credential credentialModel = new Credential.Builder()
-        .secretCrn("testString")
-        .resources(java.util.Arrays.asList(resourceModel))
-        .build();
-
       CreateTargetOptions createTargetOptions = new CreateTargetOptions.Builder()
         .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
         .accountId("62ecf99b240144dea9125666249edfcb")
         .trustedProfileId("Profile-cb2c1829-9a8d-4218-b9cd-9f83fc814e54")
         .name("Target for IBM account")
-        .credentials(java.util.Arrays.asList(credentialModel))
         .build();
 
       // Invoke operation
@@ -1700,8 +1661,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
 
       targetIdLink = targetResult.getId();
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s%nError details: %s",
+        e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 
