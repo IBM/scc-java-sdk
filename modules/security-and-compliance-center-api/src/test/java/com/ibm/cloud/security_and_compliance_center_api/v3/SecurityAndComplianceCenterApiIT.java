@@ -1342,17 +1342,26 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
   @Test(dependsOnMethods = { "testListProfileAttachments" })
   public void testCreateScope() throws Exception {
     try {
+      List<ScopeProperty> scopePropertyModels = new ArrayList<>();
       ScopePropertyScopeAny scopePropertyModel = new ScopePropertyScopeAny.Builder()
         .name("scope_id")
         .value("ff88f007f9ff4622aac4fbc0eda36255")
         .build();
+
+      ScopePropertyScopeAny scopePropertyModel2 = new ScopePropertyScopeAny.Builder()
+        .name("scope_type")
+        .value("account")
+        .build();
+
+      scopePropertyModels.add(scopePropertyModel);
+      scopePropertyModels.add(scopePropertyModel2);
 
       CreateScopeOptions createScopeOptions = new CreateScopeOptions.Builder()
         .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
         .name("ibm scope")
         .description("The scope that is defined for IBM resources.")
         .environment("ibm-cloud")
-        .xProperties(java.util.Arrays.asList(scopePropertyModel))
+        .xProperties(scopePropertyModels)
         .build();
 
       // Invoke operation
@@ -1366,8 +1375,8 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
 
       scopeIdLink = scopeResult.getId();
     } catch (ServiceResponseException e) {
-        fail(String.format("Service returned status code %d: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+      fail(String.format("Service returned status code %d: %s%nError details: %s",
+        e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 
