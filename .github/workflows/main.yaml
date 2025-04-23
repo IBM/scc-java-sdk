@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '8'
+          java-version: '21'
 
       - name: installing dependencies
         run: mvn install
@@ -31,7 +31,7 @@ jobs:
       - uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '8'
+          java-version: '21'
 
       - name: building project
         run: mvn clean compile
@@ -70,15 +70,15 @@ jobs:
       - name: setup python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: 3.12
 
       - name: releasing using semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.ADMIN_TOKEN }}
-          GIT_AUTHOR_NAME: sccdeveloper
+          GIT_AUTHOR_NAME: sccibm
           GIT_AUTHOR_EMAIL: scccomm@in.ibm.com
-          GIT_COMMITTER_NAME: sccdeveloper
-          GIT_COMMITTER_EMAIL: scccomm@in.ibm.com
+          GIT_COMMITTER_NAME: sccibm
+          GIT_COMMITTER_EMAIL: scc.results@ibm.com
         run: |
           pip install --user bumpversion
           npm install @semantic-release/changelog
@@ -101,7 +101,7 @@ jobs:
       - uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '8'
+          java-version: '21'
 
       - name: setting up gnupg for mvn
         env:
@@ -136,15 +136,15 @@ jobs:
       - uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '8'
+          java-version: '21'
 
       - name: generating javadocs
         run: build/prepareJavadoc.sh
       
       - name: deploying javadocs to gh-pages
         run: |
-          git config --global user.email "scccomm@in.ibm.com"
-          git config --global user.name "sccdeveloper"
+          git config --global user.email "scc.results@ibm.com"
+          git config --global user.name "sccibm"
           git config --global user.password "${{ secrets.ADMIN_TOKEN }}"
           cd v4/dist
           git init
@@ -155,7 +155,7 @@ jobs:
           git push -f origin gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.ADMIN_TOKEN }}
-          GIT_AUTHOR_NAME: sccdeveloper
-          GIT_AUTHOR_EMAIL: scccomm@in.ibm.com
-          GIT_COMMITTER_NAME: sccdeveloper
-          GIT_COMMITTER_EMAIL: scccomm@in.ibm.com
+          GIT_AUTHOR_NAME: sccibm
+          GIT_AUTHOR_EMAIL: scc.results@ibm.com
+          GIT_COMMITTER_NAME: sccibm
+          GIT_COMMITTER_EMAIL: scc.results@ibm.com
