@@ -1921,8 +1921,7 @@ public class SecurityAndComplianceCenterApiIT extends SdkIntegrationTestBase {
         .groupId(groupIdForReportLink)
         .reportProfileId(profileIdForReportLink)
         .type(typeForReportLink)
-        .start("testString")
-        .limit(Long.valueOf("10"))
+        .limit(Long.valueOf("100"))
         .sort("profile_name")
         .build();
 
