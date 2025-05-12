@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -40,11 +40,11 @@ public class ReportSummaryTest {
   public void testReportSummary() throws Throwable {
     ReportSummary reportSummaryModel = new ReportSummary();
     assertNull(reportSummaryModel.getReportId());
-    assertNull(reportSummaryModel.getIsntanceId());
+    assertNull(reportSummaryModel.getInstanceId());
     assertNull(reportSummaryModel.getAccount());
     assertNull(reportSummaryModel.getScore());
-    assertNull(reportSummaryModel.getControls());
     assertNull(reportSummaryModel.getEvaluations());
+    assertNull(reportSummaryModel.getControls());
     assertNull(reportSummaryModel.getResources());
   }
 }

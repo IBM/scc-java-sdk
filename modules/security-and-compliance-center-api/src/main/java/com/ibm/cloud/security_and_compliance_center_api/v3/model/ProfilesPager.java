@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.security_and_compliance_center_api.v3.SecurityAndComplianceCenterApi;
@@ -65,9 +66,9 @@ public class ProfilesPager {
 
   /**
    * Returns the next page of results.
-   * @return a List&lt;ProfileItem&gt; that contains the next page of results
+   * @return a List&lt;Profile&gt; that contains the next page of results
    */
-  public List<ProfileItem> getNext() {
+  public List<Profile> getNext() {
     if (!hasNext()) {
       throw new NoSuchElementException("No more results available");
     }
@@ -94,12 +95,12 @@ public class ProfilesPager {
 
   /**
    * Returns all results by invoking getNext() repeatedly until all pages of results have been retrieved.
-   * @return a List&lt;ProfileItem&gt; containing all results returned by the "listProfiles" method
+   * @return a List&lt;Profile&gt; containing all results returned by the "listProfiles" method
    */
-  public List<ProfileItem> getAll() {
-    List<ProfileItem> results = new ArrayList<>();
+  public List<Profile> getAll() {
+    List<Profile> results = new ArrayList<>();
     while (hasNext()) {
-      List<ProfileItem> nextPage = getNext();
+      List<Profile> nextPage = getNext();
       results.addAll(nextPage);
     }
     return results;

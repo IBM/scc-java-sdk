@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -15,12 +15,15 @@ package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Assessment;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.EvalDetails;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Evaluation;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.EvaluationDetails;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.EvaluationPage;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.PageHRef;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.ParameterInfo;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.Property;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.EvaluationProperty;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.EvaluationProviderInfo;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.PageHRefFirst;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.PageHRefNext;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.Parameter;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.Tags;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.TargetInfo;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
 import java.io.InputStream;
@@ -39,13 +42,12 @@ public class EvaluationPageTest {
   @Test
   public void testEvaluationPage() throws Throwable {
     EvaluationPage evaluationPageModel = new EvaluationPage();
-    assertNull(evaluationPageModel.getTotalCount());
     assertNull(evaluationPageModel.getLimit());
-    assertNull(evaluationPageModel.getStart());
+    assertNull(evaluationPageModel.getTotalCount());
     assertNull(evaluationPageModel.getFirst());
     assertNull(evaluationPageModel.getNext());
-    assertNull(evaluationPageModel.getHomeAccountId());
     assertNull(evaluationPageModel.getReportId());
+    assertNull(evaluationPageModel.getHomeAccountId());
     assertNull(evaluationPageModel.getEvaluations());
   }
 }

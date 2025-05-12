@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import java.util.ArrayList;
@@ -22,31 +23,29 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class ReplaceRuleOptions extends GenericModel {
 
+  protected String instanceId;
   protected String ruleId;
   protected String ifMatch;
   protected String description;
-  protected TargetPrototype target;
+  protected RuleTargetPrototype target;
   protected RequiredConfig requiredConfig;
   protected String version;
   protected Import xImport;
   protected List<String> labels;
-  protected String xCorrelationId;
-  protected String xRequestId;
 
   /**
    * Builder.
    */
   public static class Builder {
+    private String instanceId;
     private String ruleId;
     private String ifMatch;
     private String description;
-    private TargetPrototype target;
+    private RuleTargetPrototype target;
     private RequiredConfig requiredConfig;
     private String version;
     private Import xImport;
     private List<String> labels;
-    private String xCorrelationId;
-    private String xRequestId;
 
     /**
      * Instantiates a new Builder from an existing ReplaceRuleOptions instance.
@@ -54,6 +53,7 @@ public class ReplaceRuleOptions extends GenericModel {
      * @param replaceRuleOptions the instance to initialize the Builder with
      */
     private Builder(ReplaceRuleOptions replaceRuleOptions) {
+      this.instanceId = replaceRuleOptions.instanceId;
       this.ruleId = replaceRuleOptions.ruleId;
       this.ifMatch = replaceRuleOptions.ifMatch;
       this.description = replaceRuleOptions.description;
@@ -62,8 +62,6 @@ public class ReplaceRuleOptions extends GenericModel {
       this.version = replaceRuleOptions.version;
       this.xImport = replaceRuleOptions.xImport;
       this.labels = replaceRuleOptions.labels;
-      this.xCorrelationId = replaceRuleOptions.xCorrelationId;
-      this.xRequestId = replaceRuleOptions.xRequestId;
     }
 
     /**
@@ -75,13 +73,15 @@ public class ReplaceRuleOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
+     * @param instanceId the instanceId
      * @param ruleId the ruleId
      * @param ifMatch the ifMatch
      * @param description the description
      * @param target the target
      * @param requiredConfig the requiredConfig
      */
-    public Builder(String ruleId, String ifMatch, String description, TargetPrototype target, RequiredConfig requiredConfig) {
+    public Builder(String instanceId, String ruleId, String ifMatch, String description, RuleTargetPrototype target, RequiredConfig requiredConfig) {
+      this.instanceId = instanceId;
       this.ruleId = ruleId;
       this.ifMatch = ifMatch;
       this.description = description;
@@ -99,9 +99,9 @@ public class ReplaceRuleOptions extends GenericModel {
     }
 
     /**
-     * Adds an labels to labels.
+     * Adds a new element to labels.
      *
-     * @param labels the new labels
+     * @param labels the new element to be added
      * @return the ReplaceRuleOptions builder
      */
     public Builder addLabels(String labels) {
@@ -111,6 +111,17 @@ public class ReplaceRuleOptions extends GenericModel {
         this.labels = new ArrayList<String>();
       }
       this.labels.add(labels);
+      return this;
+    }
+
+    /**
+     * Set the instanceId.
+     *
+     * @param instanceId the instanceId
+     * @return the ReplaceRuleOptions builder
+     */
+    public Builder instanceId(String instanceId) {
+      this.instanceId = instanceId;
       return this;
     }
 
@@ -153,7 +164,7 @@ public class ReplaceRuleOptions extends GenericModel {
      * @param target the target
      * @return the ReplaceRuleOptions builder
      */
-    public Builder target(TargetPrototype target) {
+    public Builder target(RuleTargetPrototype target) {
       this.target = target;
       return this;
     }
@@ -202,33 +213,13 @@ public class ReplaceRuleOptions extends GenericModel {
       this.labels = labels;
       return this;
     }
-
-    /**
-     * Set the xCorrelationId.
-     *
-     * @param xCorrelationId the xCorrelationId
-     * @return the ReplaceRuleOptions builder
-     */
-    public Builder xCorrelationId(String xCorrelationId) {
-      this.xCorrelationId = xCorrelationId;
-      return this;
-    }
-
-    /**
-     * Set the xRequestId.
-     *
-     * @param xRequestId the xRequestId
-     * @return the ReplaceRuleOptions builder
-     */
-    public Builder xRequestId(String xRequestId) {
-      this.xRequestId = xRequestId;
-      return this;
-    }
   }
 
   protected ReplaceRuleOptions() { }
 
   protected ReplaceRuleOptions(Builder builder) {
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.instanceId,
+      "instanceId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.ruleId,
       "ruleId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.ifMatch,
@@ -239,6 +230,7 @@ public class ReplaceRuleOptions extends GenericModel {
       "target cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.requiredConfig,
       "requiredConfig cannot be null");
+    instanceId = builder.instanceId;
     ruleId = builder.ruleId;
     ifMatch = builder.ifMatch;
     description = builder.description;
@@ -247,8 +239,6 @@ public class ReplaceRuleOptions extends GenericModel {
     version = builder.version;
     xImport = builder.xImport;
     labels = builder.labels;
-    xCorrelationId = builder.xCorrelationId;
-    xRequestId = builder.xRequestId;
   }
 
   /**
@@ -261,9 +251,20 @@ public class ReplaceRuleOptions extends GenericModel {
   }
 
   /**
+   * Gets the instanceId.
+   *
+   * The ID of the Security and Compliance Center instance.
+   *
+   * @return the instanceId
+   */
+  public String instanceId() {
+    return instanceId;
+  }
+
+  /**
    * Gets the ruleId.
    *
-   * The ID of the corresponding rule.
+   * The ID of a rule/assessment.
    *
    * @return the ruleId
    */
@@ -304,14 +305,14 @@ public class ReplaceRuleOptions extends GenericModel {
    *
    * @return the target
    */
-  public TargetPrototype target() {
+  public RuleTargetPrototype target() {
     return target;
   }
 
   /**
    * Gets the requiredConfig.
    *
-   * The required configurations.
+   * The required configurations for a Rule.
    *
    * @return the requiredConfig
    */
@@ -350,32 +351,6 @@ public class ReplaceRuleOptions extends GenericModel {
    */
   public List<String> labels() {
     return labels;
-  }
-
-  /**
-   * Gets the xCorrelationId.
-   *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is used for downstream requests and retries of those requests. If a value of
-   * this header is not supplied in a request, the service generates a random (version 4) UUID.
-   *
-   * @return the xCorrelationId
-   */
-  public String xCorrelationId() {
-    return xCorrelationId;
-  }
-
-  /**
-   * Gets the xRequestId.
-   *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header  for the
-   * corresponding response.  The same value is not used for downstream requests and retries of those requests.  If a
-   * value of this header is not supplied in a request, the service generates a random (version 4) UUID.
-   *
-   * @return the xRequestId
-   */
-  public String xRequestId() {
-    return xRequestId;
   }
 }
 

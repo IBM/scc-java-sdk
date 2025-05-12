@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,10 +32,14 @@ public class GetSettingsOptionsTest {
   @Test
   public void testGetSettingsOptions() throws Throwable {
     GetSettingsOptions getSettingsOptionsModel = new GetSettingsOptions.Builder()
-      .xCorrelationId("1a2b3c4d-5e6f-4a7b-8c9d-e0f1a2b3c4d5")
-      .xRequestId("testString")
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
       .build();
-    assertEquals(getSettingsOptionsModel.xCorrelationId(), "1a2b3c4d-5e6f-4a7b-8c9d-e0f1a2b3c4d5");
-    assertEquals(getSettingsOptionsModel.xRequestId(), "testString");
+    assertEquals(getSettingsOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
   }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetSettingsOptionsError() throws Throwable {
+    new GetSettingsOptions.Builder().build();
+  }
+
 }

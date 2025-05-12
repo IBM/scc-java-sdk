@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -48,4 +48,10 @@ public class AdditionalTargetAttributeTest {
     assertEquals(additionalTargetAttributeModelNew.operator(), "string_equals");
     assertEquals(additionalTargetAttributeModelNew.value(), "testString");
   }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testAdditionalTargetAttributeError() throws Throwable {
+    new AdditionalTargetAttribute.Builder().build();
+  }
+
 }

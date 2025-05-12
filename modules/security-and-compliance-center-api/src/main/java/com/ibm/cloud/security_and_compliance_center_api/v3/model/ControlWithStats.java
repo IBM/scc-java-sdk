@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import java.util.List;
@@ -34,8 +35,14 @@ public class ControlWithStats extends GenericModel {
     String UNABLE_TO_PERFORM = "unable_to_perform";
     /** user_evaluation_required. */
     String USER_EVALUATION_REQUIRED = "user_evaluation_required";
+    /** not_applicable. */
+    String NOT_APPLICABLE = "not_applicable";
   }
 
+  @SerializedName("report_id")
+  protected String reportId;
+  @SerializedName("home_account_id")
+  protected String homeAccountId;
   protected String id;
   @SerializedName("control_library_id")
   protected String controlLibraryId;
@@ -47,10 +54,10 @@ public class ControlWithStats extends GenericModel {
   protected String controlDescription;
   @SerializedName("control_category")
   protected String controlCategory;
-  @SerializedName("control_path")
-  protected String controlPath;
   @SerializedName("control_specifications")
   protected List<ControlSpecificationWithStats> controlSpecifications;
+  @SerializedName("resource_tags")
+  protected Tags resourceTags;
   protected String status;
   @SerializedName("total_count")
   protected Long totalCount;
@@ -62,8 +69,32 @@ public class ControlWithStats extends GenericModel {
   protected Long unableToPerformCount;
   @SerializedName("user_evaluation_required_count")
   protected Long userEvaluationRequiredCount;
+  @SerializedName("not_applicable_count")
+  protected Long notApplicableCount;
 
   protected ControlWithStats() { }
+
+  /**
+   * Gets the reportId.
+   *
+   * The report ID.
+   *
+   * @return the reportId
+   */
+  public String getReportId() {
+    return reportId;
+  }
+
+  /**
+   * Gets the homeAccountId.
+   *
+   * The home account ID.
+   *
+   * @return the homeAccountId
+   */
+  public String getHomeAccountId() {
+    return homeAccountId;
+  }
 
   /**
    * Gets the id.
@@ -132,17 +163,6 @@ public class ControlWithStats extends GenericModel {
   }
 
   /**
-   * Gets the controlPath.
-   *
-   * The control path.
-   *
-   * @return the controlPath
-   */
-  public String getControlPath() {
-    return controlPath;
-  }
-
-  /**
    * Gets the controlSpecifications.
    *
    * The list of specifications that are on the page.
@@ -151,6 +171,17 @@ public class ControlWithStats extends GenericModel {
    */
   public List<ControlSpecificationWithStats> getControlSpecifications() {
     return controlSpecifications;
+  }
+
+  /**
+   * Gets the resourceTags.
+   *
+   * The collection of different types of tags.
+   *
+   * @return the resourceTags
+   */
+  public Tags getResourceTags() {
+    return resourceTags;
   }
 
   /**
@@ -217,6 +248,17 @@ public class ControlWithStats extends GenericModel {
    */
   public Long getUserEvaluationRequiredCount() {
     return userEvaluationRequiredCount;
+  }
+
+  /**
+   * Gets the notApplicableCount.
+   *
+   * The number of not applicable (with no evaluations) checks.
+   *
+   * @return the notApplicableCount
+   */
+  public Long getNotApplicableCount() {
+    return notApplicableCount;
   }
 }
 

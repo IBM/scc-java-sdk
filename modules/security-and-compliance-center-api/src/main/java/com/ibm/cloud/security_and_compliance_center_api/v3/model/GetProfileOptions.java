@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -19,17 +20,17 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class GetProfileOptions extends GenericModel {
 
+  protected String instanceId;
   protected String profileId;
-  protected String xCorrelationId;
-  protected String xRequestId;
+  protected String accountId;
 
   /**
    * Builder.
    */
   public static class Builder {
+    private String instanceId;
     private String profileId;
-    private String xCorrelationId;
-    private String xRequestId;
+    private String accountId;
 
     /**
      * Instantiates a new Builder from an existing GetProfileOptions instance.
@@ -37,9 +38,9 @@ public class GetProfileOptions extends GenericModel {
      * @param getProfileOptions the instance to initialize the Builder with
      */
     private Builder(GetProfileOptions getProfileOptions) {
+      this.instanceId = getProfileOptions.instanceId;
       this.profileId = getProfileOptions.profileId;
-      this.xCorrelationId = getProfileOptions.xCorrelationId;
-      this.xRequestId = getProfileOptions.xRequestId;
+      this.accountId = getProfileOptions.accountId;
     }
 
     /**
@@ -51,9 +52,11 @@ public class GetProfileOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
+     * @param instanceId the instanceId
      * @param profileId the profileId
      */
-    public Builder(String profileId) {
+    public Builder(String instanceId, String profileId) {
+      this.instanceId = instanceId;
       this.profileId = profileId;
     }
 
@@ -64,6 +67,17 @@ public class GetProfileOptions extends GenericModel {
      */
     public GetProfileOptions build() {
       return new GetProfileOptions(this);
+    }
+
+    /**
+     * Set the instanceId.
+     *
+     * @param instanceId the instanceId
+     * @return the GetProfileOptions builder
+     */
+    public Builder instanceId(String instanceId) {
+      this.instanceId = instanceId;
+      return this;
     }
 
     /**
@@ -78,24 +92,13 @@ public class GetProfileOptions extends GenericModel {
     }
 
     /**
-     * Set the xCorrelationId.
+     * Set the accountId.
      *
-     * @param xCorrelationId the xCorrelationId
+     * @param accountId the accountId
      * @return the GetProfileOptions builder
      */
-    public Builder xCorrelationId(String xCorrelationId) {
-      this.xCorrelationId = xCorrelationId;
-      return this;
-    }
-
-    /**
-     * Set the xRequestId.
-     *
-     * @param xRequestId the xRequestId
-     * @return the GetProfileOptions builder
-     */
-    public Builder xRequestId(String xRequestId) {
-      this.xRequestId = xRequestId;
+    public Builder accountId(String accountId) {
+      this.accountId = accountId;
       return this;
     }
   }
@@ -103,11 +106,13 @@ public class GetProfileOptions extends GenericModel {
   protected GetProfileOptions() { }
 
   protected GetProfileOptions(Builder builder) {
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.instanceId,
+      "instanceId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.profileId,
       "profileId cannot be empty");
+    instanceId = builder.instanceId;
     profileId = builder.profileId;
-    xCorrelationId = builder.xCorrelationId;
-    xRequestId = builder.xRequestId;
+    accountId = builder.accountId;
   }
 
   /**
@@ -117,6 +122,17 @@ public class GetProfileOptions extends GenericModel {
    */
   public Builder newBuilder() {
     return new Builder(this);
+  }
+
+  /**
+   * Gets the instanceId.
+   *
+   * The ID of the Security and Compliance Center instance.
+   *
+   * @return the instanceId
+   */
+  public String instanceId() {
+    return instanceId;
   }
 
   /**
@@ -131,29 +147,14 @@ public class GetProfileOptions extends GenericModel {
   }
 
   /**
-   * Gets the xCorrelationId.
+   * Gets the accountId.
    *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is used for downstream requests and retries of those requests. If a value of
-   * this header is not supplied in a request, the service generates a random (version 4) UUID.
+   * The user account ID.
    *
-   * @return the xCorrelationId
+   * @return the accountId
    */
-  public String xCorrelationId() {
-    return xCorrelationId;
-  }
-
-  /**
-   * Gets the xRequestId.
-   *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is not used for downstream requests and retries of those requests. If a
-   * value of this header is not supplied in a request, the service generates a random (version 4) UUID.
-   *
-   * @return the xRequestId
-   */
-  public String xRequestId() {
-    return xRequestId;
+  public String accountId() {
+    return accountId;
   }
 }
 

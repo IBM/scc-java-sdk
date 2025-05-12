@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -19,21 +20,49 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class ListRulesOptions extends GenericModel {
 
-  protected String xCorrelationId;
-  protected String xRequestId;
+  /**
+   * The list of only user-defined, or system-defined rules.
+   */
+  public interface Type {
+    /** user_defined. */
+    String USER_DEFINED = "user_defined";
+    /** system_defined. */
+    String SYSTEM_DEFINED = "system_defined";
+  }
+
+  /**
+   * Field used to sort rules. Rules can be sorted in ascending or descending order.
+   */
+  public interface Sort {
+    /** description. */
+    String DESCRIPTION = "description";
+    /** service_display_name. */
+    String SERVICE_DISPLAY_NAME = "service_display_name";
+    /** type. */
+    String TYPE = "type";
+    /** updated_on. */
+    String UPDATED_ON = "updated_on";
+  }
+
+  protected String instanceId;
+  protected Long limit;
+  protected String start;
   protected String type;
   protected String search;
   protected String serviceName;
+  protected String sort;
 
   /**
    * Builder.
    */
   public static class Builder {
-    private String xCorrelationId;
-    private String xRequestId;
+    private String instanceId;
+    private Long limit;
+    private String start;
     private String type;
     private String search;
     private String serviceName;
+    private String sort;
 
     /**
      * Instantiates a new Builder from an existing ListRulesOptions instance.
@@ -41,17 +70,28 @@ public class ListRulesOptions extends GenericModel {
      * @param listRulesOptions the instance to initialize the Builder with
      */
     private Builder(ListRulesOptions listRulesOptions) {
-      this.xCorrelationId = listRulesOptions.xCorrelationId;
-      this.xRequestId = listRulesOptions.xRequestId;
+      this.instanceId = listRulesOptions.instanceId;
+      this.limit = listRulesOptions.limit;
+      this.start = listRulesOptions.start;
       this.type = listRulesOptions.type;
       this.search = listRulesOptions.search;
       this.serviceName = listRulesOptions.serviceName;
+      this.sort = listRulesOptions.sort;
     }
 
     /**
      * Instantiates a new builder.
      */
     public Builder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param instanceId the instanceId
+     */
+    public Builder(String instanceId) {
+      this.instanceId = instanceId;
     }
 
     /**
@@ -64,24 +104,35 @@ public class ListRulesOptions extends GenericModel {
     }
 
     /**
-     * Set the xCorrelationId.
+     * Set the instanceId.
      *
-     * @param xCorrelationId the xCorrelationId
+     * @param instanceId the instanceId
      * @return the ListRulesOptions builder
      */
-    public Builder xCorrelationId(String xCorrelationId) {
-      this.xCorrelationId = xCorrelationId;
+    public Builder instanceId(String instanceId) {
+      this.instanceId = instanceId;
       return this;
     }
 
     /**
-     * Set the xRequestId.
+     * Set the limit.
      *
-     * @param xRequestId the xRequestId
+     * @param limit the limit
      * @return the ListRulesOptions builder
      */
-    public Builder xRequestId(String xRequestId) {
-      this.xRequestId = xRequestId;
+    public Builder limit(long limit) {
+      this.limit = limit;
+      return this;
+    }
+
+    /**
+     * Set the start.
+     *
+     * @param start the start
+     * @return the ListRulesOptions builder
+     */
+    public Builder start(String start) {
+      this.start = start;
       return this;
     }
 
@@ -117,16 +168,31 @@ public class ListRulesOptions extends GenericModel {
       this.serviceName = serviceName;
       return this;
     }
+
+    /**
+     * Set the sort.
+     *
+     * @param sort the sort
+     * @return the ListRulesOptions builder
+     */
+    public Builder sort(String sort) {
+      this.sort = sort;
+      return this;
+    }
   }
 
   protected ListRulesOptions() { }
 
   protected ListRulesOptions(Builder builder) {
-    xCorrelationId = builder.xCorrelationId;
-    xRequestId = builder.xRequestId;
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.instanceId,
+      "instanceId cannot be empty");
+    instanceId = builder.instanceId;
+    limit = builder.limit;
+    start = builder.start;
     type = builder.type;
     search = builder.search;
     serviceName = builder.serviceName;
+    sort = builder.sort;
   }
 
   /**
@@ -139,29 +205,36 @@ public class ListRulesOptions extends GenericModel {
   }
 
   /**
-   * Gets the xCorrelationId.
+   * Gets the instanceId.
    *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is used for downstream requests and retries of those requests. If a value of
-   * this header is not supplied in a request, the service generates a random (version 4) UUID.
+   * The ID of the Security and Compliance Center instance.
    *
-   * @return the xCorrelationId
+   * @return the instanceId
    */
-  public String xCorrelationId() {
-    return xCorrelationId;
+  public String instanceId() {
+    return instanceId;
   }
 
   /**
-   * Gets the xRequestId.
+   * Gets the limit.
    *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header  for the
-   * corresponding response.  The same value is not used for downstream requests and retries of those requests.  If a
-   * value of this header is not supplied in a request, the service generates a random (version 4) UUID.
+   * The indication of how many resources to return, unless the response is the last page of resources.
    *
-   * @return the xRequestId
+   * @return the limit
    */
-  public String xRequestId() {
-    return xRequestId;
+  public Long limit() {
+    return limit;
+  }
+
+  /**
+   * Gets the start.
+   *
+   * Determine what resource to start the page on or after.
+   *
+   * @return the start
+   */
+  public String start() {
+    return start;
   }
 
   /**
@@ -195,6 +268,17 @@ public class ListRulesOptions extends GenericModel {
    */
   public String serviceName() {
     return serviceName;
+  }
+
+  /**
+   * Gets the sort.
+   *
+   * Field used to sort rules. Rules can be sorted in ascending or descending order.
+   *
+   * @return the sort
+   */
+  public String sort() {
+    return sort;
   }
 }
 

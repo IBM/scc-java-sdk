@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,19 +10,21 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import java.util.List;
 
+import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * The required configurations.
+ * The required configurations for a Rule.
  *
  * Classes which extend this class:
- * - RequiredConfigAnd
- * - RequiredConfigOr
- * - RequiredConfigRequiredConfigBase
+ * - RequiredConfigConditionBase
+ * - RequiredConfigConditionList
+ * - RequiredConfigConditionSubRule
  */
 public class RequiredConfig extends GenericModel {
 
@@ -79,11 +81,17 @@ public class RequiredConfig extends GenericModel {
   }
 
   protected String description;
-  protected List<RequiredConfigItems> and;
-  protected List<RequiredConfigItems> or;
   protected String property;
   protected String operator;
   protected Object value;
+  protected List<ConditionItem> or;
+  protected List<ConditionItem> and;
+  protected SubRule any;
+  @SerializedName("any_ifexists")
+  protected SubRule anyIfexists;
+  protected SubRule all;
+  @SerializedName("all_ifexists")
+  protected SubRule allIfexists;
 
   protected RequiredConfig() { }
 
@@ -96,28 +104,6 @@ public class RequiredConfig extends GenericModel {
    */
   public String description() {
     return description;
-  }
-
-  /**
-   * Gets the and.
-   *
-   * The `AND` required configurations.
-   *
-   * @return the and
-   */
-  public List<RequiredConfigItems> and() {
-    return and;
-  }
-
-  /**
-   * Gets the or.
-   *
-   * The `OR` required configurations.
-   *
-   * @return the or
-   */
-  public List<RequiredConfigItems> or() {
-    return or;
   }
 
   /**
@@ -145,12 +131,78 @@ public class RequiredConfig extends GenericModel {
   /**
    * Gets the value.
    *
-   * Schema for any JSON type.
+   * The value can be of any type.
    *
    * @return the value
    */
   public Object value() {
     return value;
+  }
+
+  /**
+   * Gets the or.
+   *
+   * A list of required configurations where one item should evaluate to true.
+   *
+   * @return the or
+   */
+  public List<ConditionItem> or() {
+    return or;
+  }
+
+  /**
+   * Gets the and.
+   *
+   * A list of required configurations where all items should evaluate to true.
+   *
+   * @return the and
+   */
+  public List<ConditionItem> and() {
+    return and;
+  }
+
+  /**
+   * Gets the any.
+   *
+   * A rule within a rule used in the requiredConfig.
+   *
+   * @return the any
+   */
+  public SubRule any() {
+    return any;
+  }
+
+  /**
+   * Gets the anyIfexists.
+   *
+   * A rule within a rule used in the requiredConfig.
+   *
+   * @return the anyIfexists
+   */
+  public SubRule anyIfexists() {
+    return anyIfexists;
+  }
+
+  /**
+   * Gets the all.
+   *
+   * A rule within a rule used in the requiredConfig.
+   *
+   * @return the all
+   */
+  public SubRule all() {
+    return all;
+  }
+
+  /**
+   * Gets the allIfexists.
+   *
+   * A rule within a rule used in the requiredConfig.
+   *
+   * @return the allIfexists
+   */
+  public SubRule allIfexists() {
+    return allIfexists;
   }
 }
 

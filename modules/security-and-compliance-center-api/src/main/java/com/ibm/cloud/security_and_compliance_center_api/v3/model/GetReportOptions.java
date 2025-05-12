@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -20,16 +21,18 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class GetReportOptions extends GenericModel {
 
   protected String reportId;
-  protected String xCorrelationId;
-  protected String xRequestId;
+  protected String instanceId;
+  protected String scopeId;
+  protected String subscopeId;
 
   /**
    * Builder.
    */
   public static class Builder {
     private String reportId;
-    private String xCorrelationId;
-    private String xRequestId;
+    private String instanceId;
+    private String scopeId;
+    private String subscopeId;
 
     /**
      * Instantiates a new Builder from an existing GetReportOptions instance.
@@ -38,8 +41,9 @@ public class GetReportOptions extends GenericModel {
      */
     private Builder(GetReportOptions getReportOptions) {
       this.reportId = getReportOptions.reportId;
-      this.xCorrelationId = getReportOptions.xCorrelationId;
-      this.xRequestId = getReportOptions.xRequestId;
+      this.instanceId = getReportOptions.instanceId;
+      this.scopeId = getReportOptions.scopeId;
+      this.subscopeId = getReportOptions.subscopeId;
     }
 
     /**
@@ -52,9 +56,11 @@ public class GetReportOptions extends GenericModel {
      * Instantiates a new builder with required properties.
      *
      * @param reportId the reportId
+     * @param instanceId the instanceId
      */
-    public Builder(String reportId) {
+    public Builder(String reportId, String instanceId) {
       this.reportId = reportId;
+      this.instanceId = instanceId;
     }
 
     /**
@@ -78,24 +84,35 @@ public class GetReportOptions extends GenericModel {
     }
 
     /**
-     * Set the xCorrelationId.
+     * Set the instanceId.
      *
-     * @param xCorrelationId the xCorrelationId
+     * @param instanceId the instanceId
      * @return the GetReportOptions builder
      */
-    public Builder xCorrelationId(String xCorrelationId) {
-      this.xCorrelationId = xCorrelationId;
+    public Builder instanceId(String instanceId) {
+      this.instanceId = instanceId;
       return this;
     }
 
     /**
-     * Set the xRequestId.
+     * Set the scopeId.
      *
-     * @param xRequestId the xRequestId
+     * @param scopeId the scopeId
      * @return the GetReportOptions builder
      */
-    public Builder xRequestId(String xRequestId) {
-      this.xRequestId = xRequestId;
+    public Builder scopeId(String scopeId) {
+      this.scopeId = scopeId;
+      return this;
+    }
+
+    /**
+     * Set the subscopeId.
+     *
+     * @param subscopeId the subscopeId
+     * @return the GetReportOptions builder
+     */
+    public Builder subscopeId(String subscopeId) {
+      this.subscopeId = subscopeId;
       return this;
     }
   }
@@ -105,9 +122,12 @@ public class GetReportOptions extends GenericModel {
   protected GetReportOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.reportId,
       "reportId cannot be empty");
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.instanceId,
+      "instanceId cannot be empty");
     reportId = builder.reportId;
-    xCorrelationId = builder.xCorrelationId;
-    xRequestId = builder.xRequestId;
+    instanceId = builder.instanceId;
+    scopeId = builder.scopeId;
+    subscopeId = builder.subscopeId;
   }
 
   /**
@@ -131,29 +151,36 @@ public class GetReportOptions extends GenericModel {
   }
 
   /**
-   * Gets the xCorrelationId.
+   * Gets the instanceId.
    *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is used for downstream requests and retries of those requests. If a value of
-   * this header is not supplied in a request, the service generates a random (version 4) UUID.
+   * The ID of the Security and Compliance Center instance.
    *
-   * @return the xCorrelationId
+   * @return the instanceId
    */
-  public String xCorrelationId() {
-    return xCorrelationId;
+  public String instanceId() {
+    return instanceId;
   }
 
   /**
-   * Gets the xRequestId.
+   * Gets the scopeId.
    *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header  for the
-   * corresponding response.  The same value is not used for downstream requests and retries of those requests.  If a
-   * value of this header is not supplied in a request, the service generates a random (version 4) UUID.
+   * The ID of the scope.
    *
-   * @return the xRequestId
+   * @return the scopeId
    */
-  public String xRequestId() {
-    return xRequestId;
+  public String scopeId() {
+    return scopeId;
+  }
+
+  /**
+   * Gets the subscopeId.
+   *
+   * The ID of the subscope.
+   *
+   * @return the subscopeId
+   */
+  public String subscopeId() {
+    return subscopeId;
   }
 }
 

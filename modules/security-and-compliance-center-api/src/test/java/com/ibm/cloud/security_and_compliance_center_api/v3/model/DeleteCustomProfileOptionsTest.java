@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,13 +32,13 @@ public class DeleteCustomProfileOptionsTest {
   @Test
   public void testDeleteCustomProfileOptions() throws Throwable {
     DeleteCustomProfileOptions deleteCustomProfileOptionsModel = new DeleteCustomProfileOptions.Builder()
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
       .profileId("testString")
-      .xCorrelationId("testString")
-      .xRequestId("testString")
+      .accountId("testString")
       .build();
+    assertEquals(deleteCustomProfileOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
     assertEquals(deleteCustomProfileOptionsModel.profileId(), "testString");
-    assertEquals(deleteCustomProfileOptionsModel.xCorrelationId(), "testString");
-    assertEquals(deleteCustomProfileOptionsModel.xRequestId(), "testString");
+    assertEquals(deleteCustomProfileOptionsModel.accountId(), "testString");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

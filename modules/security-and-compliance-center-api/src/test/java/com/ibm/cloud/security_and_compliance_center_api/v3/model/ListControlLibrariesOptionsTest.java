@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,16 +32,20 @@ public class ListControlLibrariesOptionsTest {
   @Test
   public void testListControlLibrariesOptions() throws Throwable {
     ListControlLibrariesOptions listControlLibrariesOptionsModel = new ListControlLibrariesOptions.Builder()
-      .xCorrelationId("testString")
-      .xRequestId("testString")
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
+      .accountId("testString")
       .limit(Long.valueOf("50"))
-      .controlLibraryType("custom")
       .start("testString")
       .build();
-    assertEquals(listControlLibrariesOptionsModel.xCorrelationId(), "testString");
-    assertEquals(listControlLibrariesOptionsModel.xRequestId(), "testString");
+    assertEquals(listControlLibrariesOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
+    assertEquals(listControlLibrariesOptionsModel.accountId(), "testString");
     assertEquals(listControlLibrariesOptionsModel.limit(), Long.valueOf("50"));
-    assertEquals(listControlLibrariesOptionsModel.controlLibraryType(), "custom");
     assertEquals(listControlLibrariesOptionsModel.start(), "testString");
   }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testListControlLibrariesOptionsError() throws Throwable {
+    new ListControlLibrariesOptions.Builder().build();
+  }
+
 }

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,23 +32,29 @@ public class ParameterTest {
   @Test
   public void testParameter() throws Throwable {
     Parameter parameterModel = new Parameter.Builder()
-      .name("testString")
-      .displayName("testString")
-      .description("testString")
-      .type("string")
+      .assessmentType("testString")
+      .assessmentId("testString")
+      .parameterName("location")
+      .parameterDisplayName("Location")
+      .parameterType("string")
+      .parameterValue("testString")
       .build();
-    assertEquals(parameterModel.name(), "testString");
-    assertEquals(parameterModel.displayName(), "testString");
-    assertEquals(parameterModel.description(), "testString");
-    assertEquals(parameterModel.type(), "string");
+    assertEquals(parameterModel.assessmentType(), "testString");
+    assertEquals(parameterModel.assessmentId(), "testString");
+    assertEquals(parameterModel.parameterName(), "location");
+    assertEquals(parameterModel.parameterDisplayName(), "Location");
+    assertEquals(parameterModel.parameterType(), "string");
+    assertEquals(parameterModel.parameterValue(), "testString");
 
     String json = TestUtilities.serialize(parameterModel);
 
     Parameter parameterModelNew = TestUtilities.deserialize(json, Parameter.class);
     assertTrue(parameterModelNew instanceof Parameter);
-    assertEquals(parameterModelNew.name(), "testString");
-    assertEquals(parameterModelNew.displayName(), "testString");
-    assertEquals(parameterModelNew.description(), "testString");
-    assertEquals(parameterModelNew.type(), "string");
+    assertEquals(parameterModelNew.assessmentType(), "testString");
+    assertEquals(parameterModelNew.assessmentId(), "testString");
+    assertEquals(parameterModelNew.parameterName(), "location");
+    assertEquals(parameterModelNew.parameterDisplayName(), "Location");
+    assertEquals(parameterModelNew.parameterType(), "string");
+    assertEquals(parameterModelNew.parameterValue(), "testString");
   }
 }

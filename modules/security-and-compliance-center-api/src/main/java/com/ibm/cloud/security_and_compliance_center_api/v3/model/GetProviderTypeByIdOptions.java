@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -19,17 +20,15 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class GetProviderTypeByIdOptions extends GenericModel {
 
+  protected String instanceId;
   protected String providerTypeId;
-  protected String xCorrelationId;
-  protected String xRequestId;
 
   /**
    * Builder.
    */
   public static class Builder {
+    private String instanceId;
     private String providerTypeId;
-    private String xCorrelationId;
-    private String xRequestId;
 
     /**
      * Instantiates a new Builder from an existing GetProviderTypeByIdOptions instance.
@@ -37,9 +36,8 @@ public class GetProviderTypeByIdOptions extends GenericModel {
      * @param getProviderTypeByIdOptions the instance to initialize the Builder with
      */
     private Builder(GetProviderTypeByIdOptions getProviderTypeByIdOptions) {
+      this.instanceId = getProviderTypeByIdOptions.instanceId;
       this.providerTypeId = getProviderTypeByIdOptions.providerTypeId;
-      this.xCorrelationId = getProviderTypeByIdOptions.xCorrelationId;
-      this.xRequestId = getProviderTypeByIdOptions.xRequestId;
     }
 
     /**
@@ -51,9 +49,11 @@ public class GetProviderTypeByIdOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
+     * @param instanceId the instanceId
      * @param providerTypeId the providerTypeId
      */
-    public Builder(String providerTypeId) {
+    public Builder(String instanceId, String providerTypeId) {
+      this.instanceId = instanceId;
       this.providerTypeId = providerTypeId;
     }
 
@@ -67,6 +67,17 @@ public class GetProviderTypeByIdOptions extends GenericModel {
     }
 
     /**
+     * Set the instanceId.
+     *
+     * @param instanceId the instanceId
+     * @return the GetProviderTypeByIdOptions builder
+     */
+    public Builder instanceId(String instanceId) {
+      this.instanceId = instanceId;
+      return this;
+    }
+
+    /**
      * Set the providerTypeId.
      *
      * @param providerTypeId the providerTypeId
@@ -76,38 +87,17 @@ public class GetProviderTypeByIdOptions extends GenericModel {
       this.providerTypeId = providerTypeId;
       return this;
     }
-
-    /**
-     * Set the xCorrelationId.
-     *
-     * @param xCorrelationId the xCorrelationId
-     * @return the GetProviderTypeByIdOptions builder
-     */
-    public Builder xCorrelationId(String xCorrelationId) {
-      this.xCorrelationId = xCorrelationId;
-      return this;
-    }
-
-    /**
-     * Set the xRequestId.
-     *
-     * @param xRequestId the xRequestId
-     * @return the GetProviderTypeByIdOptions builder
-     */
-    public Builder xRequestId(String xRequestId) {
-      this.xRequestId = xRequestId;
-      return this;
-    }
   }
 
   protected GetProviderTypeByIdOptions() { }
 
   protected GetProviderTypeByIdOptions(Builder builder) {
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.instanceId,
+      "instanceId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.providerTypeId,
       "providerTypeId cannot be empty");
+    instanceId = builder.instanceId;
     providerTypeId = builder.providerTypeId;
-    xCorrelationId = builder.xCorrelationId;
-    xRequestId = builder.xRequestId;
   }
 
   /**
@@ -120,6 +110,17 @@ public class GetProviderTypeByIdOptions extends GenericModel {
   }
 
   /**
+   * Gets the instanceId.
+   *
+   * The ID of the Security and Compliance Center instance.
+   *
+   * @return the instanceId
+   */
+  public String instanceId() {
+    return instanceId;
+  }
+
+  /**
    * Gets the providerTypeId.
    *
    * The provider type ID.
@@ -128,32 +129,6 @@ public class GetProviderTypeByIdOptions extends GenericModel {
    */
   public String providerTypeId() {
     return providerTypeId;
-  }
-
-  /**
-   * Gets the xCorrelationId.
-   *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is used for downstream requests and retries of those requests. If a value of
-   * this headers is not supplied in a request, the service generates a random (version 4) UUID.
-   *
-   * @return the xCorrelationId
-   */
-  public String xCorrelationId() {
-    return xCorrelationId;
-  }
-
-  /**
-   * Gets the xRequestId.
-   *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header  for the
-   * corresponding response.  The same value is not used for downstream requests and retries of those requests.  If a
-   * value of this headers is not supplied in a request, the service generates a random (version 4) UUID.
-   *
-   * @return the xRequestId
-   */
-  public String xRequestId() {
-    return xRequestId;
   }
 }
 

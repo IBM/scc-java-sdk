@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -15,7 +15,7 @@ package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.CreateProfileOptions;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.DefaultParametersPrototype;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.DefaultParameters;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ProfileControlsPrototype;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
 import java.io.InputStream;
@@ -34,43 +34,47 @@ public class CreateProfileOptionsTest {
   @Test
   public void testCreateProfileOptions() throws Throwable {
     ProfileControlsPrototype profileControlsPrototypeModel = new ProfileControlsPrototype.Builder()
-      .controlLibraryId("e98a56ff-dc24-41d4-9875-1e188e2da6cd")
-      .controlId("5C453578-E9A1-421E-AD0F-C6AFCDD67CCF")
+      .controlLibraryId("testString")
+      .controlId("testString")
       .build();
-    assertEquals(profileControlsPrototypeModel.controlLibraryId(), "e98a56ff-dc24-41d4-9875-1e188e2da6cd");
-    assertEquals(profileControlsPrototypeModel.controlId(), "5C453578-E9A1-421E-AD0F-C6AFCDD67CCF");
+    assertEquals(profileControlsPrototypeModel.controlLibraryId(), "testString");
+    assertEquals(profileControlsPrototypeModel.controlId(), "testString");
 
-    DefaultParametersPrototype defaultParametersPrototypeModel = new DefaultParametersPrototype.Builder()
+    DefaultParameters defaultParametersModel = new DefaultParameters.Builder()
       .assessmentType("testString")
       .assessmentId("testString")
       .parameterName("testString")
       .parameterDefaultValue("testString")
       .parameterDisplayName("testString")
-      .parameterType("string")
+      .parameterType("testString")
       .build();
-    assertEquals(defaultParametersPrototypeModel.assessmentType(), "testString");
-    assertEquals(defaultParametersPrototypeModel.assessmentId(), "testString");
-    assertEquals(defaultParametersPrototypeModel.parameterName(), "testString");
-    assertEquals(defaultParametersPrototypeModel.parameterDefaultValue(), "testString");
-    assertEquals(defaultParametersPrototypeModel.parameterDisplayName(), "testString");
-    assertEquals(defaultParametersPrototypeModel.parameterType(), "string");
+    assertEquals(defaultParametersModel.assessmentType(), "testString");
+    assertEquals(defaultParametersModel.assessmentId(), "testString");
+    assertEquals(defaultParametersModel.parameterName(), "testString");
+    assertEquals(defaultParametersModel.parameterDefaultValue(), "testString");
+    assertEquals(defaultParametersModel.parameterDisplayName(), "testString");
+    assertEquals(defaultParametersModel.parameterType(), "testString");
 
     CreateProfileOptions createProfileOptionsModel = new CreateProfileOptions.Builder()
-      .profileName("testString")
-      .profileDescription("testString")
-      .profileType("predefined")
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
+      .profileName("Sample Profile")
+      .profileVersion("0.0.1")
       .controls(java.util.Arrays.asList(profileControlsPrototypeModel))
-      .defaultParameters(java.util.Arrays.asList(defaultParametersPrototypeModel))
-      .xCorrelationId("testString")
-      .xRequestId("testString")
+      .defaultParameters(java.util.Arrays.asList(defaultParametersModel))
+      .profileDescription("This is a sample profile")
+      .latest(true)
+      .versionGroupLabel("testString")
+      .accountId("testString")
       .build();
-    assertEquals(createProfileOptionsModel.profileName(), "testString");
-    assertEquals(createProfileOptionsModel.profileDescription(), "testString");
-    assertEquals(createProfileOptionsModel.profileType(), "predefined");
+    assertEquals(createProfileOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
+    assertEquals(createProfileOptionsModel.profileName(), "Sample Profile");
+    assertEquals(createProfileOptionsModel.profileVersion(), "0.0.1");
     assertEquals(createProfileOptionsModel.controls(), java.util.Arrays.asList(profileControlsPrototypeModel));
-    assertEquals(createProfileOptionsModel.defaultParameters(), java.util.Arrays.asList(defaultParametersPrototypeModel));
-    assertEquals(createProfileOptionsModel.xCorrelationId(), "testString");
-    assertEquals(createProfileOptionsModel.xRequestId(), "testString");
+    assertEquals(createProfileOptionsModel.defaultParameters(), java.util.Arrays.asList(defaultParametersModel));
+    assertEquals(createProfileOptionsModel.profileDescription(), "This is a sample profile");
+    assertEquals(createProfileOptionsModel.latest(), Boolean.valueOf(true));
+    assertEquals(createProfileOptionsModel.versionGroupLabel(), "testString");
+    assertEquals(createProfileOptionsModel.accountId(), "testString");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

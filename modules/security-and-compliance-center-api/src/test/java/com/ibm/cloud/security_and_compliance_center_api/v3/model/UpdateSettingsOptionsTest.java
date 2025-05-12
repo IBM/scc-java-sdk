@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -14,9 +14,8 @@
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
-import com.ibm.cloud.sdk.core.util.DateUtils;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.EventNotifications;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.ObjectStorage;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.EventNotificationsPrototype;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.ObjectStoragePrototype;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.UpdateSettingsOptions;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
 import java.io.InputStream;
@@ -34,41 +33,35 @@ public class UpdateSettingsOptionsTest {
 
   @Test
   public void testUpdateSettingsOptions() throws Throwable {
-    EventNotifications eventNotificationsModel = new EventNotifications.Builder()
-      .instanceCrn("crn:v1:bluemix:public:cloud-object-storage:global:a/ff88f007f9ff4622aac4fbc0eda36255:7199ae60-a214-4dd8-9bf7-ce571de49d01::")
-      .updatedOn(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
-      .sourceId("crn:v1:bluemix:public:event-notifications:us-south:a/ff88f007f9ff4622aac4fbc0eda36255:b8b07245-0bbe-4478-b11c-0dce523105fd::")
+    ObjectStoragePrototype objectStoragePrototypeModel = new ObjectStoragePrototype.Builder()
+      .bucket("testString")
+      .instanceCrn("testString")
+      .build();
+    assertEquals(objectStoragePrototypeModel.bucket(), "testString");
+    assertEquals(objectStoragePrototypeModel.instanceCrn(), "testString");
+
+    EventNotificationsPrototype eventNotificationsPrototypeModel = new EventNotificationsPrototype.Builder()
+      .instanceCrn("testString")
       .sourceDescription("This source is used for integration with IBM Cloud Security and Compliance Center.")
       .sourceName("compliance")
       .build();
-    assertEquals(eventNotificationsModel.instanceCrn(), "crn:v1:bluemix:public:cloud-object-storage:global:a/ff88f007f9ff4622aac4fbc0eda36255:7199ae60-a214-4dd8-9bf7-ce571de49d01::");
-    assertEquals(eventNotificationsModel.updatedOn(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
-    assertEquals(eventNotificationsModel.sourceId(), "crn:v1:bluemix:public:event-notifications:us-south:a/ff88f007f9ff4622aac4fbc0eda36255:b8b07245-0bbe-4478-b11c-0dce523105fd::");
-    assertEquals(eventNotificationsModel.sourceDescription(), "This source is used for integration with IBM Cloud Security and Compliance Center.");
-    assertEquals(eventNotificationsModel.sourceName(), "compliance");
-
-    ObjectStorage objectStorageModel = new ObjectStorage.Builder()
-      .instanceCrn("testString")
-      .bucket("testString")
-      .bucketLocation("testString")
-      .bucketEndpoint("testString")
-      .updatedOn(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
-      .build();
-    assertEquals(objectStorageModel.instanceCrn(), "testString");
-    assertEquals(objectStorageModel.bucket(), "testString");
-    assertEquals(objectStorageModel.bucketLocation(), "testString");
-    assertEquals(objectStorageModel.bucketEndpoint(), "testString");
-    assertEquals(objectStorageModel.updatedOn(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
+    assertEquals(eventNotificationsPrototypeModel.instanceCrn(), "testString");
+    assertEquals(eventNotificationsPrototypeModel.sourceDescription(), "This source is used for integration with IBM Cloud Security and Compliance Center.");
+    assertEquals(eventNotificationsPrototypeModel.sourceName(), "compliance");
 
     UpdateSettingsOptions updateSettingsOptionsModel = new UpdateSettingsOptions.Builder()
-      .eventNotifications(eventNotificationsModel)
-      .objectStorage(objectStorageModel)
-      .xCorrelationId("1a2b3c4d-5e6f-4a7b-8c9d-e0f1a2b3c4d5")
-      .xRequestId("testString")
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
+      .objectStorage(objectStoragePrototypeModel)
+      .eventNotifications(eventNotificationsPrototypeModel)
       .build();
-    assertEquals(updateSettingsOptionsModel.eventNotifications(), eventNotificationsModel);
-    assertEquals(updateSettingsOptionsModel.objectStorage(), objectStorageModel);
-    assertEquals(updateSettingsOptionsModel.xCorrelationId(), "1a2b3c4d-5e6f-4a7b-8c9d-e0f1a2b3c4d5");
-    assertEquals(updateSettingsOptionsModel.xRequestId(), "testString");
+    assertEquals(updateSettingsOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
+    assertEquals(updateSettingsOptionsModel.objectStorage(), objectStoragePrototypeModel);
+    assertEquals(updateSettingsOptionsModel.eventNotifications(), eventNotificationsPrototypeModel);
   }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testUpdateSettingsOptionsError() throws Throwable {
+    new UpdateSettingsOptions.Builder().build();
+  }
+
 }

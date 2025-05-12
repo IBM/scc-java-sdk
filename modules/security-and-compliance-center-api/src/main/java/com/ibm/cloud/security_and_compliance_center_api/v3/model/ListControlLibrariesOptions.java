@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -19,20 +20,18 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class ListControlLibrariesOptions extends GenericModel {
 
-  protected String xCorrelationId;
-  protected String xRequestId;
+  protected String instanceId;
+  protected String accountId;
   protected Long limit;
-  protected String controlLibraryType;
   protected String start;
 
   /**
    * Builder.
    */
   public static class Builder {
-    private String xCorrelationId;
-    private String xRequestId;
+    private String instanceId;
+    private String accountId;
     private Long limit;
-    private String controlLibraryType;
     private String start;
 
     /**
@@ -41,10 +40,9 @@ public class ListControlLibrariesOptions extends GenericModel {
      * @param listControlLibrariesOptions the instance to initialize the Builder with
      */
     private Builder(ListControlLibrariesOptions listControlLibrariesOptions) {
-      this.xCorrelationId = listControlLibrariesOptions.xCorrelationId;
-      this.xRequestId = listControlLibrariesOptions.xRequestId;
+      this.instanceId = listControlLibrariesOptions.instanceId;
+      this.accountId = listControlLibrariesOptions.accountId;
       this.limit = listControlLibrariesOptions.limit;
-      this.controlLibraryType = listControlLibrariesOptions.controlLibraryType;
       this.start = listControlLibrariesOptions.start;
     }
 
@@ -52,6 +50,15 @@ public class ListControlLibrariesOptions extends GenericModel {
      * Instantiates a new builder.
      */
     public Builder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param instanceId the instanceId
+     */
+    public Builder(String instanceId) {
+      this.instanceId = instanceId;
     }
 
     /**
@@ -64,24 +71,24 @@ public class ListControlLibrariesOptions extends GenericModel {
     }
 
     /**
-     * Set the xCorrelationId.
+     * Set the instanceId.
      *
-     * @param xCorrelationId the xCorrelationId
+     * @param instanceId the instanceId
      * @return the ListControlLibrariesOptions builder
      */
-    public Builder xCorrelationId(String xCorrelationId) {
-      this.xCorrelationId = xCorrelationId;
+    public Builder instanceId(String instanceId) {
+      this.instanceId = instanceId;
       return this;
     }
 
     /**
-     * Set the xRequestId.
+     * Set the accountId.
      *
-     * @param xRequestId the xRequestId
+     * @param accountId the accountId
      * @return the ListControlLibrariesOptions builder
      */
-    public Builder xRequestId(String xRequestId) {
-      this.xRequestId = xRequestId;
+    public Builder accountId(String accountId) {
+      this.accountId = accountId;
       return this;
     }
 
@@ -93,17 +100,6 @@ public class ListControlLibrariesOptions extends GenericModel {
      */
     public Builder limit(long limit) {
       this.limit = limit;
-      return this;
-    }
-
-    /**
-     * Set the controlLibraryType.
-     *
-     * @param controlLibraryType the controlLibraryType
-     * @return the ListControlLibrariesOptions builder
-     */
-    public Builder controlLibraryType(String controlLibraryType) {
-      this.controlLibraryType = controlLibraryType;
       return this;
     }
 
@@ -122,10 +118,11 @@ public class ListControlLibrariesOptions extends GenericModel {
   protected ListControlLibrariesOptions() { }
 
   protected ListControlLibrariesOptions(Builder builder) {
-    xCorrelationId = builder.xCorrelationId;
-    xRequestId = builder.xRequestId;
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.instanceId,
+      "instanceId cannot be empty");
+    instanceId = builder.instanceId;
+    accountId = builder.accountId;
     limit = builder.limit;
-    controlLibraryType = builder.controlLibraryType;
     start = builder.start;
   }
 
@@ -139,51 +136,36 @@ public class ListControlLibrariesOptions extends GenericModel {
   }
 
   /**
-   * Gets the xCorrelationId.
+   * Gets the instanceId.
    *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is used for downstream requests and retries of those requests. If a value of
-   * this header is not supplied in a request, the service generates a random (version 4) UUID.
+   * The ID of the Security and Compliance Center instance.
    *
-   * @return the xCorrelationId
+   * @return the instanceId
    */
-  public String xCorrelationId() {
-    return xCorrelationId;
+  public String instanceId() {
+    return instanceId;
   }
 
   /**
-   * Gets the xRequestId.
+   * Gets the accountId.
    *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is not used for downstream requests and retries of those requests. If a
-   * value of this header is not supplied in a request, the service generates a random (version 4) UUID.
+   * The user account ID.
    *
-   * @return the xRequestId
+   * @return the accountId
    */
-  public String xRequestId() {
-    return xRequestId;
+  public String accountId() {
+    return accountId;
   }
 
   /**
    * Gets the limit.
    *
-   * The field that indicates how many resources to return, unless the response is the last page of resources.
+   * The indication of how many resources to return, unless the response is the last page of resources.
    *
    * @return the limit
    */
   public Long limit() {
     return limit;
-  }
-
-  /**
-   * Gets the controlLibraryType.
-   *
-   * The field that indicate how you want the resources to be filtered by.
-   *
-   * @return the controlLibraryType
-   */
-  public String controlLibraryType() {
-    return controlLibraryType;
   }
 
   /**

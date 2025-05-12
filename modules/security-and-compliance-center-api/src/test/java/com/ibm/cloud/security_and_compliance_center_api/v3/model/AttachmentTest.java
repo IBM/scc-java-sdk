@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -14,9 +14,12 @@
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
+import com.ibm.cloud.sdk.core.util.DateUtils;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Attachment;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.AttachmentScope;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.ScopeProperty;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.AttachmentNotifications;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.AttachmentNotificationsControls;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.Scope;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.ScopePropertyScopeAny;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -39,5 +42,7 @@ public class AttachmentTest {
     assertNull(attachmentModel.getDescription());
     assertNull(attachmentModel.getSchedule());
     assertNull(attachmentModel.getScope());
+    assertNull(attachmentModel.getScopes());
+    assertNull(attachmentModel.getNotifications());
   }
 }

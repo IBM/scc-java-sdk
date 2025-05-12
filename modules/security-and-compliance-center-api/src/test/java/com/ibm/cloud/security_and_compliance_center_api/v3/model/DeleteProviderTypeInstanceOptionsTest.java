@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,15 +32,13 @@ public class DeleteProviderTypeInstanceOptionsTest {
   @Test
   public void testDeleteProviderTypeInstanceOptions() throws Throwable {
     DeleteProviderTypeInstanceOptions deleteProviderTypeInstanceOptionsModel = new DeleteProviderTypeInstanceOptions.Builder()
-      .providerTypeId("testString")
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
+      .providerTypeId("3e25966275dccfa2c3a34786919c5af7")
       .providerTypeInstanceId("testString")
-      .xCorrelationId("testString")
-      .xRequestId("testString")
       .build();
-    assertEquals(deleteProviderTypeInstanceOptionsModel.providerTypeId(), "testString");
+    assertEquals(deleteProviderTypeInstanceOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
+    assertEquals(deleteProviderTypeInstanceOptionsModel.providerTypeId(), "3e25966275dccfa2c3a34786919c5af7");
     assertEquals(deleteProviderTypeInstanceOptionsModel.providerTypeInstanceId(), "testString");
-    assertEquals(deleteProviderTypeInstanceOptionsModel.xCorrelationId(), "testString");
-    assertEquals(deleteProviderTypeInstanceOptionsModel.xRequestId(), "testString");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

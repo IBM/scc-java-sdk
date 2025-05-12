@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -33,9 +34,23 @@ public class ListReportEvaluationsOptions extends GenericModel {
     String SKIPPED = "skipped";
   }
 
+  /**
+   * This field sorts resources by using a valid sort field. To learn more, see
+   * [Sorting](https://cloud.ibm.com/docs/api-handbook?topic=api-handbook-sorting).
+   */
+  public interface Sort {
+    /** assessment_id. */
+    String ASSESSMENT_ID = "assessment_id";
+    /** target_id. */
+    String TARGET_ID = "target_id";
+    /** target_name. */
+    String TARGET_NAME = "target_name";
+    /** status. */
+    String STATUS = "status";
+  }
+
+  protected String instanceId;
   protected String reportId;
-  protected String xCorrelationId;
-  protected String xRequestId;
   protected String assessmentId;
   protected String assessmentMethod;
   protected String componentId;
@@ -45,14 +60,16 @@ public class ListReportEvaluationsOptions extends GenericModel {
   protected String status;
   protected String start;
   protected Long limit;
+  protected String sort;
+  protected String scopeId;
+  protected String subscopeId;
 
   /**
    * Builder.
    */
   public static class Builder {
+    private String instanceId;
     private String reportId;
-    private String xCorrelationId;
-    private String xRequestId;
     private String assessmentId;
     private String assessmentMethod;
     private String componentId;
@@ -62,6 +79,9 @@ public class ListReportEvaluationsOptions extends GenericModel {
     private String status;
     private String start;
     private Long limit;
+    private String sort;
+    private String scopeId;
+    private String subscopeId;
 
     /**
      * Instantiates a new Builder from an existing ListReportEvaluationsOptions instance.
@@ -69,9 +89,8 @@ public class ListReportEvaluationsOptions extends GenericModel {
      * @param listReportEvaluationsOptions the instance to initialize the Builder with
      */
     private Builder(ListReportEvaluationsOptions listReportEvaluationsOptions) {
+      this.instanceId = listReportEvaluationsOptions.instanceId;
       this.reportId = listReportEvaluationsOptions.reportId;
-      this.xCorrelationId = listReportEvaluationsOptions.xCorrelationId;
-      this.xRequestId = listReportEvaluationsOptions.xRequestId;
       this.assessmentId = listReportEvaluationsOptions.assessmentId;
       this.assessmentMethod = listReportEvaluationsOptions.assessmentMethod;
       this.componentId = listReportEvaluationsOptions.componentId;
@@ -81,6 +100,9 @@ public class ListReportEvaluationsOptions extends GenericModel {
       this.status = listReportEvaluationsOptions.status;
       this.start = listReportEvaluationsOptions.start;
       this.limit = listReportEvaluationsOptions.limit;
+      this.sort = listReportEvaluationsOptions.sort;
+      this.scopeId = listReportEvaluationsOptions.scopeId;
+      this.subscopeId = listReportEvaluationsOptions.subscopeId;
     }
 
     /**
@@ -92,9 +114,11 @@ public class ListReportEvaluationsOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
+     * @param instanceId the instanceId
      * @param reportId the reportId
      */
-    public Builder(String reportId) {
+    public Builder(String instanceId, String reportId) {
+      this.instanceId = instanceId;
       this.reportId = reportId;
     }
 
@@ -108,6 +132,17 @@ public class ListReportEvaluationsOptions extends GenericModel {
     }
 
     /**
+     * Set the instanceId.
+     *
+     * @param instanceId the instanceId
+     * @return the ListReportEvaluationsOptions builder
+     */
+    public Builder instanceId(String instanceId) {
+      this.instanceId = instanceId;
+      return this;
+    }
+
+    /**
      * Set the reportId.
      *
      * @param reportId the reportId
@@ -115,28 +150,6 @@ public class ListReportEvaluationsOptions extends GenericModel {
      */
     public Builder reportId(String reportId) {
       this.reportId = reportId;
-      return this;
-    }
-
-    /**
-     * Set the xCorrelationId.
-     *
-     * @param xCorrelationId the xCorrelationId
-     * @return the ListReportEvaluationsOptions builder
-     */
-    public Builder xCorrelationId(String xCorrelationId) {
-      this.xCorrelationId = xCorrelationId;
-      return this;
-    }
-
-    /**
-     * Set the xRequestId.
-     *
-     * @param xRequestId the xRequestId
-     * @return the ListReportEvaluationsOptions builder
-     */
-    public Builder xRequestId(String xRequestId) {
-      this.xRequestId = xRequestId;
       return this;
     }
 
@@ -238,16 +251,50 @@ public class ListReportEvaluationsOptions extends GenericModel {
       this.limit = limit;
       return this;
     }
+
+    /**
+     * Set the sort.
+     *
+     * @param sort the sort
+     * @return the ListReportEvaluationsOptions builder
+     */
+    public Builder sort(String sort) {
+      this.sort = sort;
+      return this;
+    }
+
+    /**
+     * Set the scopeId.
+     *
+     * @param scopeId the scopeId
+     * @return the ListReportEvaluationsOptions builder
+     */
+    public Builder scopeId(String scopeId) {
+      this.scopeId = scopeId;
+      return this;
+    }
+
+    /**
+     * Set the subscopeId.
+     *
+     * @param subscopeId the subscopeId
+     * @return the ListReportEvaluationsOptions builder
+     */
+    public Builder subscopeId(String subscopeId) {
+      this.subscopeId = subscopeId;
+      return this;
+    }
   }
 
   protected ListReportEvaluationsOptions() { }
 
   protected ListReportEvaluationsOptions(Builder builder) {
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.instanceId,
+      "instanceId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.reportId,
       "reportId cannot be empty");
+    instanceId = builder.instanceId;
     reportId = builder.reportId;
-    xCorrelationId = builder.xCorrelationId;
-    xRequestId = builder.xRequestId;
     assessmentId = builder.assessmentId;
     assessmentMethod = builder.assessmentMethod;
     componentId = builder.componentId;
@@ -257,6 +304,9 @@ public class ListReportEvaluationsOptions extends GenericModel {
     status = builder.status;
     start = builder.start;
     limit = builder.limit;
+    sort = builder.sort;
+    scopeId = builder.scopeId;
+    subscopeId = builder.subscopeId;
   }
 
   /**
@@ -269,6 +319,17 @@ public class ListReportEvaluationsOptions extends GenericModel {
   }
 
   /**
+   * Gets the instanceId.
+   *
+   * The ID of the Security and Compliance Center instance.
+   *
+   * @return the instanceId
+   */
+  public String instanceId() {
+    return instanceId;
+  }
+
+  /**
    * Gets the reportId.
    *
    * The ID of the scan that is associated with a report.
@@ -277,32 +338,6 @@ public class ListReportEvaluationsOptions extends GenericModel {
    */
   public String reportId() {
     return reportId;
-  }
-
-  /**
-   * Gets the xCorrelationId.
-   *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is used for downstream requests and retries of those requests. If a value of
-   * this header is not supplied in a request, the service generates a random (version 4) UUID.
-   *
-   * @return the xCorrelationId
-   */
-  public String xCorrelationId() {
-    return xCorrelationId;
-  }
-
-  /**
-   * Gets the xRequestId.
-   *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header  for the
-   * corresponding response.  The same value is not used for downstream requests and retries of those requests.  If a
-   * value of this header is not supplied in a request, the service generates a random (version 4) UUID.
-   *
-   * @return the xRequestId
-   */
-  public String xRequestId() {
-    return xRequestId;
   }
 
   /**
@@ -396,12 +431,46 @@ public class ListReportEvaluationsOptions extends GenericModel {
   /**
    * Gets the limit.
    *
-   * The indication of many resources to return, unless the response is  the last page of resources.
+   * The indication of many resources to return, unless the response is the last page of resources.
    *
    * @return the limit
    */
   public Long limit() {
     return limit;
+  }
+
+  /**
+   * Gets the sort.
+   *
+   * This field sorts resources by using a valid sort field. To learn more, see
+   * [Sorting](https://cloud.ibm.com/docs/api-handbook?topic=api-handbook-sorting).
+   *
+   * @return the sort
+   */
+  public String sort() {
+    return sort;
+  }
+
+  /**
+   * Gets the scopeId.
+   *
+   * The ID of the scope.
+   *
+   * @return the scopeId
+   */
+  public String scopeId() {
+    return scopeId;
+  }
+
+  /**
+   * Gets the subscopeId.
+   *
+   * The ID of the subscope.
+   *
+   * @return the subscopeId
+   */
+  public String subscopeId() {
+    return subscopeId;
   }
 }
 

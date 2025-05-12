@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -14,9 +14,9 @@
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.Assessment;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.AssessmentWithStats;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.ControlSpecificationWithStats;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.ParameterInfo;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.Parameter;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -35,8 +35,9 @@ public class ControlSpecificationWithStatsTest {
   public void testControlSpecificationWithStats() throws Throwable {
     ControlSpecificationWithStats controlSpecificationWithStatsModel = new ControlSpecificationWithStats();
     assertNull(controlSpecificationWithStatsModel.getControlSpecificationId());
-    assertNull(controlSpecificationWithStatsModel.getComponentId());
     assertNull(controlSpecificationWithStatsModel.getControlSpecificationDescription());
+    assertNull(controlSpecificationWithStatsModel.getComponentId());
+    assertNull(controlSpecificationWithStatsModel.getComponentName());
     assertNull(controlSpecificationWithStatsModel.getEnvironment());
     assertNull(controlSpecificationWithStatsModel.getResponsibility());
     assertNull(controlSpecificationWithStatsModel.getAssessments());
@@ -46,5 +47,6 @@ public class ControlSpecificationWithStatsTest {
     assertNull(controlSpecificationWithStatsModel.getNotCompliantCount());
     assertNull(controlSpecificationWithStatsModel.getUnableToPerformCount());
     assertNull(controlSpecificationWithStatsModel.getUserEvaluationRequiredCount());
+    assertNull(controlSpecificationWithStatsModel.getNotApplicableCount());
   }
 }

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,15 +32,13 @@ public class GetReportRuleOptionsTest {
   @Test
   public void testGetReportRuleOptions() throws Throwable {
     GetReportRuleOptions getReportRuleOptionsModel = new GetReportRuleOptions.Builder()
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
       .reportId("testString")
-      .ruleId("rule-8d444f8c-fd1d-48de-bcaa-f43732568761")
-      .xCorrelationId("testString")
-      .xRequestId("testString")
+      .ruleId("rule-61fa114a-2bb9-43fd-8068-b873b48bdf79")
       .build();
+    assertEquals(getReportRuleOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
     assertEquals(getReportRuleOptionsModel.reportId(), "testString");
-    assertEquals(getReportRuleOptionsModel.ruleId(), "rule-8d444f8c-fd1d-48de-bcaa-f43732568761");
-    assertEquals(getReportRuleOptionsModel.xCorrelationId(), "testString");
-    assertEquals(getReportRuleOptionsModel.xRequestId(), "testString");
+    assertEquals(getReportRuleOptionsModel.ruleId(), "rule-61fa114a-2bb9-43fd-8068-b873b48bdf79");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

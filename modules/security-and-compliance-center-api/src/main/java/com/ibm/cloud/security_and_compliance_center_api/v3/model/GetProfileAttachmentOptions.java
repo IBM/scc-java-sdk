@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -19,19 +20,19 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class GetProfileAttachmentOptions extends GenericModel {
 
-  protected String attachmentId;
+  protected String instanceId;
   protected String profileId;
-  protected String xCorrelationId;
-  protected String xRequestId;
+  protected String attachmentId;
+  protected String accountId;
 
   /**
    * Builder.
    */
   public static class Builder {
-    private String attachmentId;
+    private String instanceId;
     private String profileId;
-    private String xCorrelationId;
-    private String xRequestId;
+    private String attachmentId;
+    private String accountId;
 
     /**
      * Instantiates a new Builder from an existing GetProfileAttachmentOptions instance.
@@ -39,10 +40,10 @@ public class GetProfileAttachmentOptions extends GenericModel {
      * @param getProfileAttachmentOptions the instance to initialize the Builder with
      */
     private Builder(GetProfileAttachmentOptions getProfileAttachmentOptions) {
-      this.attachmentId = getProfileAttachmentOptions.attachmentId;
+      this.instanceId = getProfileAttachmentOptions.instanceId;
       this.profileId = getProfileAttachmentOptions.profileId;
-      this.xCorrelationId = getProfileAttachmentOptions.xCorrelationId;
-      this.xRequestId = getProfileAttachmentOptions.xRequestId;
+      this.attachmentId = getProfileAttachmentOptions.attachmentId;
+      this.accountId = getProfileAttachmentOptions.accountId;
     }
 
     /**
@@ -54,12 +55,14 @@ public class GetProfileAttachmentOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param attachmentId the attachmentId
+     * @param instanceId the instanceId
      * @param profileId the profileId
+     * @param attachmentId the attachmentId
      */
-    public Builder(String attachmentId, String profileId) {
-      this.attachmentId = attachmentId;
+    public Builder(String instanceId, String profileId, String attachmentId) {
+      this.instanceId = instanceId;
       this.profileId = profileId;
+      this.attachmentId = attachmentId;
     }
 
     /**
@@ -72,13 +75,13 @@ public class GetProfileAttachmentOptions extends GenericModel {
     }
 
     /**
-     * Set the attachmentId.
+     * Set the instanceId.
      *
-     * @param attachmentId the attachmentId
+     * @param instanceId the instanceId
      * @return the GetProfileAttachmentOptions builder
      */
-    public Builder attachmentId(String attachmentId) {
-      this.attachmentId = attachmentId;
+    public Builder instanceId(String instanceId) {
+      this.instanceId = instanceId;
       return this;
     }
 
@@ -94,24 +97,24 @@ public class GetProfileAttachmentOptions extends GenericModel {
     }
 
     /**
-     * Set the xCorrelationId.
+     * Set the attachmentId.
      *
-     * @param xCorrelationId the xCorrelationId
+     * @param attachmentId the attachmentId
      * @return the GetProfileAttachmentOptions builder
      */
-    public Builder xCorrelationId(String xCorrelationId) {
-      this.xCorrelationId = xCorrelationId;
+    public Builder attachmentId(String attachmentId) {
+      this.attachmentId = attachmentId;
       return this;
     }
 
     /**
-     * Set the xRequestId.
+     * Set the accountId.
      *
-     * @param xRequestId the xRequestId
+     * @param accountId the accountId
      * @return the GetProfileAttachmentOptions builder
      */
-    public Builder xRequestId(String xRequestId) {
-      this.xRequestId = xRequestId;
+    public Builder accountId(String accountId) {
+      this.accountId = accountId;
       return this;
     }
   }
@@ -119,14 +122,16 @@ public class GetProfileAttachmentOptions extends GenericModel {
   protected GetProfileAttachmentOptions() { }
 
   protected GetProfileAttachmentOptions(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.attachmentId,
-      "attachmentId cannot be empty");
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.instanceId,
+      "instanceId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.profileId,
       "profileId cannot be empty");
-    attachmentId = builder.attachmentId;
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.attachmentId,
+      "attachmentId cannot be empty");
+    instanceId = builder.instanceId;
     profileId = builder.profileId;
-    xCorrelationId = builder.xCorrelationId;
-    xRequestId = builder.xRequestId;
+    attachmentId = builder.attachmentId;
+    accountId = builder.accountId;
   }
 
   /**
@@ -139,14 +144,14 @@ public class GetProfileAttachmentOptions extends GenericModel {
   }
 
   /**
-   * Gets the attachmentId.
+   * Gets the instanceId.
    *
-   * The attachment ID.
+   * The ID of the Security and Compliance Center instance.
    *
-   * @return the attachmentId
+   * @return the instanceId
    */
-  public String attachmentId() {
-    return attachmentId;
+  public String instanceId() {
+    return instanceId;
   }
 
   /**
@@ -161,29 +166,25 @@ public class GetProfileAttachmentOptions extends GenericModel {
   }
 
   /**
-   * Gets the xCorrelationId.
+   * Gets the attachmentId.
    *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is used for downstream requests and retries of those requests. If a value of
-   * this header is not supplied in a request, the service generates a random (version 4) UUID.
+   * The attachment ID.
    *
-   * @return the xCorrelationId
+   * @return the attachmentId
    */
-  public String xCorrelationId() {
-    return xCorrelationId;
+  public String attachmentId() {
+    return attachmentId;
   }
 
   /**
-   * Gets the xRequestId.
+   * Gets the accountId.
    *
-   * The supplied or generated value of this header is logged for a request and repeated in a response header for the
-   * corresponding response. The same value is not used for downstream requests and retries of those requests. If a
-   * value of this header is not supplied in a request, the service generates a random (version 4) UUID.
+   * The user account ID.
    *
-   * @return the xRequestId
+   * @return the accountId
    */
-  public String xRequestId() {
-    return xRequestId;
+  public String accountId() {
+    return accountId;
   }
 }
 

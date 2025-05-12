@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -18,8 +18,9 @@ import java.util.List;
 /**
  * The `OR` required configurations.
  */
-public class RequiredConfigOr extends RequiredConfig {
-
+public class RequiredConfigOr {
+  private String description;
+  private List<RequiredConfigItems> or;
 
   /**
    * Builder.
@@ -33,7 +34,7 @@ public class RequiredConfigOr extends RequiredConfig {
      *
      * @param requiredConfigOr the instance to initialize the Builder with
      */
-    public Builder(RequiredConfig requiredConfigOr) {
+    public Builder(RequiredConfigOr requiredConfigOr) {
       this.description = requiredConfigOr.description;
       this.or = requiredConfigOr.or;
     }
@@ -61,7 +62,7 @@ public class RequiredConfigOr extends RequiredConfig {
      */
     public Builder addOr(RequiredConfigItems or) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(or,
-        "or cannot be null");
+              "or cannot be null");
       if (this.or == null) {
         this.or = new ArrayList<RequiredConfigItems>();
       }
@@ -78,6 +79,17 @@ public class RequiredConfigOr extends RequiredConfig {
     public Builder description(String description) {
       this.description = description;
       return this;
+    }
+
+    /**
+     * Gets the or.
+     * <p>
+     * A list of required configurations where one item should evaluate to true.
+     *
+     * @return the or
+     */
+    public List<RequiredConfigItems> or() {
+      return this.or;
     }
 
     /**
@@ -108,5 +120,26 @@ public class RequiredConfigOr extends RequiredConfig {
   public Builder newBuilder() {
     return new Builder(this);
   }
-}
 
+  /**
+   * Gets the description.
+   * <p>
+   * A list of required configurations where one item should evaluate to true.
+   *
+   * @return the or
+   */
+  public String description() {
+    return this.description;
+  }
+
+  /**
+   * Gets the or.
+   * <p>
+   * A list of required configurations where one item should evaluate to true.
+   *
+   * @return the or
+   */
+  public List<RequiredConfigItems> or() {
+    return this.or;
+  }
+}

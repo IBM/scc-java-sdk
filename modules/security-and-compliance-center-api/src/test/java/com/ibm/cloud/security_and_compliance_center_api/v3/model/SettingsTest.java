@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -34,44 +34,8 @@ public class SettingsTest {
 
   @Test
   public void testSettings() throws Throwable {
-    EventNotifications eventNotificationsModel = new EventNotifications.Builder()
-      .instanceCrn("crn:v1:bluemix:public:cloud-object-storage:global:a/ff88f007f9ff4622aac4fbc0eda36255:7199ae60-a214-4dd8-9bf7-ce571de49d01::")
-      .updatedOn(DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"))
-      .sourceId("crn:v1:bluemix:public:event-notifications:us-south:a/ff88f007f9ff4622aac4fbc0eda36255:b8b07245-0bbe-4478-b11c-0dce523105fd::")
-      .sourceDescription("This source is used for integration with IBM Cloud Security and Compliance Center.")
-      .sourceName("compliance")
-      .build();
-    assertEquals(eventNotificationsModel.instanceCrn(), "crn:v1:bluemix:public:cloud-object-storage:global:a/ff88f007f9ff4622aac4fbc0eda36255:7199ae60-a214-4dd8-9bf7-ce571de49d01::");
-    assertEquals(eventNotificationsModel.updatedOn(), DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"));
-    assertEquals(eventNotificationsModel.sourceId(), "crn:v1:bluemix:public:event-notifications:us-south:a/ff88f007f9ff4622aac4fbc0eda36255:b8b07245-0bbe-4478-b11c-0dce523105fd::");
-    assertEquals(eventNotificationsModel.sourceDescription(), "This source is used for integration with IBM Cloud Security and Compliance Center.");
-    assertEquals(eventNotificationsModel.sourceName(), "compliance");
-
-    ObjectStorage objectStorageModel = new ObjectStorage.Builder()
-      .instanceCrn("instance_crn")
-      .bucket("bucket")
-      .bucketLocation("bucket_location")
-      .bucketEndpoint("bucket_endpoint")
-      .updatedOn(DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"))
-      .build();
-    assertEquals(objectStorageModel.instanceCrn(), "instance_crn");
-    assertEquals(objectStorageModel.bucket(), "bucket");
-    assertEquals(objectStorageModel.bucketLocation(), "bucket_location");
-    assertEquals(objectStorageModel.bucketEndpoint(), "bucket_endpoint");
-    assertEquals(objectStorageModel.updatedOn(), DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"));
-
-    Settings settingsModel = new Settings.Builder()
-      .eventNotifications(eventNotificationsModel)
-      .objectStorage(objectStorageModel)
-      .build();
-    assertEquals(settingsModel.eventNotifications(), eventNotificationsModel);
-    assertEquals(settingsModel.objectStorage(), objectStorageModel);
-
-    String json = TestUtilities.serialize(settingsModel);
-
-    Settings settingsModelNew = TestUtilities.deserialize(json, Settings.class);
-    assertTrue(settingsModelNew instanceof Settings);
-    assertEquals(settingsModelNew.eventNotifications().toString(), eventNotificationsModel.toString());
-    assertEquals(settingsModelNew.objectStorage().toString(), objectStorageModel.toString());
+    Settings settingsModel = new Settings();
+    assertNull(settingsModel.getEventNotifications());
+    assertNull(settingsModel.getObjectStorage());
   }
 }

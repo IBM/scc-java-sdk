@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -33,12 +33,14 @@ public class GetReportOptionsTest {
   public void testGetReportOptions() throws Throwable {
     GetReportOptions getReportOptionsModel = new GetReportOptions.Builder()
       .reportId("testString")
-      .xCorrelationId("testString")
-      .xRequestId("testString")
+      .instanceId("acd7032c-15a3-484f-bf5b-67d41534d940")
+      .scopeId("testString")
+      .subscopeId("testString")
       .build();
     assertEquals(getReportOptionsModel.reportId(), "testString");
-    assertEquals(getReportOptionsModel.xCorrelationId(), "testString");
-    assertEquals(getReportOptionsModel.xRequestId(), "testString");
+    assertEquals(getReportOptionsModel.instanceId(), "acd7032c-15a3-484f-bf5b-67d41534d940");
+    assertEquals(getReportOptionsModel.scopeId(), "testString");
+    assertEquals(getReportOptionsModel.subscopeId(), "testString");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -29,10 +29,10 @@ public class ScopePropertyTest {
   final HashMap<String, InputStream> mockStreamMap = TestUtilities.createMockStreamMap();
   final List<FileWithMetadata> mockListFileWithMetadata = TestUtilities.creatMockListFileWithMetadata();
 
+  // TODO: Add tests for models that are abstract
   @Test
   public void testScopeProperty() throws Throwable {
     ScopeProperty scopePropertyModel = new ScopeProperty();
-    assertNull(scopePropertyModel.getName());
-    assertNull(scopePropertyModel.getValue());
+    assertNotNull(scopePropertyModel);
   }
 }

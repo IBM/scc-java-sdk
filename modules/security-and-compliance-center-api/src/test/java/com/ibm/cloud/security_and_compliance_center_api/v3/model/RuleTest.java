@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -16,12 +16,10 @@ package com.ibm.cloud.security_and_compliance_center_api.v3.model;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.AdditionalTargetAttribute;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Import;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.Parameter;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigAnd;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigBase;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigItemsRequiredConfigOrDepth1;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.RequiredConfigConditionBase;
 import com.ibm.cloud.security_and_compliance_center_api.v3.model.Rule;
-import com.ibm.cloud.security_and_compliance_center_api.v3.model.Target;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.RuleParameter;
+import com.ibm.cloud.security_and_compliance_center_api.v3.model.RuleTarget;
 import com.ibm.cloud.security_and_compliance_center_api.v3.utils.TestUtilities;
 import java.io.InputStream;
 import java.util.HashMap;
