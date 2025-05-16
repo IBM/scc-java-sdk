@@ -1,3 +1,17 @@
+# [5.0.0](https://github.com/IBM/scc-java-sdk/compare/4.0.0...5.0.0) (2025-05-16)
+
+
+### Features
+
+* access control segmentation ([c266070](https://github.com/IBM/scc-java-sdk/commit/c266070c390a53c89a93bf9e799d8b1e7b6a24cb))
+
+
+### BREAKING CHANGES
+
+* ScopeID is now required to create a new profile attachment
+
+Signed-off-by: Bryan Bosely <bbosely@us.ibm.com>
+
 # [4.0.0](https://github.com/IBM/scc-java-sdk/compare/3.0.0...4.0.0) (2023-09-15)
 
 
