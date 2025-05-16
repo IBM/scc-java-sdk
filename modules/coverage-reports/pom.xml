@@ -1,12 +1,12 @@
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/5.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/5.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <artifactId>security-and-compliance-center-sdk</artifactId>
         <groupId>com.ibm.cloud</groupId>
-        <version>4.0.0</version>
+        <version>5.0.0</version>
         <relativePath>../..</relativePath>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
+    <modelVersion>5.0.0</modelVersion>
 
     <artifactId>security-and-compliance-center-coverage-reports</artifactId>
 
