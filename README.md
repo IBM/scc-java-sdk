@@ -6,6 +6,8 @@
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![Maven Central](https://img.shields.io/maven-central/v/com.ibm.cloud/scc.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.ibm.cloud%22%20AND%20a:%22scc%22)
 
+> **⚠️ Important Notice:** SDK support for this service will be discontinued after December 15.
+
 # IBM Cloud Security & Compliance Center Java SDK Version 5.0.0
 Java client library to interact with various [IBM Cloud Security & Compliance Center](https://cloud.ibm.com/apidocs/security-compliance?code=java).
 
