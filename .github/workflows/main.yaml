@@ -40,13 +40,13 @@ jobs:
         run: mvn verify -fae -DskipITs $MVN_ARGS
 
       - name: publishing code coverage report to codeclimate
+        uses: paambaati/codeclimate-action@v5
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        run: |
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-          chmod +x ./cc-test-reporter
-          ./cc-test-reporter before-build
-          build/publishCodeCoverage.sh
+        with:
+          coverageLocations: |
+            modules/common/target/site/jacoco/jacoco.xml:jacoco
+            modules/security-and-compliance-center-api/target/site/jacoco/jacoco.xml:jacoco
 
       - name: running integration tests
         env:
